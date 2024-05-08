@@ -10,14 +10,14 @@ export default async function Home() {
       <h1>Player</h1>
       <ThemeSwitcher />
 
-      <section className="space-y-3">
+      <section className="space-y-3 mb-4">
         <h2 className="text-2xl md:text-3xl font-bold ">Trending</h2>
         <Suspense fallback={<AnimeCardListSkeleton />}>
           <Trending />
         </Suspense>
       </section>
 
-      <section className="space-y-3">
+      <section className="space-y-3 mb-4">
         <h2 className="text-2xl md:text-3xl font-bold ">Popular</h2>
         <Suspense fallback={<AnimeCardListSkeleton />}>
           <Popular />
