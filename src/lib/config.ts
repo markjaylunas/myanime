@@ -34,4 +34,4 @@ export const routesConfig: RoutesConfig = {
   ],
 };
 
-export const BASE_API_URL = `${env.CONSUMET_API_BASE_URL}/anime/gogoanime`;
+export const BASE_API_URL = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;

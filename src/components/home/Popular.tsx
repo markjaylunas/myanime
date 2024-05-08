@@ -1,11 +1,11 @@
 import { BASE_API_URL } from "@/lib/config";
-import { GOGOANIME_API_ROUTES } from "@/lib/constants";
+import { ANIME_API_ROUTES } from "@/lib/constants";
 import { fetchAnimeListData } from "@/lib/server-utils";
 import AnimeCardList from "./AnimeCardList";
 
-export default async function RecentEpisodes() {
+export default async function Popular() {
   const list = await fetchAnimeListData(
-    `${BASE_API_URL}${GOGOANIME_API_ROUTES.recentEpisodes}`
+    `${BASE_API_URL}${ANIME_API_ROUTES.popular}?page=1&perPage=10`
   );
 
   return <AnimeCardList animeList={list?.results || []} />;
