@@ -1,4 +1,4 @@
-export const ANIME_API_ROUTES = {
+export const API_ANIME_ROUTES = {
   /**
    * @constant
    * @type {string}
