@@ -34,4 +34,4 @@ export const routesConfig: RoutesConfig = {
   ],
 };
 
-export const BASE_API_URL = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
+export const API_BASE_URL = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
