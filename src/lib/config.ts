@@ -1,4 +1,5 @@
 import { MainNavItem } from "@/lib/types";
+import { env } from "./env";
 
 export const siteConfig = {
   name: "Myanime | Makje",
@@ -32,3 +33,5 @@ export const routesConfig: RoutesConfig = {
     },
   ],
 };
+
+export const BASE_API_URL = `${env.CONSUMET_API_BASE_URL}/anime/gogoanime`;
