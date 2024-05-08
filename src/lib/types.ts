@@ -2,6 +2,7 @@ import { Icons } from "@/components/ui/Icons";
 import { z } from "zod";
 import {
   animeDataSchema,
+  animeInfoSchema,
   animeSchema,
   searchAnimeDataSchema,
   searchAnimeSchema,
@@ -29,3 +30,5 @@ export type AnimeData = z.infer<typeof animeDataSchema>;
 export type SearchAnime = z.infer<typeof searchAnimeSchema>;
 
 export type SearchAnimeData = z.infer<typeof searchAnimeDataSchema>;
+
+export type AnimeInfoSchema = z.infer<typeof animeInfoSchema>;

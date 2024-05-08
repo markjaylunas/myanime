@@ -30,7 +30,7 @@ export default function AnimeCardList({ animeList }: Props) {
           <CarouselItem
             key={`${anime.id}-${index}`}
             className="pl-1  basis-1/2  2xs:basis-[58%] xs:basis-[40%] 2sm:basis-[37%]  sm:basis-[27%] md:basis-[26%] lg:basis-[21%] "
-            onClick={() => router.push(`/watch/${anime.id}`)}
+            onClick={() => router.push(`/info/${anime.id}`)}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}

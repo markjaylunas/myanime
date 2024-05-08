@@ -8,7 +8,8 @@ type Props = {
 };
 
 export default function AnimeCard({ anime }: Props) {
-  const href = `/watch/${anime.id}`;
+  const href = `/info/${anime.id}`;
+  const title = anime.title.english || anime.title.romaji || anime.title.native;
   return (
     <Card
       radius="lg"
@@ -23,7 +24,7 @@ export default function AnimeCard({ anime }: Props) {
       </CardHeader> */}
       <Image
         removeWrapper
-        alt={anime.title.romaji}
+        alt={title}
         className="z-0 w-full h-full object-cover"
         src={anime.image}
       />
@@ -31,7 +32,7 @@ export default function AnimeCard({ anime }: Props) {
       <CardFooter className="absolute z-10 bottom-0 p-4 flex justify-center items-start">
         <Link href={href}>
           <h4 className="text-white font-bold text-xs md:text-lg line-clamp-3 text-center text-pretty">
-            {anime.title.romaji}
+            {title}
           </h4>
         </Link>
         <section></section>

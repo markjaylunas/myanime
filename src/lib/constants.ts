@@ -88,7 +88,7 @@ export const ANIME_API_ROUTES = {
    * The following query parameters are supported:
    * - `provider`: The provider of the anime episodes.
    */
-  servers: "/servers/:id",
+  servers: "/servers", // /:id
 
   /**
    * @constant
@@ -100,14 +100,14 @@ export const ANIME_API_ROUTES = {
    * - `dub`: Whether to fetch dubbed episodes.
    * - `locale`: The locale for the anime.
    */
-  episodes: "/episodes/:id",
+  episodes: "/episodes", // /:id
 
   /**
    * @constant
    * @type {string}
    * @description The `data` route. `:id` is a placeholder for the ID of the anime.
    */
-  data: "/data/:id",
+  data: "/data", // /:id
 
   /**
    * @constant
@@ -119,14 +119,14 @@ export const ANIME_API_ROUTES = {
    * - `dub`: Whether to fetch dubbed episodes.
    * - `locale`: The locale for the anime.
    */
-  info: "/info/:id",
+  info: "/info", // /:id
 
   /**
    * @constant
    * @type {string}
    * @description The `character` route. `:id` is a placeholder for the ID of the character.
    */
-  character: "/character/:id",
+  character: "/character",
 
   /**
    * @constant
@@ -136,5 +136,5 @@ export const ANIME_API_ROUTES = {
    * - `provider`: The provider of the anime episodes.
    * - `server`: The server from which to stream the episode.
    */
-  watch: "/watch/:episodeId",
+  watch: "/watch", // /:episodeId
 };
