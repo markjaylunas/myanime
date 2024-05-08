@@ -33,7 +33,7 @@ export default function AnimeCard({ anime }: Props) {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
       <CardFooter className="absolute z-10 bottom-0 p-4 flex justify-center items-start">
         <Link href={href}>
-          <h4 className="text-white font-bold text-xs md:text-md line-clamp-3 text-center text-pretty">
+          <h4 className="text-white font-bold text-xs md:text-lg line-clamp-3 text-center text-pretty">
             {anime.title}
           </h4>
         </Link>
