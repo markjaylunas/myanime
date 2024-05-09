@@ -22,12 +22,12 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable)}
       suppressHydrationWarning
     >
-      <Providers>
-        <body className="min-h-screen">
+      <body className="min-h-screen">
+        <Providers>
           <Header />
           {children}
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }

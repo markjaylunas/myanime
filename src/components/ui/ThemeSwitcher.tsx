@@ -10,7 +10,7 @@ import { Icons } from "./Icons";
 export function ThemeSwitcher(props: ButtonProps) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  console.log({ theme });
+
   useEffect(() => {
     setMounted(true);
   }, []);

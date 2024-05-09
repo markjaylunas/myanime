@@ -34,6 +34,7 @@
     "@nextui-org/theme": "^2.2.3",
     "@nextui-org/user": "^2.0.28",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toggle": "^1.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.0.4",

@@ -1,7 +1,7 @@
 "use client";
 
+import ExpandDescription from "@/components/ui/ExpandDescription";
 import { Icons } from "@/components/ui/Icons";
-import Text from "@/components/ui/Text";
 import { AnimeInfo } from "@/lib/types";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
@@ -27,17 +27,21 @@ export default function InfoAbout({ title, image, description }: Props) {
         Watch
       </Button>
 
-      <div className="flex gap-10 mt-10">
-        <Image
-          height={300}
-          width={200}
-          alt={mainTitle}
-          src={image}
-          className="object-cover"
+      <div className="flex flex-col lg:flex-row gap-10 mt-10 mx-auto">
+        <ExpandDescription
+          className="max-w-xl"
+          maxChars={400}
+          description={description}
+          isHtmlTemplate
         />
-        <div className="flex flex-col gap-4">
-          <h2>{mainTitle}</h2>
-          <Text>{description}</Text>
+        <div className=" h-[300px] w-[200px]">
+          <Image
+            height={300}
+            width={200}
+            alt={mainTitle}
+            src={image}
+            className="object-cover"
+          />
         </div>
       </div>
     </section>
