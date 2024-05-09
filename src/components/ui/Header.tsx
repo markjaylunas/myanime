@@ -57,6 +57,9 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarMenu>
+        <NavbarMenuItem>
+          <ThemeSwitcher className="md:hidden" />
+        </NavbarMenuItem>
         {routesConfig.mainNav.map((item, index) => (
           <NavbarMenuItem key={`${item.href}-${index}`}>
             <MyLink
