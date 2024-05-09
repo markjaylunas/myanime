@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimeInfo } from "@/lib/types";
-import { Spacer } from "@nextui-org/spacer";
 import NextImage from "next/image";
 
 type Props = {
@@ -23,14 +22,13 @@ export default function InfoHero({ title, image, cover }: Props) {
           alt={mainTitle}
           fill
           sizes="100vw"
-          className="object-cover bg-gray-800 "
+          className="object-cover bg-gray-200 dark:bg-gray-800 "
         />
-        <div className="absolute z-20 inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-        <h1 className="absolute z-30 -bottom-7  text-3xl md:text-3xl lg:text-6xl pl-5 line-clamp-2 font-medium">
+        <h1 className="absolute z-30 bottom-2 text-white  text-3xl md:text-5xl lg:text-6xl pl-5 line-clamp-2 font-medium">
           {mainTitle}
         </h1>
       </div>
-      <Spacer y={10} />
+      <div className="absolute z-20  inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
     </section>
   );
 }
