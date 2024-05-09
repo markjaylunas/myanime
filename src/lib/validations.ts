@@ -180,3 +180,23 @@ export const animeInfoSchema = z.object({
   color: z.string(),
   relations: z.array(relationSchema),
 });
+
+// ----------------------------
+
+export const recentAnimeEpisodeSchema = z.object({
+  id: z.string(),
+  malId: z.string().optional().nullable(),
+  title: animeTitleSchema,
+  image: z.string(),
+  imageHash: z.string().optional().nullable(),
+  episodeId: z.string().optional().nullable(),
+  episodeTitle: z.string().optional().nullable(),
+  episodeNumber: z.number().optional().nullable(),
+  type: z.string().optional().nullable(),
+});
+
+export const recentAnimeEpisodeDataSchema = z.object({
+  currentPage: z.number(),
+  totalResults: z.number(),
+  results: z.array(recentAnimeEpisodeSchema),
+});

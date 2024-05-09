@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimeData } from "@/lib/types";
+import { AnimeData, RecentAnimeEpisodeData } from "@/lib/types";
 import { motion } from "framer-motion";
 import AnimeCard from "./AnimeCard";
 
@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 
 type Props = {
-  animeList: AnimeData["results"];
+  animeList: AnimeData["results"] | RecentAnimeEpisodeData["results"];
 };
 
 export default function AnimeCardList({ animeList }: Props) {

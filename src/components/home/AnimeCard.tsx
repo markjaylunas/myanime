@@ -1,19 +1,19 @@
-import { Anime } from "@/lib/types";
+import { Anime, RecentAnimeEpisode } from "@/lib/types";
 import { Card, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
 type Props = {
-  anime: Anime;
+  anime: Anime | RecentAnimeEpisode;
 };
 
 export default function AnimeCard({ anime }: Props) {
   const href = `/info/${anime.id}`;
   const title =
-    anime.title.english || anime.title.romaji || anime.title.native || anime.id;
+    anime.title.english || anime.title.romaji || anime.title.native || "";
   return (
     <Card className="relative h-[200px] sm:h-[250px] md:h-[300px] aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
-      <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black  via-transparent to-transparent" />
+      <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black/70  via-transparent to-transparent" />
       <Image
         removeWrapper
         alt={title}

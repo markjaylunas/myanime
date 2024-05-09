@@ -4,6 +4,8 @@ import {
   animeDataSchema,
   animeInfoSchema,
   animeSchema,
+  recentAnimeEpisodeDataSchema,
+  recentAnimeEpisodeSchema,
   searchAnimeDataSchema,
   searchAnimeSchema,
 } from "./validations";
@@ -32,3 +34,9 @@ export type SearchAnime = z.infer<typeof searchAnimeSchema>;
 export type SearchAnimeData = z.infer<typeof searchAnimeDataSchema>;
 
 export type AnimeInfo = z.infer<typeof animeInfoSchema>;
+
+export type RecentAnimeEpisodeData = z.infer<
+  typeof recentAnimeEpisodeDataSchema
+>;
+
+export type RecentAnimeEpisode = z.infer<typeof recentAnimeEpisodeSchema>;
