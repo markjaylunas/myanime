@@ -13,8 +13,6 @@ type Props = {
 };
 
 export default function InfoAbout({ title, image, description }: Props) {
-  const mainTitle = title.english || title.romaji || title.native || "";
-
   return (
     <section className="relative flex flex-col space-y-10">
       <Button
@@ -38,7 +36,7 @@ export default function InfoAbout({ title, image, description }: Props) {
           <Image
             height={300}
             width={200}
-            alt={mainTitle}
+            alt={title}
             src={image}
             className="object-cover"
           />
