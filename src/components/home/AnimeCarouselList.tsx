@@ -15,7 +15,7 @@ type Props = {
   animeList: AnimeData["results"] | RecentAnimeEpisodeData["results"];
 };
 
-export default function AnimeCardList({ animeList }: Props) {
+export default function AnimeCarouselList({ animeList }: Props) {
   const router = useRouter();
   return (
     <Carousel
