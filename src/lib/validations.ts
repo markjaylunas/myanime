@@ -47,34 +47,34 @@ export const animeTitleSchema = z.object({
   userPreferred: z.string().optional().nullable(),
 });
 
-export const searchAnimeSchema = z.object({
-  id: z.string(),
-  malId: z.number().optional().nullable(),
-  title: animeTitleSchema,
-  status: z.string(),
-  image: z.string(),
-  imageHash: z.string(),
-  cover: z.string(),
-  coverHash: z.string(),
-  popularity: z.number(),
-  totalEpisodes: z.number(),
-  currentEpisode: z.number().optional().nullable(),
-  countryOfOrigin: z.string(),
-  description: z.string(),
-  genres: z.array(z.string()),
-  rating: z.number(),
-  color: z.string().optional().nullable(),
-  type: z.string(),
-  releaseDate: z.number(),
-});
+// export const searchAnimeSchema = z.object({
+//   id: z.string(),
+//   malId: z.number().optional().nullable(),
+//   title: animeTitleSchema,
+//   status: z.string(),
+//   image: z.string(),
+//   imageHash: z.string(),
+//   cover: z.string(),
+//   coverHash: z.string(),
+//   popularity: z.number(),
+//   totalEpisodes: z.number(),
+//   currentEpisode: z.number().optional().nullable(),
+//   countryOfOrigin: z.string(),
+//   description: z.string(),
+//   genres: z.array(z.string()),
+//   rating: z.number(),
+//   color: z.string().optional().nullable(),
+//   type: z.string(),
+//   releaseDate: z.number(),
+// });
 
-export const searchAnimeDataSchema = z.object({
-  currentPage: z.number().optional().nullable(),
-  hasNextPage: z.boolean().optional().nullable(),
-  totalPages: z.number(),
-  totalResults: z.number(),
-  results: z.array(searchAnimeSchema),
-});
+// export const searchAnimeDataSchema = z.object({
+//   currentPage: z.number().optional().nullable(),
+//   hasNextPage: z.boolean().optional().nullable(),
+//   totalPages: z.number(),
+//   totalResults: z.number(),
+//   results: z.array(searchAnimeSchema),
+// });
 
 const nextAiringEpisodeSchema = z
   .object({
@@ -199,4 +199,19 @@ export const recentAnimeEpisodeDataSchema = z.object({
   currentPage: z.number(),
   totalResults: z.number(),
   results: z.array(recentAnimeEpisodeSchema),
+});
+
+export const searchAnimeSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  url: z.string(),
+  image: z.string(),
+  releaseDate: z.string(),
+  subOrDub: z.string(),
+});
+
+export const searchAnimeDataSchema = z.object({
+  currentPage: z.string(),
+  hasNextPage: z.boolean(),
+  results: z.array(searchAnimeSchema),
 });

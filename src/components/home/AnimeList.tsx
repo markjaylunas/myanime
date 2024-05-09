@@ -1,20 +1,19 @@
 "use client";
 
-import { AnimeData, RecentAnimeEpisodeData } from "@/lib/types";
 import { motion } from "framer-motion";
-import AnimeCard from "./AnimeCard";
+import AnimeCard, { AnimeCardProps } from "./AnimeCard";
 
 import { useRouter } from "next/navigation";
 
-type Props = {
-  animeList: AnimeData["results"] | RecentAnimeEpisodeData["results"];
+type AnimeListProps = {
+  list: AnimeCardProps[];
 };
 
-export default function AnimeList({ animeList }: Props) {
+export default function AnimeList({ list }: AnimeListProps) {
   const router = useRouter();
   return (
     <ul className="grid grid-cols-2 xs:grid-cols-3 2sm:grid-cols-3  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-      {animeList.map((anime, index) => (
+      {list.map((anime, index) => (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{
@@ -28,7 +27,7 @@ export default function AnimeList({ animeList }: Props) {
           onClick={() => router.push(`/info/${anime.id}`)}
           className="w-fit"
         >
-          <AnimeCard anime={anime} />
+          <AnimeCard {...anime} />
         </motion.div>
       ))}
     </ul>
