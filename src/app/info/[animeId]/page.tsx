@@ -1,4 +1,5 @@
 import { fetchAnimeInfo } from "@/actions/action";
+import Episodes from "@/components/ui/Episodes";
 import { notFound } from "next/navigation";
 import InfoAbout from "./_components/InfoAbout";
 import InfoHero from "./_components/InfoHero";
@@ -17,6 +18,11 @@ export default async function InfoPage({
     notFound();
   }
 
+  const episodeList = info.episodes.map((episode) => ({
+    id: episode.id,
+    episodeNumber: episode.number,
+  }));
+
   return (
     <main>
       {/* add cover */}
@@ -30,7 +36,7 @@ export default async function InfoPage({
         />
       </section>
 
-      {/* <InfoEpisodes episodes={info.episodes} /> */}
+      <Episodes animeId={animeId} episodeList={episodeList} />
     </main>
   );
 }
