@@ -4,6 +4,7 @@ import {
   animeDataSchema,
   animeInfoSchema,
   animeSchema,
+  episodeSourceSchema,
   recentAnimeEpisodeDataSchema,
   recentAnimeEpisodeSchema,
   searchAnimeDataSchema,
@@ -42,3 +43,5 @@ export type RecentAnimeEpisodeData = z.infer<
 export type RecentAnimeEpisode = z.infer<typeof recentAnimeEpisodeSchema>;
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
+
+export type EpisodeSource = z.infer<typeof episodeSourceSchema>;

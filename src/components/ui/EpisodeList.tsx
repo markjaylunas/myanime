@@ -9,7 +9,7 @@ type Props = {
   }[];
 };
 
-export default function Episodes({ animeId, episodeList }: Props) {
+export default function EpisodeList({ animeId, episodeList }: Props) {
   return (
     <section>
       <ol>

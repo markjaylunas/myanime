@@ -1,5 +1,5 @@
 import { fetchAnimeInfo } from "@/actions/action";
-import Episodes from "@/components/ui/Episodes";
+import EpisodeList from "@/components/ui/EpisodeList";
 import { notFound } from "next/navigation";
 import InfoAbout from "./_components/InfoAbout";
 import InfoHero from "./_components/InfoHero";
@@ -36,7 +36,7 @@ export default async function InfoPage({
         />
       </section>
 
-      <Episodes animeId={animeId} episodeList={episodeList} />
+      <EpisodeList animeId={animeId} episodeList={episodeList} />
     </main>
   );
 }

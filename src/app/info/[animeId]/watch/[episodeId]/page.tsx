@@ -1,4 +1,5 @@
-import { fetchAnimeEpisodeSource } from "@/actions/action";
+import { fetchAnimeEpisodeSource, fetchAnimeInfo } from "@/actions/action";
+import EpisodeList from "@/components/ui/EpisodeList";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
 export default async function EpisodePage({
@@ -6,16 +7,18 @@ export default async function EpisodePage({
 }: {
   params: { animeId: string; episodeId: string };
 }) {
-  const { episodeId } = params;
+  const { episodeId, animeId } = params;
   // todo: refactor to catch all params in watch page only
-  const animeEpisodeSource = await fetchAnimeEpisodeSource({ episodeId });
 
-  const source =
-    animeEpisodeSource?.sources[3] ||
-    animeEpisodeSource?.sources[2] ||
-    animeEpisodeSource?.sources[1] ||
-    animeEpisodeSource?.sources[0] ||
-    animeEpisodeSource?.sources[4];
+  const [info, animeEpisodeSource] = await Promise.all([
+    await fetchAnimeInfo({ animeId }),
+    await fetchAnimeEpisodeSource({ episodeId }),
+  ]);
+
+  const episodeList = info?.episodes.map((episode) => ({
+    id: episode.id,
+    episodeNumber: episode.number,
+  }));
 
   return (
     <div>
@@ -23,7 +26,11 @@ export default async function EpisodePage({
       <p>animeId: {params.animeId}</p>
       <p>episodeId: {params.episodeId}</p>
 
-      {source ? <VideoPlayer url={source.url} /> : <p>Video not found</p>}
+      {animeEpisodeSource && <VideoPlayer episodeSource={animeEpisodeSource} />}
+
+      {episodeList && (
+        <EpisodeList animeId={animeId} episodeList={episodeList} />
+      )}
     </div>
   );
 }

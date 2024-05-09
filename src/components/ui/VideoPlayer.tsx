@@ -1,9 +1,10 @@
 "use client";
 
+import { EpisodeSource } from "@/lib/types";
 import { useInViewport } from "@mantine/hooks";
+import { Select, SelectItem } from "@nextui-org/select";
 import React, { useEffect, useState } from "react";
 import ReactPlayer, { ReactPlayerProps } from "react-player";
-import { SourceProps } from "react-player/base";
 
 function formatSecondsToTime(seconds: number): string {
   const hrs = Math.floor(seconds / 3600);
@@ -20,7 +21,7 @@ function formatSecondsToTime(seconds: number): string {
 }
 
 type Props = {
-  url: string | string[] | SourceProps[] | MediaStream;
+  episodeSource: EpisodeSource;
 } & ReactPlayerProps;
 
 type Progress = {
@@ -30,7 +31,12 @@ type Progress = {
   loadedSeconds: number;
 };
 
-export default function VideoPlayer({ url, ...props }: Props) {
+export default function VideoPlayer({ episodeSource, ...props }: Props) {
+  const defaultSource = episodeSource.sources.find(
+    (source) => source.quality === "360p"
+  );
+
+  const [source, setSource] = React.useState<string>(defaultSource?.url || "");
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState<Progress>({
     played: 0,
@@ -40,6 +46,12 @@ export default function VideoPlayer({ url, ...props }: Props) {
   });
   const [isLoaded, setIsLoaded] = useState(false);
   const { ref, inViewport } = useInViewport();
+
+  const handleSelectionChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSource(event.target.value);
+  };
 
   useEffect(() => {
     if (inViewport) {
@@ -61,11 +73,18 @@ export default function VideoPlayer({ url, ...props }: Props) {
         <li>Loaded: {Math.floor(progress.loaded * 100)}%</li>
         <li>Loaded Seconds: {formatSecondsToTime(progress.loadedSeconds)}</li>
       </ul>
+
+      <SelectSource
+        source={source}
+        onChange={handleSelectionChange}
+        sourceList={episodeSource.sources}
+      />
+
       {inViewport || isLoaded ? (
         <ReactPlayer
           width="100%"
           height="100%"
-          url={url}
+          url={source}
           controls
           playing={isPlaying}
           onProgress={(progress) => setProgress(progress)}
@@ -73,5 +92,30 @@ export default function VideoPlayer({ url, ...props }: Props) {
         />
       ) : null}
     </div>
+  );
+}
+
+function SelectSource({
+  source,
+  sourceList,
+  onChange,
+}: {
+  source: string;
+  sourceList: EpisodeSource["sources"];
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}) {
+  return (
+    <Select
+      placeholder="Default video source"
+      className="max-w-xs"
+      value={source}
+      onChange={onChange}
+    >
+      {sourceList.map((item) => (
+        <SelectItem key={item.url} value={item.url}>
+          {item.quality}
+        </SelectItem>
+      ))}
+    </Select>
   );
 }
