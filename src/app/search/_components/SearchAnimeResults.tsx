@@ -14,7 +14,6 @@ export default async function SearchAnimeResults({ query, page }: Props) {
   }
   return (
     <div>
-      {query}
       <AnimeList list={response.results} />
       <pre>{JSON.stringify(response, null, 2)}</pre>
     </div>
