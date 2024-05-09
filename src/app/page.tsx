@@ -1,6 +1,5 @@
 import AnimeCardListSkeleton from "@/components/home/AnimeCardListSkeleton";
 import Popular from "@/components/home/Popular";
-import Random from "@/components/home/Random";
 import RecentEpisode from "@/components/home/RecentEpisode";
 import Trending from "@/components/home/Trending";
 import Heading from "@/components/ui/Heading";
@@ -33,15 +32,6 @@ export default async function Home() {
         </Heading>
         <Suspense fallback={<AnimeCardListSkeleton />}>
           <Popular />
-        </Suspense>
-      </section>
-
-      <section className="space-y-3 mb-8">
-        <Heading order="2xl" className="text-gray-300">
-          Random
-        </Heading>
-        <Suspense fallback={<AnimeCardListSkeleton />}>
-          <Random />
         </Suspense>
       </section>
     </main>
