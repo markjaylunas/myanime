@@ -5,7 +5,7 @@ import AnimeCardList from "./AnimeCardList";
 
 export default async function Trending() {
   const list = await fetchAnimeListData(
-    `${API_BASE_URL}${API_ANIME_ROUTES.trending}?page=1&perPage=10`
+    `${API_BASE_URL}${API_ANIME_ROUTES.trending}`
   );
 
   return <AnimeCardList animeList={list?.results || []} />;

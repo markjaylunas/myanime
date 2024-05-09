@@ -31,4 +31,4 @@ export type SearchAnime = z.infer<typeof searchAnimeSchema>;
 
 export type SearchAnimeData = z.infer<typeof searchAnimeDataSchema>;
 
-export type AnimeInfoSchema = z.infer<typeof animeInfoSchema>;
+export type AnimeInfo = z.infer<typeof animeInfoSchema>;

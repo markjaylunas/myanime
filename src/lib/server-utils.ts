@@ -23,9 +23,6 @@ export async function fetchAnimeInfoData(url: string) {
   try {
     const response = await fetch(url, { next: { revalidate: 3600 } });
     const data = await response.json();
-    console.log("data");
-    console.log(data);
-    console.log("data");
 
     const parsed = animeInfoSchema.safeParse(data);
 

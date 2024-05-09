@@ -5,7 +5,7 @@ import AnimeCardList from "./AnimeCardList";
 
 export default async function Popular() {
   const list = await fetchAnimeListData(
-    `${API_BASE_URL}${API_ANIME_ROUTES.popular}?page=1&perPage=10`
+    `${API_BASE_URL}${API_ANIME_ROUTES.popular}`
   );
 
   return <AnimeCardList animeList={list?.results || []} />;
