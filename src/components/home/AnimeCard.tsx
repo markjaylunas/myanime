@@ -13,7 +13,7 @@ export default function AnimeCard({ anime }: Props) {
     anime.title.english || anime.title.romaji || anime.title.native || "";
   return (
     <Card className="relative h-[200px] sm:h-[250px] md:h-[300px] aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
-      <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black/70  via-transparent to-transparent" />
+      <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
         removeWrapper
         alt={title}
