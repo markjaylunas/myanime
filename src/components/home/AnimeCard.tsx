@@ -9,7 +9,8 @@ type Props = {
 
 export default function AnimeCard({ anime }: Props) {
   const href = `/info/${anime.id}`;
-  const title = anime.title.english || anime.title.romaji || anime.title.native;
+  const title =
+    anime.title.english || anime.title.romaji || anime.title.native || anime.id;
   return (
     <Card
       radius="lg"

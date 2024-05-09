@@ -1,25 +1,38 @@
 "use client";
 
-import MyImage from "@/components/ui/MyImage";
+import { Icons } from "@/components/ui/Icons";
 import { AnimeInfo } from "@/lib/types";
+import { Button } from "@nextui-org/button";
+import Image from "next/image";
 
 type Props = {
-  info: AnimeInfo;
+  title: AnimeInfo["title"];
+  description: AnimeInfo["description"];
+  image: AnimeInfo["image"];
 };
 
-export default function InfoAbout({ info }: Props) {
-  const title =
-    info.title.english || info.title.romaji || info.title.native || info.id;
+export default function InfoAbout({ title, image, description }: Props) {
+  const mainTitle = title.english || title.romaji || title.native || "";
+
   return (
-    <section>
-      <MyImage src={info.image} alt={title} width="100" height="100" />
+    <section className="relative flex flex-col space-y-10">
+      <Button
+        variant="solid"
+        color="primary"
+        startContent={<Icons.playFill className="size-8" />}
+        fullWidth
+        className="md:ml-auto text-2xl font-medium h-16 md:min-w-60 "
+      >
+        Watch
+      </Button>
 
-      <h1>{title}</h1>
-      <p>{info.description}</p>
-
-      <pre className="max-w-2xl overflow-scroll">
-        {JSON.stringify(info, null, 2)}
-      </pre>
+      <div className="flex gap-10 mt-10">
+        <Image height={300} width={200} alt={mainTitle} src={image} />
+        <div className="flex flex-col gap-4">
+          <h2>{mainTitle}</h2>
+          <p>{description}</p>
+        </div>
+      </div>
     </section>
   );
 }

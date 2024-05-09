@@ -7,23 +7,28 @@ export const animeSchema = z.object({
     romaji: z.string(),
     english: z.string().optional().nullable(),
     native: z.string().optional().nullable(),
-    userPreferred: z.string().optional().nullable(),
   }),
   image: z.string(),
   imageHash: z.string(),
-  trailer: z.object({
-    thumbnailHash: z.string(),
-  }),
+  trailer: z
+    .object({
+      id: z.string().optional().nullable(),
+      site: z.string().optional().nullable(),
+      thumbnail: z.string().optional().nullable(),
+      thumbnailHash: z.string().optional().nullable(),
+    })
+    .optional()
+    .nullable(),
   description: z.string(),
   status: z.string(),
   cover: z.string(),
   coverHash: z.string(),
   rating: z.number(),
   releaseDate: z.number(),
-  color: z.string().optional(),
+  color: z.string().optional().nullable(),
   genres: z.array(z.string()),
   totalEpisodes: z.number(),
-  duration: z.number(),
+  duration: z.number().optional().nullable(),
   type: z.string().optional().nullable(),
 });
 

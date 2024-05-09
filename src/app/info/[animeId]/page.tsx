@@ -3,6 +3,7 @@ import { API_ANIME_ROUTES } from "@/lib/constants";
 import { fetchAnimeInfoData } from "@/lib/server-utils";
 import { notFound } from "next/navigation";
 import InfoAbout from "./_components/InfoAbout";
+import InfoHero from "./_components/InfoHero";
 
 export default async function InfoPage({
   params,
@@ -13,15 +14,21 @@ export default async function InfoPage({
     `${API_BASE_URL}${API_ANIME_ROUTES.data}/${params.animeId}`
   );
 
-  console.log("info");
-  console.log(info);
   if (!info) {
     notFound();
   }
 
   return (
     <main>
-      <InfoAbout info={info} />
+      <InfoHero title={info.title} image={info.image} cover={info.cover} />
+
+      <section className="mx-8 mt-4 md:mt-8 lg:mt-12 ">
+        <InfoAbout
+          title={info.title}
+          description={info.description}
+          image={info.image}
+        />
+      </section>
 
       {/* <InfoEpisodes episodes={info.episodes} /> */}
     </main>
