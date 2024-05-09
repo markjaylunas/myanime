@@ -16,7 +16,7 @@ export default function Episodes({ animeId, episodeList }: Props) {
         {episodeList.map((episode) => (
           <Button
             as={NextLink}
-            href={`/watch/${animeId}/${episode.id}`}
+            href={`/info/${animeId}/watch/${episode.id}`}
             variant="flat"
             radius="md"
             key={episode.id}

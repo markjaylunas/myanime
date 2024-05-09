@@ -30,7 +30,7 @@ type Progress = {
   loadedSeconds: number;
 };
 
-const Video = ({ url, ...props }: Props) => {
+export default function VideoPlayer({ url, ...props }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState<Progress>({
     played: 0,
@@ -74,6 +74,4 @@ const Video = ({ url, ...props }: Props) => {
       ) : null}
     </div>
   );
-};
-
-export default Video;
+}

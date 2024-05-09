@@ -11,8 +11,8 @@ export const animeAPIQuery = {
         `${gogoanimeBase}/${query}?page=${page}`,
       info: ({ animeId }: { animeId: string }) =>
         `${gogoanimeBase}/info/${animeId}`,
-      watch: ({ episode }: { episode: string }) =>
-        `${gogoanimeBase}/watch/${episode}`,
+      watch: ({ episodeId }: { episodeId: string }) =>
+        `${gogoanimeBase}/watch/${episodeId}`,
     },
   },
 };

@@ -1,7 +1,11 @@
 "use server";
 
 import { animeAPIQuery } from "@/lib/consumet-api";
-import { animeInfoSchema, searchAnimeDataSchema } from "@/lib/validations";
+import {
+  animeInfoSchema,
+  episodeSourceSchema,
+  searchAnimeDataSchema,
+} from "@/lib/validations";
 
 export async function searchAnime({
   query,
@@ -41,6 +45,33 @@ export async function fetchAnimeInfo({ animeId }: { animeId: string }) {
     const data = await response.json();
 
     const parsed = animeInfoSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchAnimeEpisodeSource({
+  episodeId,
+}: {
+  episodeId: string;
+}) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.watch({ episodeId }),
+      { next: { revalidate: 3600 } }
+    );
+
+    const data = await response.json();
+
+    const parsed = episodeSourceSchema.safeParse(data);
 
     if (!parsed.success) {
       console.error(parsed.error);

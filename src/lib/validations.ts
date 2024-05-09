@@ -235,3 +235,11 @@ export const animeInfoSchema = z.object({
     z.object({ id: z.string(), number: z.number(), url: z.string() })
   ),
 });
+
+export const episodeSourceSchema = z.object({
+  headers: z.object({ Referer: z.string() }),
+  sources: z.array(
+    z.object({ url: z.string(), isM3U8: z.boolean(), quality: z.string() })
+  ),
+  download: z.string(),
+});
