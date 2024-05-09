@@ -28,7 +28,9 @@ export default function Header() {
             className="rounded-md"
           >
             <Icons.logo className="mr-3 size-10" />
-            <span className="font-medium text- text-xl">{siteConfig.name}</span>
+            <span className="font-medium text- text-xl sr-only md:not-sr-only ">
+              {siteConfig.name}
+            </span>
           </MyLink>
         </NavbarBrand>
       </NavbarContent>
