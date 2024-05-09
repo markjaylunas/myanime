@@ -1,3 +1,4 @@
+import Header from "@/components/ui/Header";
 import { cn } from "@/lib/utils";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -21,9 +22,12 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable)}
       suppressHydrationWarning
     >
-      <body className="min-h-screen">
-        <Providers>{children}</Providers>
-      </body>
+      <Providers>
+        <body className="min-h-screen">
+          <Header />
+          {children}
+        </body>
+      </Providers>
     </html>
   );
 }

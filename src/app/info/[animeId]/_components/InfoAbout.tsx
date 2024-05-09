@@ -1,6 +1,7 @@
 "use client";
 
 import { Icons } from "@/components/ui/Icons";
+import Text from "@/components/ui/Text";
 import { AnimeInfo } from "@/lib/types";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
@@ -27,10 +28,16 @@ export default function InfoAbout({ title, image, description }: Props) {
       </Button>
 
       <div className="flex gap-10 mt-10">
-        <Image height={300} width={200} alt={mainTitle} src={image} />
+        <Image
+          height={300}
+          width={200}
+          alt={mainTitle}
+          src={image}
+          className="object-cover"
+        />
         <div className="flex flex-col gap-4">
           <h2>{mainTitle}</h2>
-          <p>{description}</p>
+          <Text>{description}</Text>
         </div>
       </div>
     </section>

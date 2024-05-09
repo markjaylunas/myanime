@@ -2,7 +2,7 @@ import { MainNavItem } from "@/lib/types";
 import { env } from "./env";
 
 export const siteConfig = {
-  name: "Myanime | Makje",
+  name: "My Anime",
   url: "https://myanime.makje.com",
   description:
     "A premier platform for streaming a diverse collection of anime content. We offer high-quality, uninterrupted viewing experiences to anime enthusiasts around the globe.",
