@@ -40,3 +40,5 @@ export type RecentAnimeEpisodeData = z.infer<
 >;
 
 export type RecentAnimeEpisode = z.infer<typeof recentAnimeEpisodeSchema>;
+
+export type SearchParams = { [key: string]: string | string[] | undefined };
