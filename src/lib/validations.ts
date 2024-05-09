@@ -49,7 +49,7 @@ export const animeTitleSchema = z.object({
 
 export const searchAnimeSchema = z.object({
   id: z.string(),
-  malId: z.number(),
+  malId: z.number().optional().nullable(),
   title: animeTitleSchema,
   status: z.string(),
   image: z.string(),
@@ -58,19 +58,19 @@ export const searchAnimeSchema = z.object({
   coverHash: z.string(),
   popularity: z.number(),
   totalEpisodes: z.number(),
-  currentEpisode: z.number().optional(),
+  currentEpisode: z.number().optional().nullable(),
   countryOfOrigin: z.string(),
   description: z.string(),
   genres: z.array(z.string()),
   rating: z.number(),
-  color: z.string().optional(),
+  color: z.string().optional().nullable(),
   type: z.string(),
   releaseDate: z.number(),
 });
 
 export const searchAnimeDataSchema = z.object({
-  currentPage: z.number(),
-  hasNextPage: z.boolean(),
+  currentPage: z.number().optional().nullable(),
+  hasNextPage: z.boolean().optional().nullable(),
   totalPages: z.number(),
   totalResults: z.number(),
   results: z.array(searchAnimeSchema),
