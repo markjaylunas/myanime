@@ -13,6 +13,7 @@ export default function SearchInput() {
   const defaultQuery = searchParams.get("query")?.toString();
 
   const handleSearch = useDebouncedCallback((term: string) => {
+    if (term.length < 3) return;
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term);
