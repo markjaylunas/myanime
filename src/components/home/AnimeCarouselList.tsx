@@ -42,7 +42,16 @@ export default function AnimeCarouselList({ animeList }: Props) {
                 delay: index > 5 ? 0.5 : 0.1 * index,
               }}
             >
-              <AnimeCard anime={anime} />
+              <AnimeCard
+                id={anime.id}
+                title={
+                  anime.title.english ||
+                  anime.title.romaji ||
+                  anime.title.native ||
+                  ""
+                }
+                image={anime.image}
+              />
             </motion.div>
           </CarouselItem>
         ))}

@@ -5,9 +5,9 @@ import Link from "next/link";
 export type AnimeCardProps = {
   id: string;
   title: string;
-  url: string;
   image: string;
 
+  url?: string;
   releaseDate?: string;
   subOrDub?: string;
 };
