@@ -4,14 +4,12 @@ import { ReactNode } from "react";
 
 export default async function HomeLayout({
   children,
-  animelist,
   movies,
   popular,
   recentepisodes,
   topairing,
 }: {
   children: ReactNode;
-  animelist: ReactNode;
   movies: ReactNode;
   popular: ReactNode;
   recentepisodes: ReactNode;
@@ -54,12 +52,6 @@ export default async function HomeLayout({
       {movies}
 
       <Spacer y={8} />
-
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        All
-      </Heading>
-      <Spacer y={2} />
-      {animelist}
     </main>
   );
 }
