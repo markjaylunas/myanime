@@ -1,7 +1,9 @@
+import QuickSearch from "@/components/ui/QuickSearch";
+
 export default async function Home() {
   return (
     <>
-      <h1>Makje</h1>
+      <QuickSearch />
     </>
   );
 }

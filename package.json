@@ -32,6 +32,7 @@
     "@nextui-org/spinner": "^2.0.28",
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.3",
+    "@nextui-org/use-infinite-scroll": "^2.1.3",
     "@nextui-org/user": "^2.0.28",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toggle": "^1.0.3",

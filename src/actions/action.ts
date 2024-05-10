@@ -10,15 +10,17 @@ import {
 
 export async function searchAnime({
   query,
-  page,
+  page = 1,
+  signal,
 }: {
   query: string;
-  page: number;
+  page?: number;
+  signal?: AbortSignal;
 }) {
   try {
     const response = await fetch(
       animeAPIQuery.anime.gogoanime.search({ query, page }),
-      { next: { tags: ["search-anime"] } }
+      { signal }
     );
 
     const data = await response.json();
