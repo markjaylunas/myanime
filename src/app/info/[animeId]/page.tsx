@@ -18,7 +18,7 @@ export default async function InfoPage({
     notFound();
   }
 
-  const episodeList = info.episodes.map((episode) => ({
+  const episodeList = info.episodes?.map((episode) => ({
     id: episode.id,
     episodeNumber: episode.number,
   }));
@@ -36,7 +36,7 @@ export default async function InfoPage({
         />
       </section>
 
-      <EpisodeList animeId={animeId} episodeList={episodeList} />
+      <EpisodeList animeId={animeId} episodeList={episodeList || []} />
     </main>
   );
 }

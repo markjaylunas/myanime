@@ -15,7 +15,7 @@ export default async function EpisodePage({
     await fetchAnimeEpisodeSource({ episodeId }),
   ]);
 
-  const episodeList = info?.episodes.map((episode) => ({
+  const episodeList = info?.episodes?.map((episode) => ({
     id: episode.id,
     episodeNumber: episode.number,
   }));
