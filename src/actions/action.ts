@@ -137,3 +137,78 @@ export async function fetchMovieList({ page }: { page?: number }) {
     return null;
   }
 }
+
+export async function fetchPopularList({ page }: { page?: number }) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.popular({ page }),
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeInfoListSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchRecentEpisodeList({ page }: { page?: number }) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.recentEpisodes({ page }),
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeInfoListSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchTopAiringList({ page }: { page?: number }) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.topAiring({ page }),
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeInfoListSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
