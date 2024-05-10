@@ -7,6 +7,7 @@ import { useDebouncedCallback } from "@mantine/hooks";
 import { Input } from "@nextui-org/input";
 import {
   Button,
+  Chip,
   Image,
   Listbox,
   ListboxItem,
@@ -82,7 +83,21 @@ export default function QuickSearch() {
                             </div>
                           }
                         >
-                          <p className="text-lg">{anime.title}</p>
+                          <p className="text-xl line-clamp-3 text-wrap">
+                            {anime.title}
+                          </p>
+                          <p className="text-secondary-700">
+                            {anime.releaseDate}
+                          </p>
+                          <Chip
+                            variant="solid"
+                            className="mt-2"
+                            color={
+                              anime.subOrDub === "dub" ? "secondary" : "primary"
+                            }
+                          >
+                            {anime.subOrDub}
+                          </Chip>
                         </ListboxItem>
                       ))
                     ) : (
