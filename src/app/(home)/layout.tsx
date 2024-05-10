@@ -30,14 +30,6 @@ export default async function HomeLayout({
       <Spacer y={8} />
 
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        Recent Episodes
-      </Heading>
-      <Spacer y={2} />
-      {recentepisodes}
-
-      <Spacer y={8} />
-
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Top Airing
       </Heading>
       <Spacer y={2} />
@@ -50,6 +42,14 @@ export default async function HomeLayout({
       </Heading>
       <Spacer y={2} />
       {movies}
+
+      <Spacer y={8} />
+
+      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        Recent Episodes
+      </Heading>
+      <Spacer y={2} />
+      {recentepisodes}
 
       <Spacer y={8} />
     </main>

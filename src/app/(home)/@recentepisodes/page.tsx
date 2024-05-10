@@ -1,5 +1,5 @@
 import { fetchRecentEpisodeList } from "@/actions/action";
-import AnimeCarouselList from "@/components/home/AnimeCarouselList";
+import AnimeList from "@/components/home/AnimeList";
 import { SearchParams } from "@/lib/types";
 
 export default async function RecentEpisodeListPage({
@@ -13,5 +13,5 @@ export default async function RecentEpisodeListPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  return <AnimeCarouselList animeList={data.results} />;
+  return <AnimeList animeList={data.results} />;
 }
