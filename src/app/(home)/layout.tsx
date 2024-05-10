@@ -26,6 +26,7 @@ export default async function HomeLayout({
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Popular
       </Heading>
+      <Spacer y={2} />
       {popular}
 
       <Spacer y={8} />
@@ -33,6 +34,7 @@ export default async function HomeLayout({
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Recent Episodes
       </Heading>
+      <Spacer y={2} />
       {recentepisodes}
 
       <Spacer y={8} />
@@ -40,13 +42,15 @@ export default async function HomeLayout({
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Top Airing
       </Heading>
+      <Spacer y={2} />
       {topairing}
 
-      <Spacer y={4} />
+      <Spacer y={8} />
 
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Movies
       </Heading>
+      <Spacer y={2} />
       {movies}
 
       <Spacer y={8} />
@@ -54,6 +58,7 @@ export default async function HomeLayout({
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         All
       </Heading>
+      <Spacer y={2} />
       {animelist}
     </main>
   );

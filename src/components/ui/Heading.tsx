@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import React from "react";
 
 const headingVariants = cva(
-  "scroll-m-20 text-pretty font-extrabold tracking-tight",
+  "scroll-m-20 text-pretty font-bold tracking-tight",
   {
     variants: {
       order: {
