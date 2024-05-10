@@ -112,3 +112,28 @@ export async function fetchAnimeList({ page }: { page?: number }) {
     return null;
   }
 }
+
+export async function fetchMovieList({ page }: { page?: number }) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.movies({ page }),
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeInfoListSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
