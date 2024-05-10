@@ -31,12 +31,18 @@ type Progress = {
   loadedSeconds: number;
 };
 
-export default function VideoPlayer({ episodeSource, ...props }: Props) {
-  const defaultSource = episodeSource.sources.find(
-    (source) => source.quality === "360p"
-  );
+const sourcePriority = ["1080p", "720p", "480p", "360p", "default", "backup"];
 
-  const [source, setSource] = React.useState<string>(defaultSource?.url || "");
+export default function VideoPlayer({ episodeSource, ...props }: Props) {
+  const sortedSources = episodeSource.sources.sort((a, b) => {
+    return (
+      sourcePriority.indexOf(a.quality) - sourcePriority.indexOf(b.quality)
+    );
+  });
+
+  const defaultSource = sortedSources[0];
+
+  const [source, setSource] = React.useState<string>(defaultSource.url);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState<Progress>({
     played: 0,
@@ -110,6 +116,7 @@ function SelectSource({
       className="max-w-xs"
       value={source}
       onChange={onChange}
+      aria-label="Select video source"
     >
       {sourceList.map((item) => (
         <SelectItem key={item.url} value={item.url}>
