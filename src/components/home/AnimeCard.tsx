@@ -9,7 +9,7 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
   const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
   const href = `/info/${anime.id}`;
   return (
-    <Card className="relative h-full w-full aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden">
+    <Card className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden">
       <CardHeader className="absolute z-20 top-0 p-2 flex justify-between items-start">
         {anime.rank && (
           <Chip radius="sm" size="sm" color="warning" variant="shadow">
@@ -29,13 +29,13 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
           </Chip>
         )}
       </CardHeader>
-      <div className="absolute z-10  w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
+      <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
         alt={anime.title}
         className="z-0 w-full h-full object-cover"
         src={anime.image}
         classNames={{
-          wrapper: "w-full h-full",
+          wrapper: "w-full h-full mx-auto bg-blur-md",
           img: "object-cover",
         }}
       />
