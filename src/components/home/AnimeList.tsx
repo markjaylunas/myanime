@@ -1,19 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import AnimeCard, { AnimeCardProps } from "./AnimeCard";
+import AnimeCard from "./AnimeCard";
 
+import { AnimeInfoList } from "@/lib/types";
 import { useRouter } from "next/navigation";
 
 type AnimeListProps = {
-  list: AnimeCardProps[];
+  animeList: AnimeInfoList["results"];
 };
 
-export default function AnimeList({ list }: AnimeListProps) {
+export default function AnimeList({ animeList }: AnimeListProps) {
   const router = useRouter();
   return (
     <ul className="grid grid-cols-2 xs:grid-cols-3 2sm:grid-cols-3  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-      {list.map((anime, index) => (
+      {animeList.map((anime, index) => (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{

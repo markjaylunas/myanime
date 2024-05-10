@@ -1,14 +1,9 @@
-import AnimeCardListSkeleton from "@/components/home/AnimeCardListSkeleton";
-import Popular from "@/components/home/Popular";
-import RecentEpisode from "@/components/home/RecentEpisode";
-import Trending from "@/components/home/Trending";
-import Heading from "@/components/ui/Heading";
-import { Suspense } from "react";
-
 export default async function Home() {
   return (
-    <main className="container max-w-5xl mx-auto min-h-screen px-4">
-      <section className="space-y-3 mb-8">
+    <>
+      <h1>Makje</h1>
+
+      {/* <section className="space-y-3 mb-8">
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Recent Episodes
         </Heading>
@@ -34,6 +29,7 @@ export default async function Home() {
           <Popular />
         </Suspense>
       </section>
-    </main>
+       */}
+    </>
   );
 }

@@ -221,19 +221,36 @@ export const searchAnimeDataSchema = z.object({
 export const animeInfoSchema = z.object({
   id: z.string(),
   title: z.string(),
-  url: z.string(),
-  genres: z.array(z.string()),
-  totalEpisodes: z.number(),
   image: z.string(),
-  releaseDate: z.string(),
-  description: z.string(),
-  subOrDub: z.string(),
-  type: z.string(),
-  status: z.string(),
-  otherName: z.string(),
-  episodes: z.array(
-    z.object({ id: z.string(), number: z.number(), url: z.string() })
-  ),
+  url: z.string(),
+
+  // optional
+  episodeId: z.string().optional().nullable(),
+  episodeNumber: z.number().optional().nullable(),
+  genres: z.array(z.string()).optional().nullable(),
+  totalEpisodes: z.number().optional().nullable(),
+  releaseDate: z.string().optional().nullable(),
+  description: z.string().optional().nullable(),
+  subOrDub: z.string().optional().nullable(),
+  type: z.string().optional().nullable(),
+  status: z.string().optional().nullable(),
+  otherName: z.string().optional().nullable(),
+  episodes: z
+    .array(
+      z.object({
+        id: z.string(),
+        number: z.number(),
+        url: z.string(),
+      })
+    )
+    .optional()
+    .nullable(),
+});
+
+export const animeInfoListSchema = z.object({
+  currentPage: z.string(),
+  hasNextPage: z.boolean(),
+  results: z.array(animeInfoSchema),
 });
 
 export const episodeSourceSchema = z.object({

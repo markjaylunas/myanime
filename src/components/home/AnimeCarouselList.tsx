@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimeData, RecentAnimeEpisodeData } from "@/lib/types";
+import { AnimeInfoList } from "@/lib/types";
 import { motion } from "framer-motion";
 import AnimeCard from "./AnimeCard";
 
@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 
 type Props = {
-  animeList: AnimeData["results"] | RecentAnimeEpisodeData["results"];
+  animeList: AnimeInfoList["results"];
 };
 
 export default function AnimeCarouselList({ animeList }: Props) {
@@ -42,16 +42,7 @@ export default function AnimeCarouselList({ animeList }: Props) {
                 delay: index > 5 ? 0.5 : 0.1 * index,
               }}
             >
-              <AnimeCard
-                id={anime.id}
-                title={
-                  anime.title.english ||
-                  anime.title.romaji ||
-                  anime.title.native ||
-                  ""
-                }
-                image={anime.image}
-              />
+              <AnimeCard {...anime} />
             </motion.div>
           </CarouselItem>
         ))}
