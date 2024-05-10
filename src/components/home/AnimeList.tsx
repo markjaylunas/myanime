@@ -13,7 +13,7 @@ type AnimeListProps = {
 export default function AnimeList({ animeList }: AnimeListProps) {
   const router = useRouter();
   return (
-    <ul className="grid grid-cols-2 xs:grid-cols-3 2sm:grid-cols-3  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+    <ul className="grid grid-cols-2 2xs:grid-cols-3 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 gap-y-6">
       {animeList.map((anime, index) => (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
