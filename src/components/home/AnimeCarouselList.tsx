@@ -58,8 +58,8 @@ export default function AnimeCarouselList({ animeList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious variant="ghost" />
-      <CarouselNext variant="ghost" />
+      <CarouselPrevious className="absolute left-3 size-7" />
+      <CarouselNext className="absolute right-3 size-7" />
     </Carousel>
   );
 }
