@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function AnimeCard(anime: AnimeInfo) {
   const href = `/info/${anime.id}`;
   return (
-    <Card className="relative h-full w-full aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
+    <Card className="relative h-full w-full aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden">
       <CardHeader className="absolute z-20 top-0 p-4 flex justify-end items-start">
         {anime.subOrDub === "dub" && (
           <Chip radius="sm" color="secondary">
@@ -15,12 +15,15 @@ export default function AnimeCard(anime: AnimeInfo) {
           </Chip>
         )}
       </CardHeader>
-      <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
+      <div className="absolute z-10  w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
         alt={anime.title}
         className="z-0 w-full h-full object-cover"
         src={anime.image}
-        classNames={{ wrapper: "w-full h-full" }}
+        classNames={{
+          wrapper: "w-full h-full",
+          img: "object-cover",
+        }}
       />
       <CardFooter className="absolute z-20 bottom-0 p-4 flex justify-center items-start">
         <Link href={href}>
