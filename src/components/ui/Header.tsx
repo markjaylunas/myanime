@@ -12,7 +12,6 @@ import NextLink from "next/link";
 import React from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
-import QuickSearch from "./QuickSearch";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Header() {
@@ -46,9 +45,6 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem>
-          <QuickSearch />
-        </NavbarItem>
         {/* <NavbarItem>
           <Button as={NextLink} color="primary" href="/login" variant="flat">
             Log In
