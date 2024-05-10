@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 export const metadata: Metadata = {
-  title: siteConfig.name + "| Makje",
+  title: `${siteConfig.name} | Makje`,
   description: siteConfig.description,
 };
 export default function RootLayout({
