@@ -7,10 +7,6 @@ import { useDebouncedCallback } from "@mantine/hooks";
 import { Input } from "@nextui-org/input";
 import {
   Button,
-  Chip,
-  Image,
-  Listbox,
-  ListboxItem,
   Modal,
   ModalBody,
   ModalContent,
@@ -18,8 +14,8 @@ import {
   ScrollShadow,
   useDisclosure,
 } from "@nextui-org/react";
-import NextLink from "next/link";
 import { useState } from "react";
+import AnimeCard from "../home/AnimeCard";
 
 export default function QuickSearch() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -65,45 +61,11 @@ export default function QuickSearch() {
               </ModalHeader>
               <ModalBody>
                 <ScrollShadow hideScrollBar className="h-[500px]">
-                  <Listbox>
-                    {data ? (
-                      data.map((anime) => (
-                        <ListboxItem
-                          key={anime.id}
-                          as={NextLink}
-                          href={`/info/${anime.id}`}
-                          startContent={
-                            <div className="max-h-[200px]">
-                              <Image
-                                alt={anime.image}
-                                height={150}
-                                src={anime.image}
-                                className="w-full h-[150px] object-cover"
-                              />
-                            </div>
-                          }
-                        >
-                          <p className="text-xl line-clamp-3 text-wrap">
-                            {anime.title}
-                          </p>
-                          <p className="text-secondary-700">
-                            {anime.releaseDate}
-                          </p>
-                          <Chip
-                            variant="solid"
-                            className="mt-2"
-                            color={
-                              anime.subOrDub === "dub" ? "secondary" : "primary"
-                            }
-                          >
-                            {anime.subOrDub}
-                          </Chip>
-                        </ListboxItem>
-                      ))
-                    ) : (
-                      <p>No results found</p>
-                    )}
-                  </Listbox>
+                  <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2 gap-y-3">
+                    {data.map((anime) => (
+                      <AnimeCard key={anime.id} {...anime} />
+                    ))}
+                  </ul>
                 </ScrollShadow>
               </ModalBody>
             </>
