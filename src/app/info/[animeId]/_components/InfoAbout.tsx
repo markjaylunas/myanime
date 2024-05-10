@@ -30,7 +30,6 @@ export default function InfoAbout({ title, image, description }: Props) {
           className="max-w-xl"
           maxChars={400}
           description={description || ""}
-          isHtmlTemplate
         />
         <div className=" h-[300px] w-[200px]">
           <Image
