@@ -13,9 +13,13 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   animeList: AnimeInfoList["results"];
+  isRanked?: boolean;
 };
 
-export default function AnimeCarouselList({ animeList }: Props) {
+export default function AnimeCarouselList({
+  animeList,
+  isRanked = false,
+}: Props) {
   const router = useRouter();
 
   return (
@@ -43,7 +47,7 @@ export default function AnimeCarouselList({ animeList }: Props) {
                 delay: index > 5 ? 0.5 : 0.1 * index,
               }}
             >
-              <AnimeCard {...anime} />
+              <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
             </motion.div>
           </CarouselItem>
         ))}

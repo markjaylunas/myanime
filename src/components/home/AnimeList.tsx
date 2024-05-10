@@ -8,12 +8,16 @@ import { useRouter } from "next/navigation";
 
 type AnimeListProps = {
   animeList: AnimeInfoList["results"];
+  isRanked?: boolean;
 };
 
-export default function AnimeList({ animeList }: AnimeListProps) {
+export default function AnimeList({
+  animeList,
+  isRanked = false,
+}: AnimeListProps) {
   const router = useRouter();
   return (
-    <ul className="grid grid-cols-2 2xs:grid-cols-3 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 gap-y-6">
+    <ul className="grid grid-cols-2 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 gap-y-6">
       {animeList.map((anime, index) => (
         <motion.div
           initial={{ opacity: 0.2, scale: 0.9 }}
@@ -26,7 +30,7 @@ export default function AnimeList({ animeList }: AnimeListProps) {
           onClick={() => router.push(`/info/${anime.id}`)}
           className="w-fit"
         >
-          <AnimeCard {...anime} />
+          <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
         </motion.div>
       ))}
     </ul>

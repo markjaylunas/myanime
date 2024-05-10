@@ -13,5 +13,5 @@ export default async function TopAiringListPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  return <AnimeCarouselList animeList={data.results} />;
+  return <AnimeCarouselList animeList={data.results} isRanked />;
 }

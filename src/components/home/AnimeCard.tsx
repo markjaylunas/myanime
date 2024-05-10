@@ -1,17 +1,31 @@
 import { AnimeInfo } from "@/lib/types";
+import { extractYear } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
-export default function AnimeCard(anime: AnimeInfo) {
+export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
+  const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
   const href = `/info/${anime.id}`;
   return (
     <Card className="relative h-full w-full aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden">
-      <CardHeader className="absolute z-20 top-0 p-4 flex justify-end items-start">
-        {anime.subOrDub === "dub" && (
-          <Chip radius="sm" color="secondary">
-            DUB
+      <CardHeader className="absolute z-20 top-0 p-2 flex justify-between items-start">
+        {anime.rank && (
+          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+            {anime.rank}
+          </Chip>
+        )}
+
+        {anime.releaseDate && (
+          <Chip radius="sm" size="sm" color="success" variant="shadow">
+            {extractYear(anime.releaseDate)}
+          </Chip>
+        )}
+
+        {anime.subOrDub && (
+          <Chip radius="sm" size="sm" color="secondary" variant="shadow">
+            {anime.subOrDub}
           </Chip>
         )}
       </CardHeader>
@@ -25,13 +39,18 @@ export default function AnimeCard(anime: AnimeInfo) {
           img: "object-cover",
         }}
       />
-      <CardFooter className="absolute z-20 bottom-0 p-4 flex justify-center items-start">
+      <CardFooter className="absolute z-20 bottom-0 p-2 flex flex-col gap-2 justify-start items-center">
+        {isEpisode && (
+          <Chip radius="sm" size="sm" color="primary" variant="shadow">
+            Ep {anime.episodeNumber}
+          </Chip>
+        )}
+
         <Link href={href}>
-          <h4 className="text-white font-bold text-xs md:text-lg line-clamp-3 text-center text-pretty">
+          <h6 className="text-white font-semibold text-md line-clamp-2 text-center text-pretty">
             {anime.title}
-          </h4>
+          </h6>
         </Link>
-        <section></section>
       </CardFooter>
     </Card>
   );
