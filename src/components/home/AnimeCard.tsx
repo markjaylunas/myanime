@@ -15,7 +15,7 @@ export type AnimeCardProps = {
 export default function AnimeCard(props: AnimeCardProps) {
   const href = `/info/${props.id}`;
   return (
-    <Card className="relative h-[200px] sm:h-[250px] md:h-[300px] aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
+    <Card className="relative aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
       <CardHeader className="absolute z-20 top-0 p-4 flex justify-end items-start">
         {props.subOrDub === "dub" && (
           <Chip radius="sm" color="secondary">

@@ -8,6 +8,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useRouter } from "next/navigation";
 
@@ -17,11 +19,11 @@ type Props = {
 
 export default function AnimeCarouselList({ animeList }: Props) {
   const router = useRouter();
+
   return (
     <Carousel
       opts={{
         dragFree: true,
-        skipSnaps: false,
       }}
       className="w-full"
     >
@@ -29,7 +31,7 @@ export default function AnimeCarouselList({ animeList }: Props) {
         {animeList.map((anime, index) => (
           <CarouselItem
             key={`${anime.id}-${index}`}
-            className="pl-1  basis-1/2  2xs:basis-[58%] xs:basis-[40%] 2sm:basis-[37%]  sm:basis-[27%] md:basis-[26%] lg:basis-[21%] "
+            className="pl-2  basis-1/2 2xs:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 "
             onClick={() => router.push(`/info/${anime.id}`)}
           >
             <motion.div
@@ -56,6 +58,8 @@ export default function AnimeCarouselList({ animeList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselPrevious variant="ghost" />
+      <CarouselNext variant="ghost" />
     </Carousel>
   );
 }
