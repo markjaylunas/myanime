@@ -25,7 +25,7 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
 
         {anime.subOrDub && (
           <Chip radius="sm" size="sm" color="secondary" variant="shadow">
-            {anime.subOrDub}
+            {anime.subOrDub.toUpperCase()}
           </Chip>
         )}
       </CardHeader>
