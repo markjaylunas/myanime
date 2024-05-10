@@ -18,7 +18,7 @@ export default async function HomeLayout({
   topairing: ReactNode;
 }) {
   return (
-    <main className="container max-w-5xl mx-auto min-h-screen px-2 md:px-4">
+    <main className="container max-w-5xl mx-auto min-h-screen px-2 py-8 md:px-4">
       {children}
 
       <Spacer y={8} />
