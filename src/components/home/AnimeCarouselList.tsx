@@ -33,8 +33,9 @@ export default function AnimeCarouselList({ animeList }: Props) {
             onClick={() => router.push(`/info/${anime.id}`)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{
+              initial={{ opacity: 0.5, scale: 0.9 }}
+              viewport={{ once: true }}
+              whileInView={{
                 opacity: 1,
                 scale: 1,
               }}

@@ -17,10 +17,10 @@ export default function AnimeCard(anime: AnimeInfo) {
       </CardHeader>
       <div className="absolute z-10 w-full h-full bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
-        removeWrapper
         alt={anime.title}
         className="z-0 w-full h-full object-cover"
         src={anime.image}
+        classNames={{ wrapper: "w-full h-full" }}
       />
       <CardFooter className="absolute z-20 bottom-0 p-4 flex justify-center items-start">
         <Link href={href}>

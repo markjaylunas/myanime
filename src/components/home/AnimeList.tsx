@@ -16,13 +16,11 @@ export default function AnimeList({ animeList }: AnimeListProps) {
     <ul className="grid grid-cols-2 2xs:grid-cols-3 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 gap-y-6">
       {animeList.map((anime, index) => (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
+          initial={{ opacity: 0.2, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{
-            delay: index > 5 ? 0.5 : 0.1 * index,
+            delay: 0.2,
           }}
           key={`${anime.id}-${index}`}
           onClick={() => router.push(`/info/${anime.id}`)}
