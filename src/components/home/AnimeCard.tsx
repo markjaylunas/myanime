@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function AnimeCard(anime: AnimeInfo) {
   const href = `/info/${anime.id}`;
   return (
-    <Card className="relative aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
+    <Card className="relative h-full w-full aspect-2/3 bg-transparent select-none hover:cursor-pointer overflow-hidden">
       <CardHeader className="absolute z-20 top-0 p-4 flex justify-end items-start">
         {anime.subOrDub === "dub" && (
           <Chip radius="sm" color="secondary">
