@@ -27,7 +27,13 @@ export default function AnimeList({
             delay: 0.2,
           }}
           key={`${anime.id}-${index}`}
-          onClick={() => router.push(`/info/${anime.id}`)}
+          onClick={() =>
+            router.push(
+              `/info/${anime.id}/watch/${
+                anime.episodeId ? anime.episodeId : "default_episode_id"
+              }`
+            )
+          }
           className="w-fit"
         >
           <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />

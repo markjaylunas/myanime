@@ -34,7 +34,13 @@ export default function AnimeCarouselList({
           <CarouselItem
             key={`${anime.id}-${index}`}
             className="pl-2  basis-[45%] 2xs:basis-[38%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
-            onClick={() => router.push(`/info/${anime.id}`)}
+            onClick={() =>
+              router.push(
+                `/info/${anime.id}/watch/${
+                  anime.episodeId ? anime.episodeId : "default_episode_id"
+                }`
+              )
+            }
           >
             <motion.div
               initial={{ opacity: 0.5, scale: 0.9 }}
