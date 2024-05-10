@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <main className="container max-w-5xl mx-auto min-h-screen px-4">
       <section className="space-y-3 mb-8">
-        <Heading order="2xl" className="text-gray-300">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Recent Episodes
         </Heading>
         <Suspense fallback={<AnimeCardListSkeleton />}>
@@ -18,7 +18,7 @@ export default async function Home() {
       </section>
 
       <section className="space-y-3 mb-8">
-        <Heading order="2xl" className="text-gray-300">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Trending
         </Heading>
         <Suspense fallback={<AnimeCardListSkeleton />}>
@@ -27,7 +27,7 @@ export default async function Home() {
       </section>
 
       <section className="space-y-3 mb-8">
-        <Heading order="2xl" className="text-gray-300">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Popular
         </Heading>
         <Suspense fallback={<AnimeCardListSkeleton />}>
