@@ -29,7 +29,6 @@ export default async function EpisodePage({
   }));
 
   const hasEpisode = info.totalEpisodes;
-  console.log(info);
 
   return (
     <>

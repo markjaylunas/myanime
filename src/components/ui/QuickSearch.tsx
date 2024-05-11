@@ -25,7 +25,6 @@ export default function QuickSearch() {
   const router = useRouter();
 
   const handleSearch = useDebouncedCallback(async (term: string) => {
-    console.log("fetch");
     const res = await searchAnime({ query: term });
     setData(res?.results || []);
   }, 300);

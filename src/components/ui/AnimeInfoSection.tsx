@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function AnimeInfoSection({ info }: Props) {
-  console.log({ info });
   return (
     <Card isBlurred className="border-none " shadow="sm" fullWidth>
       <CardBody>
