@@ -12,8 +12,8 @@ export default function AnimeInfoSection({ info }: Props) {
   return (
     <Card isBlurred className="border-none " shadow="sm" fullWidth>
       <CardBody>
-        <div className="flex flex-col items-start md:flex-row gap-8 p-0 md:p-4">
-          <div className="relative col-span-6 md:col-span-4 max-w-[200px] min-w-[200px] sm:w-full">
+        <div className="flex flex-col items-start sm:flex-row gap-8 p-0 md:p-4">
+          <div className="relative col-span-6 md:col-span-4 md:max-w-[300px] lg:max-w-[350px] min-w-[200px] sm:w-full">
             <Image
               alt={info.title}
               src={info.image}
