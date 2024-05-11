@@ -1,6 +1,8 @@
 "use client";
+import { Button } from "@nextui-org/button";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { Toggle } from "./toggle";
+import { Icons } from "./Icons";
 
 type Props = React.HTMLProps<HTMLParagraphElement> & {
   maxChars?: number;
@@ -17,18 +19,27 @@ export default function ExpandDescription({
   const shortDescription = `${description.slice(0, maxChars)}...`;
 
   return (
-    <section className="flex flex-col gap-2">
+    <section className="flex indent-8 flex-col justify-center items-center gap-2">
       <p {...props}>
         {isTooShort || isExpanded ? description : shortDescription}
       </p>
       {!isTooShort && (
-        <Toggle
-          variant="outline"
+        <Button
+          radius="full"
+          isIconOnly
+          variant="flat"
+          size="sm"
+          color="primary"
           className="mt-4 rounded-xl"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          {isExpanded ? "Read less" : "Read more"}
-        </Toggle>
+          <motion.div
+            animate={{ rotateX: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Icons.chevronDown />
+          </motion.div>
+        </Button>
       )}
     </section>
   );
