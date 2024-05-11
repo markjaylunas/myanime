@@ -24,8 +24,8 @@ export const routesConfig: RoutesConfig = {
       href: "/",
     },
     {
-      title: "Search",
-      href: "/search",
+      title: "Genres",
+      href: "/genre/list",
     },
     {
       title: "My List",
