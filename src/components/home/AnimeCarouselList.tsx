@@ -37,7 +37,9 @@ export default function AnimeCarouselList({
             onClick={() =>
               router.push(
                 `/info/${anime.id}/watch/${
-                  anime.episodeId ? anime.episodeId : `${anime.id}-episode-1`
+                  anime.episodeId
+                    ? `${anime.episodeId}/${anime.episodeNumber}`
+                    : `${anime.id}-episode-1/1`
                 }`
               )
             }
