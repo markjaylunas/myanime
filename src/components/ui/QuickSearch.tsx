@@ -14,6 +14,7 @@ import {
   ScrollShadow,
   useDisclosure,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import AnimeCard from "../home/AnimeCard";
 
@@ -21,6 +22,7 @@ export default function QuickSearch() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<AnimeInfo[]>([]);
+  const router = useRouter();
 
   const handleSearch = useDebouncedCallback(async (term: string) => {
     console.log("fetch");
@@ -45,6 +47,7 @@ export default function QuickSearch() {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 <Input
+                  autoFocus
                   type="text"
                   variant="underlined"
                   size="lg"
@@ -63,7 +66,20 @@ export default function QuickSearch() {
                 <ScrollShadow hideScrollBar className="h-[500px]">
                   <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2 gap-y-3">
                     {data.map((anime) => (
-                      <AnimeCard key={anime.id} {...anime} />
+                      <li
+                        onClick={() =>
+                          router.push(
+                            `/info/${anime.id}/watch/${
+                              anime.episodeId
+                                ? anime.episodeId
+                                : `${anime.id}-episode-1`
+                            }`
+                          )
+                        }
+                        key={anime.id}
+                      >
+                        <AnimeCard {...anime} />
+                      </li>
                     ))}
                   </ul>
                 </ScrollShadow>
