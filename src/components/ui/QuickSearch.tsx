@@ -63,7 +63,7 @@ export default function QuickSearch() {
               </ModalHeader>
               <ModalBody>
                 <ScrollShadow hideScrollBar className="h-[500px]">
-                  <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2 gap-y-3">
+                  <ul className="grid grid-cols-2  gap-2 gap-y-3">
                     {data.map((anime) => (
                       <li
                         onClick={() =>
