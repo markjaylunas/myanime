@@ -7,7 +7,7 @@ import { useState } from "react";
 
 type Props = {
   animeId: string;
-  activeEpisodeId: string;
+  activeEpisodeId?: string;
   episodeList: {
     id: string;
     episodeNumber: number;
