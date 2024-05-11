@@ -107,7 +107,7 @@ export default function Video({
         />
       </MediaPlayer>
 
-      <div className="">
+      <div className="sr-only">
         {episodeSource.sources.map((source) => (
           <button key={source.url} onClick={() => setSrc(source.url)}>
             {source.quality}

@@ -42,7 +42,7 @@ export default async function EpisodePage({
       ) : (
         <NoVideo bgSrc={info.image} title={`${info.status}`} />
       )}
-      <section className="px-4 md:px-0">
+      <section className="px-4 md:px-0 mt-8">
         {episodeList && hasEpisode && (
           <EpisodeList
             animeId={animeId}
