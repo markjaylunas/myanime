@@ -35,7 +35,7 @@ export default function EpisodeList({ animeId, episodeList }: Props) {
         aria-label="Episode List"
         onSelectionChange={setSelected}
         color="primary"
-        variant="underlined"
+        variant="bordered"
       >
         {episodeChunks.map((chunk, index) => (
           <Tab
