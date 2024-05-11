@@ -7,26 +7,25 @@ import { useState } from "react";
 
 type Props = {
   animeId: string;
+  activeEpisodeId: string;
   episodeList: {
     id: string;
     episodeNumber: number;
   }[];
 };
 
-function chunkArray<T>(array: T[], chunkSize: number): T[][] {
-  const result = [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    result.push(array.slice(i, i + chunkSize));
-  }
-  return result;
-}
-
-export default function EpisodeList({ animeId, episodeList }: Props) {
+export default function EpisodeList({
+  animeId,
+  episodeList,
+  activeEpisodeId,
+}: Props) {
   const chunkSize = episodeList.length > 200 ? 100 : 25;
   const episodeChunks = chunkArray(episodeList, chunkSize);
-  const tabIndex = Array.from({ length: episodeChunks.length }, (_, i) => i);
+  const defaultTab = episodeChunks.findIndex((chunk) =>
+    chunk.some((episode) => episode.id === activeEpisodeId)
+  );
 
-  const [selected, setSelected] = useState<string | number>(tabIndex[0]);
+  const [selected, setSelected] = useState<string | number>(`${defaultTab}`);
 
   return (
     <section className="flex w-full flex-col">
@@ -34,6 +33,7 @@ export default function EpisodeList({ animeId, episodeList }: Props) {
         selectedKey={selected}
         aria-label="Episode List"
         onSelectionChange={setSelected}
+        defaultSelectedKey={`${defaultTab}`}
         color="primary"
         variant="bordered"
       >
@@ -55,7 +55,9 @@ export default function EpisodeList({ animeId, episodeList }: Props) {
                     <Button
                       as={NextLink}
                       href={`/info/${animeId}/watch/${episode.id}/${episode.episodeNumber}`}
-                      variant="shadow"
+                      variant={
+                        episode.id === activeEpisodeId ? "bordered" : "shadow"
+                      }
                       radius="md"
                       color="primary"
                       key={episode.id}
@@ -72,4 +74,12 @@ export default function EpisodeList({ animeId, episodeList }: Props) {
       </Tabs>
     </section>
   );
+}
+
+function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+  const result = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    result.push(array.slice(i, i + chunkSize));
+  }
+  return result;
 }

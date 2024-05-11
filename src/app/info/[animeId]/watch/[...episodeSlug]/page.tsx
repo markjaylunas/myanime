@@ -44,7 +44,11 @@ export default async function EpisodePage({
       )}
       <section className="px-4 md:px-0">
         {episodeList && hasEpisode && (
-          <EpisodeList animeId={animeId} episodeList={episodeList} />
+          <EpisodeList
+            animeId={animeId}
+            episodeList={episodeList}
+            activeEpisodeId={episodeId}
+          />
         )}
       </section>
 
