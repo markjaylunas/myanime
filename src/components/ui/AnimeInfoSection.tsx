@@ -21,6 +21,7 @@ export default function AnimeInfoSection({ info }: Props) {
               height={200}
               shadow="md"
               width="100%"
+              isZoomed
             />
           </div>
 
