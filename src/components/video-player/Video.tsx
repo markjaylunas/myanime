@@ -82,9 +82,8 @@ export default function Video({
   }
 
   return (
-    <>
+    <section className="overflow-hidden">
       <MediaPlayer
-        className="player "
         title={about}
         src={src}
         crossorigin
@@ -115,6 +114,6 @@ export default function Video({
           </button>
         ))}
       </div>
-    </>
+    </section>
   );
 }
