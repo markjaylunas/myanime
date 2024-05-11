@@ -1,6 +1,6 @@
 import { fetchAnimeEpisodeSource, fetchAnimeInfo } from "@/actions/action";
 import EpisodeList from "@/components/ui/EpisodeList";
-import VideoPlayer from "@/components/ui/VideoPlayer";
+import Video from "@/components/video-player/Video";
 
 export default async function EpisodePage({
   params,
@@ -21,16 +21,23 @@ export default async function EpisodePage({
   }));
 
   return (
-    <div>
+    <>
+      {animeEpisodeSource && info ? (
+        <Video
+          episodeSource={animeEpisodeSource}
+          info={info}
+          episodeId={episodeId}
+        />
+      ) : (
+        <div className="w-full aspect-video">Loading...</div>
+      )}
       <h1>Episode Page</h1>
       <p>animeId: {params.animeId}</p>
       <p>episodeId: {params.episodeId}</p>
 
-      {animeEpisodeSource && <VideoPlayer episodeSource={animeEpisodeSource} />}
-
       {episodeList && (
         <EpisodeList animeId={animeId} episodeList={episodeList} />
       )}
-    </div>
+    </>
   );
 }
