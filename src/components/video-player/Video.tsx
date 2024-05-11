@@ -28,15 +28,18 @@ type Props = {
   episodeSource: EpisodeSource;
   info: AnimeInfo;
   episodeId: string;
+  episodeNumber: string;
 };
 
 const sourcePriority = ["1080p", "720p", "480p", "360p", "default", "backup"];
 
-export default function Video({ episodeSource, info, episodeId }: Props) {
-  const episodeNumber = info.episodes?.find(
-    (episode) => episode.id === episodeId
-  )?.number;
-  const about = `${info.title} - Episode ${episodeNumber || 1}`;
+export default function Video({
+  episodeSource,
+  info,
+  episodeId,
+  episodeNumber,
+}: Props) {
+  const about = `Episode ${episodeNumber || 1} - ${info.title}`;
   const sortedSources = episodeSource.sources.sort((a, b) => {
     return (
       sourcePriority.indexOf(a.quality) - sourcePriority.indexOf(b.quality)

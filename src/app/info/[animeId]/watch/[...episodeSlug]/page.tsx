@@ -1,41 +1,52 @@
 import { fetchAnimeEpisodeSource, fetchAnimeInfo } from "@/actions/action";
 import EpisodeList from "@/components/ui/EpisodeList";
+import NoVideo from "@/components/video-player/NoVideo";
 import Video from "@/components/video-player/Video";
+import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
   params,
 }: {
-  params: { animeId: string; episodeId: string };
+  params: { animeId: string; episodeSlug: string[] };
 }) {
-  const { episodeId, animeId } = params;
-  // todo: refactor to catch all params in watch page only
+  const { episodeSlug, animeId } = params;
+  const [episodeId, episodeNumber] = episodeSlug;
 
   const [info, animeEpisodeSource] = await Promise.all([
     await fetchAnimeInfo({ animeId }),
     await fetchAnimeEpisodeSource({ episodeId }),
   ]);
 
+  if (!info) {
+    return notFound();
+  }
+
   const episodeList = info?.episodes?.map((episode) => ({
     id: episode.id,
     episodeNumber: episode.number,
   }));
 
+  const hasEpisode = info.totalEpisodes;
+  console.log(info);
+
   return (
     <>
-      {animeEpisodeSource && info ? (
+      {hasEpisode && animeEpisodeSource && info ? (
         <Video
           episodeSource={animeEpisodeSource}
           info={info}
           episodeId={episodeId}
+          episodeNumber={episodeNumber}
         />
       ) : (
-        <div className="w-full aspect-video">Loading...</div>
+        <NoVideo bgSrc={info.image} title={`${info.status}`} />
       )}
+
       <h1>Episode Page</h1>
       <p>animeId: {params.animeId}</p>
-      <p>episodeId: {params.episodeId}</p>
+      <p>episodeId: {episodeId}</p>
 
-      {episodeList && (
+      {episodeList && hasEpisode && (
         <EpisodeList animeId={animeId} episodeList={episodeList} />
       )}
     </>
