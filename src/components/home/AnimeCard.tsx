@@ -51,7 +51,7 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
         )}
 
         <Link href={href}>
-          <h6 className="text-white font-semibold text-md line-clamp-2 text-center text-pretty">
+          <h6 className="text-white font-semibold text-md line-clamp-5 text-center text-pretty">
             {anime.title}
           </h6>
         </Link>
