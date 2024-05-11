@@ -50,13 +50,14 @@ export default function EpisodeList({ animeId, episodeList }: Props) {
           >
             <Card>
               <CardBody>
-                <div className="flex flex-wrap justify-start gap-3">
+                <div className="flex flex-wrap justify-start gap-2 mx-auto">
                   {chunk.map((episode) => (
                     <Button
                       as={NextLink}
                       href={`/info/${animeId}/watch/${episode.id}`}
-                      variant="flat"
+                      variant="shadow"
                       radius="md"
+                      color="primary"
                       key={episode.id}
                       isIconOnly
                     >
