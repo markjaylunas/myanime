@@ -42,10 +42,11 @@ export default async function EpisodePage({
       ) : (
         <NoVideo bgSrc={info.image} title={`${info.status}`} />
       )}
-
-      {episodeList && hasEpisode && (
-        <EpisodeList animeId={animeId} episodeList={episodeList} />
-      )}
+      <section className="px-4 md:px-0">
+        {episodeList && hasEpisode && (
+          <EpisodeList animeId={animeId} episodeList={episodeList} />
+        )}
+      </section>
 
       <Spacer y={12} />
 
