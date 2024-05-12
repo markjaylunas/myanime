@@ -270,3 +270,17 @@ export const genreSchema = z.object({
 });
 
 export const genreListSchema = z.array(genreSchema);
+
+export const genreAnimeSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  image: z.string(),
+  url: z.string(),
+  released: z.string().optional().nullable(),
+});
+
+export const genreAnimeListSchema = z.object({
+  currentPage: z.string(),
+  hasNextPage: z.boolean(),
+  results: z.array(genreAnimeSchema),
+});

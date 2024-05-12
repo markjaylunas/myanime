@@ -1,5 +1,6 @@
 import { fetchGenreList } from "@/actions/action";
 import GenreListContainer from "@/components/ui/GenreListContainer";
+import Heading from "@/components/ui/Heading";
 import { SearchParams } from "@/lib/types";
 
 export default async function GenreListPage({
@@ -13,5 +14,11 @@ export default async function GenreListPage({
 
   if (!data) throw new Error("Failed to fetch (Genre List) data");
 
-  return <GenreListContainer genreList={data} />;
+  return (
+    <>
+      <Heading className="mb-4">Genres</Heading>
+
+      <GenreListContainer genreList={data} />
+    </>
+  );
 }

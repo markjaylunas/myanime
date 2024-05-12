@@ -7,7 +7,6 @@ import {
   animeSchema,
   episodeSourceSchema,
   genreListSchema,
-  genreSchema,
   recentAnimeEpisodeDataSchema,
   recentAnimeEpisodeSchema,
   searchAnimeDataSchema,
@@ -52,5 +51,3 @@ export type AnimeInfoList = z.infer<typeof animeInfoListSchema>;
 export type AnimeInfo = z.infer<typeof animeInfoSchema>;
 
 export type GenreList = z.infer<typeof genreListSchema>;
-
-export type Genre = z.infer<typeof genreSchema>;

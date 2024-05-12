@@ -5,6 +5,7 @@ import {
   animeInfoListSchema,
   animeInfoSchema,
   episodeSourceSchema,
+  genreAnimeListSchema,
   genreListSchema,
   searchAnimeDataSchema,
 } from "@/lib/validations";
@@ -228,6 +229,37 @@ export async function fetchGenreList({ page }: { page?: number }) {
     const data = await response.json();
 
     const parsed = genreListSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error);
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchGenreAnimeList({
+  genreId,
+  page,
+}: {
+  genreId: string;
+  page?: number;
+}) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.anime.gogoanime.genre({ genreId, page }),
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = genreAnimeListSchema.safeParse(data);
 
     if (!parsed.success) {
       console.error(parsed.error);
