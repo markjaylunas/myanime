@@ -50,11 +50,13 @@ export default function Video({
   episodeNumber,
 }: Props) {
   const about = `Episode ${episodeNumber || 1} - ${info.title}`;
-  const sortedSources = episodeSource.sources.sort((a, b) => {
-    return (
-      sourcePriority.indexOf(a.quality) - sourcePriority.indexOf(b.quality)
-    );
-  });
+  const sortedSources = episodeSource.sources
+    ? episodeSource.sources.sort((a, b) => {
+        return (
+          sourcePriority.indexOf(a.quality) - sourcePriority.indexOf(b.quality)
+        );
+      })
+    : [];
 
   const currentEpisodeIndex = info.episodes
     ? info.episodes.findIndex(

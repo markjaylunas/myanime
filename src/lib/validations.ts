@@ -254,9 +254,12 @@ export const animeInfoListSchema = z.object({
 });
 
 export const episodeSourceSchema = z.object({
-  headers: z.object({ Referer: z.string() }),
-  sources: z.array(
-    z.object({ url: z.string(), isM3U8: z.boolean(), quality: z.string() })
-  ),
-  download: z.string(),
+  headers: z.object({ Referer: z.string() }).optional().nullable(),
+  sources: z
+    .array(
+      z.object({ url: z.string(), isM3U8: z.boolean(), quality: z.string() })
+    )
+    .optional()
+    .nullable(),
+  download: z.string().optional().nullable(),
 });
