@@ -263,3 +263,10 @@ export const episodeSourceSchema = z.object({
     .nullable(),
   download: z.string().optional().nullable(),
 });
+
+export const genreSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+});
+
+export const genreListSchema = z.array(genreSchema);
