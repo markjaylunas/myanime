@@ -1,4 +1,5 @@
 import Heading from "@/components/ui/Heading";
+import MyLink from "@/components/ui/MyLink";
 import { Spacer } from "@nextui-org/spacer";
 import { ReactNode } from "react";
 
@@ -21,30 +22,49 @@ export default async function HomeLayout({
 
       <Spacer y={8} />
 
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        Popular
-      </Heading>
+      <div className="flex justify-between">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+          Popular
+        </Heading>
+
+        <MyLink href="/popular">View All</MyLink>
+      </div>
       <Spacer y={2} />
       {popular}
 
       <Spacer y={8} />
 
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        Top Airing
-      </Heading>
+      <div className="flex justify-between">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+          Top Airing
+        </Heading>
+
+        <MyLink href="/top-airing">View All</MyLink>
+      </div>
       <Spacer y={2} />
       {topairing}
 
       <Spacer y={8} />
 
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        Movies
-      </Heading>
+      <div className="flex justify-between">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+          Movies
+        </Heading>
+
+        <MyLink href="/movies">View All</MyLink>
+      </div>
       <Spacer y={2} />
       {movies}
 
       <Spacer y={8} />
 
+      <div className="flex justify-between">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+          Recent Episodes
+        </Heading>
+
+        <MyLink href="/recent-episodes">View All</MyLink>
+      </div>
       <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
         Recent Episodes
       </Heading>
