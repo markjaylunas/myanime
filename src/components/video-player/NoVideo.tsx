@@ -22,7 +22,7 @@ export default function NoVideo({
       style={bgSrc ? { backgroundImage: `url(${bgSrc})` } : {}}
       {...props}
     >
-      <div className="w-full h-full bg-black/75 flex flex-col justify-center items-center ">
+      <div className="w-full h-full bg-black/35 dark:bg-black/75 flex flex-col justify-center items-center ">
         <h5 className="text-xl font-bold">{title}</h5>
         <p>{description}</p>
       </div>
