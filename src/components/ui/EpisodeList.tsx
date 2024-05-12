@@ -50,7 +50,7 @@ export default function EpisodeList({
           >
             <Card>
               <CardBody>
-                <div className="flex flex-wrap justify-start gap-2 mx-auto">
+                <div className="flex flex-wrap justify-center flex-grow gap-2 mx-auto">
                   {chunk.map((episode) => (
                     <Button
                       as={NextLink}
