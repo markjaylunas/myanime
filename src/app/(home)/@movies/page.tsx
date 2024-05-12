@@ -7,8 +7,10 @@ export default async function MovieListPage({
 }: {
   searchParams?: SearchParams;
 }) {
-  const page = typeof searchParams?.page === "string" ? searchParams?.page : "";
-
+  const page =
+    typeof searchParams?.page === "string"
+      ? parseInt(searchParams?.page) || 1
+      : 1;
   const data = await fetchMovieList({ page: Number(page) || 1 });
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");

@@ -8,8 +8,10 @@ export default async function GenreListPage({
 }: {
   searchParams?: SearchParams;
 }) {
-  const page = typeof searchParams?.page === "string" ? searchParams?.page : "";
-
+  const page =
+    typeof searchParams?.page === "string"
+      ? parseInt(searchParams?.page) || 1
+      : 1;
   const data = await fetchGenreList({ page: Number(page) || 1 });
 
   if (!data) throw new Error("Failed to fetch (Genre List) data");

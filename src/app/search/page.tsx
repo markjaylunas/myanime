@@ -11,15 +11,17 @@ export default function SearchPage({
 }) {
   const query =
     typeof searchParams?.query === "string" ? searchParams?.query : "";
-  const page = typeof searchParams?.page === "string" ? searchParams?.page : "";
-
+  const page =
+    typeof searchParams?.page === "string"
+      ? parseInt(searchParams?.page) || 1
+      : 1;
   return (
     <main>
       <div className="p-4">
         <SearchInput />
 
         <Suspense fallback={<Spinner />}>
-          <SearchAnimeResults query={query} page={parseInt(page) || 1} />
+          <SearchAnimeResults query={query} page={page || 1} />
         </Suspense>
       </div>
     </main>
