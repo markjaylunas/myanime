@@ -65,9 +65,6 @@ export default async function HomeLayout({
 
         <MyLink href="/recent-episodes">View All</MyLink>
       </div>
-      <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-        Recent Episodes
-      </Heading>
       <Spacer y={2} />
       {recentepisodes}
 
