@@ -49,7 +49,7 @@ export default async function GenreListPage({
       )}
 
       <SimplePagination
-        prevDisabled={page >= 1}
+        prevDisabled={page <= 1}
         nextDisabled={genreAnimeList?.hasNextPage === false}
       />
 
