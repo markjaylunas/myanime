@@ -49,6 +49,13 @@ export default function AnimeInfoSection({ info }: Props) {
                   </Chip>
 
                   <Chip color="secondary" variant="faded">
+                    Sub or Dub | &nbsp;
+                    <span className="font-semibold text-foreground/90">
+                      {info.subOrDub?.toUpperCase()}
+                    </span>
+                  </Chip>
+
+                  <Chip color="secondary" variant="faded">
                     Released | &nbsp;
                     <span className="font-semibold text-foreground/90">
                       {info.releaseDate}
