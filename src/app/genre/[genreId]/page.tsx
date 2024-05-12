@@ -5,6 +5,7 @@ import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { AnimeInfoList, SearchParams } from "@/lib/types";
 import { toTitleCase } from "@/lib/utils";
+import { Chip } from "@nextui-org/chip";
 
 export default async function GenreListPage({
   params,
@@ -39,7 +40,13 @@ export default async function GenreListPage({
     <>
       <Heading>Genre: {toTitleCase(genreId.split("-").join(" "))}</Heading>
 
-      {genreAnime.length > 0 && <AnimeList animeList={genreAnime} />}
+      {genreAnime.length > 0 ? (
+        <AnimeList animeList={genreAnime} />
+      ) : (
+        <Chip size="lg" variant="bordered" color="warning">
+          No anime found
+        </Chip>
+      )}
 
       <SimplePagination
         prevDisabled={page >= 1}
