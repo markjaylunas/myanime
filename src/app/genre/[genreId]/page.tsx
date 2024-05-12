@@ -1,10 +1,7 @@
 import { fetchGenreAnimeList, fetchGenreList } from "@/actions/action";
-import AnimeList from "@/components/home/AnimeList";
+import AnimeList from "@/components/anime-cards/AnimeList";
 import GenreListContainer from "@/components/ui/GenreListContainer";
-import Heading from "@/components/ui/Heading";
-import SimplePagination from "@/components/ui/SimplePagination";
 import { AnimeInfoList, SearchParams } from "@/lib/types";
-import { toTitleCase } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 
 export default async function GenreListPage({
@@ -38,8 +35,6 @@ export default async function GenreListPage({
 
   return (
     <>
-      <Heading>Genre: {toTitleCase(genreId.split("-").join(" "))}</Heading>
-
       {genreAnime.length > 0 ? (
         <AnimeList animeList={genreAnime} />
       ) : (
@@ -47,11 +42,6 @@ export default async function GenreListPage({
           No anime found
         </Chip>
       )}
-
-      <SimplePagination
-        prevDisabled={page <= 1}
-        nextDisabled={genreAnimeList?.hasNextPage === false}
-      />
 
       <GenreListContainer genreList={genreList} />
     </>

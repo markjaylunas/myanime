@@ -1,5 +1,5 @@
 import { fetchMovieList } from "@/actions/action";
-import AnimeList from "@/components/home/AnimeList";
+import AnimeList from "@/components/anime-cards/AnimeList";
 import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";

@@ -1,20 +1,18 @@
+import AnimeCarouselListSkeleton from "@/components/anime-cards/AnimeCarouselListSkeleton";
+import AnimeListSkeleton from "@/components/anime-cards/AnimeListSkeleton";
 import Heading from "@/components/ui/Heading";
 import MyLink from "@/components/ui/MyLink";
 import { Spacer } from "@nextui-org/spacer";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
+import MovieListPage from "./_components/list/movies";
+import PopularListPage from "./_components/list/popular";
+import RecentEpisodeListPage from "./_components/list/recent-episodes";
+import TopAiringListPage from "./_components/list/top-airing";
 
 export default async function HomeLayout({
   children,
-  movies,
-  popular,
-  recentepisodes,
-  topairing,
 }: {
   children: ReactNode;
-  movies: ReactNode;
-  popular: ReactNode;
-  recentepisodes: ReactNode;
-  topairing: ReactNode;
 }) {
   return (
     <main className="container max-w-5xl mx-auto min-h-screen px-2 py-8 md:px-4">
@@ -29,8 +27,12 @@ export default async function HomeLayout({
 
         <MyLink href="/popular">View All</MyLink>
       </div>
+
       <Spacer y={2} />
-      {popular}
+
+      <Suspense fallback={<AnimeCarouselListSkeleton />}>
+        <PopularListPage />
+      </Suspense>
 
       <Spacer y={8} />
 
@@ -42,7 +44,10 @@ export default async function HomeLayout({
         <MyLink href="/top-airing">View All</MyLink>
       </div>
       <Spacer y={2} />
-      {topairing}
+
+      <Suspense fallback={<AnimeCarouselListSkeleton />}>
+        <TopAiringListPage />
+      </Suspense>
 
       <Spacer y={8} />
 
@@ -54,8 +59,10 @@ export default async function HomeLayout({
         <MyLink href="/movies">View All</MyLink>
       </div>
       <Spacer y={2} />
-      {movies}
 
+      <Suspense fallback={<AnimeCarouselListSkeleton />}>
+        <MovieListPage />
+      </Suspense>
       <Spacer y={8} />
 
       <div className="flex justify-between">
@@ -66,7 +73,11 @@ export default async function HomeLayout({
         <MyLink href="/recent-episodes">View All</MyLink>
       </div>
       <Spacer y={2} />
-      {recentepisodes}
+
+      <Suspense fallback={<AnimeListSkeleton />}>
+        <RecentEpisodeListPage />
+      </Suspense>
+      <Spacer y={8} />
 
       <Spacer y={8} />
     </main>

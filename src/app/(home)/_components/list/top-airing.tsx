@@ -1,5 +1,5 @@
 import { fetchTopAiringList } from "@/actions/action";
-import AnimeCarouselList from "@/components/home/AnimeCarouselList";
+import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
 import { SearchParams } from "@/lib/types";
 
 export default async function TopAiringListPage({
@@ -11,6 +11,7 @@ export default async function TopAiringListPage({
     typeof searchParams?.page === "string"
       ? parseInt(searchParams?.page) || 1
       : 1;
+
   const data = await fetchTopAiringList({ page: Number(page) || 1 });
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");

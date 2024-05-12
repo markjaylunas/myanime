@@ -16,7 +16,7 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import AnimeCard from "../home/AnimeCard";
+import AnimeCard from "../anime-cards/AnimeCard";
 
 export default function QuickSearch() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

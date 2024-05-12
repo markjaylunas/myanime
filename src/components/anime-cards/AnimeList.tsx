@@ -36,7 +36,6 @@ export default function AnimeList({
               }`
             )
           }
-          className="w-fit"
         >
           <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
         </motion.div>
