@@ -31,10 +31,10 @@ export default function SimplePagination({
 
   return (
     <ButtonGroup size="lg" fullWidth color="primary" variant="flat">
-      <Button disabled={prevDisabled} onClick={handlePrevClick}>
+      <Button isDisabled={prevDisabled} onClick={handlePrevClick}>
         Prev
       </Button>
-      <Button disabled={nextDisabled} onClick={handleNextClick}>
+      <Button isDisabled={nextDisabled} onClick={handleNextClick}>
         Next
       </Button>
     </ButtonGroup>
