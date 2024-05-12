@@ -33,7 +33,7 @@ export default function AnimeCarouselList({
         {animeList.map((anime, index) => (
           <CarouselItem
             key={`${anime.id}-${index}`}
-            className="pl-2  basis-[45%] 2xs:basis-[38%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
+            className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
             onClick={() =>
               router.push(
                 `/info/${anime.id}/watch/${
