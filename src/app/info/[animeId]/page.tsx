@@ -36,7 +36,7 @@ export default async function InfoPage({
         />
       </section>
 
-      <EpisodeList animeId={animeId} episodeList={episodeList || []} />
+      <EpisodeList episodeList={episodeList || []} />
     </main>
   );
 }
