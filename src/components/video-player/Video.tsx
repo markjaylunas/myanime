@@ -43,12 +43,7 @@ type Props = {
 
 const sourcePriority = ["1080p", "720p", "480p", "360p", "default", "backup"];
 
-export default function Video({
-  episodeSource,
-  info,
-  episodeId,
-  episodeNumber,
-}: Props) {
+export default function Video({ episodeSource, info, episodeNumber }: Props) {
   const about = `Episode ${episodeNumber || 1} - ${info.title}`;
   const sortedSources = episodeSource.sources
     ? episodeSource.sources.sort((a, b) => {
@@ -270,9 +265,6 @@ export default function Video({
           </Button>
         </ButtonGroup>
       </div>
-      <h1 className="text-center text-xl font-semibold mt-4 text-primary">
-        {about}
-      </h1>
     </section>
   );
 }

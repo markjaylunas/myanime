@@ -3,22 +3,23 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import NextLink from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
-  animeId: string;
-  activeEpisodeId?: string;
   episodeList: {
     id: string;
     episodeNumber: number;
   }[];
 };
 
-export default function EpisodeList({
-  animeId,
-  episodeList,
-  activeEpisodeId,
-}: Props) {
+export default function EpisodeList({ episodeList }: Props) {
+  const { animeId, episodeSlug } = useParams<{
+    animeId: string;
+    episodeSlug: string[];
+  }>();
+  const [activeEpisodeId] = episodeSlug;
+
   const chunkSize = episodeList.length > 200 ? 100 : 25;
   const episodeChunks = chunkArray(episodeList, chunkSize);
   const defaultTab = episodeChunks.findIndex((chunk) =>
