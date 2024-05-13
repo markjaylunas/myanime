@@ -41,7 +41,7 @@ export default function QuickSearch() {
             startContent={<Icons.search />}
             variant="shadow"
           >
-            Search Anime
+            Search
           </Button>
         </DropdownTrigger>
         <DropdownMenu classNames={{ base: "w-full" }} aria-label="Search anime">
@@ -50,7 +50,7 @@ export default function QuickSearch() {
               <Input
                 variant="underlined"
                 autoFocus
-                placeholder="Type to search..."
+                placeholder="Type to search anime..."
                 size="sm"
                 startContent={<Icons.search />}
                 type="search"
