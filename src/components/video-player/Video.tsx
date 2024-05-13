@@ -117,6 +117,10 @@ export default function Video({
   return (
     <section className="overflow-hidden">
       <MediaPlayer
+        streamType="on-demand"
+        aspectRatio="16/9"
+        load="visible"
+        posterLoad="visible"
         title={about}
         src={src}
         crossorigin
