@@ -1,6 +1,7 @@
 import { fetchGenreAnimeList, fetchGenreList } from "@/actions/action";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import GenreListContainer from "@/components/ui/GenreListContainer";
+import SimplePagination from "@/components/ui/SimplePagination";
 import { AnimeInfoList, SearchParams } from "@/lib/types";
 import { Chip } from "@nextui-org/chip";
 
@@ -42,6 +43,11 @@ export default async function GenreListPage({
           No anime found
         </Chip>
       )}
+
+      <SimplePagination
+        prevDisabled={page <= 1}
+        nextDisabled={genreAnimeList?.hasNextPage === false}
+      />
 
       <GenreListContainer genreList={genreList} />
     </>
