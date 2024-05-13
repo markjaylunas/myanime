@@ -16,3 +16,7 @@ export function toTitleCase(str: string): string {
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
 }
+
+export function numberFormatter(number: number): string {
+  return new Intl.NumberFormat().format(number);
+}
