@@ -1,4 +1,7 @@
-import { searchAnime } from "@/actions/action";
+import { fetchRecentEpisodeList, searchAnime } from "@/actions/action";
+import AnimeList from "@/components/anime-cards/AnimeList";
+import Heading from "@/components/ui/Heading";
+import { Spacer } from "@nextui-org/spacer";
 
 type Props = {
   query: string;
@@ -6,20 +9,30 @@ type Props = {
 };
 
 export default async function SearchAnimeResults({ query, page }: Props) {
-  if (query.length < 3) return <SearchEmptyNotice />;
-
+  if (!query) {
+    return <SearchEmptyNotice />;
+  }
   const response = await searchAnime({ query, page });
 
   if (!response) {
     return <div>Something went wrong</div>;
   }
-  return <div>{/* <AnimeList list={response.results} /> */}</div>;
+  return <AnimeList animeList={response.results} />;
 }
 
-function SearchEmptyNotice() {
+async function SearchEmptyNotice() {
+  const response = await fetchRecentEpisodeList({ page: 1 });
+
+  if (!response) {
+    return <div>Something went wrong</div>;
+  }
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-4rem)]">
-      <h1 className="text-3xl text-center text-white">Search for an anime</h1>
-    </div>
+    <>
+      <Heading>Trending</Heading>
+
+      <Spacer y={4} />
+
+      <AnimeList animeList={response.results} />
+    </>
   );
 }

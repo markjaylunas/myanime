@@ -13,7 +13,6 @@ export default function SearchInput() {
   const defaultQuery = searchParams.get("query")?.toString();
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    if (term.length < 3) return;
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term);
@@ -22,18 +21,21 @@ export default function SearchInput() {
     }
     params.set("page", "1");
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 500);
 
   return (
     <Input
       isClearable
       type="text"
-      variant="bordered"
+      variant="flat"
+      color="primary"
       size="lg"
-      placeholder="Search ..."
+      classNames={{ input: "text-foreground" }}
+      placeholder="Search anime..."
       defaultValue={defaultQuery}
       startContent={<SearchButton />}
       fullWidth
+      onClear={() => handleSearch("")}
       onChange={(e) => {
         handleSearch(e.target.value);
       }}
