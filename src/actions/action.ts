@@ -44,7 +44,7 @@ export async function fetchAnimeInfo({ animeId }: { animeId: string }) {
   try {
     const response = await fetch(
       animeAPIQuery.anime.gogoanime.info({ animeId }),
-      { next: { tags: [`info_${animeId}`] } }
+      { next: { tags: [`info_${animeId}`], revalidate: 3600 } }
     );
 
     const data = await response.json();
