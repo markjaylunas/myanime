@@ -1,7 +1,4 @@
-"use client";
-
 import { AnimeInfoList } from "@/lib/types";
-import { motion } from "framer-motion";
 import AnimeCard from "./AnimeCard";
 
 import {
@@ -9,6 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import AnimeCardMotion from "./AnimeCardMotion";
 
 type Props = {
   animeList: AnimeInfoList["results"];
@@ -32,19 +30,9 @@ export default function AnimeCarouselList({
             key={`${anime.id}-${index}`}
             className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
           >
-            <motion.div
-              initial={{ opacity: 0.5, scale: 0.9 }}
-              viewport={{ once: true }}
-              whileInView={{
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                delay: index > 5 ? 0.5 : 0.1 * index,
-              }}
-            >
+            <AnimeCardMotion index={index}>
               <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
-            </motion.div>
+            </AnimeCardMotion>
           </CarouselItem>
         ))}
       </CarouselContent>
