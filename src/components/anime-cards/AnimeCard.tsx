@@ -13,7 +13,12 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
       : `${anime.id}-episode-1/1`
   }`;
   return (
-    <Card className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden">
+    <Card
+      isPressable
+      as={Link}
+      href={href}
+      className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
+    >
       <CardHeader className="absolute z-20 top-0 p-2 flex justify-between items-start">
         {anime.rank && (
           <Chip radius="sm" size="sm" color="warning" variant="shadow">
@@ -50,11 +55,9 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
           </Chip>
         )}
 
-        <Link href={href}>
-          <h6 className="text-white font-medium text-md line-clamp-5 text-center text-pretty">
-            {anime.title}
-          </h6>
-        </Link>
+        <h6 className="text-white font-medium text-md line-clamp-5 text-center text-pretty">
+          {anime.title}
+        </h6>
       </CardFooter>
     </Card>
   );

@@ -9,7 +9,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useRouter } from "next/navigation";
 
 type Props = {
   animeList: AnimeInfoList["results"];
@@ -20,8 +19,6 @@ export default function AnimeCarouselList({
   animeList,
   isRanked = false,
 }: Props) {
-  const router = useRouter();
-
   return (
     <Carousel
       opts={{
@@ -34,15 +31,6 @@ export default function AnimeCarouselList({
           <CarouselItem
             key={`${anime.id}-${index}`}
             className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
-            onClick={() =>
-              router.push(
-                `/info/${anime.id}/watch/${
-                  anime.episodeId
-                    ? `${anime.episodeId}/${anime.episodeNumber}`
-                    : `${anime.id}-episode-1/1`
-                }`
-              )
-            }
           >
             <motion.div
               initial={{ opacity: 0.5, scale: 0.9 }}

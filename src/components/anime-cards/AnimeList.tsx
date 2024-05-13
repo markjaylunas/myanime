@@ -1,10 +1,8 @@
 "use client";
 
+import { AnimeInfoList } from "@/lib/types";
 import { motion } from "framer-motion";
 import AnimeCard from "./AnimeCard";
-
-import { AnimeInfoList } from "@/lib/types";
-import { useRouter } from "next/navigation";
 
 type AnimeListProps = {
   animeList: AnimeInfoList["results"];
@@ -15,7 +13,6 @@ export default function AnimeList({
   animeList,
   isRanked = false,
 }: AnimeListProps) {
-  const router = useRouter();
   return (
     <ul className="grid grid-cols-2 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 gap-y-6">
       {animeList.map((anime, index) => (
@@ -27,15 +24,6 @@ export default function AnimeList({
             delay: 0.2,
           }}
           key={`${anime.id}-${index}`}
-          onClick={() =>
-            router.push(
-              `/info/${anime.id}/watch/${
-                anime.episodeId
-                  ? `${anime.episodeId}/${anime.episodeNumber}`
-                  : `${anime.id}-episode-1/1`
-              }`
-            )
-          }
         >
           <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
         </motion.div>
