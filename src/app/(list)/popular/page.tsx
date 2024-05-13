@@ -1,6 +1,5 @@
 import { fetchPopularList } from "@/actions/action";
 import AnimeList from "@/components/anime-cards/AnimeList";
-import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";
 import { Spacer } from "@nextui-org/spacer";
@@ -20,10 +19,6 @@ export default async function PopularPage({
 
   return (
     <>
-      <Heading>Popular</Heading>
-
-      <Spacer y={4} />
-
       <AnimeList animeList={data.results} />
 
       <Spacer y={4} />

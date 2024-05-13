@@ -1,6 +1,5 @@
 import { fetchTopAiringList } from "@/actions/action";
 import AnimeList from "@/components/anime-cards/AnimeList";
-import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";
 import { Spacer } from "@nextui-org/spacer";
@@ -20,10 +19,6 @@ export default async function TopAiringPage({
 
   return (
     <>
-      <Heading>Top Airing</Heading>
-
-      <Spacer y={4} />
-
       <AnimeList animeList={data.results} />
 
       <Spacer y={4} />
