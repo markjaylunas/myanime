@@ -2,7 +2,6 @@ import { fetchRecentEpisodeList } from "@/actions/action";
 import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
 import Heading from "@/components/ui/Heading";
 import { Chip } from "@nextui-org/chip";
-import { Spacer } from "@nextui-org/spacer";
 
 export default async function NoQueryDefaultAnime() {
   const response = await fetchRecentEpisodeList({ page: 1 });
@@ -17,8 +16,6 @@ export default async function NoQueryDefaultAnime() {
       </Chip>
 
       <Heading>Trending</Heading>
-
-      <Spacer y={4} />
 
       <AnimeCarouselList animeList={response.results} />
     </>
