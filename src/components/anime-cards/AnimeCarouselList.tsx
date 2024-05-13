@@ -18,12 +18,7 @@ export default function AnimeCarouselList({
   isRanked = false,
 }: Props) {
   return (
-    <Carousel
-      opts={{
-        dragFree: true,
-      }}
-      className="w-full"
-    >
+    <Carousel className="w-full">
       <CarouselContent className="-ml-1">
         {animeList.map((anime, index) => (
           <CarouselItem

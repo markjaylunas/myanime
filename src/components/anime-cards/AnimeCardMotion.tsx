@@ -9,21 +9,18 @@ type Props = {
   isStaggered?: boolean;
 };
 
-export default function AnimeCardMotion({
-  children,
-  index,
-  isStaggered = false,
-}: Props) {
+export default function AnimeCardMotion({ children, index }: Props) {
   return (
     <motion.div
-      initial={{ opacity: 0.5, scale: 0.9 }}
+      initial={{ opacity: 0.6, scale: 0.99, y: 10 }}
       viewport={{ once: true }}
       whileInView={{
         opacity: 1,
         scale: 1,
+        y: 0,
       }}
       transition={{
-        delay: isStaggered ? (index > 5 ? 0.5 : 0.1 * index) : 0.2,
+        delay: 0.2,
       }}
     >
       {children}
