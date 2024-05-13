@@ -20,3 +20,10 @@ export function toTitleCase(str: string): string {
 export function numberFormatter(number: number): string {
   return new Intl.NumberFormat().format(number);
 }
+
+export function stringToSlug(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
+}

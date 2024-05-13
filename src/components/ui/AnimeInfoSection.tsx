@@ -1,7 +1,10 @@
 import { AnimeInfo } from "@/lib/types";
+import { stringToSlug } from "@/lib/utils";
+import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
+import NextLink from "next/link";
 import ExpandDescription from "./ExpandDescription";
 
 type Props = {
@@ -72,9 +75,17 @@ export default function AnimeInfoSection({ info }: Props) {
                   {info.genres && (
                     <div className="flex flex-wrap gap-2 mt-4">
                       {info.genres.map((genre) => (
-                        <Chip key={genre} color="secondary" variant="shadow">
+                        <Button
+                          as={NextLink}
+                          href={`/genre/${stringToSlug(genre)}`}
+                          key={genre}
+                          color="secondary"
+                          variant="shadow"
+                          radius="full"
+                          size="sm"
+                        >
                           {genre}
-                        </Chip>
+                        </Button>
                       ))}
                     </div>
                   )}
