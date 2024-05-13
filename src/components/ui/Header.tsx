@@ -15,6 +15,7 @@ import NextLink from "next/link";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
+import QuickSearch from "./QuickSearch";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Header() {
@@ -61,6 +62,7 @@ export default function Header() {
             Log In
           </Button>
         </NavbarItem> */}
+        <QuickSearch />
         <NavbarItem onClick={closeMenu} className="sm:flex hidden">
           <ThemeSwitcher />
         </NavbarItem>
