@@ -36,9 +36,9 @@ export default function Header() {
             as={NextLink}
             href="/"
             color="foreground"
-            className="rounded-md"
+            className="rounded-md space-x-3"
           >
-            <Icons.logo className="mr-3 size-10" />
+            <Icons.logo className=" size-10" />
             <span className="font-medium text- text-xl sr-only md:not-sr-only ">
               {siteConfig.name}
             </span>
