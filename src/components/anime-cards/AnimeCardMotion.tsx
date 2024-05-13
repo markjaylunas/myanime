@@ -19,6 +19,7 @@ export default function AnimeCardMotion({ children, index }: Props) {
         scale: 1,
         y: 0,
       }}
+      whileTap={{ scale: 0.98 }}
       transition={{
         delay: 0.2,
       }}
