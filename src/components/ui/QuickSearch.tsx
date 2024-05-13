@@ -32,7 +32,7 @@ export default function QuickSearch() {
 
   return (
     <>
-      <Dropdown type="menu" placement="bottom-end">
+      <Dropdown type="menu" placement="bottom">
         <DropdownTrigger>
           <Button
             radius="full"

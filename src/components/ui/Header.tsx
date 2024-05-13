@@ -30,7 +30,6 @@ export default function Header() {
       maxWidth="2xl"
     >
       <NavbarContent>
-        <NavbarMenuToggle className="sm:hidden" />
         <NavbarBrand>
           <MyLink
             as={NextLink}
@@ -57,15 +56,13 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {/* <NavbarItem>
-          <Button as={NextLink} color="primary" href="/login" variant="flat">
-            Log In
-          </Button>
-        </NavbarItem> */}
         <QuickSearch />
+
         <NavbarItem onClick={closeMenu} className="sm:flex hidden">
           <ThemeSwitcher />
         </NavbarItem>
+
+        <NavbarMenuToggle className="sm:hidden" />
       </NavbarContent>
 
       <NavbarMenu>
