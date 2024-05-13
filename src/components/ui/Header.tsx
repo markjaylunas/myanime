@@ -10,6 +10,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
+import { motion } from "framer-motion";
 import NextLink from "next/link";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
@@ -65,22 +66,33 @@ export default function Header() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className="flex flex-col justify-start  items-center gap-10">
-        <NavbarMenuItem>
-          <ThemeSwitcher className="md:hidden" />
-        </NavbarMenuItem>
-        {routesConfig.mainNav.map((item, index) => (
-          <NavbarMenuItem key={`${item.href}-${index}`}>
-            <MyLink
-              className="text-3xl w-full"
-              href={item.href}
-              onClick={closeMenu}
-              size="lg"
-            >
-              {item.title}
-            </MyLink>
+      <NavbarMenu>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex flex-col justify-start  items-center gap-10"
+        >
+          <NavbarMenuItem>
+            <ThemeSwitcher className="md:hidden" />
           </NavbarMenuItem>
-        ))}
+          {routesConfig.mainNav.map((item, index) => (
+            <NavbarMenuItem key={`${item.href}-${index}`}>
+              <MyLink
+                className="text-4xl font-bold w-full"
+                href={item.href}
+                onClick={closeMenu}
+                size="lg"
+              >
+                {item.title}
+              </MyLink>
+            </NavbarMenuItem>
+          ))}
+        </motion.div>
       </NavbarMenu>
     </Navbar>
   );
