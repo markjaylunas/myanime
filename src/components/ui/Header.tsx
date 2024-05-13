@@ -37,7 +37,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {routesConfig.mainNav.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
-            <MyLink color="foreground" href={item.href} className="font-medium">
+            <MyLink href={item.href} className="font-medium">
               {item.title}
             </MyLink>
           </NavbarItem>
@@ -61,18 +61,7 @@ export default function Header() {
         </NavbarMenuItem>
         {routesConfig.mainNav.map((item, index) => (
           <NavbarMenuItem key={`${item.href}-${index}`}>
-            <MyLink
-              color={
-                index === 2
-                  ? "primary"
-                  : index === routesConfig.mainNav.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href={item.href}
-              size="lg"
-            >
+            <MyLink className="w-full" href={item.href} size="lg">
               {item.title}
             </MyLink>
           </NavbarMenuItem>
