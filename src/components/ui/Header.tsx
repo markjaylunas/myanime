@@ -16,7 +16,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Header() {
   return (
-    <Navbar maxWidth="2xl">
+    <Navbar shouldHideOnScroll maxWidth="2xl">
       <NavbarContent>
         <NavbarMenuToggle className="sm:hidden" />
         <NavbarBrand>
