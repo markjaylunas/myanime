@@ -1,3 +1,5 @@
+"use client";
+
 import { routesConfig, siteConfig } from "@/lib/config";
 import {
   Navbar,
@@ -9,14 +11,22 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import NextLink from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
-    <Navbar shouldHideOnScroll maxWidth="2xl">
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      shouldHideOnScroll
+      maxWidth="2xl"
+    >
       <NavbarContent>
         <NavbarMenuToggle className="sm:hidden" />
         <NavbarBrand>
@@ -50,18 +60,23 @@ export default function Header() {
             Log In
           </Button>
         </NavbarItem> */}
-        <NavbarItem className="sm:flex hidden">
+        <NavbarItem onClick={closeMenu} className="sm:flex hidden">
           <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu>
+      <NavbarMenu className="flex flex-col justify-start  items-center gap-10">
         <NavbarMenuItem>
           <ThemeSwitcher className="md:hidden" />
         </NavbarMenuItem>
         {routesConfig.mainNav.map((item, index) => (
           <NavbarMenuItem key={`${item.href}-${index}`}>
-            <MyLink className="w-full" href={item.href} size="lg">
+            <MyLink
+              className="text-3xl w-full"
+              href={item.href}
+              onClick={closeMenu}
+              size="lg"
+            >
               {item.title}
             </MyLink>
           </NavbarMenuItem>

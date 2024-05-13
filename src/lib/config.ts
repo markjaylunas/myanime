@@ -1,5 +1,4 @@
 import { MainNavItem } from "@/lib/types";
-import { env } from "./env";
 
 export const siteConfig = {
   name: "My Anime",
@@ -34,4 +33,4 @@ export const routesConfig: RoutesConfig = {
   ],
 };
 
-export const API_BASE_URL = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
+export const API_BASE_URL = `${process.env.CONSUMET_API_BASE_URL}/meta/anilist`;
