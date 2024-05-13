@@ -20,6 +20,7 @@ export default function InfoHero({ title, image, cover }: Props) {
           fill
           sizes="100vw"
           className="object-cover bg-gray-200 dark:bg-gray-800 "
+          unoptimized
         />
         <h1 className="absolute z-30 bottom-2 text-white  text-3xl md:text-5xl lg:text-6xl pl-5 line-clamp-2 font-medium">
           {title}

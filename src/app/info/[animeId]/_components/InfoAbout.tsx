@@ -38,6 +38,7 @@ export default function InfoAbout({ title, image, description }: Props) {
             alt={title}
             src={image}
             className="object-cover"
+            unoptimized
           />
         </div>
       </div>
