@@ -14,7 +14,6 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
   }`;
   return (
     <Card
-      isPressable
       as={Link}
       href={href}
       className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
