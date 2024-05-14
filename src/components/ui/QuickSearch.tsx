@@ -37,7 +37,6 @@ export default function QuickSearch() {
           <Button
             radius="full"
             className="bg-gradient-to-tr from-rose-500 to-primary text-white shadow-lg"
-            size="sm"
             startContent={<Icons.search />}
             variant="shadow"
           >
