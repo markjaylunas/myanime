@@ -1,3 +1,4 @@
+import { Footer } from "@/components/ui/Footer";
 import Header from "@/components/ui/Header";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

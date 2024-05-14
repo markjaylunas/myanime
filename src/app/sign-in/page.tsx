@@ -13,7 +13,7 @@ export default async function SignInPage() {
   }
 
   return (
-    <main>
+    <main className="container max-w-5xl mx-auto min-h-screen px-2 py-4 md:px-4 space-y-8">
       Sign in
       <OAuthButon provider="google">Google</OAuthButon>
     </main>
