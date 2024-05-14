@@ -1,6 +1,7 @@
 "use server";
 
 import { animeAPIQuery } from "@/lib/consumet-api";
+import { Provider } from "@/lib/types";
 import {
   animeInfoListSchema,
   animeInfoSchema,
@@ -9,6 +10,10 @@ import {
   genreListSchema,
   searchAnimeDataSchema,
 } from "@/lib/validations";
+
+export async function signInOauth(provider: Provider) {
+  console.log({ provider });
+}
 
 export async function searchAnime({
   query,
