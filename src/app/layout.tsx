@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({
   children,
+  authModal,
 }: Readonly<{
   children: React.ReactNode;
+  authModal: React.ReactNode;
 }>) {
   return (
     <html
@@ -23,6 +25,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen">
+        {authModal}
         <Providers>
           <Header />
           {children}

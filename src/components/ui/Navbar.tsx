@@ -14,7 +14,6 @@ import {
 import { User } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
@@ -27,7 +26,6 @@ type Props = {
 };
 
 export default function Navbar({ user }: Props) {
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -70,7 +68,7 @@ export default function Navbar({ user }: Props) {
         </NavbarItem>
 
         <NavbarItem>
-          {user === null && !pathname.startsWith(DEFAULT_SIGNIN_PATH) && (
+          {user === null && (
             <MyLink href={DEFAULT_SIGNIN_PATH} className="font-medium">
               Sign In
             </MyLink>
@@ -78,7 +76,7 @@ export default function Navbar({ user }: Props) {
           {user !== null && <UserAvatar user={user} />}
         </NavbarItem>
 
-        {user === null && !pathname.startsWith(DEFAULT_SIGNIN_PATH) && (
+        {user === null && (
           <NavbarItem onClick={closeMenu} className="sm:flex hidden">
             <ThemeSwitcher />
           </NavbarItem>

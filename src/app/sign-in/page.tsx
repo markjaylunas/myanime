@@ -1,7 +1,7 @@
 import { DEFAULT_SIGNIN_REDIRECT } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import OAuthButon from "./_components/OAuthButton";
+import SignIn from "./_components/SignIn";
 
 export default async function SignInPage() {
   const supabase = createClient();
@@ -15,7 +15,7 @@ export default async function SignInPage() {
   return (
     <main className="container max-w-5xl mx-auto min-h-screen px-2 py-4 md:px-4 space-y-8">
       Sign in
-      <OAuthButon provider="google">Google</OAuthButon>
+      <SignIn />
     </main>
   );
 }
