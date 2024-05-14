@@ -1,6 +1,13 @@
 "use client";
 
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import SignInHeader from "@/app/sign-in/_components/SignInHeader";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "@nextui-org/modal";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function AuthModal({ children }: { children: React.ReactNode }) {
@@ -8,11 +15,19 @@ export default function AuthModal({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isOpen = pathname === "/sign-in";
   return (
-    <Modal defaultOpen isOpen={isOpen} onClose={() => router.replace("/")}>
+    <Modal
+      backdrop="opaque"
+      defaultOpen
+      isOpen={isOpen}
+      onClose={() => router.replace("/")}
+    >
+      <ModalHeader>
+        <SignInHeader />
+      </ModalHeader>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">Sign In</ModalHeader>
         <ModalBody>{children}</ModalBody>
       </ModalContent>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 }
