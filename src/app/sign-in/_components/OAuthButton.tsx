@@ -2,11 +2,11 @@
 
 import { signInOauth } from "@/actions/action";
 import { Button, ButtonProps } from "@nextui-org/button";
+import { Provider } from "@supabase/supabase-js";
 
 type Props = {
   provider: Provider;
 };
-type Provider = "google" | "github";
 
 export default function OAuthButon({
   provider,
