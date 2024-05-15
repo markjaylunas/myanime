@@ -1,4 +1,5 @@
 import { env } from "./env";
+import { AnimeProviders } from "./types";
 
 const anilistBase = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
 const gogoanimeBase = `${env.CONSUMET_API_BASE_URL}/anime/gogoanime`;
@@ -72,7 +73,7 @@ export const animeAPIQuery = {
         ...params
       }: {
         id: string;
-        provider?: string;
+        provider?: AnimeProviders;
         fetchFiller?: string | boolean;
         dub?: string | boolean;
         locale?: string;

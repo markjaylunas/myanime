@@ -46,6 +46,8 @@ export type Episode = z.infer<typeof episodeSchema>;
 
 // meta
 
+export type AnimeProviders = "gogoanime" | "zoro";
+
 export type AnimeCardProps = {
   id: string;
   title: string;

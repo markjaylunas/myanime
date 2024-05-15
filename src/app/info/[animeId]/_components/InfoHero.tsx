@@ -10,7 +10,6 @@ type Props = {
 
 export default function InfoHero({ title, image, cover }: Props) {
   const isCoverDuplicated = cover === image;
-
   return (
     <section className="relative flex flex-col space-y-10">
       <div className=" relative w-full  h-[150px] md:h-[200px] lg:h-[300px]">

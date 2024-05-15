@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { TitleSchema } from "./meta-validations";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,4 +27,8 @@ export function stringToSlug(str: string): string {
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
+}
+
+export function pickTitle(title: TitleSchema): string {
+  return title.userPreferred || title.english || title.romaji || title.native;
 }

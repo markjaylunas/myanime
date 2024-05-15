@@ -5,14 +5,14 @@ const titleSchema = z.object({
   romaji: z.string(),
   english: z.string().nullable(),
   native: z.string(),
-  userPreferred: z.string(),
+  userPreferred: z.string().nullable().optional(),
 });
 
 const imageSchema = z.object({
   image: z.string(),
   imageHash: z.string(),
-  cover: z.string().nullable(),
-  coverHash: z.string(),
+  cover: z.string().nullable().optional(),
+  coverHash: z.string().nullable().optional(),
 });
 
 const nameSchema = z.object({
@@ -20,7 +20,7 @@ const nameSchema = z.object({
   last: z.string().nullable(),
   full: z.string(),
   native: z.string().nullable(),
-  userPreferred: z.string(),
+  userPreferred: z.string().nullable().optional(),
 });
 
 const dateSchema = z.object({
@@ -32,7 +32,7 @@ const dateSchema = z.object({
 // Use the reusable schemas to define more complex schemas
 const animeSchema = z.object({
   id: z.number(),
-  malId: z.number(),
+  malId: z.number().nullable(),
   title: titleSchema,
   status: z.string(),
   episodes: z.number().nullable(),
@@ -60,7 +60,7 @@ const characterSchema = z.object({
 export const animeDataSchema = z.object({
   id: z.string(),
   title: titleSchema,
-  malId: z.number(),
+  malId: z.number().nullable(),
   synonyms: z.array(z.string()),
   isLicensed: z.boolean(),
   isAdult: z.boolean(),
@@ -94,7 +94,7 @@ export const animeDataSchema = z.object({
 // Define the search schemas using the reusable schemas
 export const animeSearchSchema = z.object({
   id: z.string(),
-  malId: z.number(),
+  malId: z.number().nullable(),
   title: titleSchema,
   status: z.string(),
   ...imageSchema.shape,

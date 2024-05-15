@@ -26,7 +26,11 @@ export default async function SearchAnimeResultsPage({
   const animelist: AnimeCardProps[] =
     response?.results.map((anime) => ({
       id: anime.id,
-      title: anime.title.userPreferred,
+      title:
+        anime.title.userPreferred ||
+        anime.title.english ||
+        anime.title.romaji ||
+        anime.title.native,
       image: anime.image,
       releaseDate: anime.releaseDate,
     })) || [];
