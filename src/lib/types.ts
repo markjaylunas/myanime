@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   animeInfoListSchema,
   animeInfoSchema,
+  episodeSchema,
   episodeSourceDataSchema,
   episodeSourceSchema,
   genreListSchema,
@@ -41,4 +42,4 @@ export type AnimeInfo = z.infer<typeof animeInfoSchema>;
 
 export type GenreList = z.infer<typeof genreListSchema>;
 
-export type Provider = "google" | "github";
+export type Episode = z.infer<typeof episodeSchema>;

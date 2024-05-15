@@ -15,6 +15,12 @@ export const searchAnimeDataSchema = z.object({
   results: z.array(searchAnimeSchema),
 });
 
+export const episodeSchema = z.object({
+  id: z.string(),
+  number: z.number(),
+  url: z.string(),
+});
+
 export const animeInfoSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -32,16 +38,7 @@ export const animeInfoSchema = z.object({
   type: z.string().optional().nullable(),
   status: z.string().optional().nullable(),
   otherName: z.string().optional().nullable(),
-  episodes: z
-    .array(
-      z.object({
-        id: z.string(),
-        number: z.number(),
-        url: z.string(),
-      })
-    )
-    .optional()
-    .nullable(),
+  episodes: z.array(episodeSchema).optional().nullable(),
 });
 
 export const animeInfoListSchema = z.object({

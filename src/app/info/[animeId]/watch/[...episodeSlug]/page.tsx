@@ -1,5 +1,6 @@
 import { fetchAnimeEpisodeSource, fetchAnimeInfo } from "@/actions/action";
-import Video from "@/components/video-player/Video";
+import NoVideo from "@/components/video-player/NoVideo";
+import VideoPlayer from "@/components/video-player/VideoPlayer";
 import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
@@ -8,7 +9,7 @@ export default async function EpisodePage({
   params: { animeId: string; episodeSlug: string[] };
 }) {
   const { episodeSlug, animeId } = params;
-  const [episodeId, episodeNumber] = episodeSlug;
+  const [episodeId] = episodeSlug;
 
   const [info, animeEpisodeSource] = await Promise.all([
     await fetchAnimeInfo({ animeId }),
@@ -21,11 +22,11 @@ export default async function EpisodePage({
 
   return (
     <>
-      <Video
-        info={info}
-        episodeNumber={parseInt(episodeNumber) || 1}
-        episodeSource={animeEpisodeSource || null}
-      />
+      {animeEpisodeSource ? (
+        <VideoPlayer info={info} episodeSource={animeEpisodeSource} />
+      ) : (
+        <NoVideo bgSrc={info.image} title={`${info.status}`} />
+      )}
     </>
   );
 }
