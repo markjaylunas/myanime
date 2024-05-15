@@ -11,7 +11,7 @@ const titleSchema = z.object({
 const imageSchema = z.object({
   image: z.string(),
   imageHash: z.string(),
-  cover: z.string(),
+  cover: z.string().nullable(),
   coverHash: z.string(),
 });
 
@@ -68,26 +68,26 @@ export const animeDataSchema = z.object({
   ...imageSchema.shape,
   description: z.string(),
   status: z.string(),
-  releaseDate: z.number(),
+  releaseDate: z.number().nullable(),
   nextAiringEpisode: z.object({
     airingTime: z.number(),
     timeUntilAiring: z.number(),
     episode: z.number(),
   }),
-  totalEpisodes: z.number(),
+  totalEpisodes: z.number().nullable(),
   currentEpisode: z.number(),
-  rating: z.number(),
+  rating: z.number().nullable(),
   duration: z.number(),
   genres: z.array(z.string()),
   studios: z.array(z.string()),
   season: z.string(),
   popularity: z.number(),
-  type: z.string(),
+  type: z.string().nullable(),
   startDate: dateSchema,
   endDate: dateSchema,
   recommendations: z.array(animeSchema),
   characters: z.array(characterSchema),
-  color: z.string(),
+  color: z.string().nullable(),
   relations: z.array(animeSchema),
 });
 
@@ -99,15 +99,15 @@ export const animeSearchSchema = z.object({
   status: z.string(),
   ...imageSchema.shape,
   popularity: z.number(),
-  totalEpisodes: z.number(),
+  totalEpisodes: z.number().nullable(),
   currentEpisode: z.number().nullable(),
   countryOfOrigin: z.string(),
   description: z.string(),
   genres: z.array(z.string()),
-  rating: z.number(),
-  color: z.string(),
-  type: z.string(),
-  releaseDate: z.number(),
+  rating: z.number().nullable(),
+  color: z.string().nullable(),
+  type: z.string().nullable(),
+  releaseDate: z.number().nullable(),
 });
 
 export const animeSearchDataSchema = z.object({

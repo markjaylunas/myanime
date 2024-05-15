@@ -43,3 +43,15 @@ export type AnimeInfo = z.infer<typeof animeInfoSchema>;
 export type GenreList = z.infer<typeof genreListSchema>;
 
 export type Episode = z.infer<typeof episodeSchema>;
+
+// meta
+
+export type AnimeCardProps = {
+  id: string;
+  title: string;
+  image: string;
+  rank?: number;
+  releaseDate?: number | null;
+  episodeId?: string;
+  episodeNumber?: number;
+};

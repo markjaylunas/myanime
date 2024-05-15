@@ -1,17 +1,15 @@
-import { AnimeInfo } from "@/lib/types";
-import { extractYear } from "@/lib/utils";
+import { AnimeCardProps } from "@/lib/types";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
-export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
+export default function AnimeCard(anime: AnimeCardProps) {
   const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
-  const href = `/info/${anime.id}/watch/${
-    isEpisode
-      ? `${anime.episodeId}/${anime.episodeNumber}`
-      : `${anime.id}-episode-1/1`
-  }`;
+  let href = `/info/${anime.id}`;
+  if (isEpisode)
+    href = `${href}/watch/${anime.episodeId}/${anime.episodeNumber}`;
+
   return (
     <Card
       as={Link}
@@ -27,13 +25,7 @@ export default function AnimeCard(anime: AnimeInfo & { rank?: number }) {
 
         {anime.releaseDate && (
           <Chip radius="sm" size="sm" color="success" variant="shadow">
-            {extractYear(anime.releaseDate)}
-          </Chip>
-        )}
-
-        {anime.subOrDub && (
-          <Chip radius="sm" size="sm" color="secondary" variant="shadow">
-            {anime.subOrDub.toUpperCase()}
+            {anime.releaseDate}
           </Chip>
         )}
       </CardHeader>

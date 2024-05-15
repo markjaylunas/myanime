@@ -1,9 +1,8 @@
-import { searchAnime } from "@/actions/action";
+import { searchAnime } from "@/actions/meta";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
-import { SearchParams } from "@/lib/types";
-import NoQueryDefaultAnime from "./_components/NoQueryDefaultAnime";
+import { AnimeCardProps, SearchParams } from "@/lib/types";
 
 type Props = {
   query: string;
@@ -24,11 +23,19 @@ export default async function SearchAnimeResultsPage({
   const response = await searchAnime({ query, page });
   const hasData = !!response;
 
+  const animelist: AnimeCardProps[] =
+    response?.results.map((anime) => ({
+      id: anime.id,
+      title: anime.title.userPreferred,
+      image: anime.image,
+      releaseDate: anime.releaseDate,
+    })) || [];
+
   return (
     <>
       {hasData && <Heading>Search: {query}</Heading>}
 
-      {hasData && <AnimeList animeList={response.results} />}
+      {hasData && <AnimeList animeList={animelist} />}
 
       {hasData && (
         <SimplePagination
@@ -37,7 +44,7 @@ export default async function SearchAnimeResultsPage({
         />
       )}
 
-      {!hasData && <NoQueryDefaultAnime />}
+      {/* {!hasData && <NoQueryDefaultAnime />} */}
     </>
   );
 }
