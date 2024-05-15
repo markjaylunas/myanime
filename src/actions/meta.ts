@@ -5,6 +5,7 @@ import {
   animeDataSchema,
   animeSearchDataSchema,
   episodeDataSchema,
+  episodeSourceDataSchema,
 } from "@/lib/meta-validations";
 
 export async function searchAnime({
@@ -27,7 +28,7 @@ export async function searchAnime({
     const parsed = animeSearchDataSchema.safeParse(data);
 
     if (!parsed.success) {
-      console.error(parsed.error);
+      console.error(parsed.error.toString());
       return;
     }
     return parsed.data;
@@ -60,7 +61,6 @@ export async function fetchAnimeData({ animeId }: { animeId: string }) {
   }
 }
 
-// fetch episode data
 export async function fetchEpisodeData({ animeId }: { animeId: string }) {
   try {
     const response = await fetch(
@@ -74,6 +74,33 @@ export async function fetchEpisodeData({ animeId }: { animeId: string }) {
     const data = await response.json();
 
     const parsed = episodeDataSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error.toString());
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchAnimeEpisodeSource({
+  episodeId,
+}: {
+  episodeId: string;
+}) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.meta.anilist.watch({ episodeId, provider: "gogoanime" }),
+      { next: { revalidate: 3600 } }
+    );
+
+    const data = await response.json();
+
+    const parsed = episodeSourceDataSchema.safeParse(data);
 
     if (!parsed.success) {
       console.error(parsed.error.toString());

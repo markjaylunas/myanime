@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 
 import { sourcePriority } from "@/lib/constants";
-import { AnimeInfo, EpisodeSource, EpisodeSourceData } from "@/lib/types";
+import { EpisodeSource, EpisodeSourceData } from "@/lib/types";
 
 import {
   MediaLoadedDataEvent,
@@ -23,25 +23,28 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import { useParams } from "next/navigation";
 
+import { EpisodeSourceDataSchema } from "@/lib/meta-validations";
 import { Menu } from "@vidstack/react";
 import { Icons } from "../ui/Icons";
 
 // import { textTracks } from "./tracks";
 
 type Props = {
-  info: AnimeInfo;
-  episodeSource: EpisodeSourceData | null;
+  title: string;
+  poster: string;
+  episodeSource: EpisodeSourceDataSchema | null;
 };
 
 export default function VideoPlayer({
-  info,
+  title: defaultTitle,
+  poster,
   episodeSource: initialEpisodeSource,
 }: Props) {
   const defaultEpisodeSource = initialEpisodeSource?.sources || [];
   const sortedSources = sortSources(defaultEpisodeSource);
   const { episodeSlug } = useParams<{ episodeSlug: string[] }>();
   const [_, episodeNumber] = episodeSlug;
-  const title = `Episode ${episodeNumber} - ${info.title}`;
+  const title = `Episode ${episodeNumber} - ${defaultTitle}`;
 
   const [episodeSource, setEpisodeSource] = useState<EpisodeSource>(
     sortedSources[0]
@@ -105,9 +108,7 @@ export default function VideoPlayer({
         // onEnd={()}
       >
         <MediaProvider>
-          {info.image && (
-            <Poster className="vds-poster" src={info.image} alt={title} />
-          )}
+          {poster && <Poster className="vds-poster" src={poster} alt={title} />}
         </MediaProvider>
         <DefaultAudioLayout icons={defaultLayoutIcons} />
 

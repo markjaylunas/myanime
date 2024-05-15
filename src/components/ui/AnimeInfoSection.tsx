@@ -1,5 +1,5 @@
-import { AnimeInfo } from "@/lib/types";
-import { stringToSlug } from "@/lib/utils";
+import { AnimeDataSchema } from "@/lib/meta-validations";
+import { pickTitle, stringToSlug } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
@@ -8,17 +8,18 @@ import NextLink from "next/link";
 import ExpandDescription from "./ExpandDescription";
 
 type Props = {
-  info: AnimeInfo;
+  info: AnimeDataSchema;
 };
 
 export default function AnimeInfoSection({ info }: Props) {
+  const title = pickTitle(info.title);
   return (
     <Card isBlurred className="border-none " shadow="sm" fullWidth>
       <CardBody>
         <div className="flex flex-col items-start sm:flex-row gap-8 p-0 md:p-4">
           <div className="relative col-span-6 md:col-span-4 md:max-w-[300px] lg:max-w-[350px] min-w-[200px] sm:w-full">
             <Image
-              alt={info.title}
+              alt={title}
               src={info.image}
               className="object-cover"
               height={200}
@@ -31,10 +32,10 @@ export default function AnimeInfoSection({ info }: Props) {
           <div className="flex-grow flex flex-col col-span-6 md:col-span-8">
             <div className="flex flex-col justify-between items-start">
               <div className="flex flex-col gap-0">
-                <h1 className="text-3xl font-medium  text-primary">
-                  {info.title}
-                </h1>
-                <h2 className="text-xs text-gray-400">{info.otherName}</h2>
+                <h1 className="text-3xl font-medium  text-primary">{title}</h1>
+                <h2 className="text-xs text-gray-400">
+                  {info.synonyms.join(" ")}
+                </h2>
 
                 <div className="flex flex-col mt-4 gap-2">
                   <Chip color="secondary" variant="faded">
@@ -51,12 +52,12 @@ export default function AnimeInfoSection({ info }: Props) {
                     </span>
                   </Chip>
 
-                  <Chip color="secondary" variant="faded">
+                  {/* <Chip color="secondary" variant="faded">
                     Sub or Dub | &nbsp;
                     <span className="font-semibold text-foreground/90">
                       {info.subOrDub?.toUpperCase()}
                     </span>
-                  </Chip>
+                  </Chip> */}
 
                   <Chip color="secondary" variant="faded">
                     Released | &nbsp;

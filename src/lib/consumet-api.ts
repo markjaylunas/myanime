@@ -78,6 +78,13 @@ export const animeAPIQuery = {
         dub?: string | boolean;
         locale?: string;
       }) => createURL(anilistBase, `episodes/${id}`, params),
+      watch: ({
+        episodeId,
+        ...params
+      }: {
+        episodeId: string;
+        provider: AnimeProviders;
+      }) => createURL(anilistBase, `watch/${episodeId}`, params),
     },
   },
 };

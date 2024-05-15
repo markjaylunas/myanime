@@ -69,11 +69,14 @@ export const animeDataSchema = z.object({
   description: z.string(),
   status: z.string(),
   releaseDate: z.number().nullable(),
-  nextAiringEpisode: z.object({
-    airingTime: z.number(),
-    timeUntilAiring: z.number(),
-    episode: z.number(),
-  }),
+  nextAiringEpisode: z
+    .object({
+      airingTime: z.number(),
+      timeUntilAiring: z.number(),
+      episode: z.number(),
+    })
+    .nullable()
+    .optional(),
   totalEpisodes: z.number().nullable(),
   currentEpisode: z.number(),
   rating: z.number().nullable(),
@@ -126,7 +129,7 @@ export const episodeSchema = z.object({
   number: z.number(),
   createdAt: z.string(),
   description: z.null(),
-  url: z.string(),
+  url: z.string().nullable().optional(),
 });
 
 export const episodeDataSchema = z.array(episodeSchema);
@@ -138,11 +141,10 @@ export const episodeSourceSchema = z.object({
 });
 
 export const episodeSourceDataSchema = z.object({
-  headers: z.object({ Referer: z.string() }),
-  sources: z.array(episodeSourceSchema),
-  download: z.string(),
+  headers: z.object({ Referer: z.string() }).optional().nullable(),
+  sources: z.array(episodeSourceSchema).optional().nullable(),
+  download: z.string().optional().nullable(),
 });
-
 // type definitions
 export type TitleSchema = z.infer<typeof titleSchema>;
 export type ImageSchema = z.infer<typeof imageSchema>;

@@ -1,7 +1,7 @@
-import { fetchAnimeInfo } from "@/actions/action";
+import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
 import EpisodeList from "@/components/ui/EpisodeList";
-import { numberFormatter } from "@/lib/utils";
+import { numberFormatter, pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
 import { notFound } from "next/navigation";
@@ -17,25 +17,29 @@ export default async function HomeLayout({
   const { animeId, episodeSlug } = params;
   const [_, episodeNumber] = episodeSlug;
 
-  const info = await fetchAnimeInfo({ animeId });
+  const [info, episodeListData] = await Promise.all([
+    fetchAnimeData({ animeId }),
+    fetchEpisodeData({ animeId }),
+  ]);
 
   if (!info) {
     return notFound();
   }
 
-  const episodeList = info?.episodes?.map((episode) => ({
+  const episodeList = (episodeListData || []).map((episode) => ({
     id: episode.id,
     episodeNumber: episode.number,
   }));
 
   const hasEpisode = info.totalEpisodes;
+  const title = pickTitle(info.title);
 
   return (
     <main className="container max-w-5xl mx-auto min-h-screen pb-8  p-0">
       {children}
 
       <h2 className="text-center text-2xl text-wrap font-semibold mt-4 text-primary">
-        {info.title}
+        {title}
       </h2>
 
       <h2 className="text-center text-lg font-semibold mt-2 text-secondary">
