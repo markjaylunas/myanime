@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   animeInfoListSchema,
   animeInfoSchema,
+  episodeSourceDataSchema,
   episodeSourceSchema,
   genreListSchema,
   searchAnimeDataSchema,
@@ -31,6 +32,8 @@ export type SearchAnimeData = z.infer<typeof searchAnimeDataSchema>;
 export type SearchParams = { [key: string]: string | string[] | undefined };
 
 export type EpisodeSource = z.infer<typeof episodeSourceSchema>;
+
+export type EpisodeSourceData = z.infer<typeof episodeSourceDataSchema>;
 
 export type AnimeInfoList = z.infer<typeof animeInfoListSchema>;
 

@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import {
   animeInfoListSchema,
   animeInfoSchema,
-  episodeSourceSchema,
+  episodeSourceDataSchema,
   genreAnimeListSchema,
   genreListSchema,
   searchAnimeDataSchema,
@@ -111,7 +111,7 @@ export async function fetchAnimeEpisodeSource({
 
     const data = await response.json();
 
-    const parsed = episodeSourceSchema.safeParse(data);
+    const parsed = episodeSourceDataSchema.safeParse(data);
 
     if (!parsed.success) {
       console.error(parsed.error);

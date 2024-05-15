@@ -51,13 +51,14 @@ export const animeInfoListSchema = z.object({
 });
 
 export const episodeSourceSchema = z.object({
+  url: z.string(),
+  isM3U8: z.boolean(),
+  quality: z.string(),
+});
+
+export const episodeSourceDataSchema = z.object({
   headers: z.object({ Referer: z.string() }).optional().nullable(),
-  sources: z
-    .array(
-      z.object({ url: z.string(), isM3U8: z.boolean(), quality: z.string() })
-    )
-    .optional()
-    .nullable(),
+  sources: z.array(episodeSourceSchema).optional().nullable(),
   download: z.string().optional().nullable(),
 });
 
