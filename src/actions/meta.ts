@@ -63,17 +63,31 @@ export async function fetchAnimeData({ animeId }: { animeId: string }) {
   }
 }
 
-export async function fetchEpisodeData({ animeId }: { animeId: string }) {
+export async function fetchEpisodeData({
+  animeId,
+  provider,
+}: {
+  animeId: string;
+  provider?: AnimeProviders;
+}) {
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.episodes({
         id: animeId,
-        provider: "gogoanime",
+        provider,
       }),
       { next: { tags: [`episodes_${animeId}`], revalidate: 3600 } }
     );
 
     const data = await response.json();
+    console.log(
+      animeAPIQuery.meta.anilist.episodes({
+        id: animeId,
+        provider,
+      })
+    );
+
+    console.log({ data });
 
     const parsed = episodeDataSchema.safeParse(data);
 
@@ -213,15 +227,15 @@ export async function fetchAiringScheduleAnimeData({
 export async function fetchRecentEpisodesAnimeData({
   page = 1,
   perPage = 20,
-  provider
+  provider,
 }: {
   page?: number;
   perPage?: number;
-  provider?: AnimeProviders 
+  provider?: AnimeProviders;
 }) {
   try {
     const response = await fetch(
-      animeAPIQuery.meta.anilist.recentEpisodes({ page, perPage,provider }),
+      animeAPIQuery.meta.anilist.recentEpisodes({ page, perPage, provider }),
       {
         next: {
           tags: ["anime-sorted-data-schema_recent-episodes"],

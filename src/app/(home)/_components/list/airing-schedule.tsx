@@ -22,7 +22,7 @@ export default async function AiringScheduleListPage({
     image: anime.image,
     title: pickTitle(anime.title),
     episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber,
+    episodeNumber: anime.episodeNumber || anime.number,
     releaseDate: anime.releaseDate,
   }));
 

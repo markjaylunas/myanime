@@ -26,9 +26,11 @@ export default async function RecentEpisodeListPage({
     image: anime.image,
     title: pickTitle(anime.title),
     episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber,
+    episodeNumber: anime.episodeNumber || anime.number,
     releaseDate: anime.releaseDate,
   }));
+
+  console.log(animeList);
 
   return <AnimeList animeList={animeList} />;
 }

@@ -16,7 +16,7 @@ const imageSchema = z.object({
 });
 
 const nameSchema = z.object({
-  first: z.string(),
+  first: z.string().optional().nullable(),
   last: z.string().nullable(),
   full: z.string(),
   native: z.string().nullable(),
@@ -84,10 +84,10 @@ export const animeDataSchema = z.object({
   totalEpisodes: z.number().nullable(),
   currentEpisode: z.number(),
   rating: z.number().nullable(),
-  duration: z.number(),
+  duration: z.number().nullable().optional(),
   genres: z.array(z.string()),
   studios: z.array(z.string()),
-  season: z.string(),
+  season: z.string().nullable().optional(),
   popularity: z.number(),
   type: z.string().nullable(),
   startDate: dateSchema,
@@ -127,12 +127,12 @@ export const animeSearchDataSchema = z.object({
 
 export const episodeSchema = z.object({
   id: z.string(),
-  title: z.string(),
+  title: z.string().nullable().optional(),
   image: z.string(),
   imageHash: z.string(),
   number: z.number(),
-  createdAt: z.string(),
-  description: z.null(),
+  createdAt: z.string().nullable().optional(),
+  description: z.string().nullable().optional(),
   url: z.string().nullable().optional(),
 });
 
@@ -181,6 +181,7 @@ export const animeSortedSchema = z.object({
   episodeId: z.string().nullable().optional(),
   episodeTitle: z.string().nullable().optional(),
   episodeNumber: z.number().nullable().optional(),
+  number: z.number().nullable().optional(),
 });
 
 export const animeSortedDataSchema = z.object({
@@ -195,7 +196,7 @@ export const relatedAnimeSchema = z.object({
   role: z.string(),
   title: titleSchema,
   status: z.string(),
-  episodes: z.null(),
+  episodes: z.number().nullable().optional(),
   image: z.string(),
   imageHash: z.string(),
   rating: z.number(),

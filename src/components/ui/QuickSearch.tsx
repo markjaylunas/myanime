@@ -74,7 +74,7 @@ export default function QuickSearch() {
                 href={`/info/${anime.id}`}
                 isVirtualized
                 classNames={{ wrapper: "max-w-[900px]" }}
-                textValue={pickTitle(anime.title)}
+                textValue={pickTitle(anime.title) || anime.id}
                 key={anime.id}
                 description={
                   anime.releaseDate

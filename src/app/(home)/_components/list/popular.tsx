@@ -17,12 +17,12 @@ export default async function PopularListPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  const animeList:AnimeCardProps[] = data.results.map((anime) => ({
+  const animeList: AnimeCardProps[] = data.results.map((anime) => ({
     id: anime.id,
     image: anime.image,
     title: pickTitle(anime.title),
     episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber,
+    episodeNumber: anime.episodeNumber || anime.number,
     releaseDate: anime.releaseDate,
   }));
 

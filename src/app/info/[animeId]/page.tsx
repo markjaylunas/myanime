@@ -15,7 +15,7 @@ export default async function InfoPage({
 
   const [info, episodeListData] = await Promise.all([
     fetchAnimeData({ animeId }),
-    fetchEpisodeData({ animeId }),
+    fetchEpisodeData({ animeId, provider: "gogoanime" }),
   ]);
 
   if (!info) {
