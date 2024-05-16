@@ -1,9 +1,10 @@
 import { AnimeSortedSchema } from "@/lib/meta-validations";
-import { formatTimestamp, pickTitle } from "@/lib/utils";
+import { formatDuration, formatTimestamp, pickTitle } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
+import { Icons } from "../ui/Icons";
 
 export default function AnimeCard(
   anime: AnimeSortedSchema & { rank?: number }
@@ -27,15 +28,27 @@ export default function AnimeCard(
           </Chip>
         )}
 
-        {anime.airingAt && (
-          <Chip radius="sm" size="sm" color="warning" variant="shadow">
-            {formatTimestamp(anime.airingAt)}
-          </Chip>
-        )}
-
         {!anime.airingAt && anime.releaseDate && (
           <Chip radius="sm" size="sm" color="success" variant="shadow">
             {anime.releaseDate}
+          </Chip>
+        )}
+
+        {anime.duration && (
+          <Chip radius="sm" size="sm" color="default" variant="shadow">
+            {formatDuration(anime.duration)}
+          </Chip>
+        )}
+
+        {anime.type && (
+          <Chip radius="sm" size="sm" color="secondary" variant="shadow">
+            {anime.type}
+          </Chip>
+        )}
+
+        {anime.airingAt && (
+          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+            {formatTimestamp(anime.airingAt)}
           </Chip>
         )}
       </CardHeader>
@@ -50,15 +63,27 @@ export default function AnimeCard(
         }}
       />
       <CardFooter className="absolute z-20 bottom-0 p-2 flex flex-col gap-2 justify-start items-center">
-        {isEpisode && (
-          <Chip radius="sm" size="sm" color="primary" variant="shadow">
-            Ep {anime.episodeNumber}
+        {anime.rating && (
+          <Chip
+            startContent={<Icons.star className="mr-1" />}
+            radius="sm"
+            size="sm"
+            color="warning"
+            variant="shadow"
+          >
+            {anime.rating}
           </Chip>
         )}
 
         <h6 className="text-white font-medium text-md line-clamp-2 text-center text-pretty">
           {title}
         </h6>
+
+        {anime.episodeTitle && (
+          <p className="text-white font-normal text-xs line-clamp-1 text-center text-pretty">
+            {anime.episodeTitle}
+          </p>
+        )}
       </CardFooter>
     </Card>
   );

@@ -38,3 +38,9 @@ export function formatTimestamp(timestamp: number): string {
   const date = moment.unix(timestamp); // Convert to moment.js date
   return `Airing at ${date.format("MM-DD HH:mm")}`; // Format date
 }
+
+export function formatDuration(duration: number): string {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`;
+}
