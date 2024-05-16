@@ -60,7 +60,7 @@ export default async function HomeLayout({
           Airing Schedule
         </Heading>
 
-        <MyLink href="/movies" color="primary">
+        <MyLink href="/airing-schedule" color="primary">
           View All
         </MyLink>
       </div>
@@ -76,7 +76,7 @@ export default async function HomeLayout({
           Recent Episodes
         </Heading>
 
-        <MyLink href="/recent-episodes" color="primary">
+        <MyLink href="/recent-episode" color="primary">
           View All
         </MyLink>
       </div>

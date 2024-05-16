@@ -174,7 +174,7 @@ export const animeSortedSchema = z.object({
   genres: z.array(z.string()).nullable().optional(),
   totalEpisodes: z.number().nullable().optional(),
   duration: z.number().nullable().optional(),
-  type: z.string(),
+  type: z.string().nullable().optional(),
   episode: z.number().nullable().optional(),
   airingAt: z.number().nullable().optional(),
   country: z.string().nullable().optional(),

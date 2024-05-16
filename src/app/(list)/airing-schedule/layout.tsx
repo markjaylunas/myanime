@@ -6,7 +6,7 @@ import { ReactNode, Suspense } from "react";
 export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Heading>Top Airing</Heading>
+      <Heading>Airing Schedule</Heading>
 
       <Spacer y={4} />
 

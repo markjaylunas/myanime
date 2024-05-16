@@ -3,6 +3,7 @@ import { AnimeProviders } from "./types";
 
 const anilistBase = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
 const gogoanimeBase = `${env.CONSUMET_API_BASE_URL}/anime/gogoanime`;
+
 function createURL(
   base: string,
   path: string,
@@ -10,6 +11,9 @@ function createURL(
 ) {
   const url = new URL(`${base}/${path}`);
   Object.entries(params).forEach(([key, value]) => {
+    if (key === "perPage" && Number(value) > 40) {
+      value = 40;
+    }
     if (typeof value === "boolean") {
       value = value.toString();
     }
