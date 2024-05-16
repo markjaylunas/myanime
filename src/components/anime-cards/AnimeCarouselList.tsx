@@ -1,4 +1,3 @@
-import { AnimeCardProps } from "@/lib/types";
 import AnimeCard from "./AnimeCard";
 
 import {
@@ -6,10 +5,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { AnimeSortedSchema } from "@/lib/meta-validations";
 import AnimeCardMotion from "./AnimeCardMotion";
 
 type Props = {
-  animeList: AnimeCardProps[];
+  animeList: AnimeSortedSchema[];
   isRanked?: boolean;
 };
 

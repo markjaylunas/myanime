@@ -1,8 +1,6 @@
 import { fetchRecentEpisodesAnimeData } from "@/actions/meta";
 import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
 import Heading from "@/components/ui/Heading";
-import { AnimeCardProps } from "@/lib/types";
-import { pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 
 export default async function NoQueryDefaultAnime() {
@@ -14,14 +12,7 @@ export default async function NoQueryDefaultAnime() {
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  const animeList: AnimeCardProps[] = data.results.map((anime) => ({
-    id: anime.id,
-    image: anime.image,
-    title: pickTitle(anime.title),
-    episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber || anime.number,
-    releaseDate: anime.releaseDate,
-  }));
+  const animeList = data.results || [];
 
   return (
     <>

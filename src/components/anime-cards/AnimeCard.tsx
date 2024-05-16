@@ -1,14 +1,18 @@
-import { AnimeCardProps } from "@/lib/types";
+import { AnimeSortedSchema } from "@/lib/meta-validations";
+import { pickTitle } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
-export default function AnimeCard(anime: AnimeCardProps) {
+export default function AnimeCard(
+  anime: AnimeSortedSchema & { rank?: number }
+) {
   const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
   let href = `/info/${anime.id}`;
   if (isEpisode && anime.episodeId !== "undefined")
     href = `${href}/watch/${anime.episodeId}/${anime.episodeNumber}`;
+  const title = pickTitle(anime.title);
 
   return (
     <Card
@@ -31,7 +35,7 @@ export default function AnimeCard(anime: AnimeCardProps) {
       </CardHeader>
       <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
-        alt={anime.title}
+        alt={title}
         className="z-0 w-full h-full object-cover"
         src={anime.image}
         classNames={{
@@ -47,7 +51,7 @@ export default function AnimeCard(anime: AnimeCardProps) {
         )}
 
         <h6 className="text-white font-medium text-md line-clamp-5 text-center text-pretty">
-          {anime.title}
+          {title}
         </h6>
       </CardFooter>
     </Card>

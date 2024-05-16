@@ -1,7 +1,6 @@
 import { fetchPopularAnimeData } from "@/actions/meta";
 import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
-import { AnimeCardProps, SearchParams } from "@/lib/types";
-import { pickTitle } from "@/lib/utils";
+import { SearchParams } from "@/lib/types";
 
 export default async function PopularListPage({
   searchParams,
@@ -17,14 +16,7 @@ export default async function PopularListPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  const animeList: AnimeCardProps[] = data.results.map((anime) => ({
-    id: anime.id,
-    image: anime.image,
-    title: pickTitle(anime.title),
-    episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber || anime.number,
-    releaseDate: anime.releaseDate,
-  }));
+  const animeList = data.results || [];
 
   return <AnimeCarouselList animeList={animeList} />;
 }

@@ -1,9 +1,9 @@
-import { AnimeCardProps } from "@/lib/types";
+import { AnimeSortedSchema } from "@/lib/meta-validations";
 import AnimeCard from "./AnimeCard";
 import AnimeCardMotion from "./AnimeCardMotion";
 
 type AnimeListProps = {
-  animeList: AnimeCardProps[];
+  animeList: AnimeSortedSchema[];
   isRanked?: boolean;
 };
 

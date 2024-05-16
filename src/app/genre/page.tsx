@@ -4,8 +4,7 @@ import GenreListContainer from "@/components/ui/GenreListContainer";
 import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { genreList } from "@/lib/constants";
-import { AnimeCardProps, SearchParams } from "@/lib/types";
-import { pickTitle } from "@/lib/utils";
+import { SearchParams } from "@/lib/types";
 import { Chip } from "@nextui-org/chip";
 import { notFound } from "next/navigation";
 
@@ -39,14 +38,7 @@ export default async function GenreListPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  const animeList: AnimeCardProps[] = data.results.map((anime) => ({
-    id: anime.id,
-    image: anime.image,
-    title: pickTitle(anime.title),
-    episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber || anime.number,
-    releaseDate: anime.releaseDate,
-  }));
+  const animeList = data.results || [];
 
   return (
     <>

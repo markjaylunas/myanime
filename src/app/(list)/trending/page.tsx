@@ -1,8 +1,7 @@
 import { fetchTrendingAnimeData } from "@/actions/meta";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import SimplePagination from "@/components/ui/SimplePagination";
-import { AnimeCardProps, SearchParams } from "@/lib/types";
-import { pickTitle } from "@/lib/utils";
+import { SearchParams } from "@/lib/types";
 import { Spacer } from "@nextui-org/spacer";
 
 export default async function TrendingPage({
@@ -21,14 +20,7 @@ export default async function TrendingPage({
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  const animeList: AnimeCardProps[] = data.results.map((anime) => ({
-    id: anime.id,
-    image: anime.image,
-    title: pickTitle(anime.title),
-    episodeId: anime.episodeId,
-    episodeNumber: anime.episodeNumber || anime.number,
-    releaseDate: anime.releaseDate,
-  }));
+  const animeList = data.results || [];
 
   return (
     <>
