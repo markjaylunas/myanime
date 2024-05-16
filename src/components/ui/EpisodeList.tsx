@@ -18,7 +18,8 @@ export default function EpisodeList({ episodeList }: Props) {
     animeId: string;
     episodeSlug: string[];
   }>();
-  const [activeEpisodeId] = episodeSlug;
+  let activeEpisodeId = "";
+  if (episodeSlug) activeEpisodeId = episodeSlug[0];
 
   const chunkSize = episodeList.length > 200 ? 100 : 25;
   const episodeChunks = chunkArray(episodeList, chunkSize);

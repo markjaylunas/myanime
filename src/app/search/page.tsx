@@ -1,4 +1,4 @@
-import { searchAnime } from "@/actions/action";
+import { searchAnime } from "@/actions/meta";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
@@ -21,23 +21,24 @@ export default async function SearchAnimeResultsPage({
   const page =
     typeof searchParams?.page === "string" ? parseInt(searchParams?.page) : 1;
 
-  const response = await searchAnime({ query, page });
-  const hasData = !!response;
+  const data = await searchAnime({ query, page });
+
+  const animeList = data?.results || [];
 
   return (
     <>
-      {hasData && <Heading>Search: {query}</Heading>}
+      {animeList && <Heading>Search: {query}</Heading>}
 
-      {hasData && <AnimeList animeList={response.results} />}
+      {animeList && <AnimeList animeList={animeList} />}
 
-      {hasData && (
+      {animeList && (
         <SimplePagination
           prevDisabled={page <= 1}
-          nextDisabled={response?.hasNextPage === false}
+          nextDisabled={data?.hasNextPage === false}
         />
       )}
 
-      {!hasData && <NoQueryDefaultAnime />}
+      {!animeList && <NoQueryDefaultAnime />}
     </>
   );
 }

@@ -1,8 +1,8 @@
-import { fetchMovieList } from "@/actions/action";
+import { fetchTrendingAnimeData } from "@/actions/meta";
 import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
 import { SearchParams } from "@/lib/types";
 
-export default async function MovieListPage({
+export default async function TrendingListPage({
   searchParams,
 }: {
   searchParams?: SearchParams;
@@ -12,9 +12,11 @@ export default async function MovieListPage({
       ? parseInt(searchParams?.page) || 1
       : 1;
 
-  const data = await fetchMovieList({ page: Number(page) || 1 });
+  const data = await fetchTrendingAnimeData({ page: Number(page) || 1 });
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
-  return <AnimeCarouselList animeList={data.results} />;
+  const animeList = data.results || [];
+
+  return <AnimeCarouselList animeList={animeList} />;
 }

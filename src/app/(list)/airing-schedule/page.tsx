@@ -1,10 +1,10 @@
-import { fetchTopAiringList } from "@/actions/action";
+import { fetchAiringScheduleAnimeData } from "@/actions/meta";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";
 import { Spacer } from "@nextui-org/spacer";
 
-export default async function TopAiringPage({
+export default async function AiringSchedulePage({
   searchParams,
 }: {
   searchParams?: SearchParams;
@@ -13,13 +13,18 @@ export default async function TopAiringPage({
     typeof searchParams?.page === "string"
       ? parseInt(searchParams?.page) || 1
       : 1;
-  const data = await fetchTopAiringList({ page: Number(page) || 1 });
+  const data = await fetchAiringScheduleAnimeData({
+    page: Number(page) || 1,
+    perPage: 20,
+  });
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
+  const animeList = data.results || [];
+
   return (
     <>
-      <AnimeList animeList={data.results} />
+      <AnimeList animeList={animeList} />
 
       <Spacer y={4} />
 

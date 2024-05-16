@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
+import moment from "moment";
 import { twMerge } from "tailwind-merge";
+import { TitleSchema } from "./meta-validations";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,4 +28,19 @@ export function stringToSlug(str: string): string {
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
+}
+
+export function pickTitle(title: TitleSchema): string {
+  return title.userPreferred || title.english || title.native || title.romaji;
+}
+
+export function formatTimestamp(timestamp: number): string {
+  const date = moment.unix(timestamp); // Convert to moment.js date
+  return `Airing at ${date.format("MM-DD HH:mm")}`; // Format date
+}
+
+export function formatDuration(duration: number): string {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`;
 }

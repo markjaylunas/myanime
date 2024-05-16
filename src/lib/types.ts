@@ -43,3 +43,7 @@ export type AnimeInfo = z.infer<typeof animeInfoSchema>;
 export type GenreList = z.infer<typeof genreListSchema>;
 
 export type Episode = z.infer<typeof episodeSchema>;
+
+// meta
+
+export type AnimeProviders = "gogoanime" | "zoro";

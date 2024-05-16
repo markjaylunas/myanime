@@ -1,19 +1,14 @@
 import AnimeListSkeleton from "@/components/anime-cards/AnimeListSkeleton";
 import Heading from "@/components/ui/Heading";
-import { toTitleCase } from "@/lib/utils";
+import { Spacer } from "@nextui-org/spacer";
 import { ReactNode, Suspense } from "react";
 
-export default function Layout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { genreId: string };
-}) {
-  const genreId = params.genreId;
+export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Heading>Genre: {toTitleCase(genreId.split("-").join(" "))}</Heading>
+      <Heading>Airing Schedule</Heading>
+
+      <Spacer y={4} />
 
       <Suspense fallback={<AnimeListSkeleton cardCount={10} />}>
         {children}

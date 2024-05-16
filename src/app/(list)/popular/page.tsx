@@ -1,4 +1,4 @@
-import { fetchPopularList } from "@/actions/action";
+import { fetchPopularAnimeData } from "@/actions/meta";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";
@@ -13,13 +13,18 @@ export default async function PopularPage({
     typeof searchParams?.page === "string"
       ? parseInt(searchParams?.page) || 1
       : 1;
-  const data = await fetchPopularList({ page: Number(page) || 1 });
+  const data = await fetchPopularAnimeData({
+    page: Number(page) || 1,
+    perPage: 20,
+  });
 
   if (!data) throw new Error("Failed to fetch (Anime List) data");
 
+  const animeList = data.results || [];
+
   return (
     <>
-      <AnimeList animeList={data.results} />
+      <AnimeList animeList={animeList} />
 
       <Spacer y={4} />
 

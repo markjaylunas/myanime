@@ -1,13 +1,15 @@
 import AnimeCarouselListSkeleton from "@/components/anime-cards/AnimeCarouselListSkeleton";
 import AnimeListSkeleton from "@/components/anime-cards/AnimeListSkeleton";
+import GenreListContainer from "@/components/ui/GenreListContainer";
 import Heading from "@/components/ui/Heading";
 import MyLink from "@/components/ui/MyLink";
+import { genreList } from "@/lib/constants";
 import { Spacer } from "@nextui-org/spacer";
 import { ReactNode, Suspense } from "react";
-import MovieListPage from "./_components/list/movies";
+import AiringScheduleListPage from "./_components/list/airing-schedule";
 import PopularListPage from "./_components/list/popular";
-import RecentEpisodeListPage from "./_components/list/recent-episodes";
-import TopAiringListPage from "./_components/list/top-airing";
+import RecentEpisodeListPage from "./_components/list/recent-episode";
+import TrendingListPage from "./_components/list/trending";
 
 export default async function HomeLayout({
   children,
@@ -40,34 +42,34 @@ export default async function HomeLayout({
 
       <div className="flex justify-between">
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-          Top Airing
+          Trending
         </Heading>
 
-        <MyLink href="/top-airing" color="primary">
+        <MyLink href="/trending" color="primary">
           View All
         </MyLink>
       </div>
       <Spacer y={2} />
 
       <Suspense fallback={<AnimeCarouselListSkeleton />}>
-        <TopAiringListPage />
+        <TrendingListPage />
       </Suspense>
 
       <Spacer y={8} />
 
       <div className="flex justify-between">
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-          Movies
+          Airing Schedule
         </Heading>
 
-        <MyLink href="/movies" color="primary">
+        <MyLink href="/airing-schedule" color="primary">
           View All
         </MyLink>
       </div>
       <Spacer y={2} />
 
       <Suspense fallback={<AnimeCarouselListSkeleton />}>
-        <MovieListPage />
+        <AiringScheduleListPage />
       </Suspense>
       <Spacer y={8} />
 
@@ -76,7 +78,7 @@ export default async function HomeLayout({
           Recent Episodes
         </Heading>
 
-        <MyLink href="/recent-episodes" color="primary">
+        <MyLink href="/recent-episode" color="primary">
           View All
         </MyLink>
       </div>
@@ -86,6 +88,8 @@ export default async function HomeLayout({
         <RecentEpisodeListPage />
       </Suspense>
       <Spacer y={8} />
+
+      <GenreListContainer genreList={genreList} />
 
       <Spacer y={8} />
     </main>
