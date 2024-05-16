@@ -1,8 +1,9 @@
 "use client";
 
-import { searchAnime } from "@/actions/action";
+import { searchAnime } from "@/actions/meta";
 import { Icons } from "@/components/ui/Icons";
-import { AnimeInfo } from "@/lib/types";
+import { AnimeSearchSchema } from "@/lib/meta-validations";
+import { pickTitle } from "@/lib/utils";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { Input } from "@nextui-org/input";
 
@@ -21,7 +22,7 @@ import { useState } from "react";
 
 export default function QuickSearch() {
   const [query, setQuery] = useState<string>("");
-  const [data, setData] = useState<AnimeInfo[]>([]);
+  const [data, setData] = useState<AnimeSearchSchema[]>([]);
   const [hasNextPage, setHasNextPage] = useState<boolean>(false);
 
   const handleSearch = useDebouncedCallback(async (term: string) => {
@@ -70,14 +71,10 @@ export default function QuickSearch() {
             {data.map((anime) => (
               <DropdownItem
                 as={NextLink}
-                href={`/info/${anime.id}/watch/${
-                  Boolean(anime.episodeId && anime.episodeNumber)
-                    ? `${anime.episodeId}/${anime.episodeNumber}`
-                    : `${anime.id}-episode-1/1`
-                }`}
+                href={`/info/${anime.id}`}
                 isVirtualized
                 classNames={{ wrapper: "max-w-[900px]" }}
-                textValue={anime.title}
+                textValue={pickTitle(anime.title)}
                 key={anime.id}
                 description={
                   anime.releaseDate
@@ -87,17 +84,17 @@ export default function QuickSearch() {
                 startContent={
                   <Image
                     src={anime.image}
-                    alt={anime.title}
+                    alt={pickTitle(anime.title)}
                     height={300}
                     width={100}
                     className="h-full aspect-2/3 bg-cover"
                     radius="sm"
                   />
                 }
-                shortcut={anime.subOrDub}
+                shortcut={anime.totalEpisodes ? anime.totalEpisodes : "N/A"}
               >
                 <span className="line-clamp-4 text-wrap max-w-32">
-                  {anime.title}
+                  {pickTitle(anime.title)}
                 </span>
               </DropdownItem>
             ))}
