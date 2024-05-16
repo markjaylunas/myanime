@@ -21,10 +21,16 @@ export default function AnimeCard(
       href={href}
       className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
-      <CardHeader className="absolute z-20 top-0 p-2 flex justify-between items-start">
+      <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-start">
         {anime.rank && (
           <Chip radius="sm" size="sm" color="warning" variant="shadow">
             {anime.rank}
+          </Chip>
+        )}
+
+        {anime.airingAt && (
+          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+            {formatTimestamp(anime.airingAt)}
           </Chip>
         )}
 
@@ -45,12 +51,6 @@ export default function AnimeCard(
             {anime.type}
           </Chip>
         )}
-
-        {anime.airingAt && (
-          <Chip radius="sm" size="sm" color="warning" variant="shadow">
-            {formatTimestamp(anime.airingAt)}
-          </Chip>
-        )}
       </CardHeader>
       <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
@@ -68,7 +68,7 @@ export default function AnimeCard(
             startContent={<Icons.star className="mr-1" />}
             radius="sm"
             size="sm"
-            color="warning"
+            color="primary"
             variant="shadow"
           >
             {anime.rating}
