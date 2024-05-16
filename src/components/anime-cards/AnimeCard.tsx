@@ -1,5 +1,5 @@
 import { AnimeSortedSchema } from "@/lib/meta-validations";
-import { pickTitle } from "@/lib/utils";
+import { formatTimestamp, pickTitle } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
@@ -27,7 +27,13 @@ export default function AnimeCard(
           </Chip>
         )}
 
-        {anime.releaseDate && (
+        {anime.airingAt && (
+          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+            {formatTimestamp(anime.airingAt)}
+          </Chip>
+        )}
+
+        {!anime.airingAt && anime.releaseDate && (
           <Chip radius="sm" size="sm" color="success" variant="shadow">
             {anime.releaseDate}
           </Chip>
@@ -50,7 +56,7 @@ export default function AnimeCard(
           </Chip>
         )}
 
-        <h6 className="text-white font-medium text-md line-clamp-5 text-center text-pretty">
+        <h6 className="text-white font-medium text-md line-clamp-2 text-center text-pretty">
           {title}
         </h6>
       </CardFooter>

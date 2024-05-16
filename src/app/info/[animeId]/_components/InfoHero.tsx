@@ -14,7 +14,7 @@ export default function InfoHero({ title, image, cover }: Props) {
     <section className="relative flex flex-col space-y-10">
       <div className=" relative w-full  h-[150px] md:h-[200px] lg:h-[300px]">
         <NextImage
-          src={isCoverDuplicated || !cover ? "" : cover}
+          src={isCoverDuplicated || !cover ? "" : cover || ""}
           alt={title}
           fill
           sizes="100vw"

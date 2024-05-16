@@ -40,7 +40,7 @@ export default async function InfoPage({
       {/* add cover */}
       <InfoHero
         title={title}
-        image={info.image}
+        image={info.image || info.cover || ""}
         cover={info.cover || info.image}
       />
 

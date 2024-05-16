@@ -70,7 +70,7 @@ export const animeDataSchema = z.object({
   isAdult: z.boolean(),
   countryOfOrigin: z.string(),
   ...imageSchema.shape,
-  description: z.string(),
+  description: z.string().nullable().optional(),
   status: z.string(),
   releaseDate: z.number().nullable(),
   nextAiringEpisode: z

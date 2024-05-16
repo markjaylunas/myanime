@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import moment from "moment";
 import { twMerge } from "tailwind-merge";
 import { TitleSchema } from "./meta-validations";
 
@@ -31,4 +32,9 @@ export function stringToSlug(str: string): string {
 
 export function pickTitle(title: TitleSchema): string {
   return title.userPreferred || title.english || title.native || title.romaji;
+}
+
+export function formatTimestamp(timestamp: number): string {
+  const date = moment.unix(timestamp); // Convert to moment.js date
+  return `Airing at ${date.format("MM-DD HH:mm")}`; // Format date
 }
