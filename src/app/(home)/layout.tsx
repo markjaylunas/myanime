@@ -4,10 +4,10 @@ import Heading from "@/components/ui/Heading";
 import MyLink from "@/components/ui/MyLink";
 import { Spacer } from "@nextui-org/spacer";
 import { ReactNode, Suspense } from "react";
-import MovieListPage from "./_components/list/movies";
+import AiringScheduleListPage from "./_components/list/airing-schedule";
 import PopularListPage from "./_components/list/popular";
-import RecentEpisodeListPage from "./_components/list/recent-episodes";
-import TopAiringListPage from "./_components/list/top-airing";
+import RecentEpisodeListPage from "./_components/list/recent-episode";
+import TrendingListPage from "./_components/list/trending";
 
 export default async function HomeLayout({
   children,
@@ -40,24 +40,24 @@ export default async function HomeLayout({
 
       <div className="flex justify-between">
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-          Top Airing
+          Trending
         </Heading>
 
-        <MyLink href="/top-airing" color="primary">
+        <MyLink href="/trending" color="primary">
           View All
         </MyLink>
       </div>
       <Spacer y={2} />
 
       <Suspense fallback={<AnimeCarouselListSkeleton />}>
-        <TopAiringListPage />
+        <TrendingListPage />
       </Suspense>
 
       <Spacer y={8} />
 
       <div className="flex justify-between">
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
-          Movies
+          Airing Schedule
         </Heading>
 
         <MyLink href="/movies" color="primary">
@@ -67,7 +67,7 @@ export default async function HomeLayout({
       <Spacer y={2} />
 
       <Suspense fallback={<AnimeCarouselListSkeleton />}>
-        <MovieListPage />
+        <AiringScheduleListPage />
       </Suspense>
       <Spacer y={8} />
 

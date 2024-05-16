@@ -29,10 +29,14 @@ const dateSchema = z.object({
   day: z.number().nullable(),
 });
 
+export const stringOrNumberSchema = z
+  .union([z.string(), z.number(), z.undefined(), z.null()])
+  .optional();
+
 // Use the reusable schemas to define more complex schemas
 const animeSchema = z.object({
   id: z.number(),
-  malId: z.number().nullable(),
+  malId: stringOrNumberSchema,
   title: titleSchema,
   status: z.string(),
   episodes: z.number().nullable(),
@@ -60,7 +64,7 @@ const characterSchema = z.object({
 export const animeDataSchema = z.object({
   id: z.string(),
   title: titleSchema,
-  malId: z.number().nullable(),
+  malId: stringOrNumberSchema,
   synonyms: z.array(z.string()),
   isLicensed: z.boolean(),
   isAdult: z.boolean(),
@@ -97,7 +101,7 @@ export const animeDataSchema = z.object({
 // Define the search schemas using the reusable schemas
 export const animeSearchSchema = z.object({
   id: z.string(),
-  malId: z.number().nullable(),
+  malId: stringOrNumberSchema,
   title: titleSchema,
   status: z.string(),
   ...imageSchema.shape,
@@ -155,21 +159,21 @@ export const trailerSchema = z.object({
 
 export const animeSortedSchema = z.object({
   id: z.string(),
-  malId: z.number().nullable().optional(),
+  malId: stringOrNumberSchema,
   title: titleSchema,
   image: z.string(),
   imageHash: z.string().nullable().optional(),
-  trailer: trailerSchema,
-  description: z.string(),
-  status: z.string(),
+  trailer: trailerSchema.nullable().optional(),
+  description: z.string().nullable().optional(),
+  status: z.string().nullable().optional(),
   cover: z.string().nullable().optional(),
   coverHash: z.string().nullable().optional(),
-  rating: z.number(),
+  rating: z.number().nullable().optional(),
   releaseDate: z.number().nullable().optional(),
   color: z.string().nullable().optional(),
-  genres: z.array(z.string()),
-  totalEpisodes: z.number(),
-  duration: z.number().nullable(),
+  genres: z.array(z.string()).nullable().optional(),
+  totalEpisodes: z.number().nullable().optional(),
+  duration: z.number().nullable().optional(),
   type: z.string(),
   episode: z.number().nullable().optional(),
   airingAt: z.number().nullable().optional(),
@@ -180,8 +184,8 @@ export const animeSortedSchema = z.object({
 });
 
 export const animeSortedDataSchema = z.object({
-  currentPage: z.number(),
-  hasNextPage: z.boolean(),
+  currentPage: stringOrNumberSchema,
+  hasNextPage: z.boolean().nullable().optional(),
   results: z.array(animeSortedSchema),
 });
 
