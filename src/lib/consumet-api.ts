@@ -78,6 +78,7 @@ export const animeAPIQuery = {
         dub?: string | boolean;
         locale?: string;
       }) => createURL(anilistBase, `episodes/${id}`, params),
+
       watch: ({
         episodeId,
         ...params
@@ -85,6 +86,24 @@ export const animeAPIQuery = {
         episodeId: string;
         provider: AnimeProviders;
       }) => createURL(anilistBase, `watch/${episodeId}`, params),
+
+      trending: (params: { page?: number; perPage?: number }) =>
+        createURL(anilistBase, `trending`, params),
+
+      popular: (params: { page?: number; perPage?: number }) =>
+        createURL(anilistBase, `popular`, params),
+
+      airingSchedule: (params: { page?: number; perPage?: number }) =>
+        createURL(anilistBase, `airing-schedule`, params),
+
+      recentEpisodes: (params: {
+        page?: number;
+        perPage?: number;
+        provider?: AnimeProviders;
+      }) => createURL(anilistBase, `recent-episodes`, params),
+
+      characters: ({ id, ...params }: { id: string }) =>
+        createURL(anilistBase, `characters/${id}`, params),
     },
   },
 };

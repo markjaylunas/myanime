@@ -145,6 +145,92 @@ export const episodeSourceDataSchema = z.object({
   sources: z.array(episodeSourceSchema).optional().nullable(),
   download: z.string().optional().nullable(),
 });
+
+export const trailerSchema = z.object({
+  id: z.string().optional(),
+  site: z.string().optional(),
+  thumbnail: z.string().optional(),
+  thumbnailHash: z.string().optional(),
+});
+
+export const animeSortedSchema = z.object({
+  id: z.string(),
+  malId: z.number().nullable().optional(),
+  title: titleSchema,
+  image: z.string(),
+  imageHash: z.string().nullable().optional(),
+  trailer: trailerSchema,
+  description: z.string(),
+  status: z.string(),
+  cover: z.string().nullable().optional(),
+  coverHash: z.string().nullable().optional(),
+  rating: z.number(),
+  releaseDate: z.number().nullable().optional(),
+  color: z.string(),
+  genres: z.array(z.string()),
+  totalEpisodes: z.number(),
+  duration: z.number().nullable(),
+  type: z.string(),
+  episode: z.number().nullable().optional(),
+  airingAt: z.number().nullable().optional(),
+  country: z.string().nullable().optional(),
+  episodeId: z.string().nullable().optional(),
+  episodeTitle: z.string().nullable().optional(),
+  episodeNumber: z.number().nullable().optional(),
+});
+
+export const animeSortedDataSchema = z.object({
+  currentPage: z.number(),
+  hasNextPage: z.boolean(),
+  results: z.array(animeSortedSchema),
+});
+
+export const relatedAnimeSchema = z.object({
+  id: z.number(),
+  malId: z.number(),
+  role: z.string(),
+  title: z.object({
+    romaji: z.string(),
+    english: z.string(),
+    native: z.string(),
+    userPreferred: z.string(),
+  }),
+  status: z.string(),
+  episodes: z.null(),
+  image: z.string(),
+  imageHash: z.string(),
+  rating: z.number(),
+  releaseDate: z.number(),
+  type: z.string(),
+  color: z.string(),
+});
+
+export const animeCharacterSchema = z.object({
+  id: z.number(),
+  name: z.object({
+    first: z.string(),
+    last: z.string(),
+    full: z.string(),
+    native: z.string(),
+    userPreferred: z.string(),
+    alternative: z.array(z.string()),
+    alternativeSpoiler: z.array(z.string()),
+  }),
+  image: z.string(),
+  imageHash: z.string(),
+  description: z.string(),
+  gender: z.string(),
+  dateOfBirth: z.object({
+    year: z.number().nullable().optional(),
+    month: z.number(),
+    day: z.number(),
+  }),
+  bloodType: z.string(),
+  age: z.string(),
+  height: z.string(),
+  relations: z.array(relatedAnimeSchema),
+});
+
 // type definitions
 export type TitleSchema = z.infer<typeof titleSchema>;
 export type ImageSchema = z.infer<typeof imageSchema>;
@@ -160,3 +246,8 @@ export type EpisodeSchema = z.infer<typeof episodeSchema>;
 export type EpisodeDataSchema = z.infer<typeof episodeDataSchema>;
 export type EpisodeSourceSchema = z.infer<typeof episodeSourceSchema>;
 export type EpisodeSourceDataSchema = z.infer<typeof episodeSourceDataSchema>;
+export type TrailerSchema = z.infer<typeof trailerSchema>;
+export type AnimeSortedSchema = z.infer<typeof animeSortedSchema>;
+export type AnimeSortedDataSchema = z.infer<typeof animeSortedDataSchema>;
+export type RelatedAnimeSchema = z.infer<typeof relatedAnimeSchema>;
+export type AnimeCharacterSchema = z.infer<typeof animeCharacterSchema>;
