@@ -7,8 +7,8 @@ import Link from "next/link";
 export default function AnimeCard(anime: AnimeCardProps) {
   const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
   let href = `/info/${anime.id}`;
-  // if (isEpisode)
-  //   href = `${href}/watch/${anime.episodeId}/${anime.episodeNumber}`;
+  if (isEpisode && anime.episodeId !== "undefined")
+    href = `${href}/watch/${anime.episodeId}/${anime.episodeNumber}`;
 
   return (
     <Card

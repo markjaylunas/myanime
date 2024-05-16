@@ -3,6 +3,8 @@ import AnimeList from "@/components/anime-cards/AnimeList";
 import Heading from "@/components/ui/Heading";
 import SimplePagination from "@/components/ui/SimplePagination";
 import { AnimeCardProps, SearchParams } from "@/lib/types";
+import { pickTitle } from "@/lib/utils";
+import NoQueryDefaultAnime from "./_components/NoQueryDefaultAnime";
 
 type Props = {
   query: string;
@@ -26,11 +28,7 @@ export default async function SearchAnimeResultsPage({
   const animelist: AnimeCardProps[] =
     response?.results.map((anime) => ({
       id: anime.id,
-      title:
-        anime.title.userPreferred ||
-        anime.title.english ||
-        anime.title.romaji ||
-        anime.title.native,
+      title: pickTitle(anime.title),
       image: anime.image,
       releaseDate: anime.releaseDate,
     })) || [];
@@ -48,7 +46,7 @@ export default async function SearchAnimeResultsPage({
         />
       )}
 
-      {/* {!hasData && <NoQueryDefaultAnime />} */}
+      {!hasData && <NoQueryDefaultAnime />}
     </>
   );
 }

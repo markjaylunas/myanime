@@ -6,3 +6,24 @@ export const sourcePriority = [
   "default",
   "backup",
 ];
+
+export const genreList = [
+  "Action",
+  "Adventure",
+  "Cars",
+  "Comedy",
+  "Drama",
+  "Fantasy",
+  "Horror",
+  "Mahou Shoujo",
+  "Mecha",
+  "Music",
+  "Mystery",
+  "Psychological",
+  "Romance",
+  "Sci-Fi",
+  "Slice of Life",
+  "Sports",
+  "Supernatural",
+  "Thriller",
+];

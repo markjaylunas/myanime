@@ -30,7 +30,5 @@ export default async function RecentEpisodeListPage({
     releaseDate: anime.releaseDate,
   }));
 
-  console.log(animeList);
-
   return <AnimeList animeList={animeList} />;
 }

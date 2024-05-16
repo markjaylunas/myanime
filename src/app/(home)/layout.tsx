@@ -1,7 +1,9 @@
 import AnimeCarouselListSkeleton from "@/components/anime-cards/AnimeCarouselListSkeleton";
 import AnimeListSkeleton from "@/components/anime-cards/AnimeListSkeleton";
+import GenreListContainer from "@/components/ui/GenreListContainer";
 import Heading from "@/components/ui/Heading";
 import MyLink from "@/components/ui/MyLink";
+import { genreList } from "@/lib/constants";
 import { Spacer } from "@nextui-org/spacer";
 import { ReactNode, Suspense } from "react";
 import AiringScheduleListPage from "./_components/list/airing-schedule";
@@ -86,6 +88,8 @@ export default async function HomeLayout({
         <RecentEpisodeListPage />
       </Suspense>
       <Spacer y={8} />
+
+      <GenreListContainer genreList={genreList} />
 
       <Spacer y={8} />
     </main>

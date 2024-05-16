@@ -80,14 +80,6 @@ export async function fetchEpisodeData({
     );
 
     const data = await response.json();
-    console.log(
-      animeAPIQuery.meta.anilist.episodes({
-        id: animeId,
-        provider,
-      })
-    );
-
-    console.log({ data });
 
     const parsed = episodeDataSchema.safeParse(data);
 
@@ -236,6 +228,42 @@ export async function fetchRecentEpisodesAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.recentEpisodes({ page, perPage, provider }),
+      {
+        next: {
+          tags: ["anime-sorted-data-schema_recent-episodes"],
+          revalidate: 3600,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeSortedDataSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error.toString());
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchGenreAnimeData({
+  genres,
+  page = 1,
+  perPage = 20,
+}: {
+  genres: string[];
+  page?: number;
+  perPage?: number;
+}) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.meta.anilist.genre({ genres, page, perPage }),
       {
         next: {
           tags: ["anime-sorted-data-schema_recent-episodes"],

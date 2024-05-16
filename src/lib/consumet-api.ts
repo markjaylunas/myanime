@@ -3,7 +3,6 @@ import { AnimeProviders } from "./types";
 
 const anilistBase = `${env.CONSUMET_API_BASE_URL}/meta/anilist`;
 const gogoanimeBase = `${env.CONSUMET_API_BASE_URL}/anime/gogoanime`;
-
 function createURL(
   base: string,
   path: string,
@@ -18,7 +17,8 @@ function createURL(
       value = value.toString();
     }
     if (Array.isArray(value)) {
-      value.forEach((val) => url.searchParams.append(key, String(val)));
+      const formattedValue = JSON.stringify(value);
+      url.searchParams.append(key, formattedValue);
     } else {
       url.searchParams.append(key, String(value));
     }
@@ -108,6 +108,9 @@ export const animeAPIQuery = {
 
       characters: ({ id, ...params }: { id: string }) =>
         createURL(anilistBase, `characters/${id}`, params),
+
+      genre: (params: { genres: string[]; page?: number; perPage?: number }) =>
+        createURL(anilistBase, `genre`, params),
     },
   },
 };

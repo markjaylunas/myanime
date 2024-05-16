@@ -30,5 +30,5 @@ export function stringToSlug(str: string): string {
 }
 
 export function pickTitle(title: TitleSchema): string {
-  return title.userPreferred || title.english || title.romaji || title.native;
+  return title.userPreferred || title.english || title.native || title.romaji;
 }

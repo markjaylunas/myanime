@@ -3,8 +3,8 @@ import z from "zod";
 // Define reusable schemas
 const titleSchema = z.object({
   romaji: z.string(),
-  english: z.string().nullable(),
-  native: z.string(),
+  english: z.string().nullable().optional(),
+  native: z.string().nullable().optional(),
   userPreferred: z.string().nullable().optional(),
 });
 
