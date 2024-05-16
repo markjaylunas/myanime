@@ -1,4 +1,4 @@
-import { AnimeInfoList } from "@/lib/types";
+import { AnimeCardProps } from "@/lib/types";
 import AnimeCard from "./AnimeCard";
 
 import {
@@ -9,7 +9,7 @@ import {
 import AnimeCardMotion from "./AnimeCardMotion";
 
 type Props = {
-  animeList: AnimeInfoList["results"];
+  animeList: AnimeCardProps[];
   isRanked?: boolean;
 };
 

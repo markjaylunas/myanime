@@ -90,7 +90,7 @@ export const animeDataSchema = z.object({
   endDate: dateSchema,
   recommendations: z.array(animeSchema),
   characters: z.array(characterSchema),
-  color: z.string().nullable(),
+  color: z.string().optional().nullable(),
   relations: z.array(animeSchema),
 });
 
@@ -108,7 +108,7 @@ export const animeSearchSchema = z.object({
   description: z.string(),
   genres: z.array(z.string()),
   rating: z.number().nullable(),
-  color: z.string().nullable(),
+  color: z.string().nullable().optional(),
   type: z.string().nullable(),
   releaseDate: z.number().nullable(),
 });
@@ -166,7 +166,7 @@ export const animeSortedSchema = z.object({
   coverHash: z.string().nullable().optional(),
   rating: z.number(),
   releaseDate: z.number().nullable().optional(),
-  color: z.string(),
+  color: z.string().nullable().optional(),
   genres: z.array(z.string()),
   totalEpisodes: z.number(),
   duration: z.number().nullable(),
@@ -189,12 +189,7 @@ export const relatedAnimeSchema = z.object({
   id: z.number(),
   malId: z.number(),
   role: z.string(),
-  title: z.object({
-    romaji: z.string(),
-    english: z.string(),
-    native: z.string(),
-    userPreferred: z.string(),
-  }),
+  title: titleSchema,
   status: z.string(),
   episodes: z.null(),
   image: z.string(),
@@ -202,7 +197,7 @@ export const relatedAnimeSchema = z.object({
   rating: z.number(),
   releaseDate: z.number(),
   type: z.string(),
-  color: z.string(),
+  color: z.string().nullable().optional(),
 });
 
 export const animeCharacterSchema = z.object({

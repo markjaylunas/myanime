@@ -52,8 +52,8 @@ export type AnimeCardProps = {
   id: string;
   title: string;
   image: string;
-  rank?: number;
+  rank?: number | null;
   releaseDate?: number | null;
-  episodeId?: string;
-  episodeNumber?: number;
+  episodeId?: string | null;
+  episodeNumber?: number | null;
 };
