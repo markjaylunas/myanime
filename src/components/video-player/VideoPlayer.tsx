@@ -36,7 +36,7 @@ type Props = {
 };
 
 export default function VideoPlayer({
-  title: defaultTitle,
+  title,
   poster,
   episodeSource: initialEpisodeSource,
 }: Props) {
@@ -44,7 +44,6 @@ export default function VideoPlayer({
   const sortedSources = sortSources(defaultEpisodeSource);
   const { episodeSlug } = useParams<{ episodeSlug: string[] }>();
   const [_, episodeNumber] = episodeSlug;
-  const title = `Episode ${episodeNumber} - ${defaultTitle}`;
 
   const [episodeSource, setEpisodeSource] = useState<EpisodeSource>(
     sortedSources[0]

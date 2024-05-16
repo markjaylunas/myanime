@@ -1,4 +1,8 @@
-import { fetchAnimeData, fetchAnimeEpisodeSource } from "@/actions/meta";
+import {
+  fetchAnimeData,
+  fetchAnimeEpisodeSource,
+  fetchEpisodeData,
+} from "@/actions/meta";
 import NoVideo from "@/components/video-player/NoVideo";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
 import { pickTitle } from "@/lib/utils";
@@ -13,23 +17,29 @@ export default async function EpisodePage({
 
   const [episodeId] = episodeSlug;
 
-  const [info, animeEpisodeSource] = await Promise.all([
+  const [info, animeEpisodeSource, episodeData] = await Promise.all([
     fetchAnimeData({ animeId }),
     fetchAnimeEpisodeSource({ episodeId }),
+    fetchEpisodeData({ animeId, provider: "gogoanime" }),
   ]);
 
   if (!info) {
     return notFound();
   }
 
-  const title = pickTitle(info.title);
+  const episode = episodeData?.find((episode) => episode.id === episodeId);
+  const title = episode
+    ? `Ep ${episode?.number} - ${episode?.title} - ${new Date(
+        `${episode.createdAt}`
+      ).toLocaleDateString()}`
+    : pickTitle(info.title);
 
   return (
     <>
       {animeEpisodeSource ? (
         <VideoPlayer
           title={title}
-          poster={info.cover || info.image}
+          poster={episode?.image || info.image}
           episodeSource={animeEpisodeSource}
         />
       ) : (
