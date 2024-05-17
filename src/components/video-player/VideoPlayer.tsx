@@ -40,6 +40,7 @@ export default function VideoPlayer({
   poster,
   episodeSource: initialEpisodeSource,
 }: Props) {
+  console.log("render");
   const defaultEpisodeSource = initialEpisodeSource?.sources || [];
   const sortedSources = sortSources(defaultEpisodeSource);
   const { episodeSlug } = useParams<{ episodeSlug: string[] }>();
@@ -82,7 +83,6 @@ export default function VideoPlayer({
   const player = useRef<MediaPlayerInstance>(null);
 
   const remote = useMediaRemote(player);
-
   function onLoadedData(nativeEvent: MediaLoadedDataEvent) {
     setTimeout(() => {
       remote.seek(timeBefore - 5, nativeEvent);
@@ -93,7 +93,11 @@ export default function VideoPlayer({
 
   useEffect(() => {
     return () => {
-      console.log("removed");
+      console.log("update episode progress" + player.current?.currentTime);
+
+      player.current!.subscribe(({ currentTime, ended }) => {
+        if (ended) console.log("next episode");
+      });
     };
   }, []);
 
