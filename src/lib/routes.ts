@@ -5,9 +5,12 @@
 
 export const publicRoutes = [
   "/",
-  // "/new-verification",
-  // "/forgot-password",
-  // "/reset-password",
+  "/genres",
+  "/info",
+  "/popular",
+  "/trending",
+  "/airing-schedule",
+  "/recent-episode",
 ];
 
 /**
@@ -17,6 +20,14 @@ export const publicRoutes = [
  */
 
 export const apiAuthPrefix = "/auth";
+
+/**
+ * The prefix for the public routes
+ * Routes that start with this prefix are public pages
+ * @type {string[]}
+ */
+
+export const publicPrefix = ["/genre", "/info"];
 
 /**
  * An array of protected routes that require authentication
@@ -29,7 +40,7 @@ export const authRoutes = ["/sign-in"];
  * The default login redirect path
  * @type {string}
  */
-export const DEFAULT_SIGNIN_REDIRECT = "/my-list";
+export const DEFAULT_SIGNIN_REDIRECT = "/";
 
 /**
  * The default sign in path

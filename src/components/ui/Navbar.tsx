@@ -1,6 +1,7 @@
 "use client";
 
 import { routesConfig, siteConfig } from "@/lib/config";
+import { DEFAULT_SIGNIN_PATH } from "@/lib/routes";
 import {
   NavbarBrand,
   NavbarContent,
@@ -11,16 +12,20 @@ import {
   Navbar as NextNavbar,
 } from "@nextui-org/react";
 import { motion } from "framer-motion";
+import { User } from "next-auth";
 import NextLink from "next/link";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
 import QuickSearch from "./QuickSearch";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import UserAvatar from "./UserAvatar";
 
-type Props = {};
+type Props = {
+  user: User | null;
+};
 
-export default function Navbar({}: Props) {
+export default function Navbar({ user }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -62,20 +67,20 @@ export default function Navbar({}: Props) {
           <QuickSearch />
         </NavbarItem>
 
-        {/* <NavbarItem>
+        <NavbarItem>
           {user === null && (
             <MyLink href={DEFAULT_SIGNIN_PATH} className="font-medium">
               Sign In
             </MyLink>
           )}
           {user !== null && <UserAvatar user={user} />}
-        </NavbarItem> */}
+        </NavbarItem>
 
-        {/* {user === null && (
+        {user === null && (
           <NavbarItem onClick={closeMenu} className="sm:flex hidden">
             <ThemeSwitcher />
           </NavbarItem>
-        )} */}
+        )}
 
         <NavbarMenuToggle className="sm:hidden" />
       </NavbarContent>
