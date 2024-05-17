@@ -48,7 +48,7 @@ export default function AnimeCard(
 
         {anime.type && (
           <Chip radius="sm" size="sm" color="secondary" variant="shadow">
-            {anime.type}
+            {anime.type.split("_").join(" ")}
           </Chip>
         )}
       </CardHeader>
