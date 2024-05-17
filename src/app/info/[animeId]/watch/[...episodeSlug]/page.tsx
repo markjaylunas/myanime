@@ -28,11 +28,12 @@ export default async function EpisodePage({
   }
 
   const episode = episodeData?.find((episode) => episode.id === episodeId);
-  const title = episode
-    ? `Ep ${episode?.number} - ${episode?.title} - ${new Date(
-        `${episode.createdAt}`
-      ).toLocaleDateString()}`
-    : pickTitle(info.title);
+  const title =
+    episode?.title && episode.createdAt
+      ? `Ep ${episode?.number} - ${episode?.title} - ${new Date(
+          episode.createdAt
+        ).toLocaleDateString()}`
+      : `Ep ${episode?.number} - ${pickTitle(info.title)}`;
 
   return (
     <>

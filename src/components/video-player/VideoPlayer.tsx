@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { sourcePriority } from "@/lib/constants";
 import { EpisodeSource, EpisodeSourceData } from "@/lib/types";
@@ -90,6 +90,12 @@ export default function VideoPlayer({
       remote.play(nativeEvent);
     }, 500);
   }
+
+  useEffect(() => {
+    return () => {
+      console.log("removed");
+    };
+  }, []);
 
   return (
     <section className="overflow-hidden relative">

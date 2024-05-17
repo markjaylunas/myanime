@@ -43,8 +43,8 @@ export default async function HomeLayout({
       </h2>
 
       <h2 className="text-center mx-2 text-lg font-semibold mt-2 text-secondary">
-        {`Episode ${numberFormatter(parseInt(episodeNumber))} - ${
-          episode?.title
+        {`Episode ${numberFormatter(parseInt(episodeNumber))}${
+          episode?.title ? ` - ${episode?.title}` : ""
         }`}
       </h2>
 
