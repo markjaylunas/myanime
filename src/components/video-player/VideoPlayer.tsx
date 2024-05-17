@@ -19,6 +19,7 @@ import {
 
 import { EpisodeSchema, EpisodeSourceDataSchema } from "@/lib/meta-validations";
 import { cn } from "@/lib/utils";
+import { User } from "@supabase/supabase-js";
 import { Menu } from "@vidstack/react";
 import {
   DefaultAudioLayout,
@@ -35,9 +36,11 @@ type Props = {
   poster: string;
   episodeSource: EpisodeSourceDataSchema | null;
   nextEpisode: EpisodeSchema | null;
+  user: User | null;
 };
 
 export default function VideoPlayer({
+  user,
   title,
   poster,
   episodeSource: initialEpisodeSource,
@@ -100,11 +103,13 @@ export default function VideoPlayer({
 
   useEffect(() => {
     return () => {
-      const currentTime = player.current?.currentTime;
-      const duration = player.current?.duration;
+      const currentTime = player.current?.currentTime || 0;
+      const duration = player.current?.duration || 0;
       if (currentTime) {
         console.log(
-          `${animeId} - ${title} - ${player.current?.currentTime} / ${duration}`
+          `${user?.id} - ${animeId} - ${title} - ${
+            player.current?.currentTime
+          } / ${duration} - ${currentTime / duration > 0.9}`
         );
       }
 
