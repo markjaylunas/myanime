@@ -1,10 +1,9 @@
-import { Icons } from "@/components/ui/Icons";
-import OAuthButon from "./OAuthButton";
+// import OAuthButon from "./OAuthButton";
 
 export default function SignIn() {
   return (
     <>
-      <OAuthButon
+      {/* <OAuthButon
         variant="flat"
         startContent={<Icons.google />}
         provider="google"
@@ -17,7 +16,7 @@ export default function SignIn() {
         provider="github"
       >
         Sign in with Github
-      </OAuthButon>
+      </OAuthButon> */}
     </>
   );
 }

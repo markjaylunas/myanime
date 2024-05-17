@@ -37,8 +37,6 @@
     "@nextui-org/user": "^2.0.28",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toggle": "^1.0.3",
-    "@supabase/ssr": "^0.3.0",
-    "@supabase/supabase-js": "^2.43.1",
     "@vidstack/react": "^1.11.21",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

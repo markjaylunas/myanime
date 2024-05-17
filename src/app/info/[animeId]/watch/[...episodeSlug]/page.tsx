@@ -5,7 +5,6 @@ import {
 } from "@/actions/meta";
 import NoVideo from "@/components/video-player/NoVideo";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
-import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
@@ -22,10 +21,6 @@ export default async function EpisodePage({
     fetchAnimeEpisodeSource({ episodeId }),
     fetchEpisodeData({ animeId, provider: "gogoanime" }),
   ]);
-
-  const supabase = createClient()
-
-  const { data: {user} } = await supabase.auth.getUser()
 
   if (!info) {
     return notFound();
@@ -50,7 +45,6 @@ export default async function EpisodePage({
           poster={episode?.image || info.image}
           episodeSource={animeEpisodeSource}
           nextEpisode={nextEpisode || null}
-          user={user}
         />
       ) : (
         <NoVideo bgSrc={info.image} title={`${info.status}`} />
