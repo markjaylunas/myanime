@@ -12,19 +12,20 @@ import {
   MediaProvider,
   Poster,
   TimeSlider,
+  ToggleButton,
   Tooltip,
   useMediaRemote,
 } from "@vidstack/react";
 
+import { EpisodeSchema, EpisodeSourceDataSchema } from "@/lib/meta-validations";
+import { cn } from "@/lib/utils";
+import { Menu } from "@vidstack/react";
 import {
   DefaultAudioLayout,
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
-import { useParams } from "next/navigation";
-
-import { EpisodeSourceDataSchema } from "@/lib/meta-validations";
-import { Menu } from "@vidstack/react";
+import { useParams, useRouter } from "next/navigation";
 import { Icons } from "../ui/Icons";
 
 // import { textTracks } from "./tracks";
@@ -33,22 +34,28 @@ type Props = {
   title: string;
   poster: string;
   episodeSource: EpisodeSourceDataSchema | null;
+  nextEpisode: EpisodeSchema | null;
 };
 
 export default function VideoPlayer({
   title,
   poster,
   episodeSource: initialEpisodeSource,
+  nextEpisode,
 }: Props) {
-  console.log("render");
   const defaultEpisodeSource = initialEpisodeSource?.sources || [];
   const sortedSources = sortSources(defaultEpisodeSource);
-  const { episodeSlug } = useParams<{ episodeSlug: string[] }>();
+  const { episodeSlug, animeId } = useParams<{
+    animeId: string;
+    episodeSlug: string[];
+  }>();
+  const router = useRouter();
   const [_, episodeNumber] = episodeSlug;
 
   const [episodeSource, setEpisodeSource] = useState<EpisodeSource>(
     sortedSources[0]
   );
+  const [canNext, setCanNext] = useState(false);
   const [timeBefore, setTimeBefore] = useState<number>(0);
   const [autoPlay, setAutoPlay] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
@@ -81,8 +88,8 @@ export default function VideoPlayer({
   // - completed
 
   const player = useRef<MediaPlayerInstance>(null);
-
   const remote = useMediaRemote(player);
+
   function onLoadedData(nativeEvent: MediaLoadedDataEvent) {
     setTimeout(() => {
       remote.seek(timeBefore - 5, nativeEvent);
@@ -93,10 +100,16 @@ export default function VideoPlayer({
 
   useEffect(() => {
     return () => {
-      console.log("update episode progress" + player.current?.currentTime);
+      const currentTime = player.current?.currentTime;
+      const duration = player.current?.duration;
+      if (currentTime) {
+        console.log(
+          `${animeId} - ${title} - ${player.current?.currentTime} / ${duration}`
+        );
+      }
 
-      player.current!.subscribe(({ currentTime, ended }) => {
-        if (ended) console.log("next episode");
+      player.current!.subscribe(({ duration, currentTime }) => {
+        if (currentTime / duration > 0.9 && !canNext) setCanNext(true);
       });
     };
   }, []);
@@ -109,12 +122,18 @@ export default function VideoPlayer({
         load="visible"
         posterLoad="visible"
         title={title}
-        src={episodeSource.url}
         ref={player}
+        src={episodeSource?.url}
         autoPlay={autoPlay}
         onAutoPlayChange={setAutoPlay}
         onLoadedData={onLoadedData}
-        // onEnd={()}
+        onEnd={() =>
+          nextEpisode
+            ? router.push(
+                `/info/${animeId}/watch/${nextEpisode.id}/${nextEpisode.number}`
+              )
+            : null
+        }
       >
         <MediaProvider>
           {poster && <Poster className="vds-poster" src={poster} alt={title} />}
@@ -125,6 +144,22 @@ export default function VideoPlayer({
           icons={defaultLayoutIcons}
           // thumbnails="https://image.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/storyboard.vtt"
           slots={{
+            beforeFullscreenButton: nextEpisode ? (
+              <ToggleButton
+                onClick={() =>
+                  router.push(
+                    `/info/${animeId}/watch/${nextEpisode.id}/${nextEpisode.number}`
+                  )
+                }
+                className={cn(
+                  "vds-button w-16",
+                  canNext ? "visible" : "hidden"
+                )}
+              >
+                Next
+              </ToggleButton>
+            ) : null,
+
             timeSlider: (
               <TimeSlider.Root
                 defaultValue={timeBefore || 0}

@@ -5,7 +5,6 @@ import {
 } from "@/actions/meta";
 import NoVideo from "@/components/video-player/NoVideo";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
-import { pickTitle } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
@@ -27,13 +26,16 @@ export default async function EpisodePage({
     return notFound();
   }
 
-  const episode = episodeData?.find((episode) => episode.id === episodeId);
-  const title =
-    episode?.title && episode.createdAt
-      ? `Ep ${episode?.number} - ${episode?.title} - ${new Date(
-          episode.createdAt
-        ).toLocaleDateString()}`
-      : `Ep ${episode?.number} - ${pickTitle(info.title)}`;
+  const episodeIndex = episodeData
+    ? episodeData.findIndex((episode) => episode.id === episodeId)
+    : 1;
+  const episode = episodeData ? episodeData[episodeIndex] : null;
+
+  const nextEpisode = episodeData ? episodeData[(episodeIndex || 0) + 1] : null;
+
+  const title = `Ep ${episode?.number}${
+    episode?.title ? ` - ${episode?.title}` : ""
+  }`;
 
   return (
     <>
@@ -42,6 +44,7 @@ export default async function EpisodePage({
           title={title}
           poster={episode?.image || info.image}
           episodeSource={animeEpisodeSource}
+          nextEpisode={nextEpisode || null}
         />
       ) : (
         <NoVideo bgSrc={info.image} title={`${info.status}`} />
