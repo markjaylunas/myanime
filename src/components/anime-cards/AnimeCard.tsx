@@ -55,10 +55,9 @@ export default function AnimeCard(
       <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/20 to-transparent" />
       <Image
         alt={title}
-        className="z-0 w-full h-full object-cover"
         src={anime.image}
         classNames={{
-          wrapper: "w-full h-full mx-auto bg-blur-md",
+          wrapper: "z-0 w-full h-full mx-auto bg-blur-md",
           img: "object-cover",
         }}
       />
