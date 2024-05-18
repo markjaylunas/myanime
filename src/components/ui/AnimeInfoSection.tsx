@@ -5,6 +5,7 @@ import { Card, CardBody } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import NextLink from "next/link";
+import { ReactNode } from "react";
 import ExpandDescription from "./ExpandDescription";
 
 type Props = {
@@ -16,8 +17,8 @@ export default function AnimeInfoSection({ info }: Props) {
   return (
     <Card isBlurred className="border-none " shadow="sm" fullWidth>
       <CardBody>
-        <div className="flex flex-col items-start sm:flex-row gap-8 p-0 md:p-4">
-          <div className="relative col-span-6 md:col-span-4 md:max-w-[300px] lg:max-w-[350px] min-w-[200px] sm:w-full">
+        <div className="flex flex-col-reverse items-start sm:flex-row gap-8 p-0 md:p-4">
+          <div className="relative col-span-6 md:col-span-4 md:max-w-[300px] lg:max-w-[350px] min-w-[200px] sm:w-full mx-auto">
             <Image
               alt={title}
               src={info.image}
@@ -32,39 +33,36 @@ export default function AnimeInfoSection({ info }: Props) {
           <div className="flex-grow flex flex-col col-span-6 md:col-span-8">
             <div className="flex flex-col justify-between items-start">
               <div className="flex flex-col gap-0">
-                <h1 className="text-3xl font-medium  text-primary">{title}</h1>
+                <h1 className="sr-only text-3xl font-medium  text-primary">
+                  {title}
+                </h1>
                 <h2 className="text-xs text-gray-400">
-                  {info.synonyms.join(" ")}
+                  {Object.values(info.title).filter(Boolean).join(" | ")}
                 </h2>
-
                 <div className="flex flex-col mt-4 gap-2">
-                  <Chip color="secondary" variant="faded">
-                    Status | &nbsp;
-                    <span className="font-semibold text-foreground/90">
-                      {info.status}
-                    </span>
-                  </Chip>
+                  <div className="flex flex-wrap max-w-md gap-2 mt-4">
+                    <DetailChip label="Status">{info.status}</DetailChip>
 
-                  <Chip color="secondary" variant="faded">
-                    Total Episodes | &nbsp;
-                    <span className="font-semibold text-foreground/90">
+                    <DetailChip label="Total Episodes">
                       {info.totalEpisodes}
-                    </span>
-                  </Chip>
+                    </DetailChip>
 
-                  <Chip color="secondary" variant="faded">
-                    Released | &nbsp;
-                    <span className="font-semibold text-foreground/90">
-                      {info.releaseDate}
-                    </span>
-                  </Chip>
+                    <DetailChip label="Released">{info.releaseDate}</DetailChip>
 
-                  <Chip color="secondary" variant="faded">
-                    Type | &nbsp;
-                    <span className="font-semibold text-foreground/90">
-                      {info.type}
-                    </span>
-                  </Chip>
+                    <DetailChip label="Type">{info.type}</DetailChip>
+
+                    <DetailChip label="Studios">
+                      {info.studios.join(" , ")}
+                    </DetailChip>
+
+                    <DetailChip label="Season">{info.season}</DetailChip>
+
+                    <DetailChip label="Rating">{info.rating}</DetailChip>
+
+                    <DetailChip label="Popularity">
+                      {info.popularity}
+                    </DetailChip>
+                  </div>
 
                   {info.genres && (
                     <div className="flex flex-wrap gap-2 mt-4">
@@ -97,3 +95,16 @@ export default function AnimeInfoSection({ info }: Props) {
     </Card>
   );
 }
+
+const DetailChip = ({
+  children,
+  label,
+}: {
+  children: ReactNode;
+  label: string;
+}) => (
+  <Chip color="secondary" variant="faded">
+    {label} | &nbsp;
+    <span className="font-semibold text-foreground/90">{children}</span>
+  </Chip>
+);

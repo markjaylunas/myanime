@@ -1,9 +1,10 @@
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
-import EpisodeList from "@/components/ui/EpisodeList";
+import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
+import { Icons } from "@/components/ui/Icons";
 import { pickTitle } from "@/lib/utils";
-import { Spacer } from "@nextui-org/spacer";
+import { Button } from "@nextui-org/button";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import InfoAbout from "./_components/InfoAbout";
 import InfoHero from "./_components/InfoHero";
 
 export default async function InfoPage({
@@ -36,26 +37,32 @@ export default async function InfoPage({
     : null;
 
   return (
-    <main>
-      {/* add cover */}
+    <main className="space-y-4">
       <InfoHero
         title={title}
         image={info.image || info.cover || ""}
         cover={info.cover || info.image}
       />
 
-      <section className="mx-8 mt-4 md:mt-8 lg:mt-12 ">
-        <InfoAbout
-          title={title}
-          description={info.description}
-          image={info.image}
-          watchLink={watchLink}
-        />
+      {watchLink && (
+        <div className="px-4 md:px-8">
+          <Button
+            as={NextLink}
+            href={watchLink}
+            endContent={<Icons.chevronRight />}
+            fullWidth
+            size="lg"
+            color="primary"
+            className="text-xl font-semibold mt-4"
+          >
+            Watch Now
+          </Button>
+        </div>
+      )}
+
+      <section className="px-3 md:px-0 container">
+        <AnimeInfoSection info={info} />
       </section>
-
-      <Spacer y={4} />
-
-      <EpisodeList episodeList={episodeList || []} />
     </main>
   );
 }

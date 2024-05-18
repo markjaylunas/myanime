@@ -1,5 +1,4 @@
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
-import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
 import EpisodeList from "@/components/ui/EpisodeList";
 import { numberFormatter, pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
@@ -59,10 +58,6 @@ export default async function HomeLayout({
       </section>
 
       <Spacer y={12} />
-
-      <section className="px-3 md:px-0">
-        <AnimeInfoSection info={info} />
-      </section>
     </main>
   );
 }
