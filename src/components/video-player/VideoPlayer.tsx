@@ -33,7 +33,8 @@ import { Icons } from "../ui/Icons";
 // import { textTracks } from "./tracks";
 
 type Props = {
-  title: string;
+  animeTitle: string;
+  episodeTitle: string | null;
   poster: string;
   episodeSource: EpisodeSourceDataSchema | null;
   nextEpisode: EpisodeSchema | null;
@@ -42,7 +43,8 @@ type Props = {
 };
 
 export default function VideoPlayer({
-  title,
+  animeTitle,
+  episodeTitle,
   poster,
   episodeSource: initialEpisodeSource,
   nextEpisode,
@@ -112,13 +114,15 @@ export default function VideoPlayer({
     return () => {
       const currentTime = player.current?.currentTime || 0;
       const durationTime = player.current?.duration || 0;
-      if (currentTime && userId) {
+
+      if (currentTime && userId && currentTime > 30) {
         let data: EpisodeProgressInsert = {
           userId,
+          animeTitle,
           animeId,
           episodeId,
           episodeNumber: Number(episodeNumber),
-          episodeTitle: title,
+          episodeTitle,
           episodeImage: poster,
           currentTime,
           durationTime,
@@ -143,7 +147,7 @@ export default function VideoPlayer({
         aspectRatio="16/9"
         load="visible"
         posterLoad="visible"
-        title={title}
+        title={episodeTitle || animeTitle}
         ref={player}
         src={episodeSource?.url}
         autoPlay={autoPlay}
@@ -158,7 +162,13 @@ export default function VideoPlayer({
         }
       >
         <MediaProvider>
-          {poster && <Poster className="vds-poster" src={poster} alt={title} />}
+          {poster && (
+            <Poster
+              className="vds-poster"
+              src={poster}
+              alt={episodeTitle || animeTitle}
+            />
+          )}
         </MediaProvider>
         <DefaultAudioLayout icons={defaultLayoutIcons} />
 

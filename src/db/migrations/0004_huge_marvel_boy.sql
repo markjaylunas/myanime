@@ -1,0 +1,1 @@
+ALTER TABLE "episode_progress" ADD COLUMN "anime_title" text NOT NULL;

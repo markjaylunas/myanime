@@ -7,6 +7,7 @@ import {
 import { auth } from "@/auth";
 import NoVideo from "@/components/video-player/NoVideo";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
+import { pickTitle } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
@@ -45,16 +46,13 @@ export default async function EpisodePage({
   const episode = episodeData ? episodeData[episodeIndex] : null;
 
   const nextEpisode = episodeData ? episodeData[(episodeIndex || 0) + 1] : null;
-
-  const title = `Ep ${episode?.number}${
-    episode?.title ? ` - ${episode?.title}` : ""
-  }`;
-
+  const episodeTitle = episode?.title || null;
   return (
     <>
       {animeEpisodeSource ? (
         <VideoPlayer
-          title={title}
+          animeTitle={pickTitle(info.title)}
+          episodeTitle={episodeTitle}
           poster={episode?.image || info.image}
           episodeSource={animeEpisodeSource}
           nextEpisode={nextEpisode || null}

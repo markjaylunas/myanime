@@ -44,3 +44,10 @@ export function formatDuration(duration: number): string {
   const minutes = duration % 60;
   return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`;
 }
+export function secondsToHms(time: number): string {
+  if (time < 3600) {
+    return moment.utc(time * 1000).format("mm:ss");
+  } else {
+    return moment.utc(time * 1000).format("HH:mm:ss");
+  }
+}

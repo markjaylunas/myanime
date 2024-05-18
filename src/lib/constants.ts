@@ -27,3 +27,5 @@ export const genreList = [
   "Supernatural",
   "Thriller",
 ];
+
+export const DEFAULT_PAGE_LIMIT = 10;
