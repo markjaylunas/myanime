@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
@@ -12,16 +13,22 @@ type Props = React.HTMLProps<HTMLParagraphElement> & {
 export default function ExpandDescription({
   description,
   maxChars = 100,
+  className,
   ...props
 }: Props) {
-  const isTooShort = description.length <= maxChars;
+  const isTooShort = description.length <= maxChars || description.length < 50;
   const [isExpanded, setIsExpanded] = useState(false);
-  const shortDescription = `${description.slice(0, maxChars)}...`;
 
   return (
-    <section className="flex indent-8 flex-col justify-center items-center gap-2">
-      <p {...props}>
-        {isTooShort || isExpanded ? description : shortDescription}
+    <section className="flex indent-8 flex-col justify-center items-center gap-2,">
+      <p
+        className={cn(
+          !isTooShort && !isExpanded ? "line-clamp-3" : "",
+          className
+        )}
+        {...props}
+      >
+        {description}
       </p>
       {!isTooShort && (
         <Button

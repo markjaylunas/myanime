@@ -1,5 +1,5 @@
 import { AnimeDataSchema } from "@/lib/meta-validations";
-import { pickTitle, stringToSlug } from "@/lib/utils";
+import { pickTitle } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
@@ -52,13 +52,6 @@ export default function AnimeInfoSection({ info }: Props) {
                     </span>
                   </Chip>
 
-                  {/* <Chip color="secondary" variant="faded">
-                    Sub or Dub | &nbsp;
-                    <span className="font-semibold text-foreground/90">
-                      {info.subOrDub?.toUpperCase()}
-                    </span>
-                  </Chip> */}
-
                   <Chip color="secondary" variant="faded">
                     Released | &nbsp;
                     <span className="font-semibold text-foreground/90">
@@ -78,7 +71,7 @@ export default function AnimeInfoSection({ info }: Props) {
                       {info.genres.map((genre) => (
                         <Button
                           as={NextLink}
-                          href={`/genre/${stringToSlug(genre)}`}
+                          href={`/genre?genres=[${genre}]`}
                           key={genre}
                           color="secondary"
                           variant="shadow"
