@@ -66,8 +66,8 @@ export const verificationTokens = pgTable(
 );
 
 export const episodeProgress = pgTable("episode_progress", {
-  id: uuid("id").defaultRandom(),
-  userId: uuid("user_id").notNull(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").references(() => users.id),
   animeId: text("anime_id").notNull(),
   episodeId: text("episode_id").notNull(),
   episodeNumber: integer("episode_number").notNull(),
@@ -77,3 +77,6 @@ export const episodeProgress = pgTable("episode_progress", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export type EpisodeProgressInsert = typeof episodeProgress.$inferInsert;
+export type EpisodeProgress = typeof episodeProgress.$inferSelect;

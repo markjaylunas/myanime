@@ -1,0 +1,1 @@
+ALTER TABLE "episode_progress" ALTER COLUMN "user_id" SET DATA TYPE text;

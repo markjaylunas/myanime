@@ -1,8 +1,10 @@
+import { fetchEpisodeProgress } from "@/actions/action";
 import {
   fetchAnimeData,
   fetchAnimeEpisodeSource,
   fetchEpisodeData,
 } from "@/actions/meta";
+import { auth } from "@/auth";
 import NoVideo from "@/components/video-player/NoVideo";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
 import { notFound } from "next/navigation";
@@ -13,8 +15,19 @@ export default async function EpisodePage({
   params: { animeId: string; episodeSlug: string[] };
 }) {
   const { episodeSlug, animeId } = params;
-
   const [episodeId] = episodeSlug;
+
+  const session = await auth();
+  const userId = session?.user?.id;
+  const episodeProgressData = userId
+    ? await fetchEpisodeProgress({
+        userId,
+        animeId,
+        episodeId,
+      })
+    : null;
+
+  const episodeProgress = episodeProgressData ? episodeProgressData[0] : null;
 
   const [info, animeEpisodeSource, episodeData] = await Promise.all([
     fetchAnimeData({ animeId }),
@@ -45,6 +58,8 @@ export default async function EpisodePage({
           poster={episode?.image || info.image}
           episodeSource={animeEpisodeSource}
           nextEpisode={nextEpisode || null}
+          episodeProgress={episodeProgress}
+          userId={userId || null}
         />
       ) : (
         <NoVideo bgSrc={info.image} title={`${info.status}`} />

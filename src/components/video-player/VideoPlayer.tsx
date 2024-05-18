@@ -17,6 +17,8 @@ import {
   useMediaRemote,
 } from "@vidstack/react";
 
+import { upsertEpisodeProgress } from "@/actions/action";
+import { EpisodeProgress, EpisodeProgressInsert } from "@/db/schema";
 import { EpisodeSchema, EpisodeSourceDataSchema } from "@/lib/meta-validations";
 import { cn } from "@/lib/utils";
 import { Menu } from "@vidstack/react";
@@ -25,7 +27,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Icons } from "../ui/Icons";
 
 // import { textTracks } from "./tracks";
@@ -35,6 +37,8 @@ type Props = {
   poster: string;
   episodeSource: EpisodeSourceDataSchema | null;
   nextEpisode: EpisodeSchema | null;
+  episodeProgress: EpisodeProgress | null;
+  userId: string | null;
 };
 
 export default function VideoPlayer({
@@ -42,6 +46,8 @@ export default function VideoPlayer({
   poster,
   episodeSource: initialEpisodeSource,
   nextEpisode,
+  episodeProgress,
+  userId,
 }: Props) {
   const defaultEpisodeSource = initialEpisodeSource?.sources || [];
   const sortedSources = sortSources(defaultEpisodeSource);
@@ -50,13 +56,16 @@ export default function VideoPlayer({
     episodeSlug: string[];
   }>();
   const router = useRouter();
-  const [_, episodeNumber] = episodeSlug;
+  const pathname = usePathname();
+  const [episodeId, episodeNumber] = episodeSlug;
 
   const [episodeSource, setEpisodeSource] = useState<EpisodeSource>(
     sortedSources[0]
   );
   const [canNext, setCanNext] = useState(false);
-  const [timeBefore, setTimeBefore] = useState<number>(0);
+  const initialTime =
+    episodeProgress?.episodeId === episodeId ? episodeProgress?.currentTime : 0;
+  const [timeBefore, setTimeBefore] = useState<number>(initialTime);
   const [autoPlay, setAutoPlay] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -92,6 +101,7 @@ export default function VideoPlayer({
 
   function onLoadedData(nativeEvent: MediaLoadedDataEvent) {
     setTimeout(() => {
+      // if(initialTime) toast("Resuming from where you left off");
       remote.seek(timeBefore - 5, nativeEvent);
       setTimeBefore(0);
       remote.play(nativeEvent);
@@ -101,13 +111,21 @@ export default function VideoPlayer({
   useEffect(() => {
     return () => {
       const currentTime = player.current?.currentTime || 0;
-      const duration = player.current?.duration || 0;
-      if (currentTime) {
-        console.log(
-          ` - ${animeId} - ${title} - ${
-            player.current?.currentTime
-          } / ${duration} - ${currentTime / duration > 0.9}`
-        );
+      const durationTime = player.current?.duration || 0;
+      if (currentTime && userId) {
+        let data: EpisodeProgressInsert = {
+          userId,
+          animeId,
+          episodeId,
+          episodeNumber: Number(episodeNumber),
+          currentTime,
+          durationTime,
+          isFinished: currentTime / durationTime > 0.9,
+        };
+
+        if (episodeProgress) data.id = episodeProgress.id;
+
+        upsertEpisodeProgress({ data, pathname });
       }
 
       player.current!.subscribe(({ duration, currentTime }) => {
