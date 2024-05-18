@@ -5,6 +5,7 @@ import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
+import WatchButtons from "./_components/watch-buttons";
 
 export default async function HomeLayout({
   children,
@@ -34,18 +35,24 @@ export default async function HomeLayout({
   const title = pickTitle(info.title);
   const episode = episodeListData?.find((episode) => episode.id === episodeId);
   return (
-    <main className="container max-w-5xl mx-auto min-h-screen pb-8  p-0">
+    <main className="container max-w-5xl mx-auto min-h-screen pb-8  p-0 space-y-4">
       {children}
 
-      <h2 className="text-center mx-2 text-2xl text-wrap font-semibold mt-4 text-primary">
-        {title}
-      </h2>
+      <section className="px-4">
+        <h2 className="text-center text-2xl text-wrap font-semibold  text-primary">
+          {title}
+        </h2>
 
-      <h2 className="text-center mx-2 text-lg font-semibold mt-2 text-secondary">
-        {`Episode ${numberFormatter(parseInt(episodeNumber))}${
-          episode?.title ? ` - ${episode?.title}` : ""
-        }`}
-      </h2>
+        <h2 className="text-center mx-2 text-lg font-semibold mt-2 text-secondary">
+          {`Episode ${numberFormatter(parseInt(episodeNumber))}${
+            episode?.title ? ` - ${episode?.title}` : ""
+          }`}
+        </h2>
+      </section>
+
+      <section className="flex justify-end px-4">
+        <WatchButtons />
+      </section>
 
       <section className="px-4 md:px-0 mt-8 flex justify-center">
         {episodeList && hasEpisode ? (
