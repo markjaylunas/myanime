@@ -57,8 +57,9 @@ export default function AnimeCard(
         alt={title}
         src={anime.image}
         classNames={{
-          wrapper: "z-0 w-full h-full mx-auto bg-blur-md",
-          img: "object-cover",
+          wrapper:
+            "z-0 w-full h-full mx-auto bg-blur-md flex items-center justify-center",
+          img: "object-cover min-w-full min-h-full",
         }}
       />
       <CardFooter className="absolute z-20 bottom-0 p-2 flex flex-col gap-2 justify-start items-center">
