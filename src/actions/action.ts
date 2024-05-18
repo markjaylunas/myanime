@@ -3,7 +3,7 @@
 import db from "@/db";
 import { episodeProgress, EpisodeProgressInsert } from "@/db/schema";
 import { DEFAULT_PAGE_LIMIT } from "@/lib/constants";
-import { and, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function fetchEpisodeProgress({
@@ -45,35 +45,37 @@ export async function upsertEpisodeProgress({
 
   if (res) revalidatePath(pathname);
 }
-
 export async function fetchAllEpisodeProgress({
   userId,
   limit = DEFAULT_PAGE_LIMIT,
-  offset = 0,
+  page = 1,
   filter = "all",
 }: {
   userId: string;
   limit?: number;
-  offset?: number;
+  page?: number;
   filter?: "finished" | "unfinished" | "all";
 }) {
-  return db
-    .select()
-    .from(episodeProgress)
-    .where(
-      and(
-        eq(episodeProgress.userId, userId),
+  const filters = and(
+    eq(episodeProgress.userId, userId),
+    filter === "finished" ? eq(episodeProgress.isFinished, true) : undefined,
+    filter === "unfinished" ? eq(episodeProgress.isFinished, false) : undefined
+  );
 
-        filter === "finished"
-          ? eq(episodeProgress.isFinished, true)
-          : undefined,
+  const [episodes, totalCount] = await Promise.all([
+    await db
+      .select()
+      .from(episodeProgress)
+      .where(filters)
+      .limit(limit)
+      .offset((page - 1) * limit)
+      .orderBy(desc(episodeProgress.updatedAt)),
 
-        filter === "unfinished"
-          ? eq(episodeProgress.isFinished, false)
-          : undefined
-      )
-    )
-    .limit(limit)
-    .offset(offset)
-    .orderBy(desc(episodeProgress.updatedAt));
+    await db.select({ count: count() }).from(episodeProgress).where(filters),
+  ]);
+
+  return {
+    episodes,
+    totalCount: totalCount[0]?.count || 0,
+  };
 }

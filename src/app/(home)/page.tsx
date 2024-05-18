@@ -12,12 +12,12 @@ export default async function Home() {
 
   if (!userId) return null;
 
-  const episodeProgressList = await fetchAllEpisodeProgress({
+  const episodeProgressData = await fetchAllEpisodeProgress({
     userId,
     filter: "unfinished",
   });
 
-  if (!episodeProgressList.length) return null;
+  if (!episodeProgressData.totalCount) return null;
 
   return (
     <>
@@ -33,7 +33,7 @@ export default async function Home() {
 
       <Spacer y={2} />
 
-      <AnimeEpisodeCarouselList animeList={episodeProgressList} />
+      <AnimeEpisodeCarouselList animeList={episodeProgressData.episodes} />
     </>
   );
 }
