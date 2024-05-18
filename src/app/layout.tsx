@@ -25,8 +25,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen">
-        {authModal}
         <Providers>
+          {authModal}
           <Header />
           {children}
           <Footer />

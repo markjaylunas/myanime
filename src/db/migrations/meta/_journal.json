@@ -1,0 +1,20 @@
+{
+  "version": "6",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1716004944450,
+      "tag": "0000_grey_warpath",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1716009907136,
+      "tag": "0001_far_red_shift",
+      "breakpoints": true
+    }
+  ]
+}

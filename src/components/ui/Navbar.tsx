@@ -33,7 +33,6 @@ export default function Navbar({ user }: Props) {
     <NextNavbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      shouldHideOnScroll
       maxWidth="2xl"
     >
       <NavbarContent>

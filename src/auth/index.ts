@@ -1,14 +1,17 @@
+import db from "@/db";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
+import { authConfig } from "./auth.config";
 
-export const BASE_PATH = "/api/auth";
-
-export const { auth, handlers, signIn, signOut } = NextAuth({
-  providers: [GitHub, Google],
-  basePath: BASE_PATH,
-  secret: process.env.AUTH_SECRET,
-  pages: {
-    signIn: "/sign-in",
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
+  adapter: DrizzleAdapter(db),
+  callbacks: {
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
   },
 });
