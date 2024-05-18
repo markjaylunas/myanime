@@ -106,7 +106,7 @@ export default function QuickSearch() {
               href={`/search?query=${query}`}
               className="text-center"
             >
-              View all results
+              Show All results
             </DropdownItem>
           </DropdownSection>
         </DropdownMenu>
