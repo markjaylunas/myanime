@@ -22,6 +22,13 @@
       "when": 1716013497068,
       "tag": "0002_busy_zeigeist",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1716017624386,
+      "tag": "0003_aromatic_garia",
+      "breakpoints": true
     }
   ]
 }

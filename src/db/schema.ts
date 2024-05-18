@@ -71,6 +71,8 @@ export const episodeProgress = pgTable("episode_progress", {
   animeId: text("anime_id").notNull(),
   episodeId: text("episode_id").notNull(),
   episodeNumber: integer("episode_number").notNull(),
+  episodeTitle: text("episode_title").notNull(),
+  episodeImage: text("episode_image").notNull(),
   currentTime: real("current_time").notNull(),
   durationTime: real("duration_time").notNull(),
   isFinished: boolean("is_finished").notNull(),

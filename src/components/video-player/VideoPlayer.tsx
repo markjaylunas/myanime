@@ -118,6 +118,8 @@ export default function VideoPlayer({
           animeId,
           episodeId,
           episodeNumber: Number(episodeNumber),
+          episodeTitle: title,
+          episodeImage: poster,
           currentTime,
           durationTime,
           isFinished: currentTime / durationTime > 0.9,
