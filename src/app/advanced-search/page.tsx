@@ -24,21 +24,22 @@ export default async function SearchAnimeResultsPage({
   const data = await searchAnime({ query, page });
 
   const animeList = data?.results || [];
+  const hasQuery = query.length > 0;
 
   return (
     <>
-      {animeList && <Heading>Search: {query}</Heading>}
+      {hasQuery && <Heading>Search: {query}</Heading>}
 
-      {animeList && <AnimeList animeList={animeList} />}
+      {hasQuery && <AnimeList animeList={animeList} />}
 
-      {animeList && (
+      {hasQuery && (
         <SimplePagination
           prevDisabled={page <= 1}
           nextDisabled={data?.hasNextPage === false}
         />
       )}
 
-      {!animeList && <NoQueryDefaultAnime />}
+      {!hasQuery && <NoQueryDefaultAnime />}
     </>
   );
 }
