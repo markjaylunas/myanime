@@ -4,6 +4,8 @@ import db from "@/db";
 import {
   anime,
   AnimeInsert,
+  animeUserStatus,
+  AnimeUserStatusInsert,
   episode,
   EpisodeInsert,
   episodeProgress,
@@ -133,4 +135,36 @@ export async function fetchAllEpisodeProgress({
     episodes,
     totalCount: totalCount[0]?.count || 0,
   };
+}
+
+export async function upsertWatchStatus(params: AnimeUserStatusInsert) {
+  return await db
+    .insert(animeUserStatus)
+    .values(params)
+    .onConflictDoUpdate({
+      target: animeUserStatus.id,
+      set: {
+        status: params.status,
+        isLiked: params.isLiked,
+        isFavorite: params.isFavorite,
+        updatedAt: new Date(),
+      },
+    })
+    .returning();
+}
+
+export async function fetchWatchStatus({
+  userId,
+  animeId,
+}: {
+  userId: string;
+  animeId: string;
+}) {
+  return db
+    .select()
+    .from(animeUserStatus)
+    .where(
+      sql`${animeUserStatus.userId} = ${userId} and ${animeUserStatus.animeId} = ${animeId}`
+    )
+    .limit(1);
 }

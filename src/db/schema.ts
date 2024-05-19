@@ -138,3 +138,5 @@ export type EpisodeProgress = typeof episodeProgress.$inferSelect;
 
 export type AnimeUserStatusInsert = typeof animeUserStatus.$inferInsert;
 export type AnimeUserStatus = typeof animeUserStatus.$inferSelect;
+
+export type WatchStatus = AnimeUserStatus["status"];

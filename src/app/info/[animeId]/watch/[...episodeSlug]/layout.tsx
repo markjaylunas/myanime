@@ -1,11 +1,13 @@
+import { fetchWatchStatus } from "@/actions/action";
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
+import { auth } from "@/auth";
 import EpisodeList from "@/components/ui/EpisodeList";
 import { numberFormatter, pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
-import WatchButtons from "./_components/watch-buttons";
+import WatchListDropdown from "./_components/watchlist-dropdown";
 
 export default async function HomeLayout({
   children,
@@ -17,9 +19,13 @@ export default async function HomeLayout({
   const { animeId, episodeSlug } = params;
   const [episodeId, episodeNumber] = episodeSlug;
 
-  const [info, episodeListData] = await Promise.all([
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const [info, episodeListData, animeWatchStatus] = await Promise.all([
     fetchAnimeData({ animeId }),
     fetchEpisodeData({ animeId, provider: "gogoanime" }),
+    userId ? fetchWatchStatus({ userId, animeId }) : [],
   ]);
 
   if (!info) {
@@ -51,7 +57,11 @@ export default async function HomeLayout({
       </section>
 
       <section className="flex justify-end px-4">
-        <WatchButtons />
+        <WatchListDropdown
+          animeWatchStatus={
+            animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
+          }
+        />
       </section>
 
       <section className="px-4 md:px-0 mt-8 flex justify-center">
