@@ -26,7 +26,6 @@ export default async function ContinueWatchingPage({
     userId,
     page: Number(page) || 1,
     limit: DEFAULT_PAGE_LIMIT,
-    filter: "unfinished",
   });
 
   const canNext = episodeProgressData.totalCount > page * DEFAULT_PAGE_LIMIT;

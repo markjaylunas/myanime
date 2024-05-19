@@ -14,7 +14,6 @@ export default async function Home() {
 
   const episodeProgressData = await fetchAllEpisodeProgress({
     userId,
-    filter: "unfinished",
   });
 
   if (!episodeProgressData.totalCount) return null;
