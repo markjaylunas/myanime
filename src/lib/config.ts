@@ -23,12 +23,12 @@ export const routesConfig: RoutesConfig = {
       href: "/",
     },
     {
-      title: "Genres",
-      href: "/genre?genres=[Action]",
+      title: "Advanced Search",
+      href: "/advanced-search",
     },
     {
-      title: "My List",
-      href: "/my-list",
+      title: "Genres",
+      href: "/genre?genres=[Action]",
     },
   ],
 };

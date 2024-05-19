@@ -51,7 +51,7 @@ export default function Navbar({ user }: Props) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4 md:gap-8" justify="center">
         {routesConfig.mainNav.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
             <MyLink href={item.href} className="font-medium">

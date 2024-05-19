@@ -103,7 +103,7 @@ export default function QuickSearch() {
             <DropdownItem
               as={NextLink}
               variant="shadow"
-              href={`/search?query=${query}`}
+              href={`/advanced-search?query=${query}`}
               className="text-center"
             >
               Show All results
