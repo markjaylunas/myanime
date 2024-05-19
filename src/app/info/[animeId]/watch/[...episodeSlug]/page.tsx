@@ -53,7 +53,9 @@ export default async function EpisodePage({
         <VideoPlayer
           animeTitle={pickTitle(info.title)}
           episodeTitle={episodeTitle}
-          poster={episode?.image || info.image}
+          animeImage={info.image}
+          animeCover={info.cover || ""}
+          episodeImage={episode?.image || ""}
           episodeSource={animeEpisodeSource}
           nextEpisode={nextEpisode || null}
           episodeProgress={episodeProgress}

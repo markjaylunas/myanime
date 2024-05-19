@@ -1,16 +1,37 @@
-import { EpisodeProgress } from "@/db/schema";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import { Progress } from "@nextui-org/react";
 import moment from "moment";
 import NextLink from "next/link";
-type Props = {
-  anime: EpisodeProgress;
+
+export type AnimeEpisodeCardProps = {
+  id: string;
+  animeId: string | null;
+  animeTitle: string | null;
+  animeImage: string | null;
+  episodeId: string | null;
+  episodeTitle: string | null;
+  episodeNumber: number | null;
+  episodeImage: string | null;
+  episodeProgressUpdatedAt: Date;
+  currentTime: number;
+  durationTime: number | null;
 };
 
-export default function AnimeEpisodeCard({ anime }: Props) {
-  let href = `/info/${anime.animeId}/watch/${anime.episodeId}/${anime.episodeNumber}`;
+export default function AnimeEpisodeCard({
+  animeId,
+  animeImage,
+  animeTitle,
+  currentTime,
+  durationTime,
+  episodeId,
+  episodeImage,
+  episodeNumber,
+  episodeProgressUpdatedAt,
+  episodeTitle,
+}: AnimeEpisodeCardProps) {
+  let href = `/info/${animeId}/watch/${episodeId}/${episodeNumber}`;
 
   return (
     <Card
@@ -20,17 +41,17 @@ export default function AnimeEpisodeCard({ anime }: Props) {
     >
       <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-start">
         <Chip radius="sm" size="sm" color="secondary" variant="shadow">
-          EP {anime.episodeNumber}
+          EP {episodeNumber}
         </Chip>
         <Chip radius="sm" size="sm" color="default" variant="shadow">
-          {moment(anime.updatedAt).fromNow()}
+          {moment(episodeProgressUpdatedAt).fromNow()}
         </Chip>
       </CardHeader>
 
       <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/40 to-transparent" />
       <Image
-        alt={anime.episodeTitle || anime.animeTitle}
-        src={anime.episodeImage}
+        alt={episodeTitle || animeTitle || ""}
+        src={episodeImage || animeImage || ""}
         classNames={{
           wrapper:
             "z-0 w-full h-full mx-auto bg-blur-md flex items-center justify-center",
@@ -39,17 +60,17 @@ export default function AnimeEpisodeCard({ anime }: Props) {
       />
       <CardFooter className="absolute z-20 bottom-0 p-2 flex flex-col gap-2 justify-start items-center">
         <h6 className="text-white font-medium text-md line-clamp-1 text-center text-pretty">
-          {anime.episodeTitle}
+          {episodeTitle}
         </h6>
         <h6 className="text-white font-medium text-xs line-clamp-1 text-center text-pretty">
-          {anime.animeTitle}
+          {animeTitle}
         </h6>
 
         {/* percentage of currrentTime on durationTime */}
         <Progress
-          value={(anime.currentTime / anime.durationTime) * 100}
+          value={(currentTime / (durationTime || 0)) * 100}
           size="sm"
-          aria-label={`${anime.currentTime} / ${anime.durationTime}`}
+          aria-label={`${currentTime} / ${durationTime}`}
         />
       </CardFooter>
     </Card>

@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  pgEnum,
   pgTable,
   primaryKey,
   real,
@@ -65,21 +66,75 @@ export const verificationTokens = pgTable(
   })
 );
 
+const updatedAt = timestamp("updated_at").defaultNow().notNull();
+const createdAt = timestamp("created_at").defaultNow().notNull();
+const userIdRef = text("user_id")
+  .references(() => users.id)
+  .notNull();
+const animeIdRef = text("anime_id")
+  .references(() => anime.id)
+  .notNull();
+
+export const anime = pgTable("anime", {
+  id: text("id").primaryKey().notNull(),
+  title: text("title").notNull(),
+  image: text("image").notNull(),
+  cover: text("cover").notNull(),
+  updatedAt,
+  createdAt,
+});
+
+export const episode = pgTable("episode", {
+  id: text("id").primaryKey().notNull(),
+  animeId: animeIdRef,
+  number: integer("number").notNull(),
+  title: text("title"),
+  image: text("image"),
+  durationTime: real("duration_time").notNull(),
+  updatedAt,
+  createdAt,
+});
+
 export const episodeProgress = pgTable("episode_progress", {
   id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id").references(() => users.id),
-  animeId: text("anime_id").notNull(),
-  animeTitle: text("anime_title").notNull(),
-  episodeId: text("episode_id").notNull(),
-  episodeNumber: integer("episode_number").notNull(),
-  episodeTitle: text("episode_title"),
-  episodeImage: text("episode_image").notNull(),
+  userId: userIdRef,
+  animeId: animeIdRef,
+  episodeId: text("episode_id")
+    .references(() => episode.id)
+    .notNull(),
   currentTime: real("current_time").notNull(),
-  durationTime: real("duration_time").notNull(),
   isFinished: boolean("is_finished").notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt,
+  createdAt,
 });
+
+export const watchStatus = pgEnum("watch_status", [
+  "WATCHING",
+  "COMPLETED",
+  "ON_HOLD",
+  "DROPPED",
+  "PLAN_TO_WATCH",
+]);
+
+export const animeUserStatus = pgTable("anime_user_status", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: userIdRef,
+  animeId: animeIdRef,
+  status: watchStatus("watch_status").default("WATCHING").notNull(),
+  isLiked: boolean("is_liked").default(false).notNull(),
+  isFavorite: boolean("is_favorite").default(false).notNull(),
+  updatedAt,
+  createdAt,
+});
+
+export type AnimeInsert = typeof anime.$inferInsert;
+export type Anime = typeof anime.$inferSelect;
+
+export type EpisodeInsert = typeof episode.$inferInsert;
+export type Episode = typeof episode.$inferSelect;
 
 export type EpisodeProgressInsert = typeof episodeProgress.$inferInsert;
 export type EpisodeProgress = typeof episodeProgress.$inferSelect;
+
+export type AnimeUserStatusInsert = typeof animeUserStatus.$inferInsert;
+export type AnimeUserStatus = typeof animeUserStatus.$inferSelect;

@@ -3,12 +3,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { EpisodeProgress } from "@/db/schema";
 import AnimeCardMotion from "./AnimeCardMotion";
-import AnimeEpisodeCard from "./AnimeEpisodeCard";
+import AnimeEpisodeCard, { AnimeEpisodeCardProps } from "./AnimeEpisodeCard";
 
 type Props = {
-  animeList: EpisodeProgress[];
+  animeList: AnimeEpisodeCardProps[];
 };
 
 export default function AnimeEpisodeCarouselList({ animeList }: Props) {
@@ -26,7 +25,7 @@ export default function AnimeEpisodeCarouselList({ animeList }: Props) {
             className="pl-2  basis-[65%] xs:basis-[40%] md:basis-[35%] lg:basis-[28%]"
           >
             <AnimeCardMotion index={index}>
-              <AnimeEpisodeCard anime={anime} />
+              <AnimeEpisodeCard {...anime} />
             </AnimeCardMotion>
           </CarouselItem>
         ))}

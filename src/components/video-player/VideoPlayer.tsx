@@ -17,8 +17,11 @@ import {
   useMediaRemote,
 } from "@vidstack/react";
 
-import { upsertEpisodeProgress } from "@/actions/action";
-import { EpisodeProgress, EpisodeProgressInsert } from "@/db/schema";
+import {
+  upsertEpisodeProgress,
+  UpsertEpisodeProgressData,
+} from "@/actions/action";
+import { EpisodeProgress } from "@/db/schema";
 import { EpisodeSchema, EpisodeSourceDataSchema } from "@/lib/meta-validations";
 import { cn } from "@/lib/utils";
 import { Menu } from "@vidstack/react";
@@ -34,8 +37,10 @@ import { Icons } from "../ui/Icons";
 
 type Props = {
   animeTitle: string;
+  animeImage: string;
+  animeCover: string;
   episodeTitle: string | null;
-  poster: string;
+  episodeImage: string;
   episodeSource: EpisodeSourceDataSchema | null;
   nextEpisode: EpisodeSchema | null;
   episodeProgress: EpisodeProgress | null;
@@ -44,8 +49,10 @@ type Props = {
 
 export default function VideoPlayer({
   animeTitle,
+  animeImage,
+  animeCover,
+  episodeImage,
   episodeTitle,
-  poster,
   episodeSource: initialEpisodeSource,
   nextEpisode,
   episodeProgress,
@@ -116,20 +123,30 @@ export default function VideoPlayer({
       const durationTime = player.current?.duration || 0;
 
       if (currentTime && userId && currentTime > 30) {
-        let data: EpisodeProgressInsert = {
-          userId,
-          animeTitle,
-          animeId,
-          episodeId,
-          episodeNumber: Number(episodeNumber),
-          episodeTitle,
-          episodeImage: poster,
-          currentTime,
-          durationTime,
-          isFinished: currentTime / durationTime > 0.9,
+        let data: UpsertEpisodeProgressData = {
+          anime: {
+            id: animeId,
+            title: animeTitle,
+            image: animeImage,
+            cover: animeCover,
+          },
+          episode: {
+            id: episodeId,
+            animeId,
+            number: Number(episodeNumber),
+            title: episodeTitle,
+            image: episodeImage,
+            durationTime,
+          },
+          episodeProgress: {
+            id: episodeProgress?.id,
+            userId,
+            animeId,
+            episodeId,
+            currentTime,
+            isFinished: currentTime / durationTime > 0.9,
+          },
         };
-
-        if (episodeProgress) data.id = episodeProgress.id;
 
         upsertEpisodeProgress({ data, pathname });
       }
@@ -139,6 +156,8 @@ export default function VideoPlayer({
       });
     };
   }, []);
+
+  const poster = episodeImage || animeImage;
 
   return (
     <section className="overflow-hidden relative">
