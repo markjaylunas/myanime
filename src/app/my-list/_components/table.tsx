@@ -150,19 +150,6 @@ export default function WatchListTable({
 
   const pages = Math.ceil(totalCount / limit);
 
-  // const sortedItems = React.useMemo(() => {
-  //   return [...watchList].sort((a: Anime, b: Anime) => {
-  //     const descriptor: ColumnKey = sortDescriptor.column;
-  //     const first = a[descriptor];
-  //     const second = b[descriptor];
-  //     if (!first || !second) return 0;
-
-  //     const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-  //     return sortDescriptor.direction === "descending" ? -cmp : cmp;
-  //   });
-  // }, [sortDescriptor, watchList]);
-
   const renderCell = useCallback(
     ({
       anime,
@@ -175,7 +162,7 @@ export default function WatchListTable({
         case "animeImage":
           return (
             <User
-              avatarProps={{ radius: "lg", src: anime.animeImage || "" }}
+              avatarProps={{ radius: "lg", src: anime.animeImage }}
               name={anime.animeTitle}
               classNames={{ name: "sr-only" }}
             >
@@ -219,7 +206,7 @@ export default function WatchListTable({
           return anime.score ? (
             <div className="flex gap-1">
               <Icons.startFill className="text-primary-500" />
-              <p>{anime.score || 10}</p>
+              <p>{anime.score}</p>
             </div>
           ) : (
             <Icons.star className="text-primary-500" />
@@ -409,9 +396,6 @@ export default function WatchListTable({
                 ))}
               </DropdownMenu>
             </Dropdown>
-            {/* <Button color="primary" endContent={<>+</>}>
-              Add New
-            </Button> */}
           </div>
         </div>
         <div className="flex justify-between items-center">
