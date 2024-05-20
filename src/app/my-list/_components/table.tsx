@@ -13,7 +13,15 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
+import { Image } from "@nextui-org/image";
 import { Input } from "@nextui-org/input";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/modal";
 import { Pagination } from "@nextui-org/pagination";
 import {
   Table,
@@ -126,7 +134,6 @@ export default function WatchListTable({
   const searchParams = useSearchParams();
   const { watchList, totalCount } = watchListData;
 
-  const [filterValue, setFilterValue] = useState("");
   const [visibleColumns, setVisibleColumns] = useState(
     new Set(INITIAL_VISIBLE_COLUMNS)
   );
@@ -137,8 +144,22 @@ export default function WatchListTable({
     column: "updatedAt",
     direction: "ascending",
   });
+  const {
+    isOpen: isImageModalOpen,
+    onOpen: onImageModalOpen,
+    onClose: onImageModalClose,
+  } = useDisclosure();
+  const [imageModal, setImageModal] = useState<{
+    title: string;
+    image: string;
+  } | null>(null);
 
-  const hasSearchFilter = Boolean(filterValue);
+  const openImageModal = (anime: Anime) => {
+    setImageModal({ title: anime.animeTitle, image: anime.animeImage });
+    onImageModalOpen();
+  };
+
+  const hasSearchFilter = Boolean(query);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns.values().next().value === "all") return columns;
@@ -165,6 +186,7 @@ export default function WatchListTable({
               avatarProps={{ radius: "lg", src: anime.animeImage }}
               name={anime.animeTitle}
               classNames={{ name: "sr-only" }}
+              onClick={() => openImageModal(anime)}
             >
               {anime.animeTitle}
             </User>
@@ -418,7 +440,6 @@ export default function WatchListTable({
       </div>
     );
   }, [
-    filterValue,
     statusFilter,
     visibleColumns,
     onlimitChange,
@@ -462,43 +483,87 @@ export default function WatchListTable({
   }, [watchList.length, page, pages, hasSearchFilter]);
 
   return (
-    <Table
-      aria-label="Example table with custom cells, pagination and sorting"
-      isHeaderSticky
-      bottomContent={bottomContent}
-      bottomContentPlacement="outside"
-      sortDescriptor={sortDescriptor}
-      topContent={topContent}
-      topContentPlacement="outside"
-      onSortChange={(value) => {
-        if (typeof value === "object") {
-          setSortDescriptor(value as Descriptor);
-          onSortChange(value as Descriptor);
-        }
-      }}
-    >
-      <TableHeader columns={headerColumns}>
-        {(column) => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === "actions" ? "center" : "start"}
-            allowsSorting={column.sortable}
-          >
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody emptyContent={"No anime found"} items={watchList}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                {renderCell({ anime: item, columnKey: columnKey as ColumnKey })}
-              </TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <>
+      <Table
+        aria-label="Example table with custom cells, pagination and sorting"
+        isHeaderSticky
+        bottomContent={bottomContent}
+        bottomContentPlacement="outside"
+        sortDescriptor={sortDescriptor}
+        topContent={topContent}
+        topContentPlacement="outside"
+        onSortChange={(value) => {
+          if (typeof value === "object") {
+            setSortDescriptor(value as Descriptor);
+            onSortChange(value as Descriptor);
+          }
+        }}
+      >
+        <TableHeader columns={headerColumns}>
+          {(column) => (
+            <TableColumn
+              key={column.uid}
+              align={column.uid === "actions" ? "center" : "start"}
+              allowsSorting={column.sortable}
+            >
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody emptyContent={"No anime found"} items={watchList}>
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => (
+                <TableCell>
+                  {renderCell({
+                    anime: item,
+                    columnKey: columnKey as ColumnKey,
+                  })}
+                </TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      {imageModal && (
+        <ImageFullscreenModal
+          isOpen={isImageModalOpen}
+          onClose={onImageModalClose}
+          image={imageModal.image}
+          title={imageModal.title}
+        />
+      )}
+    </>
+  );
+}
+
+function ImageFullscreenModal({
+  image,
+  isOpen,
+  onClose,
+  title,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  image: string;
+}) {
+  return (
+    <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
+      <ModalContent>
+        <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+        <ModalBody>
+          <Image
+            src={image}
+            alt={title}
+            classNames={{
+              wrapper:
+                "w-full h-full mx-auto bg-blur-md flex items-center justify-center",
+              img: "object-cover min-w-full min-h-full",
+            }}
+          />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 }
