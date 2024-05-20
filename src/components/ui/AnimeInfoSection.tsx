@@ -51,9 +51,11 @@ export default function AnimeInfoSection({ info }: Props) {
 
                     <DetailChip label="Type">{info.type}</DetailChip>
 
-                    <DetailChip label="Studios">
-                      {info.studios.join(" , ")}
-                    </DetailChip>
+                    {info.studios.map((studio) => (
+                      <DetailChip label="Studios" key={studio}>
+                        {studio}
+                      </DetailChip>
+                    ))}
 
                     <DetailChip label="Season">{info.season}</DetailChip>
 

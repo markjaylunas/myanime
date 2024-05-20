@@ -60,7 +60,7 @@ export default async function InfoPage({
         </div>
       )}
 
-      <section className="px-3 md:px-0 container">
+      <section className="px-3 md:px-0 max-w-6xl mx-auto">
         <AnimeInfoSection info={info} />
       </section>
     </main>
