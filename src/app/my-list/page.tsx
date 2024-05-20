@@ -21,10 +21,10 @@ export default async function MyListPage({
       ? parseInt(searchParams?.limit) || 10
       : 10;
   const sort =
-    typeof searchParams?.sort === "string" ? searchParams?.sort : "title";
+    typeof searchParams?.sort === "string" ? searchParams?.sort : "animeTitle";
   const direction =
     typeof searchParams?.direction === "string"
-      ? searchParams?.direction
+      ? searchParams?.direction || "descending"
       : "descending";
 
   let statusListParams: string[];

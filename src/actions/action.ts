@@ -146,8 +146,6 @@ export async function upsertWatchStatus({
     })
     .returning();
 
-  revalidatePath("/my-list");
-
   return animeUserStatusData;
 }
 
@@ -200,7 +198,7 @@ export async function fetchAllWatchStatus({
   page = 1,
   status = [],
   query,
-  sort,
+  sort = "animeTitle",
   direction = "ascending",
 }: {
   userId: string;
