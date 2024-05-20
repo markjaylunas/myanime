@@ -13,15 +13,8 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
-import { Image } from "@nextui-org/image";
 import { Input } from "@nextui-org/input";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/modal";
+
 import { Pagination } from "@nextui-org/pagination";
 import {
   Table,
@@ -43,8 +36,7 @@ type ColumnKey =
   | "status"
   | "isLiked"
   | "score"
-  | "updatedAt"
-  | "actions";
+  | "updatedAt";
 
 const columns = [
   { name: "Anime ID", uid: "animeId" },
@@ -54,7 +46,6 @@ const columns = [
   { name: "Is Liked", uid: "isLiked" },
   { name: "Score", uid: "score", sortable: true },
   { name: "Updated At", uid: "updatedAt", sortable: true },
-  { name: "Actions", uid: "actions" },
 ];
 
 const statusOptions = [
@@ -65,12 +56,8 @@ const statusOptions = [
   { name: "Plan to Watch", uid: "plan-to-watch" },
 ];
 
-const INITIAL_VISIBLE_COLUMNS = [
-  "animeImage",
-  "animeTitle",
-  "status",
-  "actions",
-];
+const INITIAL_VISIBLE_COLUMNS = ["animeImage", "animeTitle", "status"];
+
 type Anime = {
   id: string;
   animeId: string;
@@ -80,7 +67,6 @@ type Anime = {
   isLiked: boolean;
   score: number;
   updatedAt: Date;
-  actions?: null;
 };
 
 type Descriptor = {
@@ -144,20 +130,6 @@ export default function WatchListTable({
     column: "updatedAt",
     direction: "ascending",
   });
-  const {
-    isOpen: isImageModalOpen,
-    onOpen: onImageModalOpen,
-    onClose: onImageModalClose,
-  } = useDisclosure();
-  const [imageModal, setImageModal] = useState<{
-    title: string;
-    image: string;
-  } | null>(null);
-
-  const openImageModal = (anime: Anime) => {
-    setImageModal({ title: anime.animeTitle, image: anime.animeImage });
-    onImageModalOpen();
-  };
 
   const hasSearchFilter = Boolean(query);
 
@@ -177,7 +149,7 @@ export default function WatchListTable({
       columnKey,
     }: {
       anime: FetchAllWatchStatusReturnType["watchList"][0];
-      columnKey: ColumnKey | "actions";
+      columnKey: ColumnKey;
     }) => {
       switch (columnKey) {
         case "animeImage":
@@ -186,7 +158,6 @@ export default function WatchListTable({
               avatarProps={{ radius: "lg", src: anime.animeImage }}
               name={anime.animeTitle}
               classNames={{ name: "sr-only" }}
-              onClick={() => openImageModal(anime)}
               className="cursor-pointer"
             >
               {anime.animeTitle}
@@ -238,26 +209,6 @@ export default function WatchListTable({
               {moment(anime.updatedAt).format("DD/MM/YYYY HH:mm")}
             </p>
           );
-        case "actions":
-          return (
-            <div className="relative flex justify-end items-center gap-2">
-              <Dropdown>
-                <DropdownTrigger>
-                  <Button isIconOnly size="sm" variant="light">
-                    <Icons.verticalDots className="text-default-300" />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu>
-                  <DropdownItem
-                    onPress={() => router.push(`/info/${anime.animeId}`)}
-                  >
-                    View
-                  </DropdownItem>
-                  <DropdownItem>Edit</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-          );
         default:
           return null;
       }
@@ -270,18 +221,6 @@ export default function WatchListTable({
     params.set("sort", descriptor.column);
     params.set("direction", descriptor.direction);
     params.set("page", "1");
-    router.replace(`${pathname}?${params.toString()}`);
-  };
-
-  const onNextPage = () => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", (page + 1).toString());
-    router.replace(`${pathname}?${params.toString()}`);
-  };
-
-  const onPreviousPage = () => {
-    const params = new URLSearchParams(searchParams);
-    if (page !== 1) params.set("page", (page - 1).toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
@@ -457,8 +396,10 @@ export default function WatchListTable({
   return (
     <>
       <Table
-        aria-label="Example table with custom cells, pagination and sorting"
+        isCompact
+        aria-label="Anime watch list table"
         isHeaderSticky
+        selectionMode="single"
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         sortDescriptor={sortDescriptor}
@@ -469,6 +410,9 @@ export default function WatchListTable({
             setSortDescriptor(value as Descriptor);
             onSortChange(value as Descriptor);
           }
+        }}
+        classNames={{
+          tr: "cursor-pointer hover:bg-primary-50",
         }}
       >
         <TableHeader columns={headerColumns}>
@@ -484,7 +428,7 @@ export default function WatchListTable({
         </TableHeader>
         <TableBody emptyContent={"No anime found"} items={watchList}>
           {(item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.id} href={`/info/${item.animeId}`}>
               {(columnKey) => (
                 <TableCell>
                   {renderCell({
@@ -497,45 +441,6 @@ export default function WatchListTable({
           )}
         </TableBody>
       </Table>
-      {imageModal && (
-        <ImageFullscreenModal
-          isOpen={isImageModalOpen}
-          onClose={onImageModalClose}
-          image={imageModal.image}
-          title={imageModal.title}
-        />
-      )}
     </>
-  );
-}
-
-function ImageFullscreenModal({
-  image,
-  isOpen,
-  onClose,
-  title,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  image: string;
-}) {
-  return (
-    <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
-      <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
-        <ModalBody>
-          <Image
-            src={image}
-            alt={title}
-            classNames={{
-              wrapper:
-                "w-full h-full mx-auto bg-blur-md flex items-center justify-center",
-              img: "object-cover min-w-full min-h-full",
-            }}
-          />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
   );
 }
