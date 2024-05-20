@@ -1,0 +1,1 @@
+ALTER TABLE "anime_user_status" RENAME COLUMN "watch_status" TO "status";

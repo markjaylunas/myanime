@@ -10,9 +10,10 @@ import {
   EpisodeInsert,
   episodeProgress,
   EpisodeProgressInsert,
+  WatchStatus,
 } from "@/db/schema";
 import { DEFAULT_PAGE_LIMIT } from "@/lib/constants";
-import { and, count, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, ilike, inArray, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function fetchEpisodeProgress({
@@ -45,27 +46,12 @@ export async function upsertEpisodeProgress({
   data: UpsertEpisodeProgressData;
   pathname: string;
 }) {
-  const animeInsert = db
-    .insert(anime)
-    .values(data.anime)
-    .onConflictDoUpdate({
-      target: anime.id,
-      set: {
-        image: data.anime.image,
-        updatedAt: new Date(),
-      },
-    });
+  const animeInsert = db.insert(anime).values(data.anime).onConflictDoNothing();
 
   const episodeInsert = db
     .insert(episode)
     .values(data.episode)
-    .onConflictDoUpdate({
-      target: episode.id,
-      set: {
-        image: data.anime.image,
-        updatedAt: new Date(),
-      },
-    });
+    .onConflictDoNothing();
 
   const episodeProgressInsert = db
     .insert(episodeProgress)
@@ -137,16 +123,24 @@ export async function fetchAllEpisodeProgress({
   };
 }
 
-export async function upsertWatchStatus(params: AnimeUserStatusInsert) {
+export async function upsertWatchStatus({
+  animeInsert,
+  data,
+}: {
+  animeInsert: AnimeInsert;
+  data: AnimeUserStatusInsert;
+}) {
+  await db.insert(anime).values(animeInsert).onConflictDoNothing();
+
   return await db
     .insert(animeUserStatus)
-    .values(params)
+    .values(data)
     .onConflictDoUpdate({
       target: animeUserStatus.id,
       set: {
-        status: params.status,
-        isLiked: params.isLiked,
-        isFavorite: params.isFavorite,
+        status: data.status,
+        isLiked: data.isLiked,
+        isFavorite: data.isFavorite,
         updatedAt: new Date(),
       },
     })
@@ -167,4 +161,72 @@ export async function fetchWatchStatus({
       sql`${animeUserStatus.userId} = ${userId} and ${animeUserStatus.animeId} = ${animeId}`
     )
     .limit(1);
+}
+
+export type FetchAllWatchStatusReturnType = {
+  watchList: {
+    id: string;
+    animeId: string;
+    animeTitle: string;
+    animeImage: string;
+    status: WatchStatus;
+    isLiked: boolean;
+    isFavorite: boolean;
+    updatedAt: Date;
+  }[];
+  totalCount: number;
+};
+
+export async function fetchAllWatchStatus({
+  userId,
+  limit = DEFAULT_PAGE_LIMIT,
+  page = 1,
+  status = [],
+  query,
+}: {
+  userId: string;
+  limit?: number;
+  page?: number;
+  status?: WatchStatus[];
+  query?: string;
+}): Promise<FetchAllWatchStatusReturnType> {
+  const filters = and(
+    eq(animeUserStatus.userId, userId),
+    status.length > 0 ? inArray(animeUserStatus.status, status) : undefined,
+    query ? ilike(anime.title, `%${query}%`) : undefined
+  );
+
+  const [watchListData, totalCount] = await Promise.all([
+    await db
+      .select()
+      .from(anime)
+      .innerJoin(animeUserStatus, eq(anime.id, animeUserStatus.animeId))
+      .where(filters)
+      .limit(limit)
+      .offset((page - 1) * limit)
+      .orderBy(desc(animeUserStatus.updatedAt)),
+
+    await db
+      .select({ count: count() })
+      .from(anime)
+      .innerJoin(animeUserStatus, eq(anime.id, animeUserStatus.animeId))
+      .where(filters),
+  ]);
+
+  const watchList: FetchAllWatchStatusReturnType["watchList"] =
+    watchListData.map((data) => ({
+      id: data.anime_user_status.id,
+      animeId: data.anime.id,
+      animeTitle: data.anime.title,
+      animeImage: data.anime.image,
+      status: data.anime_user_status.status,
+      isLiked: data.anime_user_status.isLiked,
+      isFavorite: data.anime_user_status.isFavorite,
+      updatedAt: data.anime_user_status.updatedAt,
+    }));
+
+  return {
+    watchList,
+    totalCount: totalCount[0]?.count || 0,
+  };
 }

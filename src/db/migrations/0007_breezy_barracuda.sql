@@ -1,0 +1,1 @@
+ALTER TYPE "watch_status" ADD VALUE 'PLAN_TO_WATCH';

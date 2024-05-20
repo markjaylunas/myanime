@@ -120,7 +120,7 @@ export const animeUserStatus = pgTable("anime_user_status", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: userIdRef,
   animeId: animeIdRef,
-  status: watchStatus("watch_status").default("WATCHING").notNull(),
+  status: watchStatus("status").default("WATCHING").notNull(),
   isLiked: boolean("is_liked").default(false).notNull(),
   isFavorite: boolean("is_favorite").default(false).notNull(),
   updatedAt,
