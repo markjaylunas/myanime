@@ -187,6 +187,7 @@ export default function WatchListTable({
               name={anime.animeTitle}
               classNames={{ name: "sr-only" }}
               onClick={() => openImageModal(anime)}
+              className="cursor-pointer"
             >
               {anime.animeTitle}
             </User>
