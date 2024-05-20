@@ -193,7 +193,7 @@ export default function WatchListTable({
           );
         case "animeTitle":
           return (
-            <p className="text-bold text-small capitalize text-wrap">
+            <p className="text-bold text-small capitalize text-wrap min-w-24">
               {anime.animeTitle}
             </p>
           );
@@ -338,7 +338,7 @@ export default function WatchListTable({
   const topContent = React.useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+        <div className="flex flex-col md:flex-row justify-between gap-3 ">
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
@@ -352,7 +352,7 @@ export default function WatchListTable({
           />
           <div className="flex gap-3">
             <Dropdown onClose={onStatusChange}>
-              <DropdownTrigger className="hidden sm:flex">
+              <DropdownTrigger>
                 <Button
                   endContent={<Icons.chevronDown className="text-small" />}
                   variant="flat"
@@ -381,7 +381,7 @@ export default function WatchListTable({
               </DropdownMenu>
             </Dropdown>
             <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
+              <DropdownTrigger>
                 <Button
                   endContent={<Icons.chevronDown className="text-small" />}
                   variant="flat"
@@ -440,35 +440,16 @@ export default function WatchListTable({
 
   const bottomContent = React.useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <Pagination
-          isCompact
-          showControls
-          showShadow
-          color="primary"
-          page={page}
-          total={pages}
-          onChange={onPageChange}
-        />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onPreviousPage}
-          >
-            Previous
-          </Button>
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onNextPage}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+      <Pagination
+        isCompact
+        showControls
+        showShadow
+        color="primary"
+        page={page}
+        total={pages}
+        onChange={onPageChange}
+        classNames={{ wrapper: "ml-auto" }}
+      />
     );
   }, [watchList.length, page, pages, hasSearchFilter]);
 
