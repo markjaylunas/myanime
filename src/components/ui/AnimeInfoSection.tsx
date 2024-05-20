@@ -87,6 +87,7 @@ export default function AnimeInfoSection({ info }: Props) {
               <ExpandDescription
                 className="mt-4"
                 description={`${info.description}`}
+                isHTML
               />
             </div>
           </div>

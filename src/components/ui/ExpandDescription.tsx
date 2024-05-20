@@ -2,18 +2,21 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { motion } from "framer-motion";
+import HTMLParse from "html-react-parser";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 
 type Props = React.HTMLProps<HTMLParagraphElement> & {
   maxChars?: number;
   description: string;
+  isHTML?: boolean;
 };
 
 export default function ExpandDescription({
   description,
   maxChars = 100,
   className,
+  isHTML = false,
   ...props
 }: Props) {
   const isTooShort = description.length <= maxChars || description.length < 50;
@@ -28,7 +31,7 @@ export default function ExpandDescription({
         )}
         {...props}
       >
-        {description}
+        {isHTML ? HTMLParse(description) : description}
       </p>
       {!isTooShort && (
         <Button
