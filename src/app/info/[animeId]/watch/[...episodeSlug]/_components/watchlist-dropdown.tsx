@@ -2,7 +2,7 @@
 
 import { upsertWatchStatus } from "@/actions/action";
 import { Icons } from "@/components/ui/Icons";
-import { AnimeUserStatus, WatchStatus } from "@/db/schema";
+import { AnimeInsert, AnimeUserStatus, WatchStatus } from "@/db/schema";
 import { DEFAULT_SIGNIN_PATH } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import {
@@ -21,9 +21,10 @@ type Status = WatchStatus | "null";
 
 type Props = {
   animeWatchStatus: AnimeUserStatus | null;
+  anime: AnimeInsert;
 };
 
-export default function WatchListDropdown({ animeWatchStatus }: Props) {
+export default function WatchListDropdown({ animeWatchStatus, anime }: Props) {
   const session = useSession();
   const userId = session?.data?.user?.id;
   const params = useParams<{ animeId: string }>();
@@ -60,10 +61,13 @@ export default function WatchListDropdown({ animeWatchStatus }: Props) {
     setIsLoading(true);
     const status = selected.values().next().value as WatchStatus;
     const upsertData = await upsertWatchStatus({
-      id: animeWatchStatus?.id || undefined,
-      status,
-      animeId,
-      userId,
+      animeInsert: anime,
+      data: {
+        id: animeWatchStatus?.id || undefined,
+        status,
+        animeId,
+        userId,
+      },
     });
     setUserWatchStatus(upsertData[0]);
     setIsLoading(false);

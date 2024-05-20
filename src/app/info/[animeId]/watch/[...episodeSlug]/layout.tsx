@@ -61,6 +61,12 @@ export default async function HomeLayout({
           animeWatchStatus={
             animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
           }
+          anime={{
+            id: animeId,
+            title: pickTitle(info.title),
+            image: info.image,
+            cover: info.cover || "",
+          }}
         />
       </section>
 
