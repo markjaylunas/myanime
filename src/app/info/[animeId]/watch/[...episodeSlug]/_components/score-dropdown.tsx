@@ -80,9 +80,13 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
         <Button
           isDisabled={isLoading}
           isIconOnly={selectedOptionValue <= 0}
-          className="px-1 bg-gradient-to-tr from-rose-500 to-primary-500 border-small border-white/50 shadow-primary-500/30 text-white"
+          className="px-0 bg-gradient-to-tr from-rose-500 to-primary-500 border-small border-white/50 shadow-primary-500/30 text-white"
         >
-          {selectedOptionValue >= 1 ? <Icons.startFill /> : <Icons.star />}
+          {selectedOptionValue >= 1 ? (
+            <Icons.startFill className="size-5" />
+          ) : (
+            <Icons.star className="size-5" />
+          )}
           <span className="ml-1">
             {selectedOptionValue > 0 ? selectedOptionValue : ""}
           </span>
