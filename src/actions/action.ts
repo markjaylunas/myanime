@@ -13,7 +13,7 @@ import {
   WatchStatus,
 } from "@/db/schema";
 import { DEFAULT_PAGE_LIMIT } from "@/lib/constants";
-import { and, count, desc, eq, ilike, inArray, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, inArray, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function fetchEpisodeProgress({
@@ -181,24 +181,44 @@ export type FetchAllWatchStatusReturnType = {
   totalCount: number;
 };
 
+export type FetchAllWatchStatusSort = "animeTitle" | "updatedAt" | "status";
+
 export async function fetchAllWatchStatus({
   userId,
   limit = DEFAULT_PAGE_LIMIT,
   page = 1,
   status = [],
   query,
+  sort,
+  direction = "ascending",
 }: {
   userId: string;
   limit?: number;
   page?: number;
   status?: WatchStatus[];
   query?: string;
+  sort?: FetchAllWatchStatusSort;
+  direction?: "ascending" | "descending";
 }): Promise<FetchAllWatchStatusReturnType> {
   const filters = and(
     eq(animeUserStatus.userId, userId),
     status.length > 0 ? inArray(animeUserStatus.status, status) : undefined,
     query ? ilike(anime.title, `%${query}%`) : undefined
   );
+
+  let orderBy = desc(animeUserStatus.updatedAt);
+  if (sort === "animeTitle")
+    orderBy = direction === "ascending" ? asc(anime.title) : desc(anime.title);
+  if (sort === "updatedAt")
+    orderBy =
+      direction === "ascending"
+        ? asc(animeUserStatus.updatedAt)
+        : desc(animeUserStatus.updatedAt);
+  if (sort === "status")
+    orderBy =
+      direction === "ascending"
+        ? asc(animeUserStatus.status)
+        : desc(animeUserStatus.status);
 
   const [watchListData, totalCount] = await Promise.all([
     db
@@ -208,7 +228,7 @@ export async function fetchAllWatchStatus({
       .where(filters)
       .limit(limit)
       .offset((page - 1) * limit)
-      .orderBy(desc(animeUserStatus.updatedAt)),
+      .orderBy(orderBy),
 
     db
       .select({ count: count() })

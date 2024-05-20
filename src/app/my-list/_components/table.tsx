@@ -27,6 +27,10 @@ import moment from "moment";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent, useCallback, useState } from "react";
 
+type Item = {
+  [key: string]: any;
+};
+
 type ColumnKey =
   | "animeId"
   | "animeTitle"
@@ -38,7 +42,7 @@ type ColumnKey =
   | "actions";
 
 const columns = [
-  { name: "Anime ID", uid: "animeId", sortable: true },
+  { name: "Anime ID", uid: "animeId" },
   { name: "Image", uid: "animeImage" },
   { name: "Title", uid: "animeTitle", sortable: true },
   { name: "Status", uid: "status", sortable: true },
@@ -234,6 +238,13 @@ export default function WatchListTable({
     },
     []
   );
+
+  const onSortChange = (descriptor: Descriptor) => {
+    params.set("sort", descriptor.column);
+    params.set("direction", descriptor.direction);
+    params.set("page", "1");
+    router.replace(`${pathname}?${params.toString()}`);
+  };
 
   const onNextPage = () => {
     params.set("page", (page + 1).toString());
@@ -441,7 +452,10 @@ export default function WatchListTable({
       topContent={topContent}
       topContentPlacement="outside"
       onSortChange={(value) => {
-        if (typeof value === "object") setSortDescriptor(value as Descriptor);
+        if (typeof value === "object") {
+          setSortDescriptor(value as Descriptor);
+          onSortChange(value as Descriptor);
+        }
       }}
     >
       <TableHeader columns={headerColumns}>

@@ -1,4 +1,4 @@
-import { fetchAllWatchStatus } from "@/actions/action";
+import { fetchAllWatchStatus, FetchAllWatchStatusSort } from "@/actions/action";
 import { auth } from "@/auth";
 import NotSignedIn from "@/components/ui/NotSignedIn";
 import { WatchStatus } from "@/db/schema";
@@ -20,6 +20,12 @@ export default async function MyListPage({
     typeof searchParams?.limit === "string"
       ? parseInt(searchParams?.limit) || 10
       : 10;
+  const sort =
+    typeof searchParams?.sort === "string" ? searchParams?.sort : "title";
+  const direction =
+    typeof searchParams?.direction === "string"
+      ? searchParams?.direction
+      : "descending";
 
   let statusListParams: string[];
   if (Array.isArray(searchParams?.status)) {
@@ -50,6 +56,8 @@ export default async function MyListPage({
     limit,
     status,
     query,
+    sort: sort as FetchAllWatchStatusSort,
+    direction: direction as "ascending" | "descending",
   });
 
   return (
