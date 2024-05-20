@@ -2,6 +2,7 @@
 
 import { FetchAllWatchStatusReturnType } from "@/actions/action";
 import { Icons } from "@/components/ui/Icons";
+import { WatchStatus } from "@/db/schema";
 import { toTitleCase } from "@/lib/utils";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { Button } from "@nextui-org/button";
@@ -67,7 +68,7 @@ type Anime = {
   animeId: string;
   animeTitle: string;
   animeImage: string;
-  status: "WATCHING" | "COMPLETED" | "ON_HOLD" | "DROPPED" | "PLAN_TO_WATCH";
+  status: WatchStatus;
   isLiked: boolean;
   score: number;
   updatedAt: Date;
@@ -78,6 +79,33 @@ type Descriptor = {
   column: ColumnKey;
   direction: "ascending" | "descending";
 };
+
+const getStatusColor = (
+  status: WatchStatus
+):
+  | "default"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger"
+  | undefined => {
+  switch (status) {
+    case "WATCHING":
+      return "primary";
+    case "COMPLETED":
+      return "success";
+    case "DROPPED":
+      return "default";
+    case "ON_HOLD":
+      return "secondary";
+    case "PLAN_TO_WATCH":
+      return "warning";
+    default:
+      return "danger";
+  }
+};
+
 export default function WatchListTable({
   watchListData,
   filters: { query, status, page, limit },
@@ -174,7 +202,7 @@ export default function WatchListTable({
           return (
             <Chip
               className="capitalize"
-              // color={}
+              color={getStatusColor(anime.status)}
               size="sm"
               variant="flat"
             >
