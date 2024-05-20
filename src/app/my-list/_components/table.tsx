@@ -193,19 +193,9 @@ export default function WatchListTable({
           );
         case "animeTitle":
           return (
-            <div className="flex flex-col">
-              <p className="text-bold text-small capitalize text-wrap">
-                {anime.animeTitle}
-              </p>
-
-              <p className="text-bold text-small capitalize">
-                {anime.isLiked ? "Liked" : ""}
-              </p>
-
-              <p className="text-bold text-small capitalize">
-                {anime.score ? "Favorite" : ""}
-              </p>
-            </div>
+            <p className="text-bold text-small capitalize text-wrap">
+              {anime.animeTitle}
+            </p>
           );
         case "status":
           return (
