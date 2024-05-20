@@ -132,7 +132,7 @@ export async function upsertWatchStatus({
 }) {
   await db.insert(anime).values(animeInsert).onConflictDoNothing();
 
-  return await db
+  const animeUserStatusData = await db
     .insert(animeUserStatus)
     .values(data)
     .onConflictDoUpdate({
@@ -145,6 +145,10 @@ export async function upsertWatchStatus({
       },
     })
     .returning();
+
+  revalidatePath("/my-list");
+
+  return animeUserStatusData;
 }
 
 export async function fetchWatchStatus({

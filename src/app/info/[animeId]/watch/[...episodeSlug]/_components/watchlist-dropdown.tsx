@@ -63,7 +63,7 @@ export default function WatchListDropdown({ animeWatchStatus, anime }: Props) {
     const upsertData = await upsertWatchStatus({
       animeInsert: anime,
       data: {
-        id: animeWatchStatus?.id || undefined,
+        id: userWatchStatus?.id || undefined,
         status,
         animeId,
         userId,

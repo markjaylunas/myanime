@@ -210,9 +210,12 @@ export default function WatchListTable({
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu>
-                  <DropdownItem>View</DropdownItem>
+                  <DropdownItem
+                    onPress={() => router.push(`/info/${anime.animeId}`)}
+                  >
+                    View
+                  </DropdownItem>
                   <DropdownItem>Edit</DropdownItem>
-                  <DropdownItem>Delete</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
