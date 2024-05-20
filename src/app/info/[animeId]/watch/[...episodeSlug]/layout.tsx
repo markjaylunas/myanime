@@ -7,6 +7,7 @@ import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
+import ScoreDropdown from "./_components/score-dropdown";
 import WatchListDropdown from "./_components/watchlist-dropdown";
 
 export default async function HomeLayout({
@@ -56,7 +57,18 @@ export default async function HomeLayout({
         </h2>
       </section>
 
-      <section className="flex justify-end px-4">
+      <section className="flex justify-between gap-2 px-4">
+        <ScoreDropdown
+          animeWatchStatus={
+            animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
+          }
+          anime={{
+            id: animeId,
+            title: pickTitle(info.title),
+            image: info.image,
+            cover: info.cover || "",
+          }}
+        />
         <WatchListDropdown
           animeWatchStatus={
             animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
