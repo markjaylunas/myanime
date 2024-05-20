@@ -122,7 +122,7 @@ export const animeUserStatus = pgTable("anime_user_status", {
   animeId: animeIdRef,
   status: watchStatus("status").default("WATCHING").notNull(),
   isLiked: boolean("is_liked").default(false).notNull(),
-  isFavorite: boolean("is_favorite").default(false).notNull(),
+  score: integer("score").default(0).notNull(),
   updatedAt,
   createdAt,
 });

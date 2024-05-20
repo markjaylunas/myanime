@@ -140,7 +140,7 @@ export async function upsertWatchStatus({
       set: {
         status: data.status,
         isLiked: data.isLiked,
-        isFavorite: data.isFavorite,
+        score: data.score,
         updatedAt: new Date(),
       },
     })
@@ -175,13 +175,24 @@ export type FetchAllWatchStatusReturnType = {
     animeImage: string;
     status: WatchStatus;
     isLiked: boolean;
-    isFavorite: boolean;
+    score: number;
     updatedAt: Date;
   }[];
   totalCount: number;
 };
 
-export type FetchAllWatchStatusSort = "animeTitle" | "updatedAt" | "status";
+export type FetchAllWatchStatusSort =
+  | "animeTitle"
+  | "updatedAt"
+  | "status"
+  | "score";
+
+type SortOptions = {
+  animeTitle: typeof anime.title;
+  status: typeof animeUserStatus.status;
+  score: typeof animeUserStatus.score;
+  updatedAt: typeof animeUserStatus.updatedAt;
+};
 
 export async function fetchAllWatchStatus({
   userId,
@@ -206,19 +217,16 @@ export async function fetchAllWatchStatus({
     query ? ilike(anime.title, `%${query}%`) : undefined
   );
 
-  let orderBy = desc(animeUserStatus.updatedAt);
-  if (sort === "animeTitle")
-    orderBy = direction === "ascending" ? asc(anime.title) : desc(anime.title);
-  if (sort === "updatedAt")
-    orderBy =
-      direction === "ascending"
-        ? asc(animeUserStatus.updatedAt)
-        : desc(animeUserStatus.updatedAt);
-  if (sort === "status")
-    orderBy =
-      direction === "ascending"
-        ? asc(animeUserStatus.status)
-        : desc(animeUserStatus.status);
+  const sortOptions: SortOptions = {
+    animeTitle: anime.title,
+    status: animeUserStatus.status,
+    score: animeUserStatus.score,
+    updatedAt: animeUserStatus.updatedAt,
+  };
+
+  const orderBy = sort ? sortOptions[sort] : animeUserStatus.updatedAt;
+  const directionOrder = direction === "ascending" ? asc : desc;
+  const sortQuery = directionOrder(orderBy);
 
   const [watchListData, totalCount] = await Promise.all([
     db
@@ -228,7 +236,7 @@ export async function fetchAllWatchStatus({
       .where(filters)
       .limit(limit)
       .offset((page - 1) * limit)
-      .orderBy(orderBy),
+      .orderBy(sortQuery),
 
     db
       .select({ count: count() })
@@ -245,7 +253,7 @@ export async function fetchAllWatchStatus({
       animeImage: data.anime.image,
       status: data.anime_user_status.status,
       isLiked: data.anime_user_status.isLiked,
-      isFavorite: data.anime_user_status.isFavorite,
+      score: data.anime_user_status.score,
       updatedAt: data.anime_user_status.updatedAt,
     }));
 

@@ -27,17 +27,13 @@ import moment from "moment";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent, useCallback, useState } from "react";
 
-type Item = {
-  [key: string]: any;
-};
-
 type ColumnKey =
   | "animeId"
   | "animeTitle"
   | "animeImage"
   | "status"
   | "isLiked"
-  | "isFavorite"
+  | "score"
   | "updatedAt"
   | "actions";
 
@@ -47,7 +43,7 @@ const columns = [
   { name: "Title", uid: "animeTitle", sortable: true },
   { name: "Status", uid: "status", sortable: true },
   { name: "Is Liked", uid: "isLiked" },
-  { name: "Is Favorite", uid: "isFavorite" },
+  { name: "Score", uid: "score", sortable: true },
   { name: "Updated At", uid: "updatedAt", sortable: true },
   { name: "Actions", uid: "actions" },
 ];
@@ -73,7 +69,7 @@ type Anime = {
   animeImage: string;
   status: "WATCHING" | "COMPLETED" | "ON_HOLD" | "DROPPED" | "PLAN_TO_WATCH";
   isLiked: boolean;
-  isFavorite: boolean;
+  score: number;
   updatedAt: Date;
   actions?: null;
 };
@@ -100,7 +96,6 @@ export default function WatchListTable({
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
   const { watchList, totalCount } = watchListData;
 
   const [filterValue, setFilterValue] = useState("");
@@ -171,7 +166,7 @@ export default function WatchListTable({
               </p>
 
               <p className="text-bold text-small capitalize">
-                {anime.isFavorite ? "Favorite" : ""}
+                {anime.score ? "Favorite" : ""}
               </p>
             </div>
           );
@@ -179,7 +174,7 @@ export default function WatchListTable({
           return (
             <Chip
               className="capitalize"
-              // color={statusWatchMap[user.status]}
+              // color={}
               size="sm"
               variant="flat"
             >
@@ -192,18 +187,21 @@ export default function WatchListTable({
             <p className="text-bold text-small text-wrap">{anime.animeId}</p>
           );
 
-        case "isFavorite":
-          return anime.isFavorite ? (
-            <Icons.startFill className="text-primary-500" />
+        case "score":
+          return anime.score ? (
+            <div className="flex gap-1">
+              <Icons.startFill className="text-primary-500" />
+              <p>{anime.score || 10}</p>
+            </div>
           ) : (
             <Icons.star className="text-primary-500" />
           );
 
         case "isLiked":
           return anime.isLiked ? (
-            <Icons.heartFill className="text-primary-500" />
+            <Icons.heartFill className="text-rose-500" />
           ) : (
-            <Icons.heart className="text-primary-500" />
+            <Icons.heart className="text-rose-500" />
           );
 
         case "updatedAt":
@@ -240,6 +238,7 @@ export default function WatchListTable({
   );
 
   const onSortChange = (descriptor: Descriptor) => {
+    const params = new URLSearchParams(searchParams);
     params.set("sort", descriptor.column);
     params.set("direction", descriptor.direction);
     params.set("page", "1");
@@ -247,27 +246,32 @@ export default function WatchListTable({
   };
 
   const onNextPage = () => {
+    const params = new URLSearchParams(searchParams);
     params.set("page", (page + 1).toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onPreviousPage = () => {
+    const params = new URLSearchParams(searchParams);
     if (page !== 1) params.set("page", (page - 1).toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onPageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onlimitChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const params = new URLSearchParams(searchParams);
     params.set("limit", e.target.value);
     params.set("page", "1");
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onSearchChange = (value: string) => {
+    const params = new URLSearchParams(searchParams);
     if (value) {
       params.set("query", value);
       params.set("page", "1");
@@ -278,12 +282,14 @@ export default function WatchListTable({
   };
 
   const onClear = () => {
+    const params = new URLSearchParams(searchParams);
     params.delete("query");
     params.set("page", "1");
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onStatusChange = () => {
+    const params = new URLSearchParams(searchParams);
     const statusList = Array.from(statusFilter);
     params.delete("status");
     statusList.forEach((status) => params.append("status", status));
@@ -292,6 +298,7 @@ export default function WatchListTable({
   };
 
   const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term);
     } else {
@@ -469,7 +476,7 @@ export default function WatchListTable({
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No watchList found"} items={watchList}>
+      <TableBody emptyContent={"No anime found"} items={watchList}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
