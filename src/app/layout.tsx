@@ -7,8 +7,10 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { Providers } from "./providers";
+
 export const metadata: Metadata = {
   title: `${siteConfig.name} | Makje`,
   description: siteConfig.description,
@@ -29,6 +31,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen">
+        <NextTopLoader showSpinner={false} height={5} />
         <SessionProvider session={session}>
           <Providers>
             {authModal}
