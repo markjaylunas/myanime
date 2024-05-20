@@ -201,7 +201,7 @@ export async function fetchAllWatchStatus({
   );
 
   const [watchListData, totalCount] = await Promise.all([
-    await db
+    db
       .select()
       .from(anime)
       .innerJoin(animeUserStatus, eq(anime.id, animeUserStatus.animeId))
@@ -210,7 +210,7 @@ export async function fetchAllWatchStatus({
       .offset((page - 1) * limit)
       .orderBy(desc(animeUserStatus.updatedAt)),
 
-    await db
+    db
       .select({ count: count() })
       .from(anime)
       .innerJoin(animeUserStatus, eq(anime.id, animeUserStatus.animeId))

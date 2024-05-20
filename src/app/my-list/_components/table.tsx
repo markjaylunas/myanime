@@ -121,7 +121,7 @@ export default function WatchListTable({
     );
   }, [visibleColumns]);
 
-  const pages = Math.ceil(watchList.length / limit);
+  const pages = Math.ceil(totalCount / limit);
 
   // const sortedItems = React.useMemo(() => {
   //   return [...watchList].sort((a: Anime, b: Anime) => {
@@ -236,14 +236,17 @@ export default function WatchListTable({
   );
 
   const onNextPage = () => {
-    const params = new URLSearchParams(searchParams);
     params.set("page", (page + 1).toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   const onPreviousPage = () => {
-    const params = new URLSearchParams(searchParams);
     if (page !== 1) params.set("page", (page - 1).toString());
+    router.replace(`${pathname}?${params.toString()}`);
+  };
+
+  const onPageChange = (page: number) => {
+    params.set("page", page.toString());
     router.replace(`${pathname}?${params.toString()}`);
   };
 
@@ -367,12 +370,13 @@ export default function WatchListTable({
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {watchList.length} anime
+            Total {totalCount} anime
           </span>
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
             <select
               className="bg-transparent outline-none text-default-400 text-small"
+              defaultValue={limit}
               onChange={onlimitChange}
             >
               <option value="5">5</option>
@@ -403,6 +407,7 @@ export default function WatchListTable({
           color="primary"
           page={page}
           total={pages}
+          onChange={onPageChange}
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
           <Button
