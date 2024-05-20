@@ -189,10 +189,18 @@ export default function WatchListTable({
           );
 
         case "isFavorite":
-          return <Icons.startFill className="text-primary-500" />;
+          return anime.isFavorite ? (
+            <Icons.startFill className="text-primary-500" />
+          ) : (
+            <Icons.star className="text-primary-500" />
+          );
 
         case "isLiked":
-          return <Icons.heartFill className="text-primary-500" />;
+          return anime.isLiked ? (
+            <Icons.heartFill className="text-primary-500" />
+          ) : (
+            <Icons.heart className="text-primary-500" />
+          );
 
         case "updatedAt":
           return (
