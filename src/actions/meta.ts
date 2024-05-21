@@ -1,6 +1,6 @@
 "use server";
 
-import { animeAPIQuery } from "@/lib/consumet-api";
+import { AnimeAdvancedSearchParams, animeAPIQuery } from "@/lib/consumet-api";
 import {
   animeDataSchema,
   animeSearchDataSchema,
@@ -10,20 +10,9 @@ import {
 } from "@/lib/meta-validations";
 import { AnimeProviders } from "@/lib/types";
 
-export async function searchAnime({
-  query,
-  page = 1,
-  signal,
-}: {
-  query: string;
-  page?: number;
-  signal?: AbortSignal;
-}) {
+export async function searchAnime(params: AnimeAdvancedSearchParams) {
   try {
-    const response = await fetch(
-      animeAPIQuery.meta.anilist.search({ query, page }),
-      { signal }
-    );
+    const response = await fetch(animeAPIQuery.meta.anilist.search(params));
 
     const data = await response.json();
 
