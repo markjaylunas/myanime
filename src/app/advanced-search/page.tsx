@@ -5,11 +5,6 @@ import SimplePagination from "@/components/ui/SimplePagination";
 import { SearchParams } from "@/lib/types";
 import NoQueryDefaultAnime from "./_components/NoQueryDefaultAnime";
 
-type Props = {
-  query: string;
-  page: number;
-};
-
 export default async function SearchAnimeResultsPage({
   searchParams,
 }: {
