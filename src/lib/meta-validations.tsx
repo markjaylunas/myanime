@@ -109,7 +109,7 @@ export const animeSearchSchema = z.object({
   totalEpisodes: z.number().nullable(),
   currentEpisode: z.number().nullable(),
   countryOfOrigin: z.string(),
-  description: z.string(),
+  description: z.string().optional().nullable(),
   genres: z.array(z.string()),
   rating: z.number().nullable(),
   color: z.string().nullable().optional(),

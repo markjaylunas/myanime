@@ -1,6 +1,6 @@
 "use server";
 
-import { AnimeAdvancedSearchParams, animeAPIQuery } from "@/lib/consumet-api";
+import { animeAPIQuery } from "@/lib/consumet-api";
 import {
   animeDataSchema,
   animeSearchDataSchema,
@@ -8,7 +8,7 @@ import {
   episodeDataSchema,
   episodeSourceDataSchema,
 } from "@/lib/meta-validations";
-import { AnimeProviders } from "@/lib/types";
+import { AnimeAdvancedSearchParams, AnimeProviders } from "@/lib/types";
 
 export async function searchAnime(params: AnimeAdvancedSearchParams) {
   try {

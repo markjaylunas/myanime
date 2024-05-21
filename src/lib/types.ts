@@ -1,6 +1,14 @@
 import { Icons } from "@/components/ui/Icons";
 import { z } from "zod";
 import {
+  ASFormatArray,
+  ASGenresArray,
+  ASSeasonArray,
+  ASSortArray,
+  ASStatusArray,
+  ASTypeArray,
+} from "./constants";
+import {
   animeInfoListSchema,
   animeInfoSchema,
   episodeSchema,
@@ -49,3 +57,24 @@ export type Episode = z.infer<typeof episodeSchema>;
 export type AnimeProviders = "gogoanime" | "zoro";
 
 export type OAuthProvider = "google" | "github";
+
+export type AnimeAdvancedSearchParams = {
+  query?: string;
+  page?: number;
+  perPage?: number;
+  type?: ASType;
+  genres?: ASGenres[];
+  id?: string;
+  format?: ASFormat;
+  sort?: ASSort[];
+  status?: ASStatus;
+  year?: number;
+  season?: ASSeason;
+};
+
+export type ASType = (typeof ASTypeArray)[number];
+export type ASSeason = (typeof ASSeasonArray)[number];
+export type ASFormat = (typeof ASFormatArray)[number];
+export type ASSort = (typeof ASSortArray)[number];
+export type ASGenres = (typeof ASGenresArray)[number];
+export type ASStatus = (typeof ASStatusArray)[number];
