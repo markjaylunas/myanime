@@ -5,9 +5,5 @@ export default async function Header() {
   const session = await auth();
   const user = session?.user ?? null;
 
-  return (
-    <header>
-      <Navbar user={user} />
-    </header>
-  );
+  return <Navbar user={user} />;
 }

@@ -34,6 +34,7 @@ export default function Navbar({ user }: Props) {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       maxWidth="2xl"
+      shouldHideOnScroll
     >
       <NavbarContent>
         <NavbarBrand>
