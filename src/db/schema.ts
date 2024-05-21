@@ -7,6 +7,7 @@ import {
   real,
   text,
   timestamp,
+  unique,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -116,16 +117,25 @@ export const watchStatus = pgEnum("watch_status", [
   "PLAN_TO_WATCH",
 ]);
 
-export const animeUserStatus = pgTable("anime_user_status", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: userIdRef,
-  animeId: animeIdRef,
-  status: watchStatus("status").default("WATCHING").notNull(),
-  isLiked: boolean("is_liked").default(false).notNull(),
-  score: integer("score").default(0).notNull(),
-  updatedAt,
-  createdAt,
-});
+export const animeUserStatus = pgTable(
+  "anime_user_status",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: userIdRef,
+    animeId: animeIdRef,
+    status: watchStatus("status").default("WATCHING").notNull(),
+    isLiked: boolean("is_liked").default(false).notNull(),
+    score: integer("score").default(0).notNull(),
+    updatedAt,
+    createdAt,
+  },
+  (t) => ({
+    uniqueAnimeUserStatus: unique("unique_anime_user_status").on(
+      t.userId,
+      t.animeId
+    ),
+  })
+);
 
 export type AnimeInsert = typeof anime.$inferInsert;
 export type Anime = typeof anime.$inferSelect;

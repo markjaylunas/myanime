@@ -136,7 +136,7 @@ export async function upsertWatchStatus({
     .insert(animeUserStatus)
     .values(data)
     .onConflictDoUpdate({
-      target: animeUserStatus.id,
+      target: [animeUserStatus.animeId, animeUserStatus.userId],
       set: {
         status: data.status,
         isLiked: data.isLiked,

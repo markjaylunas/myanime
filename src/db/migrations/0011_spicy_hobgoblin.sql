@@ -1,0 +1,1 @@
+ALTER TABLE "anime_user_status" ADD CONSTRAINT "unique_anime_user_status" UNIQUE("user_id","anime_id");
