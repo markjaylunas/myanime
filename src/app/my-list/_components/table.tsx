@@ -278,7 +278,7 @@ export default function WatchListTable({
   const topContent = React.useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col md:flex-row justify-between gap-3 ">
+        <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between gap-3 ">
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
