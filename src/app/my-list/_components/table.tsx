@@ -34,7 +34,7 @@ type ColumnKey =
   | "animeTitle"
   | "animeImage"
   | "status"
-  | "isLiked"
+  // | "isLiked"
   | "score"
   | "updatedAt";
 
@@ -43,7 +43,7 @@ const columns = [
   { name: "Image", uid: "animeImage" },
   { name: "Title", uid: "animeTitle", sortable: true },
   { name: "Status", uid: "status", sortable: true },
-  { name: "Is Liked", uid: "isLiked" },
+  // { name: "Is Liked", uid: "isLiked" },
   { name: "Score", uid: "score", sortable: true },
   { name: "Updated At", uid: "updatedAt", sortable: true },
 ];
@@ -196,12 +196,12 @@ export default function WatchListTable({
             <Icons.star className="text-primary-500" />
           );
 
-        case "isLiked":
-          return anime.isLiked ? (
-            <Icons.heartFill className="text-rose-500" />
-          ) : (
-            <Icons.heart className="text-rose-500" />
-          );
+        // case "isLiked":
+        //   return anime.isLiked ? (
+        //     <Icons.heartFill className="text-rose-500" />
+        //   ) : (
+        //     <Icons.heart className="text-rose-500" />
+        //   );
 
         case "updatedAt":
           return (
