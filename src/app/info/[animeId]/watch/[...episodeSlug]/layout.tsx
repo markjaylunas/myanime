@@ -2,6 +2,7 @@ import { fetchWatchStatus } from "@/actions/action";
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
 import { auth } from "@/auth";
 import EpisodeList from "@/components/ui/EpisodeList";
+import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
 import { numberFormatter, pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
@@ -81,6 +82,13 @@ export default async function HomeLayout({
           }}
         />
       </section>
+
+      {info.nextAiringEpisode && (
+        <NextAiringEpisode
+          airingTime={info.nextAiringEpisode.airingTime}
+          episode={info.nextAiringEpisode.episode}
+        />
+      )}
 
       <section className="px-4 md:px-0 mt-8 flex justify-center">
         {episodeList && hasEpisode ? (

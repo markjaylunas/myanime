@@ -38,7 +38,12 @@ export default function AnimeInfoSection({ info }: Props) {
                   {title}
                 </h1>
                 <h2 className="text-xs text-gray-400">
-                  {Object.values(info.title).filter(Boolean).join(" | ")}
+                  {Array.from(
+                    new Set([
+                      ...Object.values(info.title).filter(Boolean),
+                      ...info.synonyms,
+                    ])
+                  ).join(" | ")}
                 </h2>
                 <div className="flex flex-col mt-4 gap-2">
                   <div className="flex flex-wrap max-w-md gap-2 mt-4">

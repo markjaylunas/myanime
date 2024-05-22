@@ -1,6 +1,7 @@
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
 import { Icons } from "@/components/ui/Icons";
+import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
 import { pickTitle } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
@@ -45,7 +46,7 @@ export default async function InfoPage({
       />
 
       {watchLink && (
-        <div className="px-4 md:px-8">
+        <section className="px-2 md:px-8">
           <Button
             as={NextLink}
             href={watchLink}
@@ -57,10 +58,19 @@ export default async function InfoPage({
           >
             Watch Now
           </Button>
-        </div>
+        </section>
       )}
 
-      <section className="px-3 md:px-0 max-w-6xl mx-auto">
+      {info.nextAiringEpisode && (
+        <section className="px-2 md:px-8">
+          <NextAiringEpisode
+            airingTime={info.nextAiringEpisode.airingTime}
+            episode={info.nextAiringEpisode.episode}
+          />
+        </section>
+      )}
+
+      <section className=" max-w-6xl mx-auto">
         <AnimeInfoSection info={info} />
       </section>
     </main>
