@@ -79,17 +79,19 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
       <DropdownTrigger>
         <Button
           isDisabled={isLoading}
-          isIconOnly={selectedOptionValue <= 0}
-          className="px-0 bg-gradient-to-tr from-rose-500 to-primary-500 border-small border-white/50 shadow-primary-500/30 text-white"
+          className="bg-gradient-to-tr from-rose-500 to-primary-500 border-small border-white/50 shadow-primary-500/30 text-white"
         >
           {selectedOptionValue >= 1 ? (
-            <Icons.startFill className="size-5" />
+            <>
+              <Icons.startFill className="size-5" />
+              <span className="ml-1">{selectedOptionValue}</span>
+            </>
           ) : (
-            <Icons.star className="size-5" />
+            <>
+              <Icons.star className="size-5" />
+              <span className="ml-1">Rate</span>
+            </>
           )}
-          <span className="ml-1">
-            {selectedOptionValue > 0 ? selectedOptionValue : ""}
-          </span>
         </Button>
       </DropdownTrigger>
       <DropdownMenu
@@ -107,7 +109,7 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
         {Object.keys(labelsMap)
           .slice(1)
           .map((key) => (
-            <DropdownItem key={key} color="secondary">
+            <DropdownItem key={key.toString()} color="secondary">
               {labelsMap[key as string]}
             </DropdownItem>
           ))}
