@@ -4,6 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
+import moment from "moment";
 import NextLink from "next/link";
 import { ReactNode } from "react";
 import ExpandDescription from "./ExpandDescription";
@@ -47,6 +48,8 @@ export default function AnimeInfoSection({ info }: Props) {
                       {info.totalEpisodes}
                     </DetailChip>
 
+                    <DetailChip label="Duration">{info.duration}</DetailChip>
+
                     <DetailChip label="Released">{info.releaseDate}</DetailChip>
 
                     <DetailChip label="Type">{info.type}</DetailChip>
@@ -64,7 +67,25 @@ export default function AnimeInfoSection({ info }: Props) {
                     <DetailChip label="Popularity">
                       {info.popularity}
                     </DetailChip>
+
+                    <DetailChip label="Country of Origin">
+                      {info.countryOfOrigin}
+                    </DetailChip>
                   </div>
+
+                  <DetailChip label="Start Date">
+                    {moment(
+                      `${info.startDate.year}-${info.startDate.month}-${info.startDate.month}`
+                    ).format("MMM Do, YYYY")}
+                  </DetailChip>
+
+                  <DetailChip label="End Date">
+                    {info.endDate.year
+                      ? moment(
+                          `${info.endDate.year}-${info.endDate.month}-${info.endDate.month}`
+                        ).format("MMM Do, YYYY")
+                      : "Ongoing"}
+                  </DetailChip>
 
                   {info.genres && (
                     <div className="flex flex-wrap gap-2 mt-4">
