@@ -1,8 +1,11 @@
 import { fetchWatchStatus } from "@/actions/action";
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
 import { auth } from "@/auth";
+import AnimeList from "@/components/anime-cards/AnimeList";
 import EpisodeList from "@/components/ui/EpisodeList";
+import Heading from "@/components/ui/Heading";
 import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
+import { AnimeSortedSchema } from "@/lib/meta-validations";
 import { numberFormatter, pickTitle } from "@/lib/utils";
 import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
@@ -39,6 +42,18 @@ export default async function HomeLayout({
     episodeNumber: episode.number,
   }));
 
+  const recommendationData = info.recommendations || [];
+  const animeList: AnimeSortedSchema[] = recommendationData.map((anime) => ({
+    id: `${anime.id}`,
+    title: anime.title,
+    image: anime.image,
+    cover: anime.cover || "",
+    status: anime.status,
+    episodes: anime.episodes,
+    rating: anime.rating,
+    type: anime.type,
+  }));
+
   const hasEpisode = info.totalEpisodes;
   const title = pickTitle(info.title);
   const episode = episodeListData?.find((episode) => episode.id === episodeId);
@@ -46,7 +61,7 @@ export default async function HomeLayout({
     <main className="container max-w-5xl mx-auto min-h-screen pb-8  p-0 space-y-4">
       {children}
 
-      <section className="px-4">
+      <section className="px-4 md:px-0">
         <h2 className="text-center text-2xl text-wrap font-semibold  text-primary">
           {title}
         </h2>
@@ -58,7 +73,7 @@ export default async function HomeLayout({
         </h2>
       </section>
 
-      <section className="flex justify-between gap-2 px-4">
+      <section className="flex justify-between gap-2 px-4 md:px-0">
         <ScoreDropdown
           animeWatchStatus={
             animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
@@ -83,16 +98,32 @@ export default async function HomeLayout({
         />
       </section>
 
-      {info.nextAiringEpisode && (
-        <NextAiringEpisode
-          airingTime={info.nextAiringEpisode.airingTime}
-          episode={info.nextAiringEpisode.episode}
-        />
-      )}
+      <section className="px-4 md:px-0 mt-8 ">
+        {info.nextAiringEpisode && (
+          <NextAiringEpisode
+            airingTime={info.nextAiringEpisode.airingTime}
+            episode={info.nextAiringEpisode.episode}
+          />
+        )}
+      </section>
 
       <section className="px-4 md:px-0 mt-8 flex justify-center">
         {episodeList && hasEpisode ? (
           <EpisodeList episodeList={episodeList} />
+        ) : (
+          <Chip size="lg" variant="bordered" color="warning">
+            No episodes available yet!
+          </Chip>
+        )}
+      </section>
+
+      <Spacer y={12} />
+
+      <section className="px-4 md:px-0 mt-8 space-y-4">
+        <Heading>Recommendations</Heading>
+
+        {episodeList && hasEpisode ? (
+          <AnimeList animeList={animeList} />
         ) : (
           <Chip size="lg" variant="bordered" color="warning">
             No episodes available yet!

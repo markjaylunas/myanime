@@ -12,7 +12,7 @@ export default function AnimeList({
   isRanked = false,
 }: AnimeListProps) {
   return (
-    <ul className="grid grid-cols-2 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 gap-y-6">
+    <ul className="grid grid-cols-2 xs:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
       {animeList.map((anime, index) => (
         <AnimeCardMotion isStaggered index={index} key={`${anime.id}-${index}`}>
           <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
