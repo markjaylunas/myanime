@@ -37,14 +37,6 @@ export default function UserAvatar({ user }: Props) {
         </DropdownSection>
         <DropdownSection>
           <DropdownItem
-            as={NextLink}
-            href="/setting"
-            startContent={<Icons.setting className="size-4" />}
-            key="settings"
-          >
-            My Settings
-          </DropdownItem>
-          <DropdownItem
             key="theme toggle"
             onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
             startContent={
