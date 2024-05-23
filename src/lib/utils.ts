@@ -51,3 +51,17 @@ export function secondsToHms(time: number): string {
     return moment.utc(time * 1000).format("HH:mm:ss");
   }
 }
+
+export function formatDescription(description: string) {
+  // Replace "__" with bold HTML tags
+  let formatted = description.replace(/__(.*?)__/g, "<b>$1</b>");
+
+  // Replace "\n" with line break HTML tags
+  formatted = formatted.replace(/\n/g, "<br/>");
+
+  // Replace ~! and !~ with regular
+  formatted = formatted.replace(/~!/g, "");
+  formatted = formatted.replace(/!~/g, "");
+
+  return formatted;
+}
