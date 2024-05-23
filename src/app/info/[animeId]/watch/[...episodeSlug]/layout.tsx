@@ -4,11 +4,14 @@ import { auth } from "@/auth";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import EpisodeList from "@/components/ui/EpisodeList";
 import Heading from "@/components/ui/Heading";
+import { Icons } from "@/components/ui/Icons";
 import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
 import { AnimeSortedSchema } from "@/lib/meta-validations";
 import { numberFormatter, pickTitle } from "@/lib/utils";
+import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 import { Spacer } from "@nextui-org/spacer";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 import ScoreDropdown from "./_components/score-dropdown";
@@ -73,29 +76,39 @@ export default async function HomeLayout({
         </h2>
       </section>
 
-      <section className="flex justify-between gap-2 px-4 md:px-0">
-        <ScoreDropdown
-          animeWatchStatus={
-            animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
-          }
-          anime={{
-            id: animeId,
-            title: pickTitle(info.title),
-            image: info.image,
-            cover: info.cover || "",
-          }}
-        />
-        <WatchListDropdown
-          animeWatchStatus={
-            animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
-          }
-          anime={{
-            id: animeId,
-            title: pickTitle(info.title),
-            image: info.image,
-            cover: info.cover || "",
-          }}
-        />
+      <section className="flex flex-wrap justify-between gap-2 px-4 md:px-0">
+        <Button
+          as={NextLink}
+          href={`/info/${info.id}`}
+          startContent={<Icons.information />}
+        >
+          More Info
+        </Button>
+
+        <div className="flex gap-4 flex-wrap">
+          <ScoreDropdown
+            animeWatchStatus={
+              animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
+            }
+            anime={{
+              id: animeId,
+              title: pickTitle(info.title),
+              image: info.image,
+              cover: info.cover || "",
+            }}
+          />
+          <WatchListDropdown
+            animeWatchStatus={
+              animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
+            }
+            anime={{
+              id: animeId,
+              title: pickTitle(info.title),
+              image: info.image,
+              cover: info.cover || "",
+            }}
+          />
+        </div>
       </section>
 
       <section className="px-4 md:px-0 mt-8 ">
