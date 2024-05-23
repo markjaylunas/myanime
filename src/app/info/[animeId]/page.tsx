@@ -1,7 +1,10 @@
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
+import AnimeList from "@/components/anime-cards/AnimeList";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
+import Heading from "@/components/ui/Heading";
 import { Icons } from "@/components/ui/Icons";
 import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
+import { AnimeSortedSchema } from "@/lib/meta-validations";
 import { pickTitle } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
@@ -29,6 +32,18 @@ export default async function InfoPage({
     episodeNumber: episode.number,
   }));
 
+  const relationData = info.relations || [];
+  const animeList: AnimeSortedSchema[] = relationData.map((anime) => ({
+    id: `${anime.id}`,
+    title: anime.title,
+    image: anime.image,
+    cover: anime.cover || "",
+    status: anime.status,
+    episodes: anime.episodes,
+    rating: anime.rating,
+    type: anime.type,
+  }));
+
   const title = pickTitle(info.title);
 
   const episode = episodeList[0];
@@ -38,7 +53,7 @@ export default async function InfoPage({
     : null;
 
   return (
-    <main className="space-y-4">
+    <main className="space-y-4 mb-10">
       <InfoHero
         title={title}
         image={info.image || info.cover || ""}
@@ -46,7 +61,7 @@ export default async function InfoPage({
       />
 
       {watchLink && (
-        <section className="px-2 md:px-8">
+        <section className="px-4">
           <Button
             as={NextLink}
             href={watchLink}
@@ -62,7 +77,7 @@ export default async function InfoPage({
       )}
 
       {info.nextAiringEpisode && (
-        <section className="px-2 md:px-8">
+        <section className="px-4">
           <NextAiringEpisode
             airingTime={info.nextAiringEpisode.airingTime}
             episode={info.nextAiringEpisode.episode}
@@ -70,8 +85,14 @@ export default async function InfoPage({
         </section>
       )}
 
-      <section className=" max-w-6xl mx-auto">
+      <section className="px-0">
         <AnimeInfoSection info={info} />
+      </section>
+
+      <section className="px-4 space-y-4">
+        <Heading>Related Anime</Heading>
+
+        <AnimeList animeList={animeList} />
       </section>
     </main>
   );
