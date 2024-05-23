@@ -2,6 +2,7 @@
 
 import { animeAPIQuery } from "@/lib/consumet-api";
 import {
+  animeCharacterSchema,
   animeDataSchema,
   animeSearchDataSchema,
   animeSortedDataSchema,
@@ -264,6 +265,33 @@ export async function fetchGenreAnimeData({
     const data = await response.json();
 
     const parsed = animeSortedDataSchema.safeParse(data);
+
+    if (!parsed.success) {
+      console.error(parsed.error.toString());
+      return;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function fetchCharacterData({
+  characterId,
+}: {
+  characterId: string;
+}) {
+  try {
+    const response = await fetch(
+      animeAPIQuery.meta.anilist.character({ id: characterId }),
+      { next: { tags: [`character_${characterId}`], revalidate: 3600 } }
+    );
+
+    const data = await response.json();
+
+    const parsed = animeCharacterSchema.safeParse(data);
 
     if (!parsed.success) {
       console.error(parsed.error.toString());

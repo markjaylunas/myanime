@@ -99,8 +99,8 @@ export const animeAPIQuery = {
         provider?: AnimeProviders;
       }) => createURL(anilistBase, `recent-episodes`, params),
 
-      characters: ({ id, ...params }: { id: string }) =>
-        createURL(anilistBase, `characters/${id}`, params),
+      character: ({ id, ...params }: { id: string }) =>
+        createURL(anilistBase, `character/${id}`, params),
 
       genre: (params: { genres: string[]; page?: number; perPage?: number }) =>
         createURL(anilistBase, `genre`, params),
