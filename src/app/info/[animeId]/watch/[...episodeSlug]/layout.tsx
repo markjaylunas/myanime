@@ -86,7 +86,7 @@ export default async function HomeLayout({
           More Info
         </Button>
 
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 flex-wrap w-full justify-between">
           <ScoreDropdown
             animeWatchStatus={
               animeWatchStatus.length > 0 ? animeWatchStatus[0] : null
