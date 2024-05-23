@@ -10,7 +10,6 @@ import {
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
-import NextLink from "next/link";
 import { Icons } from "./Icons";
 
 type Props = {
