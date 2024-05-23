@@ -1,4 +1,5 @@
 import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
+import AnimeCharacterList from "@/components/anime-cards/AnimeCharacterList";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
 import Heading from "@/components/ui/Heading";
@@ -53,7 +54,7 @@ export default async function InfoPage({
     : null;
 
   return (
-    <main className="space-y-4 mb-10">
+    <main className="space-y-8 mb-10">
       <InfoHero
         title={title}
         image={info.image || info.cover || ""}
@@ -87,6 +88,11 @@ export default async function InfoPage({
 
       <section className="px-0">
         <AnimeInfoSection info={info} />
+      </section>
+
+      <section className="px-4 space-y-4">
+        <Heading>Characters</Heading>
+        <AnimeCharacterList characterList={info.characters} />
       </section>
 
       <section className="px-4 space-y-4">
