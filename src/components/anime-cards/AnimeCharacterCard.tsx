@@ -19,7 +19,7 @@ export default function AnimeCharacterCard({ character }: Props) {
     >
       <CardBody className="flex flex-row gap-4 justify-between">
         <User
-          name={character.name.full}
+          name={character.name.userPreferred}
           description={character.role}
           avatarProps={{
             src: character.image,
