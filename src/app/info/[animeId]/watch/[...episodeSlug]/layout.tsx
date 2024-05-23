@@ -133,7 +133,7 @@ export default async function HomeLayout({
       <Spacer y={12} />
 
       <section className="px-4 md:px-0 mt-8 space-y-4">
-        <Heading>Recommendations</Heading>
+        <Heading>Recommended For You</Heading>
 
         {episodeList && hasEpisode ? (
           <AnimeList animeList={animeList} />
