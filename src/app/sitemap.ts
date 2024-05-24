@@ -8,7 +8,7 @@ export default async function sitemap() {
     "/about",
     "/sign-in",
     "/advanced-search",
-    "/character/",
+    "/character/*",
     "/genre/*",
     "/info/*",
     "/sitemap.xml",

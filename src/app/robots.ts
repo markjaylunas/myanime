@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
           "/about",
           "/sign-in",
           "/advanced-search",
-          "/character/",
+          "/character/*",
           "/genre/*",
           "/info/*",
           "/sitemap.xml",
