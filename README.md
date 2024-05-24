@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Anime
 
-## Getting Started
+Welcome to My Anime, a premier platform for streaming a diverse collection of anime content. We offer high-quality, uninterrupted viewing experiences to anime enthusiasts around the globe.
 
-First, run the development server:
+## Live Website
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visit our official website at [https://myanime.makje.com](https://myanime.makje.com) to start streaming your favorite anime.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Source
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project uses the Consumet API for fetching anime data. You can find the API source code at [https://github.com/consumet/api.consumet.org](https://github.com/consumet/api.consumet.org).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- **Home**: Browse the latest and most popular anime series.
+- **Watch Page**: Stream your favorite anime in high quality. Our player supports various features like subtitles, different video qualities, and a full-screen mode for an immersive viewing experience.
+- **Advanced Search**: Find your favorite anime with our advanced search options.
+- **Genres**: Explore anime by genres like Action, Adventure, Comedy, and more.
+- **My List**: Keep track of your favorite anime series in your personal list.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To get started with the project, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository: `git clone https://github.com/markjaylunas/my-anime.git`
+2. Install the dependencies: `npm install`
+3. Start the development server: `npm run dev`
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Visit `http://localhost:3000` in your browser to view the application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) to get started.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
+
+## Contact
+
+If you have any questions, feel free to reach out to us at [our GitHub](https://github.com/markjaylunas).
+
+Happy watching!
