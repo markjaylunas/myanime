@@ -34,7 +34,7 @@ export async function fetchAnimeData({ animeId }: { animeId: string }) {
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.data({ id: animeId }),
-      { next: { tags: [`info_${animeId}`], revalidate: 3600 } }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -66,7 +66,7 @@ export async function fetchEpisodeData({
         id: animeId,
         provider,
       }),
-      { next: { tags: [`episodes_${animeId}`], revalidate: 3600 } }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -122,7 +122,7 @@ export async function fetchPopularAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.popular({ page, perPage }),
-      { next: { tags: ["anime-sorted-data-schema_popular"], revalidate: 3600 } }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -151,9 +151,7 @@ export async function fetchTrendingAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.trending({ page, perPage }),
-      {
-        next: { tags: ["anime-sorted-data-schema_trending"], revalidate: 3600 },
-      }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -182,12 +180,7 @@ export async function fetchAiringScheduleAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.airingSchedule({ page, perPage }),
-      {
-        next: {
-          tags: ["anime-sorted-data-schema_airing-schedule"],
-          revalidate: 3600,
-        },
-      }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -218,12 +211,7 @@ export async function fetchRecentEpisodesAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.recentEpisodes({ page, perPage, provider }),
-      {
-        next: {
-          tags: ["anime-sorted-data-schema_recent-episodes"],
-          revalidate: 3600,
-        },
-      }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -254,12 +242,7 @@ export async function fetchGenreAnimeData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.genre({ genres, page, perPage }),
-      {
-        next: {
-          tags: ["anime-sorted-data-schema_recent-episodes"],
-          revalidate: 3600,
-        },
-      }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
@@ -286,7 +269,7 @@ export async function fetchCharacterData({
   try {
     const response = await fetch(
       animeAPIQuery.meta.anilist.character({ id: characterId }),
-      { next: { tags: [`character_${characterId}`], revalidate: 3600 } }
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();
