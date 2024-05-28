@@ -13,8 +13,8 @@ export default async function RecentEpisodeListPage({
       : 1;
 
   const data = await fetchRecentEpisodesAnimeData({
-    page: Number(page) || 1,
-    perPage: 40,
+    // page: Number(page) || 1,
+    // perPage: 40,
     provider: "gogoanime",
   });
 

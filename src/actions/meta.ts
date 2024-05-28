@@ -200,8 +200,8 @@ export async function fetchAiringScheduleAnimeData({
 }
 
 export async function fetchRecentEpisodesAnimeData({
-  page = 1,
-  perPage = 20,
+  page,
+  perPage,
   provider,
 }: {
   page?: number;
