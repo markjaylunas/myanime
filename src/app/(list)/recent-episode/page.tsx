@@ -32,7 +32,7 @@ export default async function RecentEpisodePage({
       <SimplePagination
         prevDisabled={page <= 1}
         nextDisabled={
-          true && //disabled temporarily until gogoanime fix their pagination
+          true || //disabled temporarily until gogoanime fix their pagination
           data?.hasNextPage === false
         }
       />
