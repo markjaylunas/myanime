@@ -14,8 +14,8 @@ export default async function RecentEpisodePage({
       ? parseInt(searchParams?.page) || 1
       : 1;
   const data = await fetchRecentEpisodesAnimeData({
-    // page: Number(page) || 1,
-    // perPage: 20,
+    page: Number(page) || 1,
+    perPage: 20,
     provider: "gogoanime",
   });
 
@@ -31,10 +31,7 @@ export default async function RecentEpisodePage({
 
       <SimplePagination
         prevDisabled={page <= 1}
-        nextDisabled={
-          true || //disabled temporarily until gogoanime fix their pagination
-          data?.hasNextPage === false
-        }
+        nextDisabled={data?.hasNextPage === false}
       />
     </>
   );
