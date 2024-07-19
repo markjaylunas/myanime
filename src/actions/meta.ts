@@ -66,7 +66,7 @@ export async function fetchEpisodeData({
         id: animeId,
         provider,
       }),
-      { next: { revalidate: 3600 } }
+      { cache: "no-store" }
     );
 
     const data = await response.json();
