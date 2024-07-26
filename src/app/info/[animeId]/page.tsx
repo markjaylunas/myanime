@@ -2,12 +2,14 @@ import { fetchAnimeData, fetchEpisodeData } from "@/actions/meta";
 import AnimeCharacterList from "@/components/anime-cards/AnimeCharacterList";
 import AnimeList from "@/components/anime-cards/AnimeList";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
+import EpisodeList from "@/components/ui/EpisodeList";
 import Heading from "@/components/ui/Heading";
 import { Icons } from "@/components/ui/Icons";
 import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
 import { AnimeSortedSchema } from "@/lib/meta-validations";
 import { pickTitle } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
+import { Chip } from "@nextui-org/chip";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import InfoHero from "./_components/InfoHero";
@@ -53,6 +55,8 @@ export default async function InfoPage({
     ? `/info/${animeId}/watch/${episode.id}/${episode.episodeNumber}`
     : null;
 
+  const hasEpisode = info.totalEpisodes;
+
   return (
     <main className="space-y-8 mb-10">
       <InfoHero
@@ -85,6 +89,16 @@ export default async function InfoPage({
           />
         </section>
       )}
+
+      <section className="px-4 md:px-0 mt-8 flex justify-center">
+        {episodeList && hasEpisode ? (
+          <EpisodeList episodeList={episodeList} />
+        ) : (
+          <Chip size="lg" variant="bordered" color="warning">
+            No episodes available yet!
+          </Chip>
+        )}
+      </section>
 
       <section className="px-0">
         <AnimeInfoSection info={info} />
