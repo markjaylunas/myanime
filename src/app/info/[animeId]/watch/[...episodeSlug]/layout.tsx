@@ -136,11 +136,11 @@ export default async function HomeLayout({
       <section className="px-4 md:px-0 mt-8 space-y-4">
         <Heading>Recommended For You</Heading>
 
-        {episodeList && hasEpisode ? (
+        {animeList.length > 0 ? (
           <AnimeList animeList={animeList} />
         ) : (
           <Chip size="lg" variant="bordered" color="warning">
-            No episodes available yet!
+            No recommendations yet!
           </Chip>
         )}
       </section>
