@@ -4,11 +4,10 @@ import AnimeList from "@/components/anime-cards/AnimeList";
 import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
 import EpisodeList from "@/components/ui/EpisodeList";
 import Heading from "@/components/ui/Heading";
-import { Icons } from "@/components/ui/Icons";
 import NextAiringEpisode from "@/components/ui/NextAiringEpisode";
 import { AnimeSortedSchema } from "@/lib/meta-validations";
 import { pickTitle } from "@/lib/utils";
-import { Button } from "@nextui-org/button";
+import { Button, ButtonGroup } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
@@ -49,10 +48,15 @@ export default async function InfoPage({
 
   const title = pickTitle(info.title);
 
-  const episode = episodeList[0];
+  const firstEpisode = episodeList[0];
+  const latestEpisode = episodeList[episodeList.length - 1];
 
-  const watchLink = episode
-    ? `/info/${animeId}/watch/${episode.id}/${episode.episodeNumber}`
+  const watchLink = firstEpisode
+    ? `/info/${animeId}/watch/${firstEpisode.id}/${firstEpisode.episodeNumber}`
+    : null;
+
+  const latestLink = latestEpisode
+    ? `/info/${animeId}/watch/${latestEpisode.id}/${latestEpisode.episodeNumber}`
     : null;
 
   const hasEpisode = info.totalEpisodes;
@@ -65,21 +69,31 @@ export default async function InfoPage({
         cover={info.cover || info.image}
       />
 
-      {watchLink && (
-        <section className="px-4">
+      <section className="px-4">
+        <ButtonGroup fullWidth>
           <Button
             as={NextLink}
-            href={watchLink}
-            endContent={<Icons.chevronRight />}
-            fullWidth
+            href={watchLink || ""}
+            size="lg"
+            color="primary"
+            variant="bordered"
+            className="text-xl font-semibold mt-4"
+            isDisabled={watchLink === null}
+          >
+            First Episode
+          </Button>
+          <Button
+            as={NextLink}
+            href={latestLink || ""}
             size="lg"
             color="primary"
             className="text-xl font-semibold mt-4"
+            isDisabled={latestLink === null}
           >
-            Watch Now
+            Latest Episode
           </Button>
-        </section>
-      )}
+        </ButtonGroup>
+      </section>
 
       {info.nextAiringEpisode && (
         <section className="px-4">
@@ -90,7 +104,7 @@ export default async function InfoPage({
         </section>
       )}
 
-      <section className="px-4 md:px-0 mt-8 flex justify-center">
+      <section className="px-4 mt-8 flex justify-center">
         {episodeList && hasEpisode ? (
           <EpisodeList episodeList={episodeList} />
         ) : (
@@ -112,7 +126,13 @@ export default async function InfoPage({
       <section className="px-4 space-y-4">
         <Heading>Related Anime</Heading>
 
-        <AnimeList animeList={animeList} />
+        {animeList.length > 0 ? (
+          <AnimeList animeList={animeList} />
+        ) : (
+          <Chip size="lg" variant="bordered" color="warning">
+            No related anime yet!
+          </Chip>
+        )}
       </section>
     </main>
   );
