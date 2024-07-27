@@ -69,7 +69,20 @@ export async function fetchEpisodeData({
       { cache: "no-store" }
     );
 
-    const data = await response.json();
+    let data = await response.json();
+
+    // fetch info to get episode list if empty
+    if (data.length <= 0) {
+      const response = await fetch(
+        animeAPIQuery.meta.anilist.info({
+          id: animeId,
+        }),
+        { cache: "no-store" }
+      );
+
+      const rawData = await response.json();
+      data = rawData.episodes;
+    }
 
     const parsed = episodeDataSchema.safeParse(data);
 

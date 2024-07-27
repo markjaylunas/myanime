@@ -65,6 +65,9 @@ export const animeAPIQuery = {
       data: ({ id }: { id: string }) =>
         createURL(anilistBase, `data/${id}`, {}),
 
+      info: ({ id }: { id: string }) =>
+        createURL(anilistBase, `info/${id}`, {}),
+
       episodes: ({
         id,
         ...params
