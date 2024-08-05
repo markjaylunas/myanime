@@ -9,7 +9,6 @@ export default async function SortedList() {
 
   if (!data) throw new Error("Failed to fetch home data");
 
-  console.log(data.latestEpisodeAnimes);
   return (
     <>
       {/* <AnimeCarouselList animeList={data.spotlightAnimes} /> */}

@@ -27,7 +27,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           </Chip>
         )}
 
-        {anime.duration && (
+        {Boolean(anime.duration) && (
           <Chip
             radius="sm"
             size="sm"
@@ -39,7 +39,14 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           </Chip>
         )}
       </CardHeader>
-      <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/85  via-transparent to-transparent" />
+
+      <div
+        className={cn(
+          "absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/85 to-transparent",
+          Boolean(anime.rank) ? "via-black/20" : "via-transparent"
+        )}
+      />
+
       <Image
         alt={anime.name}
         src={anime.poster}
@@ -49,6 +56,13 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           img: "object-cover min-w-full min-h-full",
         }}
       />
+
+      {Boolean(anime.rank) && (
+        <p className="absolute z-20 top-1/3 right-2 text-8xl font-black text-white/75">
+          {anime.rank}
+        </p>
+      )}
+
       <CardFooter className="absolute z-20 bottom-0 p-2 flex items-start flex-col gap-2">
         {anime.rating && (
           <Chip

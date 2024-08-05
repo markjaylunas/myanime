@@ -9,13 +9,9 @@ import AnimeCard from "./anime-card";
 
 type Props = {
   animeList: AWAnimeSchema[];
-  isRanked?: boolean;
 };
 
-export default function AnimeCarouselList({
-  animeList,
-  isRanked = false,
-}: Props) {
+export default function AnimeCarouselList({ animeList }: Props) {
   return (
     <Carousel
       opts={{
@@ -30,7 +26,7 @@ export default function AnimeCarouselList({
             className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
           >
             <AnimeCardMotion index={index}>
-              <AnimeCard {...anime} rank={isRanked ? index + 1 : undefined} />
+              <AnimeCard {...anime} />
             </AnimeCardMotion>
           </CarouselItem>
         ))}
