@@ -4,6 +4,12 @@ import { routesConfig, siteConfig } from "@/lib/config";
 import { DEFAULT_SIGNIN_PATH } from "@/lib/routes";
 import { MainNavItem } from "@/lib/types";
 import {
+  Button,
+  Chip,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -57,7 +63,56 @@ export default function Navbar({ user }: Props) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4 md:gap-8" justify="center">
+      <NavbarContent className="flex gap-4 md:gap-8" justify="center">
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent font-medium"
+                endContent={<Icons.chevronDown />}
+                radius="sm"
+                variant="light"
+              >
+                Servers
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu
+            aria-label="Anime"
+            className="w-[340px]"
+            itemClasses={{
+              base: "gap-4",
+            }}
+          >
+            <DropdownItem
+              key="anime_s1"
+              description="First anime server. Can be slow to load while streaming."
+              startContent={<Icons.server />}
+              href="/s1"
+            >
+              Anime Server 1
+            </DropdownItem>
+            <DropdownItem
+              key="anime_s2"
+              description="Latest anime server. Fast and has more streaming servers."
+              startContent={<Icons.server />}
+              href="/s2"
+              endContent={<Chip color="primary">New</Chip>}
+            >
+              Anime Server 2
+            </DropdownItem>
+            <DropdownItem
+              key="manga_s1"
+              description="Coming soon."
+              startContent={<Icons.server />}
+            >
+              Manga
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
+      <NavbarContent className="hidden md:flex gap-4 md:gap-8" justify="center">
         {routes.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
             <MyLink href={item.href} className="font-medium">
@@ -85,7 +140,7 @@ export default function Navbar({ user }: Props) {
           </NavbarItem>
         )}
 
-        <NavbarMenuToggle className="sm:hidden" />
+        <NavbarMenuToggle className="md:hidden" />
       </NavbarContent>
 
       <NavbarMenu>
