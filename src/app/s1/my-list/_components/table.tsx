@@ -116,6 +116,7 @@ export default function WatchListTable({
   };
 }) {
   const pathname = usePathname();
+  const basepath = pathname.startsWith("/s1") ? "/s1" : "/s2";
   const router = useRouter();
   const searchParams = useSearchParams();
   const { watchList, totalCount } = watchListData;
@@ -428,7 +429,7 @@ export default function WatchListTable({
         </TableHeader>
         <TableBody emptyContent={"No anime found"} items={watchList}>
           {(item) => (
-            <TableRow key={item.id} href={`/info/${item.animeId}`}>
+            <TableRow key={item.id} href={`${basepath}/info/${item.animeId}`}>
               {(columnKey) => (
                 <TableCell>
                   {renderCell({

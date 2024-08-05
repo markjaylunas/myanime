@@ -33,7 +33,7 @@ export const routesConfig: RoutesConfig = {
     },
     {
       title: "My List",
-      href: "/my-list",
+      href: "/s1/my-list",
     },
   ],
   s2Nav: [
@@ -51,7 +51,7 @@ export const routesConfig: RoutesConfig = {
     },
     {
       title: "My List",
-      href: "/my-list",
+      href: "/s2/my-list",
     },
   ],
 };
