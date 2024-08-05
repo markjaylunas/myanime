@@ -36,20 +36,19 @@ export default function QuickSearch() {
       <Dropdown type="menu" placement="bottom">
         <DropdownTrigger>
           <Button
+            aria-label="Search anime"
             radius="full"
             className="bg-gradient-to-tr from-rose-500 to-primary text-white shadow-lg"
             startContent={<Icons.search />}
             variant="shadow"
-          >
-            Search
-          </Button>
+            isIconOnly
+          ></Button>
         </DropdownTrigger>
         <DropdownMenu classNames={{ base: "w-full" }} aria-label="Search anime">
           <DropdownSection>
             <DropdownItem textValue="Search" isReadOnly>
               <Input
                 variant="underlined"
-                autoFocus
                 placeholder="Type to search anime..."
                 size="sm"
                 startContent={<Icons.search />}
