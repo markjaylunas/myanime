@@ -14,6 +14,7 @@ export type SiteConfig = typeof siteConfig;
 
 interface RoutesConfig {
   s1Nav: MainNavItem[];
+  s2Nav: MainNavItem[];
 }
 
 export const routesConfig: RoutesConfig = {
@@ -29,6 +30,24 @@ export const routesConfig: RoutesConfig = {
     {
       title: "Genres",
       href: "/s1/genre?genres=[Action]",
+    },
+    {
+      title: "My List",
+      href: "/my-list",
+    },
+  ],
+  s2Nav: [
+    {
+      title: "Home",
+      href: "/s2",
+    },
+    {
+      title: "Advanced Search",
+      href: "/s2/advanced-search",
+    },
+    {
+      title: "Genres",
+      href: "/s2/genre?genres=[Action]",
     },
     {
       title: "My List",

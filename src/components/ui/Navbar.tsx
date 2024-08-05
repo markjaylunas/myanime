@@ -2,6 +2,7 @@
 
 import { routesConfig, siteConfig } from "@/lib/config";
 import { DEFAULT_SIGNIN_PATH } from "@/lib/routes";
+import { MainNavItem } from "@/lib/types";
 import {
   NavbarBrand,
   NavbarContent,
@@ -14,6 +15,7 @@ import {
 import { motion } from "framer-motion";
 import { User } from "next-auth";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
@@ -26,9 +28,12 @@ type Props = {
 };
 
 export default function Navbar({ user }: Props) {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-
+  let routes: MainNavItem[] = [];
+  if (pathname.startsWith("/s1")) routes = routesConfig.s1Nav;
+  if (pathname.startsWith("/s2")) routes = routesConfig.s2Nav;
   return (
     <NextNavbar
       isMenuOpen={isMenuOpen}
@@ -53,7 +58,7 @@ export default function Navbar({ user }: Props) {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4 md:gap-8" justify="center">
-        {routesConfig.s1Nav.map((item, index) => (
+        {routes.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
             <MyLink href={item.href} className="font-medium">
               {item.title}
@@ -63,9 +68,7 @@ export default function Navbar({ user }: Props) {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem>
-          <QuickSearch />
-        </NavbarItem>
+        <NavbarItem>{routes.length > 0 && <QuickSearch />}</NavbarItem>
 
         <NavbarItem>
           {user === null && (
@@ -99,7 +102,7 @@ export default function Navbar({ user }: Props) {
           <NavbarMenuItem>
             <ThemeSwitcher className="md:hidden" />
           </NavbarMenuItem>
-          {routesConfig.s1Nav.map((item, index) => (
+          {routes.map((item, index) => (
             <NavbarMenuItem key={`${item.href}-${index}`}>
               <MyLink
                 className="text-4xl font-bold w-full"
