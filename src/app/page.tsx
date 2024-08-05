@@ -41,7 +41,8 @@ export default async function MainHomePage() {
           </CardHeader>
           <CardBody className="overflow-visible py-2">
             <Image
-              alt="Card background"
+              unoptimized
+              alt="slow server"
               className="object-cover rounded-xl w-full scale-x-[-1]"
               src={IMGAnimeSlow}
               width={270}
@@ -84,7 +85,8 @@ export default async function MainHomePage() {
           </CardHeader>
           <CardBody className="overflow-visible py-2">
             <Image
-              alt="Card background"
+              unoptimized
+              alt="fast server"
               className="object-cover rounded-xl w-full scale-x-[-1]"
               src={IMGAnimeFast}
               width={270}
