@@ -24,8 +24,14 @@ export default async function MainHomePage() {
         Select Your Streaming Server
       </Heading>
 
-      <section className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8 mt-2 sm:mt-4 mx-auto">
-        <Card isFooterBlurred className="w-full col-span-12 sm:col-span-6">
+      <section className="max-w-[900px] flex gap-2 flex-col sm:flex-row px-8 mt-2 sm:mt-4 mx-auto">
+        <Card
+          as={NextLink}
+          href="/s1"
+          isFooterBlurred
+          className="w-full"
+          isPressable
+        >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <h4 className="font-bold text-large">Server 1</h4>
             <small className="text-default-500">
@@ -54,14 +60,21 @@ export default async function MainHomePage() {
             </Button>
           </CardFooter>
         </Card>
-        <Card isFooterBlurred className="w-full col-span-12 sm:col-span-6">
+        <Card
+          as={NextLink}
+          href="#"
+          isPressable
+          isFooterBlurred
+          className="w-full"
+        >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <div className="w-full flex justify-between">
+            <section className="w-full flex justify-between">
               <h4 className="font-bold text-large">Server 2</h4>
               <Chip color="danger" size="sm">
-                Recommended
+                {/* Recommended */}
+                Coming Soon!
               </Chip>
-            </div>
+            </section>
             <small className="text-default-500">
               Faster and more efficient for a smoother viewing experience.
             </small>
@@ -80,7 +93,7 @@ export default async function MainHomePage() {
           <CardFooter className=" z-10">
             <Button
               as={NextLink}
-              href="/s2"
+              href="#"
               variant="shadow"
               color="secondary"
               radius="lg"
