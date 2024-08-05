@@ -12,15 +12,12 @@ export default async function MainHomePage() {
     <main className="container max-w-5xl mx-auto min-h-screen px-2 py-4 md:px-4">
       <Heading
         order="4xl"
-        className="text-gray-700 dark:text-gray-300 text-center mt-3 sm:mt-8"
+        className="text-gray-700 dark:text-gray-300 text-center mt-0 sm:mt-8"
       >
         My Anime
       </Heading>
 
-      <Heading
-        order="2xl"
-        className="text-gray-600 dark:text-gray-400 text-center mt-3 sm:mt-8"
-      >
+      <Heading className="text-gray-600 dark:text-gray-400 text-center mt-3 sm:mt-8">
         Select Your Streaming Server
       </Heading>
 
