@@ -70,7 +70,7 @@ export default function Navbar({ user }: Props) {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent font-medium"
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent font-medium text-md"
                   endContent={<Icons.chevronDown />}
                   radius="sm"
                   variant="light"
