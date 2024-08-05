@@ -88,27 +88,22 @@ export default function Navbar({ user }: Props) {
             >
               <DropdownItem
                 key="anime_s1"
-                description="First anime server. Can be slow to load while streaming."
-                startContent={<Icons.server />}
+                description="Reliable but may experience slower speeds."
                 href="/s1"
               >
-                Anime Server 1
+                Server 1
               </DropdownItem>
               <DropdownItem
                 key="anime_s2"
-                description="Latest anime server. Fast and has more streaming servers."
-                startContent={<Icons.server />}
+                description="Faster and more efficient for a smoother viewing experience."
                 href="/s2"
-                endContent={<Chip color="primary">New</Chip>}
+                endContent={
+                  <Chip color="primary" size="sm">
+                    Recommended
+                  </Chip>
+                }
               >
-                Anime Server 2
-              </DropdownItem>
-              <DropdownItem
-                key="manga_s1"
-                description="Coming soon."
-                startContent={<Icons.server />}
-              >
-                Manga
+                Server 2
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
