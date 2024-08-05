@@ -63,7 +63,7 @@ export default async function MainHomePage() {
         </Card>
         <Card
           as={NextLink}
-          href="#"
+          href="/s2"
           isPressable
           isFooterBlurred
           className="w-full"
@@ -72,8 +72,7 @@ export default async function MainHomePage() {
             <section className="w-full flex justify-between">
               <h4 className="font-bold text-large">Server 2</h4>
               <Chip color="danger" size="sm">
-                {/* Recommended */}
-                Coming Soon!
+                Recommended
               </Chip>
             </section>
             <small className="text-default-500">
@@ -95,7 +94,7 @@ export default async function MainHomePage() {
           <CardFooter className=" z-10">
             <Button
               as={NextLink}
-              href="#"
+              href="/s2"
               variant="shadow"
               color="secondary"
               radius="lg"

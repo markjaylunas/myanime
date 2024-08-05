@@ -72,6 +72,20 @@ export type AnimeAdvancedSearchParams = {
   season?: ASSeason;
 };
 
+export type AniwatchSearchParams = {
+  q: string;
+  page?: number;
+  genres?: string;
+  type?: string;
+  season?: string;
+  language?: string;
+  status?: string;
+  rated?: string;
+  start_date?: string;
+  end_date?: string;
+  score?: string;
+};
+
 export type ASType = (typeof ASTypeArray)[number];
 export type ASSeason = (typeof ASSeasonArray)[number];
 export type ASFormat = (typeof ASFormatArray)[number];

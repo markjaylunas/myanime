@@ -66,7 +66,7 @@ export default function Navbar({ user }: Props) {
       <NavbarContent justify="center">
         {routes.length > 0 && (
           <Dropdown>
-            <NavbarItem className="px-12">
+            <NavbarItem>
               <DropdownTrigger>
                 <Button
                   disableRipple
