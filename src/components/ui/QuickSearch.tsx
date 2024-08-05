@@ -18,9 +18,12 @@ import {
   ScrollShadow,
 } from "@nextui-org/react";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function QuickSearch() {
+  const pathname = usePathname();
+  const server = pathname.startsWith("/s2") ? "s2" : "s1";
   const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<AnimeSearchSchema[]>([]);
   const [hasNextPage, setHasNextPage] = useState<boolean>(false);
@@ -70,7 +73,7 @@ export default function QuickSearch() {
             {data.map((anime) => (
               <DropdownItem
                 as={NextLink}
-                href={`/info/${anime.id}`}
+                href={`/${server}/info/${anime.id}`}
                 isVirtualized
                 classNames={{ wrapper: "max-w-[900px]" }}
                 textValue={pickTitle(anime.title) || anime.id}
@@ -102,7 +105,7 @@ export default function QuickSearch() {
             <DropdownItem
               as={NextLink}
               variant="shadow"
-              href={`/advanced-search?query=${query}`}
+              href={`/${server}/advanced-search?query=${query}`}
               className="text-center"
             >
               Show All results
