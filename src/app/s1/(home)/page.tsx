@@ -25,7 +25,7 @@ export default async function Home() {
           Continue Watching
         </Heading>
 
-        <MyLink href="/continue-watching" color="primary">
+        <MyLink href="/s1/continue-watching" color="primary">
           Show All
         </MyLink>
       </div>

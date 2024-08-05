@@ -53,7 +53,7 @@ export default function Navbar({ user }: Props) {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4 md:gap-8" justify="center">
-        {routesConfig.mainNav.map((item, index) => (
+        {routesConfig.s1Nav.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
             <MyLink href={item.href} className="font-medium">
               {item.title}
@@ -99,7 +99,7 @@ export default function Navbar({ user }: Props) {
           <NavbarMenuItem>
             <ThemeSwitcher className="md:hidden" />
           </NavbarMenuItem>
-          {routesConfig.mainNav.map((item, index) => (
+          {routesConfig.s1Nav.map((item, index) => (
             <NavbarMenuItem key={`${item.href}-${index}`}>
               <MyLink
                 className="text-4xl font-bold w-full"

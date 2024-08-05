@@ -10,7 +10,7 @@ export default function AnimeCard(
   anime: AnimeSortedSchema & { rank?: number }
 ) {
   const isEpisode = Boolean(anime.episodeId && anime.episodeNumber);
-  let href = `/info/${anime.id}`;
+  let href = `/s1/info/${anime.id}`;
   if (isEpisode && anime.episodeId !== "undefined")
     href = `${href}/watch/${anime.episodeId}/${anime.episodeNumber}`;
   const title = pickTitle(anime.title);

@@ -31,7 +31,7 @@ export default function AnimeEpisodeCard({
   episodeProgressUpdatedAt,
   episodeTitle,
 }: AnimeEpisodeCardProps) {
-  let href = `/info/${animeId}/watch/${episodeId}/${episodeNumber}`;
+  let href = `s1/info/${animeId}/watch/${episodeId}/${episodeNumber}`;
 
   return (
     <Card

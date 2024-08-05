@@ -56,7 +56,7 @@ export default function EpisodeList({ episodeList }: Props) {
                   {chunk.map((episode) => (
                     <Button
                       as={NextLink}
-                      href={`/info/${animeId}/watch/${episode.id}/${episode.episodeNumber}`}
+                      href={`watch/${episode.id}/${episode.episodeNumber}`}
                       variant={
                         episode.id === activeEpisodeId ? "bordered" : "shadow"
                       }

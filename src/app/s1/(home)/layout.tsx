@@ -27,7 +27,7 @@ export default async function HomeLayout({
           Popular
         </Heading>
 
-        <MyLink href="/popular" color="primary">
+        <MyLink href="/s1/popular" color="primary">
           Show All
         </MyLink>
       </div>
@@ -45,7 +45,7 @@ export default async function HomeLayout({
           Trending
         </Heading>
 
-        <MyLink href="/trending" color="primary">
+        <MyLink href="/s1/trending" color="primary">
           Show All
         </MyLink>
       </div>
@@ -62,7 +62,7 @@ export default async function HomeLayout({
           Airing Schedule
         </Heading>
 
-        <MyLink href="/airing-schedule" color="primary">
+        <MyLink href="/s1/airing-schedule" color="primary">
           Show All
         </MyLink>
       </div>
@@ -78,7 +78,7 @@ export default async function HomeLayout({
           Recent Episodes
         </Heading>
 
-        <MyLink href="/recent-episode" color="primary">
+        <MyLink href="/s1/recent-episode" color="primary">
           Show All
         </MyLink>
       </div>

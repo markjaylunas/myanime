@@ -79,7 +79,7 @@ export default async function HomeLayout({
       <section className="flex flex-wrap-reverse justify-end md:justify-between  gap-4 px-4 md:px-0">
         <Button
           as={NextLink}
-          href={`/info/${info.id}`}
+          href={`/s1/info/${info.id}`}
           startContent={<Icons.information />}
           className="w-full md:w-auto"
         >

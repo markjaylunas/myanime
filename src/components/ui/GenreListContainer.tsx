@@ -16,7 +16,7 @@ export default function GenreListContainer({ genreList }: Props) {
           radius="full"
           size="sm"
           variant="shadow"
-          href={`/genre?genres=[${genre}]`}
+          href={`/s1/genre?genres=[${genre}]`}
           className="bg-gradient-to-br from-indigo-800 to-cyan-500 border-small border-white/50 shadow-cyan-500/30 drop-shadow  text-white"
           key={genre}
         >

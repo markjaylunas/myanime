@@ -97,7 +97,7 @@ export default function AnimeInfoSection({ info }: Props) {
                       {info.genres.map((genre) => (
                         <Button
                           as={NextLink}
-                          href={`/genre?genres=[${genre}]`}
+                          href={`/s1/genre?genres=[${genre}]`}
                           key={genre}
                           color="secondary"
                           variant="shadow"

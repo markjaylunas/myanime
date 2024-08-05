@@ -15,7 +15,7 @@ export default function AnimeCharacterCard({ character }: Props) {
       shadow="sm"
       isPressable
       as={NextLink}
-      href={`/character/${character.id}`}
+      href={`/s1/character/${character.id}`}
     >
       <CardBody className="flex flex-row gap-4 justify-between">
         <User

@@ -13,22 +13,22 @@ export const siteConfig = {
 export type SiteConfig = typeof siteConfig;
 
 interface RoutesConfig {
-  mainNav: MainNavItem[];
+  s1Nav: MainNavItem[];
 }
 
 export const routesConfig: RoutesConfig = {
-  mainNav: [
+  s1Nav: [
     {
       title: "Home",
-      href: "/",
+      href: "/s1",
     },
     {
       title: "Advanced Search",
-      href: "/advanced-search",
+      href: "/s1/advanced-search",
     },
     {
       title: "Genres",
-      href: "/genre?genres=[Action]",
+      href: "/s1/genre?genres=[Action]",
     },
     {
       title: "My List",
