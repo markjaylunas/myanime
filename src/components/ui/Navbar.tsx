@@ -63,14 +63,14 @@ export default function Navbar({ user }: Props) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="flex gap-4 md:gap-8" justify="center">
+      <NavbarContent justify="center">
         {routes.length > 0 && (
           <Dropdown>
-            <NavbarItem>
+            <NavbarItem className="px-12">
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent font-medium text-md"
+                  className="bg-transparent data-[hover=true]:bg-transparent font-medium text-md"
                   endContent={<Icons.chevronDown />}
                   radius="sm"
                   variant="light"
