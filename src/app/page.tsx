@@ -93,7 +93,7 @@ export default async function MainHomePage() {
               as={NextLink}
               href="/s2"
               variant="shadow"
-              color="secondary"
+              color="primary"
               radius="lg"
               fullWidth
             >
