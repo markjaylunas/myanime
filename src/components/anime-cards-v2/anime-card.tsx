@@ -14,7 +14,38 @@ export default function AnimeCard(anime: AWAnimeSchema) {
       className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
       radius="sm"
     >
-      <CardHeader className="absolute z-20 top-0 p-2 flex flex-row-reverse flex-wrap gap-2 justify-between items-end">
+      <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-end">
+        <div className="flex justify-center items-center">
+          {Boolean(anime.episodes?.sub) && (
+            <Chip
+              radius="sm"
+              size="sm"
+              color="primary"
+              variant="shadow"
+              className={cn(
+                "text-xs mx-auto space-x-1",
+                anime.episodes?.dub && "rounded-r-none"
+              )}
+              startContent={<Icons.closedCaption className="size-3" />}
+            >
+              {anime.episodes?.sub}
+            </Chip>
+          )}
+
+          {Boolean(anime.episodes?.dub) && (
+            <Chip
+              radius="sm"
+              size="sm"
+              color="secondary"
+              variant="shadow"
+              className={cn("text-xs", anime.episodes?.sub && "rounded-l-none")}
+              startContent={<Icons.microphone className="size-3" />}
+            >
+              {anime.episodes?.dub}
+            </Chip>
+          )}
+        </div>
+
         {anime.type && (
           <Chip
             radius="sm"
@@ -24,18 +55,6 @@ export default function AnimeCard(anime: AWAnimeSchema) {
             className="text-xs"
           >
             {anime.type}
-          </Chip>
-        )}
-
-        {Boolean(anime.duration) && (
-          <Chip
-            radius="sm"
-            size="sm"
-            color="default"
-            variant="shadow"
-            className="text-xs"
-          >
-            {anime.duration}
           </Chip>
         )}
       </CardHeader>
@@ -64,44 +83,28 @@ export default function AnimeCard(anime: AWAnimeSchema) {
       )}
 
       <CardFooter className="absolute z-20 bottom-0 p-2 flex items-start flex-col gap-2">
-        {anime.rating && (
-          <Chip
-            radius="sm"
-            size="sm"
-            color="warning"
-            variant="bordered"
-            className="text-xs ml-auto"
-          >
-            {anime.rating}
-          </Chip>
-        )}
-        <div className="flex justify-center items-center">
-          {Boolean(anime.episodes?.sub) && (
+        <div className="flex flex-wrap justify-between w-full">
+          {Boolean(anime.duration) && (
             <Chip
               radius="sm"
               size="sm"
-              color="primary"
+              color="default"
               variant="shadow"
-              className={cn(
-                "text-xs mx-auto space-x-1",
-                anime.episodes?.dub && "rounded-r-none"
-              )}
-              startContent={<Icons.closedCaption className="size-3" />}
+              className="text-xs"
             >
-              {anime.episodes?.sub}
+              {anime.duration}
             </Chip>
           )}
 
-          {Boolean(anime.episodes?.dub) && (
+          {anime.rating && (
             <Chip
               radius="sm"
               size="sm"
-              color="secondary"
-              variant="shadow"
-              className={cn("text-xs", anime.episodes?.sub && "rounded-l-none")}
-              startContent={<Icons.microphone className="size-3" />}
+              color="warning"
+              variant="bordered"
+              className="text-xs ml-auto"
             >
-              {anime.episodes?.dub}
+              {anime.rating}
             </Chip>
           )}
         </div>
