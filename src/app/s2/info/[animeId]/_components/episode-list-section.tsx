@@ -51,7 +51,11 @@ export default function EpisodeListSection({
   return (
     <section className="space-y-3">
       <p className="text-gray-500">
-        Episodes {totalEpisodes && `1-${totalEpisodes}`}
+        Episodes{" "}
+        {totalEpisodes &&
+          `${episodeList[0].number}-${
+            episodeList[episodeList.length - 1].number
+          }`}
       </p>
 
       <div className="flex justify-start gap-3">
