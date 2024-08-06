@@ -26,6 +26,7 @@ export default function ExpandDescription({
     <section className="flex indent-8 flex-col justify-center items-center gap-2,">
       <p
         className={cn(
+          "text-foreground-500 text-justify",
           !isTooShort && !isExpanded ? "line-clamp-3" : "",
           className
         )}

@@ -123,8 +123,21 @@ export const aWAnimeInfoDataSchema = z.object({
     .nullable(),
 });
 
+export const aWEpisodesDataSchema = z.object({
+  totalEpisodes: z.number(),
+  episodes: z.array(
+    z.object({
+      title: z.string(),
+      episodeId: z.string(),
+      number: z.number(),
+      isFiller: z.boolean(),
+    })
+  ),
+});
+
 // type definitions
 
 export type AWHomeDataSchema = z.infer<typeof aWHomeDataSchema>;
 export type AWAnimeSchema = z.infer<typeof aWAnimeSchema>;
 export type AWAnimeInfoDataSchema = z.infer<typeof aWAnimeInfoDataSchema>;
+export type AWEpisodesDataSchema = z.infer<typeof aWEpisodesDataSchema>;

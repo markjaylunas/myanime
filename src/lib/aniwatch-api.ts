@@ -35,7 +35,7 @@ export const aniwatchAPIQuery = {
   search: (params: AniwatchSearchParams) =>
     createURL(aniwatchBase, `search`, params),
 
-  info: ({ id }: { id: string }) => createURL(aniwatchBase, `info/${id}`, {}),
+  info: (params: { id: string }) => createURL(aniwatchBase, `info`, params),
 
   suggest: (params: { q: string }) =>
     createURL(aniwatchBase, `search/suggest`, params),

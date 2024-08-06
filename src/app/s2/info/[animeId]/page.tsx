@@ -1,15 +1,10 @@
-import { fetchAWAnimeData } from "@/actions/aniwatch";
-import AnimeCharacterList from "@/components/anime-cards/AnimeCharacterList";
-import AnimeList from "@/components/anime-cards/AnimeList";
-import AnimeInfoSection from "@/components/ui/AnimeInfoSection";
-import EpisodeList from "@/components/ui/EpisodeList";
+import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
 import Heading from "@/components/ui/Heading";
-import { pickTitle } from "@/lib/utils";
-import { Button, ButtonGroup } from "@nextui-org/button";
-import { Chip } from "@nextui-org/chip";
-import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import InfoHero from "./_components/InfoHero";
+import AnimeCover from "./_components/anime-cover";
+import AnimeInfoSection from "./_components/anime-info-section";
+import EpisodeListSection from "./_components/episode-list-section";
+import PosterMoreInfo from "./_components/poster-more-info";
 
 export default async function InfoPage({
   params,
@@ -18,101 +13,63 @@ export default async function InfoPage({
 }) {
   const { animeId } = params;
 
-  const [info, _] = await Promise.all([
+  const [infoData, episodeData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
-    // fetchEpisodeData({ animeId, provider: "gogoanime" }),
+    fetchAWEpisodeData({ animeId }),
   ]);
 
-  if (!info) {
+  if (!infoData) {
     notFound();
   }
 
-  const episodeList = [];
-  // const episodeList = (episodeListData || []).map((episode) => ({
-  //   id: episode.id,
-  //   episodeNumber: episode.number,
-  // }));
+  const {
+    anime,
+    mostPopularAnimes,
+    recommendedAnimes,
+    relatedAnimes,
+    seasons,
+  } = infoData;
 
-  const relationData = info.relatedAnimes || [];
+  const { info, moreInfo } = anime;
 
-  const title = pickTitle(info.title);
+  const episodeList = episodeData?.episodes || [];
 
   const firstEpisode = episodeList[0];
   const latestEpisode = episodeList[episodeList.length - 1];
 
   const watchLink = firstEpisode
-    ? `/s1/info/${animeId}/watch/${firstEpisode.id}/${firstEpisode.episodeNumber}`
+    ? `/s1/info/${animeId}/watch/${firstEpisode.episodeId}/${firstEpisode.number}`
     : null;
 
   const latestLink = latestEpisode
-    ? `/s1/info/${animeId}/watch/${latestEpisode.id}/${latestEpisode.episodeNumber}`
+    ? `/s1/info/${animeId}/watch/${latestEpisode.episodeId}/${latestEpisode.number}`
     : null;
 
-  const hasEpisode = info.totalEpisodes;
+  const hasEpisode =
+    episodeData?.totalEpisodes && episodeData.episodes.length > 0;
 
   return (
-    <main className="space-y-8 mb-10">
-      <InfoHero
-        title={title}
-        image={info.anime.info.poster}
-        cover={info.anime.info.poster}
-      />
+    <main className="relative mb-12">
+      <Heading className="block sm:hidden mx-8 text-center mt-5" order={"2xl"}>
+        {info.name}
+      </Heading>
+      <h2 className="block sm:hidden text-xs mx-8 text-center mb-5 text-gray-400">
+        {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
+      </h2>
 
-      <section className="px-4">
-        <ButtonGroup fullWidth>
-          <Button
-            as={NextLink}
-            href={watchLink || ""}
-            size="lg"
-            color="primary"
-            variant="bordered"
-            className="text-xl font-semibold mt-4"
-            isDisabled={watchLink === null}
-          >
-            First Episode
-          </Button>
-          <Button
-            as={NextLink}
-            href={latestLink || ""}
-            size="lg"
-            color="primary"
-            className="text-xl font-semibold mt-4"
-            isDisabled={latestLink === null}
-          >
-            Latest Episode
-          </Button>
-        </ButtonGroup>
-      </section>
+      <AnimeCover title={info.name} image={info.poster} />
 
-      <section className="px-4 mt-8 flex justify-center">
-        {episodeList && hasEpisode ? (
-          <EpisodeList episodeList={episodeList} />
-        ) : (
-          <Chip size="lg" variant="bordered" color="warning">
-            No episodes available yet!
-          </Chip>
-        )}
-      </section>
+      <section className="max-w-7xl mx-8 px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
+        <PosterMoreInfo anime={anime} />
 
-      <section className="px-0">
-        <AnimeInfoSection info={info} />
-      </section>
+        <div className="flex flex-col gap-6">
+          <AnimeInfoSection anime={anime} />
 
-      <section className="px-4 space-y-4">
-        <Heading>Characters</Heading>
-        <AnimeCharacterList characterList={info.characters} />
-      </section>
-
-      <section className="px-4 space-y-4">
-        <Heading>Related Anime</Heading>
-
-        {animeList.length > 0 ? (
-          <AnimeList animeList={animeList} />
-        ) : (
-          <Chip size="lg" variant="bordered" color="warning">
-            No related anime yet!
-          </Chip>
-        )}
+          <EpisodeListSection
+            episodeList={episodeList}
+            totalEpisodes={episodeData?.totalEpisodes || 0}
+          />
+        </div>
       </section>
     </main>
   );
