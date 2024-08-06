@@ -450,7 +450,7 @@ export const Icons = {
   closedCaption: (props: IconProps) => (
     <svg
       height="16"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
       viewBox="0 0 16 16"
       width="16"
       {...props}
