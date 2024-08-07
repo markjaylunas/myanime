@@ -1,6 +1,8 @@
 import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
 import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import Heading from "@/components/ui/Heading";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import AnimeCover from "./_components/anime-cover";
 import AnimeInfoSection from "./_components/anime-info-section";
@@ -70,11 +72,31 @@ export default async function InfoPage({
         <PosterMoreInfo anime={anime} />
 
         <div className="flex flex-col gap-6 w-full">
-          <AnimeInfoSection
-            anime={anime}
-            watchLink={watchLink}
-            latestLink={latestLink}
-          />
+          <AnimeInfoSection anime={anime}>
+            <ButtonGroup className="w-full sm:w-fit">
+              <Button
+                as={NextLink}
+                href={watchLink || ""}
+                size="lg"
+                color="primary"
+                className="text-xl font-semibold"
+                isDisabled={watchLink === null}
+              >
+                Watch Now
+              </Button>
+              <Button
+                as={NextLink}
+                href={latestLink || ""}
+                size="lg"
+                color="primary"
+                variant="bordered"
+                className="text-xl font-semibold"
+                isDisabled={latestLink === null}
+              >
+                Latest
+              </Button>
+            </ButtonGroup>
+          </AnimeInfoSection>
 
           <EpisodeListSection
             episodeList={episodeList}
