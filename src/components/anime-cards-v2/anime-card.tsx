@@ -80,7 +80,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
       )}
 
       <CardFooter className="absolute z-20 bottom-0 p-2 flex items-start flex-col gap-2">
-        <div className="flex flex-wrap justify-between w-full">
+        <div className="flex flex-wrap justify-between flex-row-reverse w-full">
           {Boolean(anime.duration) && (
             <Chip
               size="sm"
@@ -95,7 +95,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           {anime.rating && (
             <Chip
               size="sm"
-              color="warning"
+              color="danger"
               variant="bordered"
               className="text-xs ml-auto"
             >
