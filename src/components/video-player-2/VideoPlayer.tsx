@@ -117,7 +117,7 @@ export default function VideoPlayer({
     return () => {
       const currentTime = player.current?.currentTime || 0;
       const durationTime = player.current?.duration || 0;
-
+      const episodeIdRecord = `${animeId}-${episodeNumber}`;
       if (currentTime && userId && currentTime > 30) {
         let data: UpsertEpisodeProgressData = {
           anime: {
@@ -127,7 +127,7 @@ export default function VideoPlayer({
             cover: animeCover || "",
           },
           episode: {
-            id: episodeId,
+            id: episodeIdRecord,
             animeId,
             number: Number(episodeNumber),
             title: episodeTitle,
@@ -138,9 +138,12 @@ export default function VideoPlayer({
             id: episodeProgress?.id,
             userId,
             animeId,
-            episodeId,
+            episodeId: episodeIdRecord,
             currentTime,
             isFinished: currentTime / durationTime > 0.9,
+            server: "s2",
+            serverAnimeId: animeId,
+            serverEpisodeId: episodeId,
           },
         };
 

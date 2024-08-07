@@ -1,3 +1,4 @@
+import { fetchAllEpisodeProgress } from "@/actions/action";
 import { auth } from "@/auth";
 import AnimeEpisodeCarouselList from "@/components/anime-cards/AnimeEpisodeCarouselList";
 import Heading from "@/components/ui/Heading";
@@ -11,10 +12,9 @@ export default async function Home() {
 
   if (!userId) return null;
 
-  const episodeProgressData = {
-    episodes: [],
-    totalCount: 0,
-  };
+  const episodeProgressData = await fetchAllEpisodeProgress({
+    userId,
+  });
 
   if (!episodeProgressData.totalCount) return null;
 
@@ -25,7 +25,7 @@ export default async function Home() {
           Continue Watching
         </Heading>
 
-        <MyLink href="/s1/continue-watching" color="primary">
+        <MyLink href="/s2/continue-watching" color="primary">
           Show All
         </MyLink>
       </div>

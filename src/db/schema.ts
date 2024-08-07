@@ -78,7 +78,8 @@ const animeIdRef = text("anime_id")
 
 export const anime = pgTable("anime", {
   id: text("id").primaryKey().notNull(),
-  title: text("title").notNull(),
+  title: text("title").notNull(), // possible conflict of title from different servers
+  // jtitle: text("jtitle"),
   image: text("image").notNull(),
   cover: text("cover").notNull(),
   updatedAt,
@@ -103,6 +104,9 @@ export const episodeProgress = pgTable("episode_progress", {
   episodeId: text("episode_id")
     .references(() => episode.id)
     .notNull(),
+  server: text("server").default("s1").notNull(),
+  serverAnimeId: text("server_anime_id"),
+  serverEpisodeId: text("server_episode_id"),
   currentTime: real("current_time").notNull(),
   isFinished: boolean("is_finished").notNull(),
   updatedAt,

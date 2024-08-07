@@ -105,6 +105,9 @@ export async function fetchAllEpisodeProgress({
         episodeProgressUpdatedAt: episodeProgress.updatedAt,
         currentTime: episodeProgress.currentTime,
         durationTime: episode.durationTime,
+        server: episodeProgress.server,
+        serverAnimeId: episodeProgress.serverAnimeId,
+        serverEpisodeId: episodeProgress.serverEpisodeId,
       })
       .from(episodeProgress)
       .leftJoin(anime, eq(anime.id, episodeProgress.animeId))

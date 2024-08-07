@@ -97,7 +97,7 @@ export const aWAnimeInfoDataSchema = z.object({
 
     moreInfo: z.object({
       japanese: z.string(),
-      synonyms: z.string(),
+      synonyms: z.string().optional().nullable(),
       aired: z.string(),
       premiered: z.string(),
       duration: z.string(),
@@ -105,7 +105,7 @@ export const aWAnimeInfoDataSchema = z.object({
       malscore: z.string(),
       genres: z.array(z.string()),
       studios: z.string().optional().nullable(),
-      producers: z.array(z.string()),
+      producers: z.array(z.string()).optional().nullable(),
     }),
   }),
 

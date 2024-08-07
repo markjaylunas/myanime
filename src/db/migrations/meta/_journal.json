@@ -85,6 +85,20 @@
       "when": 1716260643378,
       "tag": "0011_spicy_hobgoblin",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1723016806603,
+      "tag": "0012_tranquil_mandrill",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1723016968840,
+      "tag": "0013_cold_nighthawk",
+      "breakpoints": true
     }
   ]
 }

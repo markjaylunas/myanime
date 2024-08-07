@@ -17,22 +17,26 @@ export type AnimeEpisodeCardProps = {
   episodeProgressUpdatedAt: Date;
   currentTime: number;
   durationTime: number | null;
+  server: string | null;
+  serverAnimeId: string | null;
+  serverEpisodeId: string | null;
 };
 
 export default function AnimeEpisodeCard({
-  animeId,
   animeImage,
   animeTitle,
   currentTime,
   durationTime,
-  episodeId,
   episodeImage,
   episodeNumber,
   episodeProgressUpdatedAt,
   episodeTitle,
+  server,
+  serverAnimeId,
+  serverEpisodeId,
 }: AnimeEpisodeCardProps) {
-  let href = `/s1/info/${animeId}/watch/${episodeId}/${episodeNumber}`;
-
+  let href = `${server}/info/${serverAnimeId}/watch/${serverEpisodeId}/${episodeNumber}`;
+  // todo: add server tag to card if progress is on different server
   return (
     <Card
       as={NextLink}
@@ -40,10 +44,10 @@ export default function AnimeEpisodeCard({
       className="relative h-full w-full mx-auto aspect-video bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
       <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-start">
-        <Chip size="sm" color="secondary" variant="shadow">
+        <Chip radius="sm" size="sm" color="secondary" variant="shadow">
           EP {episodeNumber}
         </Chip>
-        <Chip size="sm" color="default" variant="shadow">
+        <Chip radius="sm" size="sm" color="default" variant="shadow">
           {moment(episodeProgressUpdatedAt).fromNow()}
         </Chip>
       </CardHeader>

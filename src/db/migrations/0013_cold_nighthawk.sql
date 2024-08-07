@@ -1,0 +1,1 @@
+ALTER TABLE "episode_progress" ADD COLUMN "server_anime_id" text;
