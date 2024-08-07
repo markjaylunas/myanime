@@ -1,13 +1,13 @@
 import { fetchEpisodeProgress } from "@/actions/action";
 import {
-  fetchAnimeData,
-  fetchAnimeEpisodeSource,
-  fetchEpisodeData,
-} from "@/actions/meta";
+  fetchAWAnimeData,
+  fetchAWEpisodeData,
+  fetchAWEpisodeSourceData,
+} from "@/actions/aniwatch";
 import { auth } from "@/auth";
-import NoVideo from "@/components/video-player/NoVideo";
-import VideoPlayer from "@/components/video-player/VideoPlayer";
-import { pickTitle } from "@/lib/utils";
+import NoVideo from "@/components/video-player-2/NoVideo";
+import VideoPlayer from "@/components/video-player-2/VideoPlayer";
+import { decodeEpisodeId } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
@@ -17,6 +17,7 @@ export default async function EpisodePage({
 }) {
   const { episodeSlug, animeId } = params;
   const [episodeId] = episodeSlug;
+  console.log(episodeId);
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -30,39 +31,53 @@ export default async function EpisodePage({
 
   const episodeProgress = episodeProgressData ? episodeProgressData[0] : null;
 
-  const [info, animeEpisodeSource, episodeData] = await Promise.all([
-    fetchAnimeData({ animeId }),
-    fetchAnimeEpisodeSource({ episodeId }),
-    fetchEpisodeData({ animeId, provider: "gogoanime" }),
+  const [infoData, episodeData, episodeSourceData] = await Promise.all([
+    fetchAWAnimeData({ animeId }),
+    fetchAWEpisodeData({ animeId }),
+    fetchAWEpisodeSourceData({ episodeId }),
   ]);
 
-  if (!info) {
+  if (!infoData) {
     return notFound();
   }
 
-  const episodeIndex = episodeData
-    ? episodeData.findIndex((episode) => episode.id === episodeId)
-    : 1;
-  const episode = episodeData ? episodeData[episodeIndex] : null;
+  const { anime } = infoData;
+  const { info } = anime;
 
-  const nextEpisode = episodeData ? episodeData[(episodeIndex || 0) + 1] : null;
-  const episodeTitle = episode?.title || null;
+  const episodeIndex = episodeData
+    ? episodeData.episodes.findIndex(
+        (episode) => decodeEpisodeId(episode.episodeId) === episodeId
+      )
+    : 1;
+
+  const episode = episodeData ? episodeData.episodes[episodeIndex] : null;
+
+  const nextEpisode = episodeData
+    ? episodeData.episodes[(episodeIndex || 0) + 1]
+    : null;
+  const episodeTitle = episode?.title;
   return (
     <>
-      {animeEpisodeSource ? (
+      {episodeSourceData ? (
         <VideoPlayer
-          animeTitle={pickTitle(info.title)}
-          episodeTitle={episodeTitle}
-          animeImage={info.image}
-          animeCover={info.cover || ""}
-          episodeImage={episode?.image || ""}
-          episodeSource={animeEpisodeSource}
-          nextEpisode={nextEpisode || null}
+          animeTitle={info.name}
+          episodeTitle={episodeTitle || null}
+          animeImage={info.poster}
+          episodeSource={episodeSourceData.sources}
+          nextEpisode={
+            nextEpisode
+              ? {
+                  episodeId: nextEpisode?.episodeId,
+                  episodeNumber: nextEpisode?.number,
+                }
+              : null
+          }
           episodeProgress={episodeProgress}
           userId={userId || null}
+          trackListList={episodeSourceData.tracks || []}
         />
       ) : (
-        <NoVideo bgSrc={info.image} title={`${info.status}`} />
+        <NoVideo bgSrc={info.poster} title={`No source found`} />
       )}
     </>
   );

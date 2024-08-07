@@ -140,7 +140,7 @@ export const episodeDataSchema = z.array(episodeSchema);
 
 export const episodeSourceSchema = z.object({
   url: z.string(),
-  quality: z.string(),
+  quality: z.string().optional().nullable(),
   isM3U8: z.boolean(),
 });
 

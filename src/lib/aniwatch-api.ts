@@ -1,5 +1,6 @@
 import { env } from "./env";
 import { AniwatchSearchParams } from "./types";
+import { decodeEpisodeId } from "./utils";
 
 const aniwatchBase = `${env.ANIWATCH_API_BASE_URL}/anime`;
 
@@ -55,9 +56,22 @@ export const aniwatchAPIQuery = {
   episodes: ({ animeId }: { animeId: string }) =>
     createURL(aniwatchBase, `episodes/${animeId}`, {}),
 
-  episodeServers: (params: { episodeId: string }) =>
-    createURL(aniwatchBase, `servers`, params),
+  episodeServers: ({ episodeId, ...params }: { episodeId: string }) =>
+    createURL(aniwatchBase, `servers`, {
+      id: decodeEpisodeId(episodeId),
+      ...params,
+    }),
 
-  episodeSource: (params: { id: string; server?: string; category?: string }) =>
-    createURL(aniwatchBase, `episode-srcs`, params),
+  episodeSource: ({
+    id,
+    ...params
+  }: {
+    id: string;
+    server?: string;
+    category?: string;
+  }) =>
+    createURL(aniwatchBase, `episode-srcs`, {
+      id: decodeEpisodeId(id),
+      ...params,
+    }),
 };

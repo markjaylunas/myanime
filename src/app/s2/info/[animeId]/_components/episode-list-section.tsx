@@ -2,7 +2,7 @@
 
 import { Icons } from "@/components/ui/Icons";
 import { AWEpisodesDataSchema } from "@/lib/aniwatch-validations";
-import { cn } from "@/lib/utils";
+import { cn, encodeEpisodeId } from "@/lib/utils";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { Button } from "@nextui-org/button";
 import { Input, Listbox, ListboxItem } from "@nextui-org/react";
@@ -89,6 +89,9 @@ export default function EpisodeListSection({
                 startContent={episode.number}
                 color={episode.isFiller ? "warning" : "primary"}
                 textValue={episode.title}
+                href={`/s2/info/${animeId}/watch/${encodeEpisodeId(
+                  episode.episodeId
+                )}/${episode.number}`}
                 className={cn(
                   "pl-2",
                   episodeSpotlight === episode.number && "text-secondary-500"
@@ -113,7 +116,9 @@ export default function EpisodeListSection({
             {episodeList.map((episode, episodeIdx) => (
               <Button
                 as={NextLink}
-                href={`/s2/info/${animeId}/watch/${episode.episodeId}/${episode.number}`}
+                href={`/s2/info/${animeId}/watch/${encodeEpisodeId(
+                  episode.episodeId
+                )}/${episode.number}`}
                 variant={
                   episode.number === episodeSpotlight ? "shadow" : "flat"
                 }

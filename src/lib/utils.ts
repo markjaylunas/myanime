@@ -65,3 +65,11 @@ export function formatDescription(description: string) {
 
   return formatted;
 }
+
+export function encodeEpisodeId(id: string) {
+  return id.replace(/\?/g, "%3F");
+}
+
+export function decodeEpisodeId(id: string) {
+  return id.replace(/%3F/g, "?");
+}

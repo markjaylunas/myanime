@@ -1,6 +1,7 @@
 import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
 import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import Heading from "@/components/ui/Heading";
+import { encodeEpisodeId } from "@/lib/utils";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
@@ -49,11 +50,15 @@ export default async function InfoPage({
   const latestEpisode = episodeList[episodeList.length - 1];
 
   const watchLink = firstEpisode
-    ? `/s2/info/${animeId}/watch/${firstEpisode.episodeId}/${firstEpisode.number}`
+    ? `/s2/info/${animeId}/watch/${encodeEpisodeId(firstEpisode.episodeId)}/${
+        firstEpisode.number
+      }`
     : null;
 
   const latestLink = latestEpisode
-    ? `/s2/info/${animeId}/watch/${latestEpisode.episodeId}/${latestEpisode.number}`
+    ? `/s2/info/${animeId}/watch/${encodeEpisodeId(latestEpisode.episodeId)}/${
+        latestEpisode.number
+      }`
     : null;
 
   return (
