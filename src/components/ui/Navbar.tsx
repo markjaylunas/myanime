@@ -4,12 +4,6 @@ import { routesConfig, siteConfig } from "@/lib/config";
 import { DEFAULT_SIGNIN_PATH } from "@/lib/routes";
 import { MainNavItem } from "@/lib/types";
 import {
-  Button,
-  Chip,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -63,18 +57,20 @@ export default function Navbar({ user }: Props) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent justify="center">
+      {/* <NavbarContent justify="end">
         {routes.length > 0 && (
-          <Dropdown>
+          <Dropdown placement="bottom-start">
             <NavbarItem>
               <DropdownTrigger>
                 <Button
                   disableRipple
+                  aria-label="servers"
                   className="bg-transparent data-[hover=true]:bg-transparent font-medium text-md"
-                  endContent={<Icons.chevronDown />}
                   variant="light"
+                  startContent={<Icons.server />}
+                  endContent={<Icons.chevronDown />}
                 >
-                  Servers
+                  <span className="hidden md:visible">Servers</span>
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
@@ -96,18 +92,16 @@ export default function Navbar({ user }: Props) {
                 key="anime_s2"
                 description="Faster and more efficient for a smoother viewing experience."
                 href="/s2"
-                endContent={
-                  <Chip color="primary" size="sm">
-                    Recommended
-                  </Chip>
-                }
               >
-                Server 2
+                Server 2{" "}
+                <Chip color="primary" size="sm">
+                  Recommended
+                </Chip>
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         )}
-      </NavbarContent>
+      </NavbarContent> */}
       <NavbarContent className="hidden md:flex gap-4 md:gap-8" justify="center">
         {routes.map((item, index) => (
           <NavbarItem key={`${item.title}-${index}`}>
