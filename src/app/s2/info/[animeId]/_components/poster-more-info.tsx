@@ -1,15 +1,17 @@
 import { Icons } from "@/components/ui/Icons";
 import { AWAnimeInfoDataSchema } from "@/lib/aniwatch-validations";
+import { cn } from "@/lib/utils";
 import { Image } from "@nextui-org/image";
 
 type Props = {
   anime: AWAnimeInfoDataSchema["anime"];
+  classname?: string;
 };
 
-export default function PosterMoreInfo({ anime }: Props) {
+export default function PosterMoreInfo({ anime, classname }: Props) {
   const { info, moreInfo } = anime;
   return (
-    <section className="w-60 flex-none">
+    <section className={cn("w-60 flex-none", classname)}>
       <Image isBlurred width={240} src={info.poster} alt={info.name} />
 
       <article className="space-y-2 mt-6">

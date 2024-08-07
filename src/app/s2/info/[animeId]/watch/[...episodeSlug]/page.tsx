@@ -57,7 +57,6 @@ export default async function EpisodePage({
     ? episodeData.episodes[(episodeIndex || 0) + 1]
     : null;
   const episodeTitle = episode?.title;
-  console.log({ episodeSourceData });
 
   return (
     <>

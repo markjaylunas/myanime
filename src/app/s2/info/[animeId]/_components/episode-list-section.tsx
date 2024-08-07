@@ -14,19 +14,30 @@ import { useRef, useState } from "react";
 type Props = {
   episodeList: AWEpisodesDataSchema["episodes"];
   totalEpisodes: AWEpisodesDataSchema["totalEpisodes"];
+  className?: string;
 };
 
 export default function EpisodeListSection({
   episodeList,
   totalEpisodes,
+  className,
 }: Props) {
   const { animeId, episodeSlug } = useParams<{
     animeId: string;
     episodeSlug: string[];
   }>();
 
-  let activeEpisodeId = "";
-  if (episodeSlug) activeEpisodeId = episodeSlug[0];
+  let activeEpisodeNumber = -1;
+  let title = "";
+  if (episodeSlug && episodeSlug.length > 0) {
+    activeEpisodeNumber = parseInt(episodeSlug[1]);
+    const episode = episodeList.find(
+      (episode) => episode.number === activeEpisodeNumber
+    );
+    title = `Now playing EP ${activeEpisodeNumber} of ${totalEpisodes}  ${
+      episode?.title ? `- ${episode?.title}` : ""
+    }`;
+  }
 
   const episodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isListView, setIsListView] = useState(true);
@@ -49,14 +60,10 @@ export default function EpisodeListSection({
   }, 500);
 
   return (
-    <section className="space-y-3">
-      <p className="text-gray-500">
-        Episodes{" "}
-        {totalEpisodes &&
-          `${episodeList[0].number}-${
-            episodeList[episodeList.length - 1].number
-          }`}
-      </p>
+    <section className={cn("space-y-3 min-w-[300px]", className)}>
+      {activeEpisodeNumber && (
+        <p className="text-gray-500 line-clamp-2">{title}</p>
+      )}
 
       <div className="flex justify-start gap-3">
         <Button
@@ -82,7 +89,7 @@ export default function EpisodeListSection({
             variant="flat"
             disallowEmptySelection
             selectionMode="single"
-            defaultSelectedKeys={activeEpisodeId || ""}
+            // defaultSelectedKeys={activeEpisodeId || ""}
           >
             {episodeList.map((episode, episodeIdx) => (
               <ListboxItem
@@ -97,7 +104,11 @@ export default function EpisodeListSection({
                   episodeSpotlight === episode.number && "text-secondary-500"
                 )}
                 endContent={
-                  episode.episodeId === activeEpisodeId ? "Playing..." : ""
+                  episode.number === activeEpisodeNumber ? (
+                    <Icons.playFill className="size-3" />
+                  ) : (
+                    ""
+                  )
                 }
                 key={episode.episodeId}
               >
@@ -125,13 +136,14 @@ export default function EpisodeListSection({
                 radius="md"
                 color="primary"
                 key={episode.episodeId}
+                isIconOnly
               >
                 <div
                   ref={(el) => {
                     episodeRefs.current[episodeIdx] = el;
                   }}
                 >
-                  {episode.episodeId === activeEpisodeId ? (
+                  {episode.number === activeEpisodeNumber ? (
                     <Icons.playFill />
                   ) : (
                     episode.number

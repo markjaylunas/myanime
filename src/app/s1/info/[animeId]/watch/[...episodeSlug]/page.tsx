@@ -45,7 +45,6 @@ export default async function EpisodePage({
     : null;
 
   const episodeProgress = episodeProgressData ? episodeProgressData[0] : null;
-  console.log({ episodeProgress });
 
   const nextEpisode = episodeData ? episodeData[(episodeIndex || 0) + 1] : null;
   const episodeTitle = episode?.title || null;
