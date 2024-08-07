@@ -17,24 +17,15 @@ export default async function EpisodePage({
 }) {
   const { episodeSlug, animeId } = params;
   const [episodeId] = episodeSlug;
-  console.log(episodeId);
+  const decodedEpisodeId = decodeEpisodeId(episodeId);
 
   const session = await auth();
   const userId = session?.user?.id;
-  const episodeProgressData = userId
-    ? await fetchEpisodeProgress({
-        userId,
-        animeId,
-        episodeId,
-      })
-    : null;
-
-  const episodeProgress = episodeProgressData ? episodeProgressData[0] : null;
 
   const [infoData, episodeData, episodeSourceData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
     fetchAWEpisodeData({ animeId }),
-    fetchAWEpisodeSourceData({ episodeId }),
+    fetchAWEpisodeSourceData({ episodeId: decodedEpisodeId }),
   ]);
 
   if (!infoData) {
@@ -46,20 +37,38 @@ export default async function EpisodePage({
 
   const episodeIndex = episodeData
     ? episodeData.episodes.findIndex(
-        (episode) => decodeEpisodeId(episode.episodeId) === episodeId
+        (episode) => episode.episodeId === decodedEpisodeId
       )
     : 1;
 
   const episode = episodeData ? episodeData.episodes[episodeIndex] : null;
 
+  const episodeProgressData = userId
+    ? await fetchEpisodeProgress({
+        userId,
+        animeId: info.malId,
+        episodeId: `${info.malId}-${episode?.number}`,
+      })
+    : null;
+
+  const episodeProgress = episodeProgressData ? episodeProgressData[0] : null;
+
   const nextEpisode = episodeData
     ? episodeData.episodes[(episodeIndex || 0) + 1]
     : null;
   const episodeTitle = episode?.title;
+  console.log({ episodeSourceData });
+
   return (
     <>
-      {episodeSourceData ? (
+      {episodeSourceData && episode ? (
         <VideoPlayer
+          animeId={info.malId}
+          episodeId={`${info.malId}-${episode?.number}`}
+          episodeNumber={episode.number}
+          server="s2"
+          serverAnimeId={animeId}
+          serverEpisodeId={episodeId}
           animeTitle={info.name}
           episodeTitle={episodeTitle || null}
           animeImage={info.poster}

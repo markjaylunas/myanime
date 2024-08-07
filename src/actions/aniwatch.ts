@@ -89,12 +89,11 @@ export async function fetchAWEpisodeSourceData({
         next: { revalidate: 3600 },
       }
     );
-
     const data = await response.json();
     const parsed = aWEpisodeSourceDataSchema.safeParse(data);
 
     if (!parsed.success) {
-      console.error(parsed.error.toString());
+      // console.error(parsed.error.toString());
       return;
     }
 

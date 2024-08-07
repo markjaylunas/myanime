@@ -50,7 +50,9 @@ export default function AnimeInfoSection({
 
       <ExpandDescription
         className="mt-4"
-        description={`${info.description}`}
+        description={
+          info.description ? `${info.description}` : "No description"
+        }
         isHTML
       />
     </section>

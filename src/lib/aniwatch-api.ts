@@ -1,6 +1,5 @@
 import { env } from "./env";
 import { AniwatchSearchParams } from "./types";
-import { decodeEpisodeId } from "./utils";
 
 const aniwatchBase = `${env.ANIWATCH_API_BASE_URL}/anime`;
 
@@ -24,7 +23,7 @@ function createURL(
       const formattedValue = `[${value.map((v) => `"${value}"`).join(",")}]`;
       url.searchParams.append(key, formattedValue);
     } else {
-      url.searchParams.append(key, String(value));
+      url.searchParams.append(key, `${value}`);
     }
   });
   return url.toString();
@@ -56,22 +55,9 @@ export const aniwatchAPIQuery = {
   episodes: ({ animeId }: { animeId: string }) =>
     createURL(aniwatchBase, `episodes/${animeId}`, {}),
 
-  episodeServers: ({ episodeId, ...params }: { episodeId: string }) =>
-    createURL(aniwatchBase, `servers`, {
-      id: decodeEpisodeId(episodeId),
-      ...params,
-    }),
+  episodeServers: (params: { episodeId: string }) =>
+    createURL(aniwatchBase, `servers`, params),
 
-  episodeSource: ({
-    id,
-    ...params
-  }: {
-    id: string;
-    server?: string;
-    category?: string;
-  }) =>
-    createURL(aniwatchBase, `episode-srcs`, {
-      id: decodeEpisodeId(id),
-      ...params,
-    }),
+  episodeSource: (params: { id: string; server?: string; category?: string }) =>
+    createURL(aniwatchBase, `episode-srcs`, params),
 };

@@ -66,7 +66,7 @@ export const aWAnimeInfoDataSchema = z.object({
       id: z.string(),
       name: z.string(),
       poster: z.string(),
-      description: z.string(),
+      description: z.string().optional().nullable(),
 
       anilistId: z.coerce.string(),
       malId: z.coerce.string(),

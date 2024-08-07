@@ -26,9 +26,15 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
+  animeId: string;
+  episodeId: string;
+  episodeNumber: number;
+  server: string;
+  serverAnimeId: string;
+  serverEpisodeId: string;
   animeTitle: string;
   animeImage: string;
   animeCover?: string;
@@ -42,6 +48,11 @@ type Props = {
 };
 
 export default function VideoPlayer({
+  animeId,
+  episodeId,
+  episodeNumber,
+  serverAnimeId,
+  serverEpisodeId,
   animeTitle,
   animeImage,
   animeCover,
@@ -52,14 +63,10 @@ export default function VideoPlayer({
   episodeProgress,
   userId,
   trackListList,
+  server,
 }: Props) {
-  const { episodeSlug, animeId } = useParams<{
-    animeId: string;
-    episodeSlug: string[];
-  }>();
   const router = useRouter();
   const pathname = usePathname();
-  const [episodeId, episodeNumber] = episodeSlug;
   const captions = trackListList.filter(
     (caption) => caption.kind == "captions"
   );
@@ -117,7 +124,6 @@ export default function VideoPlayer({
     return () => {
       const currentTime = player.current?.currentTime || 0;
       const durationTime = player.current?.duration || 0;
-      const episodeIdRecord = `${animeId}-${episodeNumber}`;
       if (currentTime && userId && currentTime > 30) {
         let data: UpsertEpisodeProgressData = {
           anime: {
@@ -127,7 +133,7 @@ export default function VideoPlayer({
             cover: animeCover || "",
           },
           episode: {
-            id: episodeIdRecord,
+            id: episodeId,
             animeId,
             number: Number(episodeNumber),
             title: episodeTitle,
@@ -138,12 +144,12 @@ export default function VideoPlayer({
             id: episodeProgress?.id,
             userId,
             animeId,
-            episodeId: episodeIdRecord,
+            episodeId,
             currentTime,
             isFinished: currentTime / durationTime > 0.9,
-            server: "s2",
-            serverAnimeId: animeId,
-            serverEpisodeId: episodeId,
+            server,
+            serverAnimeId,
+            serverEpisodeId,
           },
         };
 
@@ -178,7 +184,6 @@ export default function VideoPlayer({
             : null
         }
         playsInline
-        crossOrigin
         viewType="video"
       >
         <MediaProvider>
@@ -187,24 +192,25 @@ export default function VideoPlayer({
             src={poster}
             alt={episodeTitle || animeTitle}
           />
-          {captions.map((caption, captionIdx) => (
-            <Track
-              key={`${captionIdx}`}
-              src={caption.file}
-              label={caption.label || ""}
-              kind={caption?.kind as TextTrackKind}
-              language="en-us"
-              type={"vtt"}
-              default={Boolean(caption.default)}
-            />
-          ))}
+          {captions.length > 0 &&
+            captions.map((caption, captionIdx) => (
+              <Track
+                key={`${captionIdx}`}
+                src={caption.file}
+                label={caption.label || ""}
+                kind={caption?.kind as TextTrackKind}
+                language="en-us"
+                type={"vtt"}
+                default={Boolean(caption.default)}
+              />
+            ))}
         </MediaProvider>
 
         <DefaultAudioLayout icons={defaultLayoutIcons} />
 
         <DefaultVideoLayout
           icons={defaultLayoutIcons}
-          thumbnails={thumbnails[0].file}
+          thumbnails={thumbnails.length > 0 ? thumbnails[0].file : undefined}
           slots={{
             beforeFullscreenButton: nextEpisode ? (
               <ToggleButton

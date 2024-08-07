@@ -16,7 +16,6 @@ export default async function InfoPage({
   params: { animeId: string };
 }) {
   const { animeId } = params;
-
   const [infoData, episodeData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
     fetchAWEpisodeData({ animeId }),
@@ -48,7 +47,6 @@ export default async function InfoPage({
 
   const firstEpisode = episodeList[0];
   const latestEpisode = episodeList[episodeList.length - 1];
-
   const watchLink = firstEpisode
     ? `/s2/info/${animeId}/watch/${encodeEpisodeId(firstEpisode.episodeId)}/${
         firstEpisode.number
