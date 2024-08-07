@@ -23,31 +23,31 @@ export default function AnimeCard(
     >
       <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-start">
         {anime.rank && (
-          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+          <Chip size="sm" color="warning" variant="shadow">
             {anime.rank}
           </Chip>
         )}
 
         {anime.airingAt && (
-          <Chip radius="sm" size="sm" color="warning" variant="shadow">
+          <Chip size="sm" color="warning" variant="shadow">
             {formatTimestamp(anime.airingAt)}
           </Chip>
         )}
 
         {!anime.airingAt && anime.releaseDate && (
-          <Chip radius="sm" size="sm" color="success" variant="shadow">
+          <Chip size="sm" color="success" variant="shadow">
             {anime.releaseDate}
           </Chip>
         )}
 
         {anime.duration && (
-          <Chip radius="sm" size="sm" color="default" variant="shadow">
+          <Chip size="sm" color="default" variant="shadow">
             {formatDuration(anime.duration)}
           </Chip>
         )}
 
         {anime.type && (
-          <Chip radius="sm" size="sm" color="secondary" variant="shadow">
+          <Chip size="sm" color="secondary" variant="shadow">
             {anime.type.split("_").join(" ")}
           </Chip>
         )}
@@ -66,7 +66,6 @@ export default function AnimeCard(
         {anime.rating && (
           <Chip
             startContent={<Icons.star className="mr-1" />}
-            radius="sm"
             size="sm"
             color="primary"
             variant="shadow"

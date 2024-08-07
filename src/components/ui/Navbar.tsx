@@ -72,7 +72,6 @@ export default function Navbar({ user }: Props) {
                   disableRipple
                   className="bg-transparent data-[hover=true]:bg-transparent font-medium text-md"
                   endContent={<Icons.chevronDown />}
-                  radius="sm"
                   variant="light"
                 >
                   Servers

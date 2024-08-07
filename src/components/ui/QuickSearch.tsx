@@ -90,7 +90,6 @@ export default function QuickSearch() {
                     height={300}
                     width={100}
                     className="h-full aspect-2/3 bg-cover"
-                    radius="sm"
                   />
                 }
                 shortcut={anime.totalEpisodes ? anime.totalEpisodes : "N/A"}
