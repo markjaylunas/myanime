@@ -1,4 +1,5 @@
 import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
+import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import Heading from "@/components/ui/Heading";
 import { notFound } from "next/navigation";
 import AnimeCover from "./_components/anime-cover";
@@ -33,6 +34,14 @@ export default async function InfoPage({
   const { info, moreInfo } = anime;
 
   const episodeList = episodeData?.episodes || [];
+  const animeSeasonList = seasons
+    ? seasons.map((season) => ({
+        id: season.id,
+        name: season.name,
+        poster: season.poster,
+        isCurrent: season.isCurrent,
+      }))
+    : [];
 
   const firstEpisode = episodeList[0];
   const latestEpisode = episodeList[episodeList.length - 1];
@@ -59,10 +68,10 @@ export default async function InfoPage({
 
       <AnimeCover title={info.name} image={info.poster} />
 
-      <section className="max-w-7xl mx-8 px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
+      <section className="max-w-7xl px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
         <PosterMoreInfo anime={anime} />
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-full">
           <AnimeInfoSection anime={anime} />
 
           <EpisodeListSection
@@ -70,6 +79,20 @@ export default async function InfoPage({
             totalEpisodes={episodeData?.totalEpisodes || 0}
           />
         </div>
+      </section>
+
+      <section className="max-w-7xl px-8 sm:mx-auto">
+        {Boolean(animeSeasonList.length) && (
+          <>
+            <Heading
+              order="2xl"
+              className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+            >
+              Seasons
+            </Heading>
+            <AnimeCarouselList animeList={animeSeasonList} />
+          </>
+        )}
       </section>
     </main>
   );

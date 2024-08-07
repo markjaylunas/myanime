@@ -10,15 +10,14 @@ export default function AnimeCard(anime: AWAnimeSchema) {
   return (
     <Card
       as={Link}
-      href={`s2/info/${anime.id}`}
-      className="relative h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
-      radius="sm"
+      href={`/s2/info/${anime.id}`}
+      className="relative
+       h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
       <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-end">
         <div className="flex justify-center items-center">
           {Boolean(anime.episodes?.sub) && (
             <Chip
-              radius="sm"
               size="sm"
               color="primary"
               variant="shadow"
@@ -34,7 +33,6 @@ export default function AnimeCard(anime: AWAnimeSchema) {
 
           {Boolean(anime.episodes?.dub) && (
             <Chip
-              radius="sm"
               size="sm"
               color="secondary"
               variant="shadow"
@@ -47,14 +45,13 @@ export default function AnimeCard(anime: AWAnimeSchema) {
         </div>
 
         {anime.type && (
-          <Chip
-            radius="sm"
-            size="sm"
-            color="warning"
-            variant="shadow"
-            className="text-xs"
-          >
+          <Chip size="sm" color="warning" variant="shadow" className="text-xs">
             {anime.type}
+          </Chip>
+        )}
+        {anime.isCurrent && (
+          <Chip size="sm" color="success" variant="shadow" className="text-xs">
+            Latest Season
           </Chip>
         )}
       </CardHeader>
@@ -86,7 +83,6 @@ export default function AnimeCard(anime: AWAnimeSchema) {
         <div className="flex flex-wrap justify-between w-full">
           {Boolean(anime.duration) && (
             <Chip
-              radius="sm"
               size="sm"
               color="default"
               variant="shadow"
@@ -98,7 +94,6 @@ export default function AnimeCard(anime: AWAnimeSchema) {
 
           {anime.rating && (
             <Chip
-              radius="sm"
               size="sm"
               color="warning"
               variant="bordered"

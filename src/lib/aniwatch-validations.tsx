@@ -30,6 +30,7 @@ const aWAnimeSchema = z.object({
   rating: z.string().nullable().optional(),
   rank: z.number().nullable().optional(),
   episodes: episodeSubDubSchema,
+  isCurrent: z.boolean().optional().nullable(),
 });
 
 // aniwatch schemas
@@ -98,7 +99,7 @@ export const aWAnimeInfoDataSchema = z.object({
       status: z.string(),
       malscore: z.string(),
       genres: z.array(z.string()),
-      studios: z.string(),
+      studios: z.string().optional().nullable(),
       producers: z.array(z.string()),
     }),
   }),
