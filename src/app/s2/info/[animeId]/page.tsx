@@ -65,9 +65,7 @@ export default async function InfoPage({
       <h2 className="block sm:hidden text-xs mx-8 text-center mb-5 text-gray-400">
         {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
       </h2>
-
       <AnimeCover title={info.name} image={info.poster} />
-
       <section className="max-w-7xl px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
         <PosterMoreInfo anime={anime} />
 
@@ -80,20 +78,51 @@ export default async function InfoPage({
           />
         </div>
       </section>
+      {Boolean(animeSeasonList.length) && (
+        <section className="max-w-7xl px-8 sm:mx-auto">
+          <Heading
+            order="2xl"
+            className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+          >
+            Seasons
+          </Heading>
+          <AnimeCarouselList animeList={animeSeasonList} />
+        </section>
+      )}
+      {Boolean(relatedAnimes) && (
+        <section className="max-w-7xl px-8 sm:mx-auto">
+          <Heading
+            order="2xl"
+            className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+          >
+            Related
+          </Heading>
+          <AnimeCarouselList animeList={relatedAnimes || []} />
+        </section>
+      )}
 
-      <section className="max-w-7xl px-8 sm:mx-auto">
-        {Boolean(animeSeasonList.length) && (
-          <>
-            <Heading
-              order="2xl"
-              className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-            >
-              Seasons
-            </Heading>
-            <AnimeCarouselList animeList={animeSeasonList} />
-          </>
-        )}
-      </section>
+      {Boolean(recommendedAnimes) && (
+        <section className="max-w-7xl px-8 sm:mx-auto">
+          <Heading
+            order="2xl"
+            className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+          >
+            Recommendations
+          </Heading>
+          <AnimeCarouselList animeList={recommendedAnimes || []} />
+        </section>
+      )}
+      {Boolean(mostPopularAnimes) && (
+        <section className="max-w-7xl px-8 sm:mx-auto">
+          <Heading
+            order="2xl"
+            className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+          >
+            Most Popular
+          </Heading>
+          <AnimeCarouselList animeList={mostPopularAnimes || []} />
+        </section>
+      )}
     </main>
   );
 }
