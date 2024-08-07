@@ -74,15 +74,15 @@ export default async function InfoPage({
       <section className="max-w-7xl px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
         <PosterMoreInfo anime={anime} />
 
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-6">
           <AnimeInfoSection anime={anime}>
-            <ButtonGroup className="w-full sm:w-fit">
+            <ButtonGroup className="sm:w-fit w-full">
               <Button
                 as={NextLink}
                 href={watchLink || ""}
                 size="lg"
                 color="primary"
-                className="text-xl font-semibold"
+                className="text-xl font-semibold w-full"
                 isDisabled={watchLink === null}
               >
                 Watch Now
@@ -93,7 +93,7 @@ export default async function InfoPage({
                 size="lg"
                 color="primary"
                 variant="bordered"
-                className="text-xl font-semibold"
+                className="text-xl font-semibold w-full"
                 isDisabled={latestLink === null}
               >
                 Latest
