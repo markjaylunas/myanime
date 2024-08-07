@@ -25,7 +25,7 @@ export default async function HomeLayout({
 
   return (
     <main className=" max-w-7xl mx-auto min-h-screen pb-8  p-0 space-y-4">
-      <section className="grid grid-cols-10 grid-rows-3 gap-4 w-full md:px-4 ">
+      <section className="grid grid-cols-10 gap-4 w-full md:px-4 ">
         <div className="col-span-full md:col-span-7">{children}</div>
 
         <EpisodeListSection
