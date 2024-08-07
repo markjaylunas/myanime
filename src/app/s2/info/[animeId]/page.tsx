@@ -62,15 +62,22 @@ export default async function InfoPage({
       <Heading className="block sm:hidden mx-8 text-center mt-5" order={"2xl"}>
         {info.name}
       </Heading>
+
       <h2 className="block sm:hidden text-xs mx-8 text-center mb-5 text-gray-400">
         {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
       </h2>
+
       <AnimeCover title={info.name} image={info.poster} />
+
       <section className="max-w-7xl px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
         <PosterMoreInfo anime={anime} />
 
         <div className="flex flex-col gap-6 w-full">
-          <AnimeInfoSection anime={anime} />
+          <AnimeInfoSection
+            anime={anime}
+            watchLink={watchLink}
+            latestLink={latestLink}
+          />
 
           <EpisodeListSection
             episodeList={episodeList}
@@ -78,6 +85,7 @@ export default async function InfoPage({
           />
         </div>
       </section>
+
       {Boolean(animeSeasonList.length) && (
         <section className="max-w-7xl px-8 sm:mx-auto">
           <Heading
@@ -89,6 +97,7 @@ export default async function InfoPage({
           <AnimeCarouselList animeList={animeSeasonList} />
         </section>
       )}
+
       {Boolean(relatedAnimes) && (
         <section className="max-w-7xl px-8 sm:mx-auto">
           <Heading
@@ -112,6 +121,7 @@ export default async function InfoPage({
           <AnimeCarouselList animeList={recommendedAnimes || []} />
         </section>
       )}
+
       {Boolean(mostPopularAnimes) && (
         <section className="max-w-7xl px-8 sm:mx-auto">
           <Heading
