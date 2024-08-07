@@ -47,15 +47,12 @@ export default async function InfoPage({
   const latestEpisode = episodeList[episodeList.length - 1];
 
   const watchLink = firstEpisode
-    ? `/s1/info/${animeId}/watch/${firstEpisode.episodeId}/${firstEpisode.number}`
+    ? `/s2/info/${animeId}/watch/${firstEpisode.episodeId}/${firstEpisode.number}`
     : null;
 
   const latestLink = latestEpisode
-    ? `/s1/info/${animeId}/watch/${latestEpisode.episodeId}/${latestEpisode.number}`
+    ? `/s2/info/${animeId}/watch/${latestEpisode.episodeId}/${latestEpisode.number}`
     : null;
-
-  const hasEpisode =
-    episodeData?.totalEpisodes && episodeData.episodes.length > 0;
 
   return (
     <main className="relative mb-12">
