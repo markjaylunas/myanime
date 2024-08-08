@@ -6,78 +6,91 @@ import { Spacer } from "@nextui-org/spacer";
 
 export default async function SortedList() {
   const data = await fetchAniwatchHomeData();
-
   if (!data) throw new Error("Failed to fetch home data");
 
   return (
     <>
-      {/* <AnimeCarouselList animeList={data.spotlightAnimes} /> */}
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Latest Episodes
-      </Heading>
-      <AnimeCarouselList animeList={data.latestEpisodeAnimes} />
+      <section className="space-y-2">
+        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 mb-2">
+          Latest Episodes
+        </Heading>
+        <AnimeCarouselList animeList={data.latestEpisodeAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Trending
-      </Heading>
-      <AnimeCarouselList animeList={data.trendingAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Trending
+        </Heading>
+        <AnimeCarouselList animeList={data.trendingAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Top Airing
-      </Heading>
-      <AnimeCarouselList animeList={data.topAiringAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Top Airing
+        </Heading>
+        <AnimeCarouselList animeList={data.topAiringAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Top Upcoming
-      </Heading>
-      <AnimeCarouselList animeList={data.topUpcomingAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Top Upcoming
+        </Heading>
+        <AnimeCarouselList animeList={data.topUpcomingAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Top 10
-      </Heading>
-      <AnimeCarouselList animeList={data.top10Animes.month} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Top 10
+        </Heading>
+        <AnimeCarouselList animeList={data.top10Animes.month} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Popular
-      </Heading>
-      <AnimeCarouselList animeList={data.mostPopularAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Popular
+        </Heading>
+        <AnimeCarouselList animeList={data.mostPopularAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Most Favorite
-      </Heading>
-      <AnimeCarouselList animeList={data.mostFavoriteAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Most Favorite
+        </Heading>
+        <AnimeCarouselList animeList={data.mostFavoriteAnimes} />
+      </section>
 
-      <Heading
-        order="2xl"
-        className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
-      >
-        Latest Completed
-      </Heading>
-      <AnimeCarouselList animeList={data.latestCompletedAnimes} />
+      <section className="space-y-2">
+        <Heading
+          order="2xl"
+          className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
+        >
+          Latest Completed
+        </Heading>
+        <AnimeCarouselList animeList={data.latestCompletedAnimes} />
+      </section>
 
-      <Spacer y={8} />
-      <GenreListContainer genreList={data.genres} />
+      <section className="space-y-2">
+        <Spacer y={8} />
+        <GenreListContainer genreList={data.genres} />
+      </section>
     </>
   );
 }

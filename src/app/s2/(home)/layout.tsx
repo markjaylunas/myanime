@@ -1,6 +1,4 @@
-import AnimeCarouselListSkeleton from "@/components/anime-cards/AnimeCarouselListSkeleton";
-import { ReactNode, Suspense } from "react";
-import SortedList from "./_components/sorted-list";
+import { ReactNode } from "react";
 
 export default async function HomeLayout({
   children,
@@ -8,12 +6,8 @@ export default async function HomeLayout({
   children: ReactNode;
 }) {
   return (
-    <main className="container max-w-5xl mx-auto min-h-screen px-2 py-4 md:px-4">
+    <main className="container max-w-5xl mx-auto min-h-screen px-2 py-4 md:px-4 space-y-8">
       {children}
-
-      <Suspense fallback={<AnimeCarouselListSkeleton />}>
-        <SortedList />
-      </Suspense>
     </main>
   );
 }
