@@ -19,6 +19,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           {Boolean(anime.episodes?.sub) && (
             <Chip
               size="sm"
+              radius="sm"
               color="primary"
               variant="shadow"
               className={cn(
@@ -33,6 +34,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
 
           {Boolean(anime.episodes?.dub) && (
             <Chip
+              radius="sm"
               size="sm"
               color="secondary"
               variant="shadow"
@@ -45,12 +47,24 @@ export default function AnimeCard(anime: AWAnimeSchema) {
         </div>
 
         {anime.type && (
-          <Chip size="sm" color="warning" variant="shadow" className="text-xs">
+          <Chip
+            radius="sm"
+            size="sm"
+            color="warning"
+            variant="shadow"
+            className="text-xs"
+          >
             {anime.type}
           </Chip>
         )}
         {anime.isCurrent && (
-          <Chip size="sm" color="success" variant="shadow" className="text-xs">
+          <Chip
+            radius="sm"
+            size="sm"
+            color="success"
+            variant="shadow"
+            className="text-xs"
+          >
             Latest Season
           </Chip>
         )}
@@ -83,6 +97,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
         <div className="flex flex-wrap justify-between flex-row-reverse w-full">
           {Boolean(anime.duration) && (
             <Chip
+              radius="sm"
               size="sm"
               color="default"
               variant="shadow"
@@ -94,6 +109,7 @@ export default function AnimeCard(anime: AWAnimeSchema) {
 
           {anime.rating && (
             <Chip
+              radius="sm"
               size="sm"
               color="danger"
               variant="bordered"

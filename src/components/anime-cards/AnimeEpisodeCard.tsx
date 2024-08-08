@@ -43,13 +43,20 @@ export default function AnimeEpisodeCard({
       href={href}
       className="relative h-full w-full mx-auto aspect-video bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
-      <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-start">
-        <Chip radius="sm" size="sm" color="secondary" variant="shadow">
-          EP {episodeNumber}
-        </Chip>
-        <Chip radius="sm" size="sm" color="default" variant="shadow">
-          {moment(episodeProgressUpdatedAt).fromNow()}
-        </Chip>
+      <CardHeader className="absolute z-20 top-0 p-2 flex flex-col w-full gap-1">
+        <div className="flex flex-wrap gap-2 justify-between items-start w-full">
+          <Chip radius="sm" size="sm" color="secondary" variant="shadow">
+            EP {episodeNumber}
+          </Chip>
+          <Chip radius="sm" size="sm" color="default" variant="shadow">
+            {moment(episodeProgressUpdatedAt).fromNow()}
+          </Chip>
+        </div>
+        <div className="flex justify-end w-full">
+          <Chip radius="sm" size="sm" color="success" variant="bordered">
+            Server&nbsp;{server === "s1" ? "1" : "2"}
+          </Chip>
+        </div>
       </CardHeader>
 
       <div className="absolute z-10 w-[101%] h-[101%] bg-gradient-to-t from-black/80  via-black/40 to-transparent" />
