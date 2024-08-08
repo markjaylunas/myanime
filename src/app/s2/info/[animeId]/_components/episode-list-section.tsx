@@ -145,7 +145,7 @@ export default function EpisodeListSection({
                 startContent={episode.number}
                 color={episode.isFiller ? "warning" : "primary"}
                 textValue={episode.title}
-                href={`/s2/info/${animeId}/watch/${encodeEpisodeId(
+                href={`/${server}/info/${animeId}/watch/${encodeEpisodeId(
                   episode.episodeId
                 )}/${episode.number}`}
                 className={cn(
@@ -176,7 +176,7 @@ export default function EpisodeListSection({
             {episodeList.map((episode, episodeIdx) => (
               <Button
                 as={NextLink}
-                href={`/s2/info/${animeId}/watch/${encodeEpisodeId(
+                href={`/${server}/info/${animeId}/watch/${encodeEpisodeId(
                   episode.episodeId
                 )}/${episode.number}`}
                 variant={
