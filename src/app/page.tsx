@@ -17,11 +17,11 @@ export default async function MainHomePage() {
         My Anime
       </Heading>
 
-      <Heading className="text-gray-600 dark:text-gray-400 text-center mt-3 sm:mt-8">
+      <Heading className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl text-center mt-3 sm:mt-8">
         Select Your Streaming Server
       </Heading>
 
-      <section className="max-w-[900px] flex gap-2 flex-col sm:flex-row px-8 mt-2 sm:mt-4 mx-auto">
+      <section className="max-w-[900px] flex gap-2 lg:gap-4 flex-col sm:flex-row px-8 mt-2 sm:mt-4 mx-auto">
         <Card
           as={NextLink}
           href="/s1"
