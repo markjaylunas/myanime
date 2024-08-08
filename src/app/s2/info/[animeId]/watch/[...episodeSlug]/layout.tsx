@@ -54,6 +54,7 @@ export default async function HomeLayout({
     seasons,
   } = infoData;
 
+  const server = "s2";
   const episodeList = episodeData?.episodes || [];
   const totalEpisodes = episodeData?.totalEpisodes || 0;
 
@@ -101,7 +102,7 @@ export default async function HomeLayout({
               <div className="flex justify-start md:justify-end gap-2 flex-wrap">
                 <Button
                   as={NextLink}
-                  href={`/s1/info/${anime.info.id}`}
+                  href={`/${server}/info/${anime.info.id}`}
                   startContent={<Icons.information />}
                   size="sm"
                 >
