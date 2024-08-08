@@ -166,7 +166,9 @@ export default function EpisodeListSection({
                     episodeRefs.current[episodeIdx] = el;
                   }}
                 >
-                  {episode.title}
+                  <span className="text-wrap line-clamp-1">
+                    {episode.title}
+                  </span>
                 </div>
               </ListboxItem>
             ))}
