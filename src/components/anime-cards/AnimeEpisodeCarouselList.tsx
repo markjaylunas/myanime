@@ -38,7 +38,7 @@ export default function AnimeEpisodeCarouselList({ animeList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselNextPrev className="right-4 -top-10" />
+      <CarouselNextPrev className="right-2 -top-10" />
     </Carousel>
   );
 }

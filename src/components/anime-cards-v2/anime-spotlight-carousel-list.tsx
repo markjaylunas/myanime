@@ -39,7 +39,10 @@ export default function AnimeSpotlightCarouselList({ animeList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselNextPrev className="right-4 bottom-6" variant="secondary" />
+      <CarouselNextPrev
+        className="right-4 sm:right-2  bottom-2"
+        variant="secondary"
+      />
     </Carousel>
   );
 }
