@@ -2,7 +2,6 @@ import AnimeCarouselListSkeleton from "@/components/anime-cards/AnimeCarouselLis
 import AnimeListSkeleton from "@/components/anime-cards/AnimeListSkeleton";
 import GenreListContainer from "@/components/ui/GenreListContainer";
 import Heading from "@/components/ui/Heading";
-import MyLink from "@/components/ui/MyLink";
 import { genreList } from "@/lib/constants";
 import { Spacer } from "@nextui-org/spacer";
 import { ReactNode, Suspense } from "react";
@@ -26,10 +25,6 @@ export default async function HomeLayout({
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Popular
         </Heading>
-
-        <MyLink href="/s1/popular" color="primary">
-          Show All
-        </MyLink>
       </div>
 
       <Spacer y={2} />
@@ -44,10 +39,6 @@ export default async function HomeLayout({
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Trending
         </Heading>
-
-        <MyLink href="/s1/trending" color="primary">
-          Show All
-        </MyLink>
       </div>
       <Spacer y={2} />
 
@@ -61,10 +52,6 @@ export default async function HomeLayout({
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Airing Schedule
         </Heading>
-
-        <MyLink href="/s1/airing-schedule" color="primary">
-          Show All
-        </MyLink>
       </div>
       <Spacer y={2} />
 
@@ -77,10 +64,6 @@ export default async function HomeLayout({
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Recent Episodes
         </Heading>
-
-        <MyLink href="/s1/recent-episode" color="primary">
-          Show All
-        </MyLink>
       </div>
       <Spacer y={2} />
 
