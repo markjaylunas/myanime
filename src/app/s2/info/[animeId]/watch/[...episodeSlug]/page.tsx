@@ -12,12 +12,21 @@ import { notFound } from "next/navigation";
 
 export default async function EpisodePage({
   params,
+  searchParams,
 }: {
   params: { animeId: string; episodeSlug: string[] };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { episodeSlug, animeId } = params;
   const [episodeId] = episodeSlug;
   const decodedEpisodeId = decodeEpisodeId(episodeId);
+
+  const category =
+    typeof searchParams?.category === "string"
+      ? searchParams?.category || ""
+      : "";
+  const server =
+    typeof searchParams?.server === "string" ? searchParams?.server || "" : "";
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -25,7 +34,7 @@ export default async function EpisodePage({
   const [infoData, episodeData, episodeSourceData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
     fetchAWEpisodeData({ animeId }),
-    fetchAWEpisodeSourceData({ episodeId: decodedEpisodeId }),
+    fetchAWEpisodeSourceData({ episodeId: decodedEpisodeId, category, server }),
   ]);
 
   if (!infoData) {

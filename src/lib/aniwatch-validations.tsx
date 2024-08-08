@@ -178,3 +178,4 @@ export type AWEpisodeServersDataSchema = z.infer<
   typeof aWEpisodeServersDataSchema
 >;
 export type TrackSchema = z.infer<typeof trackSchema>;
+export type AWEpisodeServersSchema = z.infer<typeof aWEpisodeServersSchema>;
