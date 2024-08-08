@@ -35,7 +35,7 @@ export default function AnimeEpisodeCard({
   serverAnimeId,
   serverEpisodeId,
 }: AnimeEpisodeCardProps) {
-  let href = `${server}/info/${serverAnimeId}/watch/${serverEpisodeId}/${episodeNumber}`;
+  let href = `/${server}/info/${serverAnimeId}/watch/${serverEpisodeId}/${episodeNumber}`;
   // todo: add server tag to card if progress is on different server
   return (
     <Card
