@@ -2,6 +2,7 @@ import { fetchAllEpisodeProgress } from "@/actions/action";
 import { auth } from "@/auth";
 import AnimeEpisodeCarouselList from "@/components/anime-cards/AnimeEpisodeCarouselList";
 import Heading from "@/components/ui/Heading";
+import ServerButton from "@/components/ui/ServerButton";
 import { Spacer } from "@nextui-org/spacer";
 
 export default async function Home() {
@@ -23,6 +24,8 @@ export default async function Home() {
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
           Continue Watching
         </Heading>
+
+        <ServerButton />
       </div>
 
       <Spacer y={2} />
