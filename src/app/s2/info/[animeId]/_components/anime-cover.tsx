@@ -9,7 +9,7 @@ type Props = {
 
 export default function AnimeCover({ title, image }: Props) {
   return (
-    <section className="relative sm:flex flex-col hidden">
+    <section className="relative  flex-col ">
       <div className="relative w-full  h-[150px] md:h-[200px] lg:h-[300px]">
         <NextImage
           src={image}

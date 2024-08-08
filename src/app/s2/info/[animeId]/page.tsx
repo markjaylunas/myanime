@@ -61,18 +61,22 @@ export default async function InfoPage({
 
   return (
     <main className="relative mb-12">
-      <Heading className="block sm:hidden mx-8 text-center mt-5" order={"2xl"}>
-        {info.name}
-      </Heading>
-
-      <h2 className="block sm:hidden text-xs mx-8 text-center mb-5 text-gray-400">
-        {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
-      </h2>
-
       <AnimeCover title={info.name} image={info.poster} />
 
-      <section className="max-w-7xl px-8 sm:mx-auto sm:-mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
-        <PosterMoreInfo anime={anime} />
+      <section className="max-w-7xl px-4 sm:mx-auto -mt-32 flex justify-start items-center sm:items-start flex-col sm:flex-row gap-6 sm:gap-12 ">
+        <div className="space-y-2">
+          <Heading
+            className="block sm:hidden mx-8 text-center mt-5"
+            order={"2xl"}
+          >
+            {info.name}
+          </Heading>
+
+          <h3 className="block sm:hidden text-xs mx-8 text-center mb-5 text-gray-400">
+            {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
+          </h3>
+        </div>
+        <PosterMoreInfo anime={anime} classname="w-full" />
 
         <div className="flex flex-col gap-6">
           <AnimeInfoSection anime={anime}>
@@ -109,7 +113,7 @@ export default async function InfoPage({
       </section>
 
       {Boolean(animeSeasonList.length) && (
-        <section className="max-w-7xl px-8 sm:mx-auto">
+        <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
             order="2xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
@@ -121,7 +125,7 @@ export default async function InfoPage({
       )}
 
       {Boolean(relatedAnimes?.length) && (
-        <section className="max-w-7xl px-8 sm:mx-auto">
+        <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
             order="2xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
@@ -133,7 +137,7 @@ export default async function InfoPage({
       )}
 
       {Boolean(recommendedAnimes?.length) && (
-        <section className="max-w-7xl px-8 sm:mx-auto">
+        <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
             order="2xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
@@ -145,7 +149,7 @@ export default async function InfoPage({
       )}
 
       {Boolean(mostPopularAnimes?.length) && (
-        <section className="max-w-7xl px-8 sm:mx-auto">
+        <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
             order="2xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
