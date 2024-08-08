@@ -1,10 +1,11 @@
 import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
 import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import Heading from "@/components/ui/Heading";
+import { SearchParams } from "@/lib/types";
 import { encodeEpisodeId } from "@/lib/utils";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import NextLink from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import AnimeCover from "./_components/anime-cover";
 import AnimeInfoSection from "./_components/anime-info-section";
 import EpisodeListSection from "./_components/episode-list-section";
@@ -12,10 +13,17 @@ import PosterMoreInfo from "./_components/poster-more-info";
 
 export default async function InfoPage({
   params,
+  searchParams,
 }: {
   params: { animeId: string };
+  searchParams?: SearchParams;
 }) {
   const { animeId } = params;
+  const toWatch =
+    typeof searchParams?.watch === "string"
+      ? Boolean(searchParams?.watch) || false
+      : false;
+
   const [infoData, episodeData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
     fetchAWEpisodeData({ animeId }),
@@ -52,6 +60,8 @@ export default async function InfoPage({
         firstEpisode.number
       }`
     : null;
+
+  if (toWatch && watchLink) redirect(watchLink);
 
   const latestLink = latestEpisode
     ? `/s2/info/${animeId}/watch/${encodeEpisodeId(latestEpisode.episodeId)}/${

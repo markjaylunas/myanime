@@ -23,7 +23,8 @@ const config = {
       },
 
       aspectRatio: {
-        "2/3": "2 / 3",
+        "2/3": "2/3",
+        "3/1": "3/1",
       },
       screens: {
         "2xs": "345px",

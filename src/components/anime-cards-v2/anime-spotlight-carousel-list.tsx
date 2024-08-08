@@ -10,35 +10,36 @@ import {
 import { AWAnimeSchema } from "@/lib/aniwatch-validations";
 import { useState } from "react";
 import AnimeCardMotion from "../anime-cards/AnimeCardMotion";
-import AnimeCard from "./anime-card";
+import AnimeSpotlightCard from "./anime-spotlight-card";
 
 type Props = {
   animeList: AWAnimeSchema[];
 };
 
-export default function AnimeCarouselList({ animeList }: Props) {
+export default function AnimeSpotlightCarouselList({ animeList }: Props) {
   const [_, setApi] = useState<CarouselApi>();
+
   return (
     <Carousel
-      opts={{
-        dragFree: true,
-      }}
       setApi={setApi}
+      opts={{
+        skipSnaps: true,
+      }}
       className="w-full"
     >
       <CarouselContent className="-ml-1">
         {animeList.map((anime, index) => (
           <CarouselItem
             key={`${anime.id}-${index}`}
-            className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
+            className="pl-2  basis-[100%]"
           >
             <AnimeCardMotion index={index}>
-              <AnimeCard {...anime} />
+              <AnimeSpotlightCard {...anime} />
             </AnimeCardMotion>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselNextPrev className="right-2 -top-10" />
+      <CarouselNextPrev className="right-4 bottom-6" variant="secondary" />
     </Carousel>
   );
 }

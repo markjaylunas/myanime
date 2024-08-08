@@ -1,8 +1,13 @@
+"use client";
+
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselNextPrev,
 } from "@/components/ui/carousel";
+import { useState } from "react";
 import AnimeCardMotion from "./AnimeCardMotion";
 import AnimeEpisodeCard, { AnimeEpisodeCardProps } from "./AnimeEpisodeCard";
 
@@ -11,8 +16,11 @@ type Props = {
 };
 
 export default function AnimeEpisodeCarouselList({ animeList }: Props) {
+  const [_, setApi] = useState<CarouselApi>();
+
   return (
     <Carousel
+      setApi={setApi}
       opts={{
         dragFree: true,
       }}
@@ -30,6 +38,7 @@ export default function AnimeEpisodeCarouselList({ animeList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselNextPrev className="right-4 -top-10" />
     </Carousel>
   );
 }

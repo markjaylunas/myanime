@@ -20,6 +20,7 @@ import React, { useState } from "react";
 import { Icons } from "./Icons";
 import MyLink from "./MyLink";
 import QuickSearch from "./QuickSearch";
+import ServerButton from "./ServerButton";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import UserAvatar from "./UserAvatar";
 
@@ -113,6 +114,7 @@ export default function Navbar({ user }: Props) {
       </NavbarContent>
 
       <NavbarContent justify="end">
+        <NavbarItem>{routes.length > 0 && <ServerButton />}</NavbarItem>
         <NavbarItem>{routes.length > 0 && <QuickSearch />}</NavbarItem>
 
         <NavbarItem>

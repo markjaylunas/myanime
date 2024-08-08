@@ -2,7 +2,6 @@ import { fetchAllEpisodeProgress } from "@/actions/action";
 import { auth } from "@/auth";
 import AnimeEpisodeCarouselList from "@/components/anime-cards/AnimeEpisodeCarouselList";
 import Heading from "@/components/ui/Heading";
-import ServerButton from "@/components/ui/ServerButton";
 
 export default async function ContinueList() {
   const session = await auth();
@@ -23,7 +22,6 @@ export default async function ContinueList() {
           Continue Watching
         </Heading>
 
-        <ServerButton />
         {/* 
         <MyLink href="/s2/continue-watching" color="primary">
           Show All
