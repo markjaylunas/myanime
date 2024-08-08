@@ -57,6 +57,7 @@ const config = {
   plugins: [
     require("@vidstack/react/tailwind.cjs"),
     require("tailwindcss-animate"),
+    require("tailwind-scrollbar"),
     nextui({
       layout: {
         radius: {
