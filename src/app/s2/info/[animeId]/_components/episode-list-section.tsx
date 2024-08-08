@@ -39,7 +39,7 @@ export default function EpisodeListSection({
     const episodeIndex = episodeList.findIndex(
       (episode) => episode.number === activeEpisodeNumber
     );
-    title = `Now playing EP ${activeEpisodeNumber} of ${totalEpisodes}  ${
+    title = `You are watching episode ${activeEpisodeNumber} of ${totalEpisodes}  ${
       episodeList[episodeIndex].title
         ? `- ${episodeList[episodeIndex].title}`
         : ""
