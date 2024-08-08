@@ -82,7 +82,6 @@ export default function EpisodeListSection({
       {activeEpisodeNumber && (
         <p className="text-gray-500 line-clamp-2">{title}</p>
       )}
-
       <div className="flex justify-start gap-3">
         <Button
           onPress={() => setIsListView((v) => !v)}
@@ -100,36 +99,38 @@ export default function EpisodeListSection({
           onValueChange={handleEpisodeSearchChange}
         />
 
-        <ButtonGroup variant="bordered">
-          <Button
-            as={NextLink}
-            href={
-              prevEpisode
-                ? `/${server}/info/${animeId}/watch/${encodeEpisodeId(
-                    prevEpisode.episodeId
-                  )}/${prevEpisode.number}`
-                : ""
-            }
-            isDisabled={!Boolean(prevEpisode)}
-            startContent={<Icons.chevronDoubleLeft />}
-          >
-            {prevEpisode ? prevEpisode.number : saluteCharacter}
-          </Button>
-          <Button
-            as={NextLink}
-            href={
-              nextEpisode
-                ? `/${server}/info/${animeId}/watch/${encodeEpisodeId(
-                    nextEpisode.episodeId
-                  )}/${nextEpisode.number}`
-                : ""
-            }
-            isDisabled={!Boolean(nextEpisode)}
-            endContent={<Icons.chevronDoubleRight />}
-          >
-            {nextEpisode ? nextEpisode.number : meltCharacter}
-          </Button>
-        </ButtonGroup>
+        {activeEpisodeNumber > 0 && (
+          <ButtonGroup variant="bordered">
+            <Button
+              as={NextLink}
+              href={
+                prevEpisode
+                  ? `/${server}/info/${animeId}/watch/${encodeEpisodeId(
+                      prevEpisode.episodeId
+                    )}/${prevEpisode.number}`
+                  : ""
+              }
+              isDisabled={!Boolean(prevEpisode)}
+              startContent={<Icons.chevronDoubleLeft />}
+            >
+              {prevEpisode ? prevEpisode.number : saluteCharacter}
+            </Button>
+            <Button
+              as={NextLink}
+              href={
+                nextEpisode
+                  ? `/${server}/info/${animeId}/watch/${encodeEpisodeId(
+                      nextEpisode.episodeId
+                    )}/${nextEpisode.number}`
+                  : ""
+              }
+              isDisabled={!Boolean(nextEpisode)}
+              endContent={<Icons.chevronDoubleRight />}
+            >
+              {nextEpisode ? nextEpisode.number : meltCharacter}
+            </Button>
+          </ButtonGroup>
+        )}
       </div>
       <ScrollShadow className="w-full max-h-[400px] scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-stone-600 scrollbar-track-stone-600/50 ">
         {isListView ? (
