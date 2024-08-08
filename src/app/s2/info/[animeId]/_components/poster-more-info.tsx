@@ -79,7 +79,7 @@ export default function PosterMoreInfo({ anime, classname }: Props) {
           </span>
         </p>
         <p className="flex justify-between text-tiny">
-          <span className="text-foreground-500">Aired</span>{" "}
+          <span className="text-foreground-500 pr-20">Aired</span>{" "}
           <span>{moreInfo.aired}</span>
         </p>
         <p className="flex justify-between text-tiny">
