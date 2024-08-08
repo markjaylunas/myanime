@@ -42,8 +42,9 @@ export default function QuickSearch() {
             aria-label="Search anime"
             radius="full"
             className="bg-gradient-to-tr from-rose-500 to-primary text-white shadow-lg"
-            startContent={<Icons.search />}
+            startContent={<Icons.search className="size-4" />}
             variant="shadow"
+            size="sm"
             isIconOnly
           ></Button>
         </DropdownTrigger>

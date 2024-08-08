@@ -25,7 +25,7 @@ export default function UserAvatar({ user }: Props) {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <Avatar isBordered as="button" name={name} src={image} />
+        <Avatar size="sm" isBordered as="button" name={name} src={image} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownSection title="User" showDivider>
