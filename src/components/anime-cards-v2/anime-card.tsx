@@ -15,6 +15,17 @@ export default function AnimeCard(anime: AWAnimeSchema) {
        h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
       <CardHeader className="absolute z-20 top-0 p-2 flex flex-wrap gap-2 justify-between items-end">
+        {anime.type && (
+          <Chip
+            radius="sm"
+            size="sm"
+            color="warning"
+            variant="shadow"
+            className="text-xs"
+          >
+            {anime.type}
+          </Chip>
+        )}
         <div className="flex justify-center items-center">
           {Boolean(anime.episodes?.sub) && (
             <Chip
@@ -46,17 +57,6 @@ export default function AnimeCard(anime: AWAnimeSchema) {
           )}
         </div>
 
-        {anime.type && (
-          <Chip
-            radius="sm"
-            size="sm"
-            color="warning"
-            variant="shadow"
-            className="text-xs"
-          >
-            {anime.type}
-          </Chip>
-        )}
         {anime.isCurrent && (
           <Chip
             radius="sm"
