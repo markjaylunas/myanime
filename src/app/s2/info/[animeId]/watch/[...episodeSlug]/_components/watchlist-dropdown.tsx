@@ -74,7 +74,7 @@ export default function WatchListDropdown({ animeWatchStatus, anime }: Props) {
   };
 
   return (
-    <ButtonGroup variant="shadow">
+    <ButtonGroup variant="shadow" size="sm">
       <Button
         color={isNull ? "primary" : "default"}
         disabled={!isNull}

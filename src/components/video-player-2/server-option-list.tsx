@@ -34,12 +34,7 @@ export default function ServerOptionList({
 }: Props) {
   const currentServer = "s2";
   return (
-    <section className={cn("flex flex-col gap-2 w-full", className)}>
-      <Text className="text-xs text-foreground-500">
-        If current stream server doesn&apos;t work please try other stream
-        servers below.
-      </Text>
-
+    <section className={cn("flex flex-col gap-2", className)}>
       <div className="flex gap-3 flex-wrap">
         <Text className="text-secondary-500">Servers: </Text>
         {serverList.map((server) => (

@@ -80,7 +80,7 @@ export default function EpisodeListSection({
   return (
     <section className={cn("space-y-3 min-w-[300px]", className)}>
       {activeEpisodeNumber && (
-        <p className="text-gray-500 line-clamp-2">{title}</p>
+        <p className="text-gray-500 line-clamp-2 text-tiny">{title}</p>
       )}
       <div className="flex justify-start gap-3">
         <Button

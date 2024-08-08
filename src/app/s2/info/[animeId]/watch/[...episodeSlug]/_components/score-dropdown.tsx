@@ -60,7 +60,8 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
       return;
     }
     setIsLoading(true);
-    const score = selected.values().next().value as number;
+    const score = parseInt(selected.values().next().value || "");
+    if (!score) return;
     const upsertData = await upsertWatchStatus({
       animeInsert: anime,
       data: {
@@ -78,6 +79,7 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
         <Button
+          size="sm"
           isDisabled={isLoading}
           className="bg-gradient-to-tr from-rose-500 to-primary-500 border-small border-white/50 shadow-primary-500/30 text-white"
         >
@@ -97,7 +99,6 @@ export default function ScoreDropdown({ animeWatchStatus, anime }: Props) {
       <DropdownMenu
         disallowEmptySelection
         aria-label="Watch list options"
-        selectedKeys={selectedOptionValue.toString()}
         selectionMode="single"
         onSelectionChange={(selected) => {
           if (selected instanceof Set) {
