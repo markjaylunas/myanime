@@ -15,11 +15,11 @@ export default function PosterMoreInfo({ anime, classname }: Props) {
   return (
     <section
       className={cn(
-        "flex-none flex items-start  gap-2 flex-row sm:flex-col",
+        "flex-none md:max-w-60 flex items-start  gap-2 flex-row sm:flex-col",
         classname
       )}
     >
-      <div className="w-48 flex-1">
+      <div className="max-w-60 flex-1">
         <Image isBlurred width={240} src={info.poster} alt={info.name} />
       </div>
 
