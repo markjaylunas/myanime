@@ -11,7 +11,7 @@ export default async function SortedList() {
   return (
     <>
       <section className="space-y-2">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 mb-2">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 mb-2">
           Latest Episodes
         </Heading>
         <AnimeCarouselList
@@ -22,7 +22,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Trending
@@ -32,7 +32,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Top Airing
@@ -42,7 +42,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Top Upcoming
@@ -52,7 +52,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Top 10
@@ -62,7 +62,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Popular
@@ -72,7 +72,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Most Favorite
@@ -82,7 +82,7 @@ export default async function SortedList() {
 
       <section className="space-y-2">
         <Heading
-          order="2xl"
+          order="xl"
           className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
         >
           Latest Completed

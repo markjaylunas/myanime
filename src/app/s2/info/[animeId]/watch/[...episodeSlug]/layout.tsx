@@ -151,7 +151,7 @@ export default async function HomeLayout({
       {Boolean(animeSeasonList.length) && (
         <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
-            order="2xl"
+            order="xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
           >
             Seasons
@@ -163,7 +163,7 @@ export default async function HomeLayout({
       {Boolean(relatedAnimes?.length) && (
         <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
-            order="2xl"
+            order="xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
           >
             Related
@@ -175,7 +175,7 @@ export default async function HomeLayout({
       {Boolean(recommendedAnimes?.length) && (
         <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
-            order="2xl"
+            order="xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
           >
             Recommendations
@@ -187,7 +187,7 @@ export default async function HomeLayout({
       {Boolean(mostPopularAnimes?.length) && (
         <section className="max-w-7xl px-4 sm:mx-auto">
           <Heading
-            order="2xl"
+            order="xl"
             className="text-gray-700 dark:text-gray-300 mt-8 mb-2"
           >
             Most Popular

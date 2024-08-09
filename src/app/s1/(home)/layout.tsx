@@ -22,7 +22,7 @@ export default async function HomeLayout({
       <Spacer y={8} />
 
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Popular
         </Heading>
       </div>
@@ -36,7 +36,7 @@ export default async function HomeLayout({
       <Spacer y={8} />
 
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Trending
         </Heading>
       </div>
@@ -49,7 +49,7 @@ export default async function HomeLayout({
       <Spacer y={8} />
 
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Airing Schedule
         </Heading>
       </div>
@@ -61,7 +61,7 @@ export default async function HomeLayout({
       <Spacer y={8} />
 
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Recent Episodes
         </Heading>
       </div>

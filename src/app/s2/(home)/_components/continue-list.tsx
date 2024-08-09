@@ -18,7 +18,7 @@ export default async function ContinueList() {
   return (
     <section className="space-y-2">
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Continue Watching
         </Heading>
 

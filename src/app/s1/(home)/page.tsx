@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex justify-between">
-        <Heading order="2xl" className="text-gray-700 dark:text-gray-300 ">
+        <Heading order="xl" className="text-gray-700 dark:text-gray-300 ">
           Continue Watching
         </Heading>
       </div>
