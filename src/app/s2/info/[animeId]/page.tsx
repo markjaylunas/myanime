@@ -4,6 +4,7 @@ import Heading from "@/components/ui/Heading";
 import { SearchParams } from "@/lib/types";
 import { encodeEpisodeId } from "@/lib/utils";
 import { Button, ButtonGroup } from "@nextui-org/button";
+import { Chip } from "@nextui-org/chip";
 import NextLink from "next/link";
 import { notFound, redirect } from "next/navigation";
 import AnimeCover from "./_components/anime-cover";
@@ -58,6 +59,7 @@ export default async function InfoPage({
       }))
     : [];
 
+  const hasEpisode = episodeList.length > 0;
   const firstEpisode = episodeList[0];
   const latestEpisode = episodeList[episodeList.length - 1];
   const watchLink = firstEpisode
@@ -96,35 +98,57 @@ export default async function InfoPage({
 
         <div className="flex flex-col gap-6">
           <AnimeInfoSection anime={anime}>
-            <ButtonGroup className="sm:w-fit w-full">
-              <Button
-                as={NextLink}
-                href={watchLink || ""}
-                size="lg"
-                color="primary"
-                className="text-xl font-semibold w-full"
-                isDisabled={watchLink === null}
-              >
-                Watch Now
-              </Button>
-              <Button
-                as={NextLink}
-                href={latestLink || ""}
-                size="lg"
-                color="primary"
-                variant="bordered"
-                className="text-xl font-semibold w-full"
-                isDisabled={latestLink === null}
-              >
-                Latest
-              </Button>
-            </ButtonGroup>
+            {hasEpisode && (
+              <ButtonGroup className="sm:w-fit w-full">
+                <Button
+                  as={NextLink}
+                  href={watchLink || ""}
+                  size="lg"
+                  color="primary"
+                  className="text-xl font-semibold w-full"
+                  isDisabled={watchLink === null}
+                >
+                  Watch Now
+                </Button>
+                <Button
+                  as={NextLink}
+                  href={latestLink || ""}
+                  size="lg"
+                  color="primary"
+                  variant="bordered"
+                  className="text-xl font-semibold w-full"
+                  isDisabled={latestLink === null}
+                >
+                  Latest
+                </Button>
+              </ButtonGroup>
+            )}
           </AnimeInfoSection>
 
-          <EpisodeListSection
-            episodeList={episodeList}
-            totalEpisodes={episodeData?.totalEpisodes || 0}
-          />
+          {hasEpisode ? (
+            <EpisodeListSection
+              episodeList={episodeList}
+              totalEpisodes={episodeData?.totalEpisodes || 0}
+            />
+          ) : (
+            <Chip
+              radius="lg"
+              variant="flat"
+              className="w-full mx-auto h-fit px-8 py-4"
+            >
+              <h3 className="text-center text-2xl font-bold text-warning">
+                Upcoming Anime
+              </h3>
+              <p className="text-foreground-500 text-center text-pretty mt-2">
+                This anime hasn&apos;t been released yet so no episodes are
+                available. Add it to your{" "}
+                <span className="text-secondary-500">
+                  &ldquo;Watchlist&ldquo;
+                </span>{" "}
+                to get notified when it&apos;s out!
+              </p>
+            </Chip>
+          )}
         </div>
       </section>
 

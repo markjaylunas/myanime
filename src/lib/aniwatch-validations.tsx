@@ -63,7 +63,7 @@ export const aWHomeDataSchema = z.object({
 export const aWAnimeInfoDataSchema = z.object({
   anime: z.object({
     info: z.object({
-      id: z.string(),
+      id: z.string().nullable().optional(),
       name: z.string(),
       poster: z.string(),
       description: z.string().optional().nullable(),
