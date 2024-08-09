@@ -12,6 +12,7 @@ import Text from "@/components/ui/Text";
 import ServerOptionList, {
   ServerOptionListType,
 } from "@/components/video-player-2/server-option-list";
+import { aniwatchAnimeObjectMapper } from "@/lib/object-mapper";
 import { decodeEpisodeId } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
@@ -156,7 +157,9 @@ export default async function HomeLayout({
           >
             Seasons
           </Heading>
-          <AnimeCarouselList animeList={animeSeasonList} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(animeSeasonList)}
+          />
         </section>
       )}
 
@@ -168,7 +171,9 @@ export default async function HomeLayout({
           >
             Related
           </Heading>
-          <AnimeCarouselList animeList={relatedAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(relatedAnimes || [])}
+          />
         </section>
       )}
 
@@ -180,7 +185,9 @@ export default async function HomeLayout({
           >
             Recommendations
           </Heading>
-          <AnimeCarouselList animeList={recommendedAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(recommendedAnimes || [])}
+          />
         </section>
       )}
 
@@ -192,7 +199,9 @@ export default async function HomeLayout({
           >
             Most Popular
           </Heading>
-          <AnimeCarouselList animeList={mostPopularAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(mostPopularAnimes || [])}
+          />
         </section>
       )}
     </main>

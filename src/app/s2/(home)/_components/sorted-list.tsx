@@ -2,6 +2,7 @@ import { fetchAniwatchHomeData } from "@/actions/aniwatch";
 import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import GenreListContainer from "@/components/ui/GenreListContainer";
 import Heading from "@/components/ui/Heading";
+import { aniwatchAnimeObjectMapper } from "@/lib/object-mapper";
 import { Spacer } from "@nextui-org/spacer";
 
 export default async function SortedList() {
@@ -15,7 +16,7 @@ export default async function SortedList() {
           Latest Episodes
         </Heading>
         <AnimeCarouselList
-          animeList={data.latestEpisodeAnimes}
+          animeList={aniwatchAnimeObjectMapper(data.latestEpisodeAnimes)}
           isRecentEpisode
         />
       </section>
@@ -27,7 +28,9 @@ export default async function SortedList() {
         >
           Trending
         </Heading>
-        <AnimeCarouselList animeList={data.trendingAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.trendingAnimes)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -37,7 +40,9 @@ export default async function SortedList() {
         >
           Top Airing
         </Heading>
-        <AnimeCarouselList animeList={data.topAiringAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.topAiringAnimes)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -47,7 +52,9 @@ export default async function SortedList() {
         >
           Top Upcoming
         </Heading>
-        <AnimeCarouselList animeList={data.topUpcomingAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.topUpcomingAnimes)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -57,7 +64,9 @@ export default async function SortedList() {
         >
           Top 10
         </Heading>
-        <AnimeCarouselList animeList={data.top10Animes.month} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.top10Animes.month)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -67,7 +76,9 @@ export default async function SortedList() {
         >
           Popular
         </Heading>
-        <AnimeCarouselList animeList={data.mostPopularAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.mostPopularAnimes)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -77,7 +88,9 @@ export default async function SortedList() {
         >
           Most Favorite
         </Heading>
-        <AnimeCarouselList animeList={data.mostFavoriteAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.mostFavoriteAnimes)}
+        />
       </section>
 
       <section className="space-y-2">
@@ -87,7 +100,9 @@ export default async function SortedList() {
         >
           Latest Completed
         </Heading>
-        <AnimeCarouselList animeList={data.latestCompletedAnimes} />
+        <AnimeCarouselList
+          animeList={aniwatchAnimeObjectMapper(data.latestCompletedAnimes)}
+        />
       </section>
 
       <section className="space-y-2">

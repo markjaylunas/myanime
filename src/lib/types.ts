@@ -92,3 +92,17 @@ export type ASFormat = (typeof ASFormatArray)[number];
 export type ASSort = (typeof ASSortArray)[number];
 export type ASGenres = (typeof ASGenresArray)[number];
 export type ASStatus = (typeof ASStatusArray)[number];
+
+export type AnimeType = {
+  id: string;
+  name: string;
+  poster: string;
+  type?: string | null;
+  sub?: number | null;
+  dub?: number | null;
+  isLatestSeason?: boolean | null;
+  rank?: number | null;
+  duration?: string | null;
+  rated?: string | null;
+  rating?: string | null;
+};

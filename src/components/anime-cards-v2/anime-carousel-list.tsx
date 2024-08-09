@@ -7,13 +7,13 @@ import {
   CarouselItem,
   CarouselNextPrev,
 } from "@/components/ui/carousel";
-import { AWAnimeSchema } from "@/lib/aniwatch-validations";
+import { AnimeType } from "@/lib/types";
 import { useState } from "react";
 import AnimeCardMotion from "../anime-cards/AnimeCardMotion";
 import AnimeCard from "./anime-card";
 
 type Props = {
-  animeList: AWAnimeSchema[];
+  animeList: AnimeType[];
   isRecentEpisode?: boolean;
 };
 

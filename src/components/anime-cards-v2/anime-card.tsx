@@ -1,4 +1,4 @@
-import { AWAnimeSchema } from "@/lib/aniwatch-validations";
+import { AnimeType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
@@ -7,11 +7,11 @@ import NextLink from "next/link";
 import { Icons } from "../ui/Icons";
 
 type Props = {
-  anime: AWAnimeSchema;
+  anime: AnimeType;
   isRecentEpisode?: boolean;
 };
 
-export default function AnimeCard({ anime, isRecentEpisode = false }: Props) {
+export default function AnimeCard({ anime, isRecentEpisode }: Props) {
   const server = "s2";
   let link = `/${server}/info/${anime.id}`;
 
@@ -37,7 +37,7 @@ export default function AnimeCard({ anime, isRecentEpisode = false }: Props) {
           </Chip>
         )}
         <div className="flex justify-center items-center">
-          {Boolean(anime.episodes?.sub) && (
+          {Boolean(anime?.sub) && (
             <Chip
               size="sm"
               radius="sm"
@@ -45,29 +45,29 @@ export default function AnimeCard({ anime, isRecentEpisode = false }: Props) {
               variant="shadow"
               className={cn(
                 "text-xs mx-auto space-x-1",
-                anime.episodes?.dub && "rounded-r-none"
+                anime?.dub && "rounded-r-none"
               )}
               startContent={<Icons.closedCaption className="size-3" />}
             >
-              {anime.episodes?.sub}
+              {anime?.sub}
             </Chip>
           )}
 
-          {Boolean(anime.episodes?.dub) && (
+          {Boolean(anime?.dub) && (
             <Chip
               radius="sm"
               size="sm"
               color="secondary"
               variant="shadow"
-              className={cn("text-xs", anime.episodes?.sub && "rounded-l-none")}
+              className={cn("text-xs", anime?.sub && "rounded-l-none")}
               startContent={<Icons.microphone className="size-3" />}
             >
-              {anime.episodes?.dub}
+              {anime?.dub}
             </Chip>
           )}
         </div>
 
-        {anime.isCurrent && (
+        {anime.isLatestSeason && (
           <Chip
             radius="sm"
             size="sm"

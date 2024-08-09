@@ -1,6 +1,7 @@
 import { fetchAWAnimeData, fetchAWEpisodeData } from "@/actions/aniwatch";
 import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
 import Heading from "@/components/ui/Heading";
+import { aniwatchAnimeObjectMapper } from "@/lib/object-mapper";
 import { SearchParams } from "@/lib/types";
 import { encodeEpisodeId } from "@/lib/utils";
 import { Button, ButtonGroup } from "@nextui-org/button";
@@ -160,7 +161,9 @@ export default async function InfoPage({
           >
             Seasons
           </Heading>
-          <AnimeCarouselList animeList={animeSeasonList} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(animeSeasonList)}
+          />
         </section>
       )}
 
@@ -172,7 +175,9 @@ export default async function InfoPage({
           >
             Related
           </Heading>
-          <AnimeCarouselList animeList={relatedAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(relatedAnimes || [])}
+          />
         </section>
       )}
 
@@ -184,7 +189,9 @@ export default async function InfoPage({
           >
             Recommendations
           </Heading>
-          <AnimeCarouselList animeList={recommendedAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(recommendedAnimes || [])}
+          />
         </section>
       )}
 
@@ -196,7 +203,9 @@ export default async function InfoPage({
           >
             Most Popular
           </Heading>
-          <AnimeCarouselList animeList={mostPopularAnimes || []} />
+          <AnimeCarouselList
+            animeList={aniwatchAnimeObjectMapper(mostPopularAnimes || [])}
+          />
         </section>
       )}
     </main>
