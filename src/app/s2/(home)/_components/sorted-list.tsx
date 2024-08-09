@@ -16,7 +16,7 @@ export default async function SortedList() {
         </Heading>
         <AnimeCarouselList
           animeList={data.latestEpisodeAnimes}
-          query="?latest=true"
+          isRecentEpisode
         />
       </section>
 

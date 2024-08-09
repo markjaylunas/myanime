@@ -3,19 +3,24 @@ import { cn } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
-import Link from "next/link";
+import NextLink from "next/link";
 import { Icons } from "../ui/Icons";
 
 type Props = {
   anime: AWAnimeSchema;
-  query?: string;
+  isRecentEpisode?: boolean;
 };
 
-export default function AnimeCard({ anime, query = "" }: Props) {
+export default function AnimeCard({ anime, isRecentEpisode = false }: Props) {
+  const server = "s2";
+  let link = `/${server}/info/${anime.id}`;
+
+  if (isRecentEpisode) link = `${link}?latest=true`;
+
   return (
     <Card
-      as={Link}
-      href={`/s2/info/${anime.id}${query}`}
+      as={NextLink}
+      href={link}
       className="relative
        h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >
