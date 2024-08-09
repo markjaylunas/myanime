@@ -15,7 +15,7 @@ export default function PosterMoreInfo({ anime, classname }: Props) {
   return (
     <section
       className={cn(
-        "flex-1 flex items-start  gap-2 flex-row sm:flex-col",
+        "flex-none flex items-start  gap-2 flex-row sm:flex-col",
         classname
       )}
     >

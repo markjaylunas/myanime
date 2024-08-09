@@ -94,7 +94,7 @@ export default async function InfoPage({
             {Array.from(new Set([moreInfo.synonyms])).join(" | ")}
           </h3>
         </div>
-        <PosterMoreInfo anime={anime} classname="w-full" />
+        <PosterMoreInfo anime={anime} />
 
         <div className="flex flex-col gap-6">
           <AnimeInfoSection anime={anime}>
