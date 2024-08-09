@@ -41,7 +41,7 @@ export default function AnimeSpotlightCard(anime: AWAnimeSchema) {
         src={anime.poster}
         classNames={{
           wrapper:
-            "z-0 w-full h-full mx-auto bg-blur-md flex items-end justify-end -mt-2",
+            "z-0 w-full h-full mx-auto bg-blur-md flex items-start justify-end -mt-2",
           img: "object-cover object-right-middle min-w-full min-h-full",
         }}
       />
