@@ -1,10 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
-import { motion } from "framer-motion";
 import HTMLParse from "html-react-parser";
 import React, { useState } from "react";
-import { Icons } from "./Icons";
 
 type Props = React.HTMLProps<HTMLParagraphElement> & {
   maxChars?: number;
@@ -23,7 +21,7 @@ export default function ExpandDescription({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section className="flex indent-8 flex-col justify-center items-center gap-2,">
+    <section className="flex indent-8 flex-col justify-center items-center">
       <p
         className={cn(
           "text-foreground-500 text-justify",
@@ -36,20 +34,12 @@ export default function ExpandDescription({
       </p>
       {!isTooShort && (
         <Button
-          radius="full"
-          isIconOnly
-          variant="flat"
+          variant="light"
           size="sm"
-          color="primary"
-          className="mt-4 rounded-xl"
+          className="mt-1rounded-xl"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          <motion.div
-            animate={{ rotateX: isExpanded ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Icons.chevronDown />
-          </motion.div>
+          Read more
         </Button>
       )}
     </section>
