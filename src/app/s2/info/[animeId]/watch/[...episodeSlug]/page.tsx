@@ -2,13 +2,15 @@ import { fetchEpisodeProgress } from "@/actions/action";
 import {
   fetchAWAnimeData,
   fetchAWEpisodeData,
+  fetchAWEpisodeServersData,
   fetchAWEpisodeSourceData,
 } from "@/actions/aniwatch";
 import { auth } from "@/auth";
 import NoVideo from "@/components/video-player-2/NoVideo";
+import { ServerOptionListType } from "@/components/video-player-2/server-option-list";
 import VideoPlayer from "@/components/video-player-2/VideoPlayer";
-import { decodeEpisodeId } from "@/lib/utils";
-import { notFound } from "next/navigation";
+import { decodeEpisodeId, encodeEpisodeId } from "@/lib/utils";
+import { notFound, redirect } from "next/navigation";
 
 export default async function EpisodePage({
   params,
@@ -31,14 +33,42 @@ export default async function EpisodePage({
   const session = await auth();
   const userId = session?.user?.id;
 
-  const [infoData, episodeData, episodeSourceData] = await Promise.all([
-    fetchAWAnimeData({ animeId }),
-    fetchAWEpisodeData({ animeId }),
-    fetchAWEpisodeSourceData({ episodeId: decodedEpisodeId, category, server }),
-  ]);
+  const [infoData, episodeData, episodeSourceData, episodeServersData] =
+    await Promise.all([
+      fetchAWAnimeData({ animeId }),
+      fetchAWEpisodeData({ animeId }),
+      fetchAWEpisodeSourceData({
+        episodeId: decodedEpisodeId,
+        category,
+        server,
+      }),
+      fetchAWEpisodeServersData({ episodeId: decodedEpisodeId }),
+    ]);
 
   if (!infoData) {
     return notFound();
+  }
+  if (!episodeSourceData) {
+    const serverListOption: ServerOptionListType = [
+      { type: "sub", list: episodeServersData?.sub || [] },
+      { type: "dub", list: episodeServersData?.dub || [] },
+      { type: "raw", list: episodeServersData?.raw || [] },
+    ];
+
+    const serverListFiltered = serverListOption.filter(
+      (server) => server.list.length > 0
+    );
+
+    console.log({ serverListFiltered });
+    if (serverListFiltered) {
+      redirect(
+        `/s2/info/${animeId}/watch/${encodeEpisodeId(
+          episodeServersData?.episodeId || ""
+        )}/${episodeServersData?.episodeNo || 1}?category=${
+          serverListFiltered[0].type
+        }&server=${serverListFiltered[0].list[0].serverName}`
+      );
+    }
   }
 
   const { anime } = infoData;
@@ -94,7 +124,11 @@ export default async function EpisodePage({
           trackListList={episodeSourceData.tracks || []}
         />
       ) : (
-        <NoVideo bgSrc={info.poster} title={`No source found`} />
+        <NoVideo
+          bgSrc={info.poster}
+          title={`No source found`}
+          description="Please try other stream servers below ⬇️"
+        />
       )}
     </>
   );
