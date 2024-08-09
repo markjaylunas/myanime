@@ -14,9 +14,10 @@ import AnimeCard from "./anime-card";
 
 type Props = {
   animeList: AWAnimeSchema[];
+  query?: string;
 };
 
-export default function AnimeCarouselList({ animeList }: Props) {
+export default function AnimeCarouselList({ animeList, query }: Props) {
   const [_, setApi] = useState<CarouselApi>();
   return (
     <Carousel
@@ -33,7 +34,7 @@ export default function AnimeCarouselList({ animeList }: Props) {
             className="pl-2  basis-[45%] xs:basis-[28%] md:basis-[23%] lg:basis-[19%] xl:basis-[18%]"
           >
             <AnimeCardMotion index={index}>
-              <AnimeCard {...anime} />
+              <AnimeCard anime={anime} query={query} />
             </AnimeCardMotion>
           </CarouselItem>
         ))}

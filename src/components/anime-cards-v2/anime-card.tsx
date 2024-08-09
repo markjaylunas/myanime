@@ -6,11 +6,16 @@ import { Image } from "@nextui-org/image";
 import Link from "next/link";
 import { Icons } from "../ui/Icons";
 
-export default function AnimeCard(anime: AWAnimeSchema) {
+type Props = {
+  anime: AWAnimeSchema;
+  query?: string;
+};
+
+export default function AnimeCard({ anime, query }: Props) {
   return (
     <Card
       as={Link}
-      href={`/s2/info/${anime.id}`}
+      href={`/s2/info/${anime.id}${query}`}
       className="relative
        h-full w-full mx-auto aspect-2/3 bg-gray-600 select-none hover:cursor-pointer overflow-hidden"
     >

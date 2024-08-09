@@ -24,6 +24,11 @@ export default async function InfoPage({
       ? Boolean(searchParams?.watch) || false
       : false;
 
+  const toLatest =
+    typeof searchParams?.latest === "string"
+      ? Boolean(searchParams?.latest) || false
+      : false;
+
   const [infoData, episodeData] = await Promise.all([
     fetchAWAnimeData({ animeId }),
     fetchAWEpisodeData({ animeId }),
@@ -61,13 +66,14 @@ export default async function InfoPage({
       }`
     : null;
 
-  if (toWatch && watchLink) redirect(watchLink);
-
   const latestLink = latestEpisode
     ? `/s2/info/${animeId}/watch/${encodeEpisodeId(latestEpisode.episodeId)}/${
         latestEpisode.number
       }`
     : null;
+
+  if (toWatch && watchLink) redirect(watchLink);
+  if (toLatest && latestLink) redirect(latestLink);
 
   return (
     <main className="relative mb-12">

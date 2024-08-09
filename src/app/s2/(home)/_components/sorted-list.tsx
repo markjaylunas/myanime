@@ -14,7 +14,10 @@ export default async function SortedList() {
         <Heading order="2xl" className="text-gray-700 dark:text-gray-300 mb-2">
           Latest Episodes
         </Heading>
-        <AnimeCarouselList animeList={data.latestEpisodeAnimes} />
+        <AnimeCarouselList
+          animeList={data.latestEpisodeAnimes}
+          query="?latest=true"
+        />
       </section>
 
       <section className="space-y-2">
