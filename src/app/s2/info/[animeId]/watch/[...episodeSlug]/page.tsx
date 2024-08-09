@@ -59,7 +59,6 @@ export default async function EpisodePage({
       (server) => server.list.length > 0
     );
 
-    console.log({ serverListFiltered });
     if (serverListFiltered) {
       redirect(
         `/s2/info/${animeId}/watch/${encodeEpisodeId(
