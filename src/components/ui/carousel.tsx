@@ -260,7 +260,13 @@ const CarouselNextPrev = React.forwardRef<
     useCarousel();
 
   return (
-    <section className={cn("absolute flex z-10 ", className)}>
+    <section
+      className={cn(
+        "absolute flex z-10",
+        !canScrollNext && !canScrollPrev && "hidden",
+        className
+      )}
+    >
       <Button
         ref={ref}
         variant={variant}
