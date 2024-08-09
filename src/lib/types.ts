@@ -93,7 +93,7 @@ export type ASSort = (typeof ASSortArray)[number];
 export type ASGenres = (typeof ASGenresArray)[number];
 export type ASStatus = (typeof ASStatusArray)[number];
 
-export type AnimeType = {
+export type AnimeCardType = {
   id: string;
   name: string;
   poster: string;
@@ -103,6 +103,7 @@ export type AnimeType = {
   isLatestSeason?: boolean | null;
   rank?: number | null;
   duration?: string | null;
+  releaseDate?: string | null;
   rated?: string | null;
   rating?: string | null;
 };

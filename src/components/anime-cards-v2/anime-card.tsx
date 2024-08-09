@@ -1,19 +1,24 @@
-import { AnimeType } from "@/lib/types";
+"use client";
+
+import { AnimeCardType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { Icons } from "../ui/Icons";
 
 type Props = {
-  anime: AnimeType;
+  anime: AnimeCardType;
   isRecentEpisode?: boolean;
 };
 
 export default function AnimeCard({ anime, isRecentEpisode }: Props) {
-  const server = "s2";
-  let link = `/${server}/info/${anime.id}`;
+  const pathname = usePathname();
+
+  const server = pathname.split("/")[1];
+  let link = `${server}/info/${anime.id}`;
 
   if (isRecentEpisode) link = `${link}?latest=true`;
 
@@ -63,6 +68,18 @@ export default function AnimeCard({ anime, isRecentEpisode }: Props) {
               startContent={<Icons.microphone className="size-3" />}
             >
               {anime?.dub}
+            </Chip>
+          )}
+
+          {Boolean(anime?.releaseDate) && (
+            <Chip
+              radius="sm"
+              size="sm"
+              color="secondary"
+              variant="shadow"
+              className={cn("text-xs", anime?.sub && "rounded-l-none")}
+            >
+              {anime?.releaseDate}
             </Chip>
           )}
         </div>
@@ -119,13 +136,24 @@ export default function AnimeCard({ anime, isRecentEpisode }: Props) {
 
           {anime.rating && (
             <Chip
+              startContent={<Icons.star className="mr-1" />}
+              size="sm"
+              color="primary"
+              variant="shadow"
+            >
+              {anime.rating}
+            </Chip>
+          )}
+
+          {anime.rated && (
+            <Chip
               radius="sm"
               size="sm"
               color="danger"
               variant="bordered"
               className="text-xs ml-auto"
             >
-              {anime.rating}
+              {anime.rated}
             </Chip>
           )}
         </div>

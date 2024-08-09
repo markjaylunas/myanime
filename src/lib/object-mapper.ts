@@ -1,9 +1,11 @@
 import { AWAnimeSchema } from "./aniwatch-validations";
-import { AnimeType } from "./types";
+import { AnimeSortedSchema } from "./meta-validations";
+import { AnimeCardType } from "./types";
+import { formatTimestamp, pickTitle } from "./utils";
 
 export const aniwatchAnimeObjectMapper = (
   animeList: AWAnimeSchema[]
-): AnimeType[] =>
+): AnimeCardType[] =>
   animeList.map((anime) => ({
     id: anime.id,
     name: anime.name,
@@ -15,5 +17,28 @@ export const aniwatchAnimeObjectMapper = (
     rank: anime.rank,
     duration: anime.duration,
     rated: anime.rating,
-    rating: null,
   }));
+
+export const metaAnimeObjectMapper = (
+  animeList: AnimeSortedSchema[],
+  isRanked = false
+): AnimeCardType[] =>
+  animeList.map((anime, animeIdx) => {
+    let date = null;
+    if (anime.releaseDate) date = `${anime.releaseDate}`;
+    if (anime.airingAt) date = formatTimestamp(anime.airingAt);
+
+    return {
+      id: anime.id,
+      name: pickTitle(anime.title),
+      poster: anime.image,
+      type: anime.type?.split("_").join(" "),
+      sub: anime.episodeNumber ? anime.episodeNumber : null,
+      dub: null,
+      isLatestSeason: false,
+      rank: isRanked ? animeIdx + 1 : null,
+      duration: anime.duration ? `${anime.duration}m` : null,
+      releaseDate: date,
+      rating: anime.rating ? `${anime.rating}` : null,
+    };
+  });

@@ -1,5 +1,6 @@
 import { fetchAiringScheduleAnimeData } from "@/actions/meta";
-import AnimeCarouselList from "@/components/anime-cards/AnimeCarouselList";
+import AnimeCarouselList from "@/components/anime-cards-v2/anime-carousel-list";
+import { metaAnimeObjectMapper } from "@/lib/object-mapper";
 import { SearchParams } from "@/lib/types";
 
 export default async function AiringScheduleListPage({
@@ -18,5 +19,5 @@ export default async function AiringScheduleListPage({
 
   const animeList = data.results || [];
 
-  return <AnimeCarouselList animeList={animeList} />;
+  return <AnimeCarouselList animeList={metaAnimeObjectMapper(animeList)} />;
 }

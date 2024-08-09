@@ -7,13 +7,13 @@ import {
   CarouselItem,
   CarouselNextPrev,
 } from "@/components/ui/carousel";
-import { AnimeType } from "@/lib/types";
+import { AnimeCardType } from "@/lib/types";
 import { useState } from "react";
 import AnimeCardMotion from "../anime-cards/AnimeCardMotion";
 import AnimeCard from "./anime-card";
 
 type Props = {
-  animeList: AnimeType[];
+  animeList: AnimeCardType[];
   isRecentEpisode?: boolean;
 };
 

@@ -1,5 +1,6 @@
 import { fetchRecentEpisodesAnimeData } from "@/actions/meta";
-import AnimeList from "@/components/anime-cards/AnimeList";
+import AnimeList from "@/components/anime-cards-v2/anime-list";
+import { metaAnimeObjectMapper } from "@/lib/object-mapper";
 import { SearchParams } from "@/lib/types";
 
 export default async function RecentEpisodeListPage({
@@ -22,5 +23,5 @@ export default async function RecentEpisodeListPage({
 
   const animeList = data.results || [];
 
-  return <AnimeList animeList={animeList} />;
+  return <AnimeList animeList={metaAnimeObjectMapper(animeList)} />;
 }
