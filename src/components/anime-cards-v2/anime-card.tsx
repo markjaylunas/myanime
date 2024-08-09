@@ -11,7 +11,7 @@ type Props = {
   query?: string;
 };
 
-export default function AnimeCard({ anime, query }: Props) {
+export default function AnimeCard({ anime, query = "" }: Props) {
   return (
     <Card
       as={Link}
